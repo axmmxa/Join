@@ -1,0 +1,108 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.navbar{
+    margin: 50px auto;
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.logo > img {
+    height: 100px;
+}
+
+.sign-up-btn {
+    color: white;
+    text-decoration: none;
+    background-color: #4589FF;
+    padding: 10px 16px 10px 16px;
+    border-radius: 8px;
+    margin-left: 15px;
+}
+
+.no-user-link {
+    text-decoration: none;
+    color: black;
+}
+
+.login {
+    height: 300px;
+    width: 40%;
+    box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.08);
+    border-radius: 30px;
+}
+
+.login-container {
+    height: 100%;
+    width: 90%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.login-container > h1 {
+    border-bottom: 2px solid #4589FF;
+    padding-bottom: 10px;
+}
+
+.form {
+    width: 65%;
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.login-data {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.login-data  input {
+    margin: 10px 0;
+    border: none;
+    border-bottom: 1px solid gray;
+    padding-left: 10px;
+}
+
+.login-option { 
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.remember-option {
+    display: flex;
+    align-items: center;
+}
+
+.remember-option > input {
+    margin-right: 15px;
+    
+}
+
+input[type=checkbox]{
+    border: 1px solid red;
+}
+
+.login-option span {
+    font-size: small;
+}
+
+.login-btns {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+}
