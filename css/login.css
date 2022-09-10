@@ -5,14 +5,14 @@ body {
     flex-direction: column;
 }
 
-.navbar{
+.navbar {
     margin: 50px auto;
     width: 90%;
     display: flex;
     justify-content: space-between;
 }
 
-.logo > img {
+.logo>img {
     height: 100px;
 }
 
@@ -47,7 +47,7 @@ body {
     flex-direction: column;
 }
 
-.login-container > h1 {
+.login-container>h1 {
     border-bottom: 2px solid #4589FF;
     padding-bottom: 10px;
 }
@@ -67,15 +67,22 @@ body {
     flex-direction: column;
 }
 
-
-.login-data  input {
+.login-data input {
     margin: 10px 0;
     border: none;
-    border-bottom: 1px solid gray;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
     padding-left: 10px;
 }
 
-.login-option { 
+::placeholder {
+    color: rgba(0, 0, 0, 0.3);
+}
+
+.login-data input:focus {
+    outline: none;
+}
+
+.login-option {
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -87,13 +94,12 @@ body {
     align-items: center;
 }
 
-.remember-option > input {
-    margin-right: 15px;
-    
+#remember-me {
+    border: 1px solid #4589FF !important;
 }
 
-input[type=checkbox]{
-    border: 1px solid red;
+.forgot-password {
+    color: #4589FF;
 }
 
 .login-option span {
@@ -104,5 +110,34 @@ input[type=checkbox]{
     width: 100%;
     display: flex;
     justify-content: space-between;
+}
 
+.login-btn {
+    cursor: pointer;
+    background-color: #4589FF;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 25px 10px 25px
+}
+
+.login-btn:hover,
+.sign-up-btn:hover {
+    background-color: blue;
+    /* box-shadow:  */
+}
+
+.guest-btn {
+    cursor: pointer;
+    background-color: white;
+    color: rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    padding: 10px 25px 10px 25px
+}
+
+.guest-btn:hover {
+    border: 2px solid #4589FF;
+    color: #4589FF;
+    /* box-shadow:  */
 }
