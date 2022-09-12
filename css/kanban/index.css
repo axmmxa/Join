@@ -100,6 +100,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+    
 }
 
 .user-name {
@@ -112,4 +114,46 @@ body {
     font-size: 24px;
 }
 
-.task-urgent {}
+.task-urgent {
+    background-color: #4589FF;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 150px;
+    width: 500px;
+    border-radius: 18px;
+}
+
+.task-urgent-left-part {
+    height: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-right: 2px solid white;
+    padding-right: 10px;
+}
+
+.summary-count-white {
+    margin-left: 8px;
+    margin-top: 8px;
+    font-size: 32px;
+    font-weight: bold;
+    color: white;
+}
+
+.summary-count-black {
+    
+}
+
+.task-urgent-right-part {
+    height: 90%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.task-urgent-left-part-1 {
+    display: flex;
+    align-items: center;
+}
