@@ -110,8 +110,10 @@ body {
 }
 
 .forgot-password {
+    text-decoration: none;
     cursor: pointer;
     color: #4589FF;
+    font-size: 12px;
 }
 
 .login-option span {
@@ -131,7 +133,9 @@ body {
     color: white;
     border: none;
     border-radius: 8px;
-    padding: 10px 25px 10px 25px
+    padding: 10px 25px 10px 25px;
+    text-decoration: none;
+    
 }
 
 .login-btn:hover,
@@ -146,11 +150,69 @@ body {
     color: rgba(0, 0, 0, 0.3);
     border: 2px solid rgba(0, 0, 0, 0.3);
     border-radius: 8px;
-    padding: 10px 25px 10px 25px
+    padding: 10px 25px 10px 25px;
+    text-decoration: none;
 }
 
 .guest-btn:hover {
     border: 2px solid #4589FF;
     color: #4589FF;
     /* box-shadow:  */
+}
+
+.not-a-user-mobile {
+    margin-top: 40px;
+    display: none;
+}
+
+@media(max-width:540px) {
+
+    .login {
+        height: 500px;
+    }
+
+    .login-option {
+        align-items: flex-start !important;
+        flex-direction: column-reverse;
+    }
+
+    .login-btns {
+        width: 95%;
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+    }
+
+    .forgot-password {
+        margin-top: 20px;
+    }
+
+    .remember-option {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .login-btns {
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .login-btn {
+        margin-bottom: 20px;
+        width: 100px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .guest-btn {
+        width: 100px;
+    }
+
+    .not-a-user {
+        display: none;
+    }
+
+    .not-a-user-mobile {
+        display: inline-block;
+    }
 }
