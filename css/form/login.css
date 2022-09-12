@@ -3,10 +3,11 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    font-family: "Open Sans";
 }
 
 .navbar {
-    margin: 50px auto;
+    margin: 40px auto;
     width: 90%;
     display: flex;
     justify-content: space-between;
@@ -32,9 +33,11 @@ body {
 
 .login {
     height: 300px;
-    width: 40%;
+    min-width: 450px;
     box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.08);
     border-radius: 30px;
+    background-color: white;
+    display: flex;
 }
 
 .login-container {
@@ -47,14 +50,21 @@ body {
     flex-direction: column;
 }
 
-.login-container>h1 {
-    border-bottom: 2px solid #4589FF;
+.headline {
     padding-bottom: 10px;
+    margin: 0;
+}
+
+.blue-bottom {
+    width: 100px;
+    height: 2px;
+    background-color: #4589FF;
 }
 
 .form {
     width: 65%;
     height: 60%;
+    margin-top: 7px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -72,6 +82,7 @@ body {
     border: none;
     border-bottom: 1px solid rgba(0, 0, 0, 0.3);
     padding-left: 10px;
+    padding-bottom: 10px;
 }
 
 ::placeholder {
@@ -99,17 +110,19 @@ body {
 }
 
 .forgot-password {
+    cursor: pointer;
     color: #4589FF;
 }
 
 .login-option span {
-    font-size: small;
+    font-size: 12px;
 }
 
 .login-btns {
-    width: 100%;
+    width: 95%;
     display: flex;
     justify-content: space-between;
+    margin-top: 10px;
 }
 
 .login-btn {
@@ -123,7 +136,7 @@ body {
 
 .login-btn:hover,
 .sign-up-btn:hover {
-    background-color: blue;
+    background-color: rgba(0, 0, 255, 0.7);
     /* box-shadow:  */
 }
 

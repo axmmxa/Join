@@ -6,52 +6,56 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join</title>
-    <link rel="stylesheet" href="css/login.css">
-    <link rel="shortcut icon" href="img/logo_blue.png" type="image/x-icon">
-    <script src="js/login.js"></script>
+    <link rel="stylesheet" href="css/form/fonts.css">
+    <link rel="stylesheet" href="css/kanban/index.css">
 </head>
 
 <body>
+    <nav class="kanban-navbar">
+        <div class="inner-container">
+            <img class="logo" src="img/form_logo/logo_white.png">
 
-    <nav class="navbar">
-        <div class="logo">
-            <img src="img/logo_blue.png">
-        </div>
-        <div>
-            <a class="no-user-link" href="">Not a Join User?</a>
-            <a class="sign-up-btn" href="">Sign up</a>
+            <div class="info">
+                <p class="name">Kanban Project Management Tool</p>
+                <img class="help" src="img/kanban_logo/help.png">
+                <img class="user-img" src="img/kanban_logo/user_example.png">
+            </div>
         </div>
     </nav>
 
-    <div class="login">
-        <div class="login-container">
-            <h1>Log In </h1>
-
-            <form class="form" action="">
-
-                <div class="login-data">
-                    <input type="text" placeholder="E-mail">
-                    <input type="text" placeholder="Password">
+    <main class="kanban-main">
+        <div class="sidebar">
+            <div class="inner-sidebar">
+                <div class="kanban-btns">
+                    <div class="kanban-link"><img class="kanban-img" src="img/kanban_logo/summary.png"><span>Summary</span></div>
+                    <div class="kanban-link"><img class="kanban-img" src="img/kanban_logo/board.png"><span>Board</span></div>
+                    <div class="kanban-link"><img class="kanban-img" src="img/kanban_logo/addTask.png"><span>Add Task</span></div>
+                    <div class="kanban-link"><img class="kanban-img" src="img/kanban_logo/contacts.png"><span>Contacts</span></div>
                 </div>
 
-                <div class="login-option">
-                    <div class="remember-option">
-                        <input type="checkbox" id="remember-me">
-                        <span>Remember me</span>
-                    </div>
-
-                    <span class="forgot-password">Forgot my password</span>
+                <div class="legal-notice">
+                    <div class="kanban-link"><img class="kanban-img" src="img/kanban_logo/legal_notice.png"><span>Legal Notice</span></div>
                 </div>
-
-                <div class="login-btns">
-                    <button class="login-btn">Log in </button>
-                    <button class="guest-btn">Guest log in</button>
-                </div>
-
-                <div></div>
-            </form>
+            </div>
         </div>
-    </div>
+
+        <div class="main-field">
+            <div class="summary-container">
+                <span class="gm-text">Good Morning, <span class="user-name">Name</span></span>
+                <div>
+                    <div>
+                        <div class="task-urgent"></div>
+                        <div class="task-card"></div>
+                    </div>
+                    <div>
+                        <div class="task-card"></div>
+                        <div class="task-card"></div>
+                        <div class="task-card"></div>
+                        <div class="task-card"></div>
+                    </div>
+                </div>
+            </div>
+    </main>
 
 </body>
 

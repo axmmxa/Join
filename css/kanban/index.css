@@ -1,0 +1,115 @@
+body {
+    margin: 0;
+    font-family: "Open Sans";
+}
+
+.kanban-navbar {
+    height: 15vh;
+    width: 100%;
+    background-color: #4589FF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.inner-container {
+    width: 90%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    height: 50px;
+}
+
+.info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.name {
+    color: white;
+    margin-right: 20px;
+}
+
+.help {
+    height: 25px;
+    margin-right: 20px;
+}
+
+.user-img {
+    height: 30px;
+    border-radius: 50%;
+    border: 3px solid white;
+}
+
+.kanban-main {
+    width: 100%;
+    height: 85vh;
+    display: flex;
+}
+
+.sidebar {
+    width: 20%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-right: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.inner-sidebar {
+    width: 80%;
+    height: 85%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.main-field {
+    width: 80%;
+    height: 100%;
+}
+
+.kanban-img {
+    width: 25px;
+    height: 25px;
+    margin: 0 20px;
+}
+
+.kanban-link {
+    width: 85%;
+    padding: 5px;
+    margin: 20px auto;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.kanban-link:hover {
+    background-color: #D2E3FF;
+    border-radius: 16px;
+}
+
+.summary-container {
+    height: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.user-name {
+    font-size: 32px;
+    color: #4589FF;
+    margin-left: 15px;
+}
+
+.gm-text {
+    font-size: 24px;
+}
+
+.task-urgent {}
