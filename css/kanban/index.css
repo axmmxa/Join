@@ -108,6 +108,7 @@ body {
     width: 80%;
     display: flex;
     flex-direction: column;
+    margin-top: 10px;
 }
 
 .user-name {
@@ -121,6 +122,7 @@ body {
 }
 
 .task-urgent {
+    cursor: pointer;
     background-color: #4589FF;
     display: flex;
     align-items: center;
@@ -128,6 +130,11 @@ body {
     height: 150px;
     width: 65%;
     border-radius: 18px;
+}
+
+.task-urgent:hover {
+    background-color: white;
+    transform: scale(1.1);
 }
 
 .task-urgent-left-part {
@@ -153,7 +160,7 @@ body {
     color: white;
 }
 
-.summary-img{
+.summary-img {
     height: 60px;
     width: 60px;
 }
@@ -161,6 +168,7 @@ body {
 .summary-count-black {
     margin-left: 8px;
     margin-top: 8px;
+    margin-bottom: 8px;
     font-size: 32px;
     font-weight: bold;
     color: black;
@@ -213,29 +221,38 @@ body {
 }
 
 .task-card-upper {
+    cursor: pointer;
     width: 150px;
     height: 150px;
-    border: 1px solid gray;
+    border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    background-color: #D2E3FF;
+}
+
+.task-card-upper:hover {
+    background-color: white;
+    transform: scale(1.1);
 }
 
 .task-to-do {
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
 .inner-task-card-upper {
-    height: 80%;
+    height: 70%;
 }
 
 .task-card-lower {
+    cursor: pointer;
     width: 150px;
     height: 150px;
-    border: 1px solid gray;
+    border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 16px;
     margin-top: 10px;
     display: flex;
@@ -244,6 +261,32 @@ body {
     flex-direction: column;
 }
 
-.blue-text{
+.task-card-lower:hover {
+    background-color: blue;
+    transform: scale(1.1);
+}
+
+.blue-text {
     color: #4589FF;
+}
+
+@media (max-width: 1124px) {
+    .summary-container {
+        height: 98%;
+    }
+    .task-urgent {
+        height: 135px;
+    }
+    .upper-task-container {
+        margin-bottom: 10px;
+    }
+    .task-card-upper {
+        height: 135px;
+    }
+    .task-card-lower {
+        height: 135px;
+    }
+    .deadline {
+        font-size: 15px;
+    }
 }
