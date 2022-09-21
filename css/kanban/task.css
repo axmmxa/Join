@@ -1,0 +1,61 @@
+.add-task-container {
+    display: flex;
+}
+ 
+.task-form-left {
+    width: 50%;
+    
+}
+
+.task-form {
+    display: flex;
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin: auto;
+    margin-top: 40Px;
+    
+}
+
+.task-form input {
+    border: none;
+    border-bottom: 1px solid gray;
+    padding-bottom: 10px;
+    padding-left: 20px;
+}
+
+#contacts {
+    border: none;
+    border-bottom: 1px solid gray;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    margin-top: 20px;
+}
+
+.task-form input:focus {
+    outline: none;
+}
+
+.input-title {
+    height: 50px;
+    
+}
+
+.input-title::placeholder {
+    font-size: 32px;
+    color: rgba(0, 0, 0, 0.2);
+}
+
+.task-form-right {
+    width: 50%;
+}
+
+.label-flex {
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+}
+
+#due-date::placeholder {
+    color: rgba(0, 0, 0, 0.2);
+}

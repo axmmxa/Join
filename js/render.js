@@ -133,7 +133,125 @@ function renderSummary() {
 
 
 function renderBoard() {
-    // document.querySelector(".main-field").innerHTML =
+    document.querySelector(".main-field").innerHTML = `
+    <div class="board-container">
+                <span class="board-headline-mobile blue-text">Kanban Project Mangement Tool</span>
+                <div class="search-field">
+                    <div class="input-container">
+                        <input placeholder="Find task" type="text" class="input">
+                        <img class="search-img" src="img/kanban_logo/search.png">
+                    </div>
+                    <button class="add-btn"><span class="white-text">Add Task</span><img class="add-img" src="img/kanban_logo/add.png"></button>
+                </div>
+
+                <div class="board-task-container">
+                    <div class="board-to-do width-25">
+                        <div class="flex">
+                            <h3 class="board-task-title">To do</h3>
+                            <img class="board-task-img" src="img/kanban_logo/plus button.png">
+                        </div>
+
+                        <div class="added-task">
+                            <span class="task-topic white-text">Design</span>
+                            <h4 class="task-headline blue-text">Redesign Website</h4>
+                            <span class="added-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</span>
+                            <div class="progress">
+                                <div class="progress-bar"></div> <span class="addTask-amount"><span>3</span>/<span>3</span> Done</span>
+                            </div>
+                            <div class="board-user-img-container">
+                                <div class="user-tasks"></div>
+                                <img src="img/kanban_logo/non-urgent-green.png" class="priority-img">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="board-in-progress width-25">
+                        <div class="flex">
+                            <h3 class="board-task-title">In Progress</h3>
+                            <img class="board-task-img" src="img/kanban_logo/plus button.png">
+                        </div>
+
+                        <div class="added-task">
+                            <span class="task-topic white-text">Design</span>
+                            <h4 class="task-headline blue-text">Redesign Website</h4>
+                            <span class="added-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</span>
+                            <div class="progress">
+                                <div class="progress-bar"></div> <span class="addTask-amount"><span>3</span>/<span>3</span> Done</span>
+                            </div>
+                            <div class="board-user-img-container">
+                                <div class="user-tasks"></div>
+                                <img src="img/kanban_logo/non-urgent-green.png" class="priority-img">
+                            </div>
+                        </div>
+
+                        <div class="added-task">
+                            <span class="task-topic white-text">Design</span>
+                            <h4 class="task-headline blue-text">Redesign Website</h4>
+                            <span class="added-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</span>
+                            <div class="progress">
+                                <div class="progress-bar"></div> <span class="addTask-amount"><span>3</span>/<span>3</span> Done</span>
+                            </div>
+                            <div class="board-user-img-container">
+                                <div class="user-tasks"></div>
+                                <img src="img/kanban_logo/non-urgent-green.png" class="priority-img">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="board-await-feedback width-25">
+                        <div class="flex">
+                            <h3 class="board-task-title">Await Feedback</h3>
+                            <img class="board-task-img" src="img/kanban_logo/plus button.png">
+                        </div>
+
+                        <div class="added-task">
+                            <span class="task-topic white-text">Design</span>
+                            <h4 class="task-headline blue-text">Redesign Website</h4>
+                            <span class="added-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</span>
+                            <div class="progress">
+                                <div class="progress-bar"></div> <span class="addTask-amount"><span>3</span>/<span>3</span> Done</span>
+                            </div>
+                            <div class="board-user-img-container">
+                                <div class="user-tasks"></div>
+                                <img src="img/kanban_logo/non-urgent-green.png" class="priority-img">
+                            </div>
+                        </div>
+
+                        <div class="added-task">
+                            <span class="task-topic white-text">Design</span>
+                            <h4 class="task-headline blue-text">Redesign Website</h4>
+                            <span class="added-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</span>
+                            <div class="progress">
+                                <div class="progress-bar"></div> <span class="addTask-amount"><span>3</span>/<span>3</span> Done</span>
+                            </div>
+                            <div class="board-user-img-container">
+                                <div class="user-tasks"></div>
+                                <img src="img/kanban_logo/non-urgent-green.png" class="priority-img">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="board-done width-25">
+                        <div class="flex">
+                            <h3 class="board-task-title">Done</h3>
+                            <img class="board-task-img" src="img/kanban_logo/plus button.png">
+                        </div>
+
+                        <div class="added-task">
+                            <span class="task-topic white-text">Design</span>
+                            <h4 class="task-headline blue-text">Redesign Website</h4>
+                            <span class="added-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</span>
+                            <div class="progress">
+                                <div class="progress-bar"></div> <span class="addTask-amount"><span>3</span>/<span>3</span> Done</span>
+                            </div>
+                            <div class="board-user-img-container">
+                                <div class="user-tasks"></div>
+                                <img src="img/kanban_logo/non-urgent-green.png" class="priority-img">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    `
 }
 
 function renderAddTasks() {
