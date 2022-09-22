@@ -63,23 +63,24 @@
                         <label class="label-flex" for="due-date">Due date<input placeholder="dd/mm/yyyy" id="due-date"type="text"></label>
                         <select name="contacts" id="contacts">
                             <option value="">select contacts to assign</option>
-                            <option value="">contact1</option>
-                            <option value="">contac2</option>
-                            <option value="">contact2</option>
+                            <option value="">New Category</option>
+                            <option value="">Sales</option>
+                            <option value="">Backoffice</option>
                         </select>
                         <div class="priority-btn-container">
-                            <button></button>
-                            <button></button>
-                            <button></button>
+                            <button class="urgent-btn">Urgent <img src="img/kanban_logo/urgent-red.png"></button>
+                            <button class="medium-btn">Medium <img src="img/kanban_logo/middle-priority-orange.png"></button>
+                            <button class="non-urgent-btn">Low <img src="img/kanban_logo/non-urgent-green.png"></button>
                         </div>
                         <div class="description-container">
-                            <h3></h3>
-                            <textarea name="" id="" cols="30" rows="10"></textarea>
+                            <span>Description</span>
+                            <textarea name="" id="textarea" placeholder="Enter a description"></textarea>
                         </div>
-                        <label for="category">Category<input id="category" type="text"></label>
-                        <div>
-                            <label for="category">Category<input id="category" type="text"></label>
-                            <label for="subtask"> <input type="checkbox" id="subtask">subtask</label>
+                        
+                        <div class="category-container">
+                            <label class="category-label" for="category">Subtask<input id="category" placeholder="Add new subtask" type="text"></label>
+                            <label for="subtask"><input type="checkbox" id="subtask"><span class="category-span">Subtask</span></label>
+                            
                         </div>
                     </form>
                 </div>

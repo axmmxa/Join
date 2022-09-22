@@ -59,3 +59,69 @@
 #due-date::placeholder {
     color: rgba(0, 0, 0, 0.2);
 }
+
+.priority-btn-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 40px;
+}
+
+.priority-btn-container button {
+    background-color: transparent;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 10px 15px;
+}
+
+.urgent-btn:hover{
+    border-bottom: 2px solid red;
+}
+
+.medium-btn:hover {
+    border-bottom: 2px solid orange;
+}
+
+.non-urgent-btn:hover{
+    border-bottom: 2px solid lightgreen;
+}
+
+.description-container {
+    margin-top: 20px;
+}
+
+.description-container > span {
+    font-weight: bold;
+    
+}
+
+#textarea {
+    width: 90%;
+    height: 100px;
+    margin: auto;
+    border-radius: 8px;
+}
+
+#textarea::placeholder {
+    padding-left: 15px;
+    padding-top: 10px;
+} 
+
+.category-container {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.category-label {
+    display: flex;
+    flex-direction: column
+}
+
+.category-span {
+    margin-left: 15px;
+}
+
+#category::placeholder {
+    color: rgba(0, 0, 0, 0.2);
+}
