@@ -1,6 +1,6 @@
-function init() {
-    renderSummary()
-}
+// function init() {
+//     renderSummary()
+// }
 
 function renderSummary() {
     document.querySelector(".main-field").innerHTML =
@@ -368,10 +368,10 @@ function renderAddTasks() {
 
     `
 
-
-
     // document.querySelector(".main-field").innerHTML =
 }
+
+
 
 function renderContacts() {
     // document.querySelector(".main-field").innerHTML =

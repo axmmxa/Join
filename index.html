@@ -12,11 +12,30 @@
     <link rel="stylesheet" href="css/kanban/task.css">
     <link rel="stylesheet" href="css/kanban/contacts.css">
     <script src="js/render.js" defer></script>
+    <script src="js/mini_backend.js"></script>
+
+    <script>
+        let users = [];
+
+        setURL('http://gruppe-319.developerakademie.net/smallest_backend_ever/smallest_backend_ever')
+
+        async function addUser() {
+            users.push('John');
+            await backend.setItem('users', JSON.stringify(users));
+        }
+
+        async function init() {
+            await downloadFromServer();
+            users = JSON.parse(backend.getItem("users")) || [];
+            console.log(users)
+        }
+    </script>
+
     <!-- <script src="js/login.js" defer></script> -->
 
 </head>
 
-<body>
+<body onload="init()">
     <nav class="kanban-navbar">
         <div class="inner-container">
             <img class="logo" src="img/form_logo/logo_white.png">
@@ -50,7 +69,7 @@
 
         <div class="main-field">
 
-            <button class="add-person-btn-mobile">Add Contacts <img class="add-person-img" src="img/kanban_logo/add_person.png"></button>
+            <button onclick="addUser()" class="add-person-btn-mobile">Add Contacts <img class="add-person-img" src="img/kanban_logo/add_person.png"></button>
 
             <div class="contacts-left">
 
