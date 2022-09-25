@@ -50,7 +50,7 @@
 }
 
 #due-date {
-    width: 91%;
+    width: 95%;
     margin-top: 10px;
     padding-bottom: 10px;
 }
@@ -94,7 +94,12 @@
 }
 
 .input-title {
-    height: 50px;
+    margin-top: 5px;
+    height: 35px;
+}
+
+.input-title:focus {
+    outline: none;
 }
 
 .input-title::placeholder {
@@ -120,14 +125,14 @@
     width: 100%;
     display: flex;
     justify-content: space-evenly;
-    margin-top: 25px;
+    margin-top: 15px;
 }
 
 .priority-btn-container button {
     background-color: transparent;
     border: 2px solid rgba(0, 0, 0, 0.2);
     border-radius: 8px;
-    padding: 10px 15px;
+    padding: 5px 10px;
 }
 
 .priority-urgent-img {
@@ -137,19 +142,22 @@
 }
 
 .urgent-btn:hover {
+    cursor: pointer;
     border-bottom: 2px solid red;
 }
 
 .medium-btn:hover {
+    cursor: pointer;
     border-bottom: 2px solid orange;
 }
 
 .non-urgent-btn:hover {
+    cursor: pointer;
     border-bottom: 2px solid lightgreen;
 }
 
 .description-container {
-    margin-top: 20px;
+    margin-top: 15px;
 }
 
 .description-container>span {
@@ -244,4 +252,122 @@
     width: 16px;
     height: 12px;
     margin-left: 5px;
+}
+
+.mobile-create-task-navbar {
+    height: 10vh;
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
+}
+
+.mobile-logo-blue {
+    height: 35px;
+    width: 35px;
+    margin-left: 25px;
+}
+
+.create-task-mobile-btn {
+    cursor: pointer;
+    background-color: #4589FF;
+    color: white;
+    padding: 10px 15px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    margin-right: 25px;
+}
+
+.create-task-mobile-btn:hover {
+    background-color: blue;
+}
+
+@media (max-width: 874px) {
+    .task-form {
+        width: 250px;
+    }
+    .input-title {
+        width: 225px;
+    }
+    #contacts {
+        width: 250px;
+    }
+    #due-date {
+        width: 225px;
+    }
+    #task-category {
+        width: 250px;
+    }
+    #description-container {
+        width: 250px;
+    }
+    #category {
+        width: 225px
+    }
+    .create-task-container {
+        width: 100%;
+    }
+    .priority-btn-container {
+        width: 250px;
+    }
+}
+
+@media (max-width: 684px) {
+    .task-form-right {
+        display: none;
+    }
+    .task-form-left {
+        width: 100%;
+    }
+    .task-form {
+        width: 100%;
+    }
+    .input-title {
+        width: 95%;
+    }
+    #contacts {
+        width: 100%;
+    }
+    #due-date {
+        width: 95%;
+    }
+    #task-category {
+        width: 100%;
+    }
+    #description-container {
+        width: 100%;
+    }
+    #category {
+        width: 95%
+    }
+    .create-task-container {
+        width: 100%;
+    }
+    .priority-btn-container {
+        width: 100%;
+    }
+    .priority-btn-container button {
+        padding: 10px 15px;
+    }
+    .kanban-navbar {
+        display: none;
+    }
+    .mobile-create-task-navbar {
+        display: flex;
+    }
+}
+
+@media (max-width: 480px) {
+    .priority-btn-container button {
+        padding: 5px 10px;
+    }
+    .input-title {
+        width: 91%;
+    }
+    #due-date {
+        width: 91%;
+    }
+    #category {
+        width: 91%
+    }
 }

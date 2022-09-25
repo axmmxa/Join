@@ -443,7 +443,7 @@ body {
         font-size: 10px;
     }
     .kanban-link {
-        margin: 25px 0;
+        /* margin: 25px 0; */
     }
     .name {
         display: none;
@@ -462,7 +462,7 @@ body {
     }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 410px) {
     .task-card-lower {
         width: 120px;
     }
