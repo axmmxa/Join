@@ -256,7 +256,7 @@ function renderBoard() {
 
 function renderAddTasks() {
     console.log("test")
-    
+
     document.querySelector('body').innerHTML = `
 
     <nav class="kanban-navbar">
@@ -354,10 +354,6 @@ function renderAddTasks() {
         </div>
 
 
-
-
-
-
         <div class="sidebar-mobile">
             <div class="kanban-btns">
                 <div class="kanban-link"><img class="kanban-img" src="img/kanban_logo/summary.png"><span>Summary</span></div>
@@ -372,7 +368,7 @@ function renderAddTasks() {
 
     `
 
-    
+
 
     // document.querySelector(".main-field").innerHTML =
 }

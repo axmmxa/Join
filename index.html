@@ -29,19 +29,14 @@
         </div>
     </nav>
 
-    <nav class="mobile-create-task-navbar">
-        <img class="mobile-logo-blue" src="img/form_logo/logo_blue.png">
-        <button class="create-task-mobile-btn">Create <img class="white-clear" src="img/kanban_logo/white_clear_btn.png"></button>
-    </nav>
-
 
     <main class="kanban-main">
         <div class="sidebar">
-            <div class="inner-sidebar">    
+            <div class="inner-sidebar">
                 <div class="kanban-btns">
                     <div class="kanban-link" onclick="renderSummary()"><img class="kanban-img" src="img/kanban_logo/summary.png"><span>Summary</span></div>
                     <div class="kanban-link" onclick="renderBoard()"><img class="kanban-img" src="img/kanban_logo/board.png"><span>Board</span></div>
-                    <div class="kanban-link" onclick="renderAddTasks()"><img  class="kanban-img" src="img/kanban_logo/addTask.png"><span>Add Task</span></div>
+                    <div class="kanban-link" onclick="renderAddTasks()"><img class="kanban-img" src="img/kanban_logo/addTask.png"><span>Add Task</span></div>
                     <div class="kanban-link"><img class="kanban-img" src="img/kanban_logo/contacts.png"><span>Contacts</span></div>
                 </div>
 
@@ -51,12 +46,14 @@
             </div>
         </div>
 
-       
+
 
         <div class="main-field">
 
+            <button class="add-person-btn-mobile">Add Contacts <img class="add-person-img" src="img/kanban_logo/add_person.png"></button>
+
             <div class="contacts-left">
-              
+
                 <div class="contacts-A">
 
                     <div class="contacs-A-headline">
@@ -69,8 +66,8 @@
                                 <img class="contact-img" src="img/kanban_logo/user_example.png">
                             </div>
                             <div class="contact-data">
-                                <h3>Anton Mayer</h3>
-                                <span class="blue-text">atom@gmail.com</span>
+                                <h3 class="contact-name">Anton Mayer</h3>
+                                <span class="darkblue-text">atom@gmail.com</span>
                             </div>
                         </div>
 
@@ -79,22 +76,31 @@
                                 <img class="contact-img" src="img/kanban_logo/user_example.png">
                             </div>
                             <div class="contact-data">
-                                <h3>Anja Schulz</h3>
-                                <span class="blue-text">schulz@gmail.com</span>
+                                <h3 class="contact-name">Anja Schulz</h3>
+                                <span class="darkblue-text">schulz@gmail.com</span>
                             </div>
                         </div>
 
-                        
                     </div>
                 </div>
 
             </div>
 
             <div class="contacts-right">
+                <button class="add-person-btn">Add Contacts <img class="add-person-img" src="img/kanban_logo/add_person.png"></button>
+            </div>
 
+            <div class="sidebar-mobile">
+                <div class="kanban-btns">
+                    <div class="kanban-link"><img class="kanban-img" src="img/kanban_logo/summary.png"><span>Summary</span></div>
+                    <div class="kanban-link"><img class="kanban-img" src="img/kanban_logo/board.png"><span>Board</span></div>
+                    <div class="kanban-link"><img class="kanban-img" src="img/kanban_logo/addTask.png"><span>Add Task</span></div>
+                    <div class="kanban-link"><img class="kanban-img" src="img/kanban_logo/contacts.png"><span>Contacts</span></div>
+                </div>
             </div>
 
         </div>
+
     </main>
 
 </body>
