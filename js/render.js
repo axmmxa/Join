@@ -374,7 +374,56 @@ function renderAddTasks() {
 
 
 function renderContacts() {
-    // document.querySelector(".main-field").innerHTML =
+    document.querySelector(".main-field").innerHTML =
+        `<button class="add-person-btn-mobile">Add Contacts <img class="add-person-img" src="img/kanban_logo/add_person.png"></button>
+
+        <div class="contacts-left">
+
+            <div class="contacts-A">
+
+                <div class="contacs-A-headline">
+                    <span>A</span>
+                </div>
+
+                <div class="contacts-A-data">
+                    <div class="contact-info">
+                        <div>
+                            <img class="contact-img" src="img/kanban_logo/user_example.png">
+                        </div>
+                        <div class="contact-data">
+                            <h3 class="contact-name">Anton Mayer</h3>
+                            <span class="darkblue-text">atom@gmail.com</span>
+                        </div>
+                    </div>
+
+                    <div class="contact-info">
+                        <div>
+                            <img class="contact-img" src="img/kanban_logo/user_example.png">
+                        </div>
+                        <div class="contact-data">
+                            <h3 class="contact-name">Anja Schulz</h3>
+                            <span class="darkblue-text">schulz@gmail.com</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="contacts-right">
+            <button class="add-person-btn">Add Contacts <img class="add-person-img" src="img/kanban_logo/add_person.png"></button>
+        </div>
+
+        <div class="sidebar-mobile">
+            <div class="kanban-btns">
+                <div class="kanban-link"><img class="kanban-img" src="img/kanban_logo/summary.png"><span>Summary</span></div>
+                <div class="kanban-link"><img class="kanban-img" src="img/kanban_logo/board.png"><span>Board</span></div>
+                <div class="kanban-link"><img class="kanban-img" src="img/kanban_logo/addTask.png"><span>Add Task</span></div>
+                <div class="kanban-link"><img class="kanban-img" src="img/kanban_logo/contacts.png"><span>Contacts</span></div>
+            </div>
+        </div>
+`
 }
 
 function renderLegalNotice() {

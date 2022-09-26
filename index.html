@@ -17,7 +17,7 @@
     <script>
         let users = [];
 
-        setURL('http://gruppe-319.developerakademie.net/smallest_backend_ever/smallest_backend_ever')
+        setURL('https://gruppe-319.developerakademie.net/smallest_backend_ever')
 
         async function addUser() {
             users.push('John');
@@ -56,7 +56,7 @@
                     <div class="kanban-link" onclick="renderSummary()"><img class="kanban-img" src="img/kanban_logo/summary.png"><span>Summary</span></div>
                     <div class="kanban-link" onclick="renderBoard()"><img class="kanban-img" src="img/kanban_logo/board.png"><span>Board</span></div>
                     <div class="kanban-link" onclick="renderAddTasks()"><img class="kanban-img" src="img/kanban_logo/addTask.png"><span>Add Task</span></div>
-                    <div class="kanban-link"><img class="kanban-img" src="img/kanban_logo/contacts.png"><span>Contacts</span></div>
+                    <div class="kanban-link" onclick="renderContacts()"><img class="kanban-img" src="img/kanban_logo/contacts.png"><span>Contacts</span></div>
                 </div>
 
                 <div class="legal-notice">
@@ -68,55 +68,6 @@
 
 
         <div class="main-field">
-
-            <button onclick="addUser()" class="add-person-btn-mobile">Add Contacts <img class="add-person-img" src="img/kanban_logo/add_person.png"></button>
-
-            <div class="contacts-left">
-
-                <div class="contacts-A">
-
-                    <div class="contacs-A-headline">
-                        <span>A</span>
-                    </div>
-
-                    <div class="contacts-A-data">
-                        <div class="contact-info">
-                            <div>
-                                <img class="contact-img" src="img/kanban_logo/user_example.png">
-                            </div>
-                            <div class="contact-data">
-                                <h3 class="contact-name">Anton Mayer</h3>
-                                <span class="darkblue-text">atom@gmail.com</span>
-                            </div>
-                        </div>
-
-                        <div class="contact-info">
-                            <div>
-                                <img class="contact-img" src="img/kanban_logo/user_example.png">
-                            </div>
-                            <div class="contact-data">
-                                <h3 class="contact-name">Anja Schulz</h3>
-                                <span class="darkblue-text">schulz@gmail.com</span>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="contacts-right">
-                <button class="add-person-btn">Add Contacts <img class="add-person-img" src="img/kanban_logo/add_person.png"></button>
-            </div>
-
-            <div class="sidebar-mobile">
-                <div class="kanban-btns">
-                    <div class="kanban-link"><img class="kanban-img" src="img/kanban_logo/summary.png"><span>Summary</span></div>
-                    <div class="kanban-link"><img class="kanban-img" src="img/kanban_logo/board.png"><span>Board</span></div>
-                    <div class="kanban-link"><img class="kanban-img" src="img/kanban_logo/addTask.png"><span>Add Task</span></div>
-                    <div class="kanban-link"><img class="kanban-img" src="img/kanban_logo/contacts.png"><span>Contacts</span></div>
-                </div>
-            </div>
 
         </div>
 

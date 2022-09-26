@@ -132,6 +132,7 @@
         align-items: flex-end;
     }
     .add-person-btn-mobile {
+        cursor: pointer;
         display: flex;
         margin-right: 0;
     }
