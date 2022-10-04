@@ -7,12 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join</title>
     <link rel="stylesheet" href="css/form/fonts.css">
+
     <link rel="stylesheet" href="css/kanban/index.css">
     <link rel="stylesheet" href="css/kanban/board.css">
     <link rel="stylesheet" href="css/kanban/task.css">
     <link rel="stylesheet" href="css/kanban/contacts.css">
+    <link rel="stylesheet" href="css/kanban/legal-notice.css">
+    <link rel="stylesheet" href="css/kanban/help.css">
+
     <script src="js/render.js" defer></script>
-    <script src="js/mini_backend.js"></script>
+    <script src="js/mini_backend.js" defer></script>
 
     <script>
         let users = [];
@@ -42,7 +46,7 @@
 
             <div class="info">
                 <p class="name">Kanban Project Management Tool</p>
-                <img class="help" src="img/kanban_logo/help.png">
+                <img class="help" onclick="renderHelp()" src="img/kanban_logo/help.png">
                 <img class="user-img" src="img/kanban_logo/user_example.png">
             </div>
         </div>
@@ -60,7 +64,7 @@
                 </div>
 
                 <div class="legal-notice">
-                    <div class="kanban-link"><img class="kanban-img" src="img/kanban_logo/legal_notice.png"><span>Legal Notice</span></div>
+                    <div class="kanban-link" onclick="renderLegalNotice()"><img class="kanban-img" src="img/kanban_logo/legal_notice.png"><span>Legal Notice</span></div>
                 </div>
             </div>
         </div>
@@ -70,6 +74,8 @@
         <div class="main-field">
 
         </div>
+
+
 
     </main>
 

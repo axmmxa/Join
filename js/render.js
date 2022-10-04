@@ -123,10 +123,10 @@ function renderSummary() {
     </div>
     <div class="sidebar-mobile">
         <div class="kanban-btns">
-            <div class="kanban-link"><img class="kanban-img" src="img/kanban_logo/summary.png"><span>Summary</span></div>
-            <div class="kanban-link"><img class="kanban-img" src="img/kanban_logo/board.png"><span>Board</span></div>
-            <div class="kanban-link"><img class="kanban-img" src="img/kanban_logo/addTask.png"><span>Add Task</span></div>
-            <div class="kanban-link"><img class="kanban-img" src="img/kanban_logo/contacts.png"><span>Contacts</span></div>
+            <div class="kanban-link" onclick="renderSummmary()"><img class="kanban-img" src="img/kanban_logo/summary.png"><span>Summary</span></div>
+            <div class="kanban-link" onclick="renderBoatd()"><img class="kanban-img" src="img/kanban_logo/board.png"><span>Board</span></div>
+            <div class="kanban-link" onclick="renderAddTasks()"><img class="kanban-img" src="img/kanban_logo/addTask.png"><span>Add Task</span></div>
+            <div class="kanban-link" onclick="renderContacts()"><img class="kanban-img" src="img/kanban_logo/contacts.png"><span>Contacts</span></div>
         </div>
     </div>`
 }
@@ -147,7 +147,7 @@ function renderBoard() {
                 <div class="board-task-container">
                     <div class="board-to-do width-25">
                         <div class="flex">
-                            <h3 class="board-task-title">To do</h3>
+                            <h4 class="board-task-title">To do</h4>
                             <img class="board-task-img" src="img/kanban_logo/plus button.png">
                         </div>
 
@@ -167,7 +167,7 @@ function renderBoard() {
                     </div>
                     <div class="board-in-progress width-25">
                         <div class="flex">
-                            <h3 class="board-task-title">In Progress</h3>
+                            <h4 class="board-task-title">In Progress</h4>
                             <img class="board-task-img" src="img/kanban_logo/plus button.png">
                         </div>
 
@@ -200,7 +200,7 @@ function renderBoard() {
                     </div>
                     <div class="board-await-feedback width-25">
                         <div class="flex">
-                            <h3 class="board-task-title">Await Feedback</h3>
+                            <h4 class="board-task-title">Await Feedback</h4>
                             <img class="board-task-img" src="img/kanban_logo/plus button.png">
                         </div>
 
@@ -232,7 +232,7 @@ function renderBoard() {
                     </div>
                     <div class="board-done width-25">
                         <div class="flex">
-                            <h3 class="board-task-title">Done</h3>
+                            <h4 class="board-task-title">Done</h4>
                             <img class="board-task-img" src="img/kanban_logo/plus button.png">
                         </div>
 
@@ -284,11 +284,11 @@ function renderAddTasks() {
                 <div class="kanban-link" onclick="renderSummary()"><img class="kanban-img" src="img/kanban_logo/summary.png"><span>Summary</span></div>
                 <div class="kanban-link" onclick="renderBoard()"><img class="kanban-img" src="img/kanban_logo/board.png"><span>Board</span></div>
                 <div class="kanban-link" onclick="renderAddTasks()"><img  class="kanban-img" src="img/kanban_logo/addTask.png"><span>Add Task</span></div>
-                <div class="kanban-link"><img class="kanban-img" src="img/kanban_logo/contacts.png"><span>Contacts</span></div>
+                <div class="kanban-link" onclick="renderContacts()"><img class="kanban-img" src="img/kanban_logo/contacts.png"><span>Contacts</span></div>
             </div>
 
             <div class="legal-notice">
-                <div class="kanban-link"><img class="kanban-img" src="img/kanban_logo/legal_notice.png"><span>Legal Notice</span></div>
+                <div class="kanban-link" onclick="renderLegalNotice()"><img class="kanban-img" src="img/kanban_logo/legal_notice.png"><span>Legal Notice</span></div>
             </div>
         </div>
     </div>
@@ -356,10 +356,10 @@ function renderAddTasks() {
 
         <div class="sidebar-mobile">
             <div class="kanban-btns">
-                <div class="kanban-link"><img class="kanban-img" src="img/kanban_logo/summary.png"><span>Summary</span></div>
-                <div class="kanban-link"><img class="kanban-img" src="img/kanban_logo/board.png"><span>Board</span></div>
-                <div class="kanban-link"><img class="kanban-img" src="img/kanban_logo/addTask.png"><span>Add Task</span></div>
-                <div class="kanban-link"><img class="kanban-img" src="img/kanban_logo/contacts.png"><span>Contacts</span></div>
+                <div class="kanban-link" onclick="renderSummary()"><img class="kanban-img" src="img/kanban_logo/summary.png"><span>Summary</span></div>
+                <div class="kanban-link" onclick="renderBoard()"><img class="kanban-img" src="img/kanban_logo/board.png"><span>Board</span></div>
+                <div class="kanban-link" onclick="renderAddTasks()"><img class="kanban-img" src="img/kanban_logo/addTask.png"><span>Add Task</span></div>
+                <div class="kanban-link" onclick="renderContacts()"><img class="kanban-img" src="img/kanban_logo/contacts.png"><span>Contacts</span></div>
             </div>
         </div>
 
@@ -417,15 +417,73 @@ function renderContacts() {
 
         <div class="sidebar-mobile">
             <div class="kanban-btns">
-                <div class="kanban-link"><img class="kanban-img" src="img/kanban_logo/summary.png"><span>Summary</span></div>
-                <div class="kanban-link"><img class="kanban-img" src="img/kanban_logo/board.png"><span>Board</span></div>
-                <div class="kanban-link"><img class="kanban-img" src="img/kanban_logo/addTask.png"><span>Add Task</span></div>
-                <div class="kanban-link"><img class="kanban-img" src="img/kanban_logo/contacts.png"><span>Contacts</span></div>
+                <div class="kanban-link" onclick="renderSummary()"><img class="kanban-img" src="img/kanban_logo/summary.png"><span>Summary</span></div>
+                <div class="kanban-link" onclick="renderBoard()"><img class="kanban-img" src="img/kanban_logo/board.png"><span>Board</span></div>
+                <div class="kanban-link" onclick="renderAddTasks()"><img class="kanban-img" src="img/kanban_logo/addTask.png"><span>Add Task</span></div>
+                <div class="kanban-link" onclick="renderContacts()"><img class="kanban-img" src="img/kanban_logo/contacts.png"><span>Contacts</span></div>
             </div>
         </div>
 `
 }
 
 function renderLegalNotice() {
-    // document.querySelector(".main-field").innerHTML =
+    document.querySelector(".main-field").innerHTML =
+        `
+        <div class="legal-notice">
+        <div class="legal-notice-arrow-container">
+            <img src="img/form_logo/blue_arrow.png">
+        </div>
+        <h1 id="legal-notice-headline">Legal Notice</h1>
+        <div>
+            <h3 id="subtitle-1">Subtitle-1</h3>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolores esse cumque possimus dolorum adipisci nobis incidunt dolore tempora molestias, debitis ad mollitia, eos aperiam velit, reprehenderit sit aspernatur eum autem!</p>
+        </div>
+
+        <div>
+            <h3 id="subtitle-2">Subtitle-2</h3>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Adipisci, harum saepe. Nulla pariatur quibusdam ut nisi magnam quasi maiores neque impedit illum atque? Vitae aspernatur provident atque praesentium, cupiditate obcaecati.</p>
+        </div>
+    </div>
+
+    <div class="sidebar-mobile">
+        <div class="kanban-btns">
+            <div class="kanban-link" onclick="renderSummary()"><img class="kanban-img" src="img/kanban_logo/summary.png"><span>Summary</span></div>
+            <div class="kanban-link" onclick="renderBoard()"><img class="kanban-img" src="img/kanban_logo/board.png"><span>Board</span></div>
+            <div class="kanban-link" onclick="renderAddTasks()"><img class="kanban-img" src="img/kanban_logo/addTask.png"><span>Add Task</span></div>
+            <div class="kanban-link" onclick="renderContacts()"><img class="kanban-img" src="img/kanban_logo/contacts.png"><span>Contacts</span></div>
+        </div>
+    </div>
+
+        `
+}
+
+function renderHelp() {
+    document.querySelector(".main-field").innerHTML =
+        `
+        <div class="help-container">
+                <div class="help-arrow-container">
+                    <img src="img/form_logo/blue_arrow.png">
+                </div>
+                <h1 id="help-headline">Help</h1>
+                <div>
+                    <h3 id="subtitle-join">What is Join</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolores esse cumque possimus dolorum adipisci nobis incidunt dolore tempora molestias, debitis ad mollitia, eos aperiam velit, reprehenderit sit aspernatur eum autem!</p>
+                </div>
+
+                <div>
+                    <h3 id="subtitle-how-to">How to use it</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Adipisci, harum saepe. Nulla pariatur quibusdam ut nisi magnam quasi maiores neque impedit illum atque? Vitae aspernatur provident atque praesentium, cupiditate obcaecati.</p>
+                </div>
+            </div>
+
+            <div class="sidebar-mobile">
+                <div class="kanban-btns">
+                    <div class="kanban-link" onclick="renderSummary()"><img class="kanban-img" src="img/kanban_logo/summary.png"><span>Summary</span></div>
+                    <div class="kanban-link" onclick="renderBoard()"><img class="kanban-img" src="img/kanban_logo/board.png"><span>Board</span></div>
+                    <div class="kanban-link" onclick="renderAddTasks()"><img class="kanban-img" src="img/kanban_logo/addTask.png"><span>Add Task</span></div>
+                    <div class="kanban-link" onclick="renderContacts()"><img class="kanban-img" src="img/kanban_logo/contacts.png"><span>Contacts</span></div>
+                </div>
+            </div>
+
+        `
 }

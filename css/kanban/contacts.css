@@ -3,7 +3,7 @@
 }
 
 .main-field {
-    /*displa:flex*/
+    display: flex;
 }
 
 .contacts-left {

@@ -36,6 +36,7 @@ body {
 }
 
 .help {
+    cursor: pointer;
     height: 25px;
     margin-right: 20px;
 }
@@ -77,6 +78,7 @@ body {
 .main-field {
     width: 80%;
     height: 100%;
+    overflow: scroll;
 }
 
 .kanban-img {

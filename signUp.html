@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="css/form/signUp.css">
     <script src="js/mini_backend.js"></script>
     <script>
-        
         setURL('https://gruppe-319.developerakademie.net/smallest_backend_ever')
 
         let users = []
@@ -24,20 +23,19 @@
             let password = document.querySelector('#password').value
 
             let user = {
-                'name':name,
-                'email':email,
-                'password':password
+                'name': name,
+                'email': email,
+                'password': password
             }
 
             addUser(user)
-            
+
         }
 
         function addUser(user) {
             users.push(user)
             backend.setItem('users', JSON.stringify(users));
         }
-
     </script>
 </head>
 

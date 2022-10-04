@@ -1,0 +1,64 @@
+.main-field {
+    position: relative;
+}
+
+.legal-notice {
+    width: 90%;
+    margin: 20px auto;
+}
+
+.legal-notice-arrow-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+#legal-notice-headline {
+    margin-top: 0;
+    color: #4589FF;
+}
+
+#subtitle-1 {
+    color: #005DFF;
+}
+
+#subtitle-2 {
+    color: #005DFF;
+}
+
+@media (max-width: 500px) {
+    .main-field {
+        height: 105%;
+    }
+    .legal-notice {
+        width: 100%;
+    }
+    .kanban-btns {
+        position: absolute;
+        bottom: 0;
+    }
+}
+
+@media (max-width: 400px) {
+    .main-field {
+        height: 110%;
+    }
+}
+
+@media (max-width: 380px) {
+    .main-field {
+        height: 115%;
+    }
+}
+
+@media (max-width: 360px) {
+    .main-field {
+        height: 120%;
+    }
+}
+
+@media (max-width: 340px) {
+    .main-field {
+        height: 125%;
+    }
+}
