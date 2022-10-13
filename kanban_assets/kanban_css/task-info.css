@@ -1,0 +1,40 @@
+#board-task-info {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 5px;
+}
+
+.task-info-priority {
+    background-color: transparent;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 5px 10px;
+}
+
+.edit-btn {
+    display: flex;
+    align-items: center;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    margin-right: 5px;
+}
+
+.edit-btn:hover {
+    cursor: pointer;
+    background-color: blue;
+}
+
+.close-btn-container-task-info {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.board-task-edit-btn-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}

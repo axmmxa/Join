@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join</title>
+    <link rel="stylesheet" href="login_assets/login_css/fonts.css">
+    <link rel="stylesheet" href="login_assets/login_css/login.css">
+
+
+    <link rel="stylesheet" href="kanban_assets/kanban_css/generalKanban.css">
+    <link rel="stylesheet" href="kanban_assets/kanban_css/index.css">
+
+    <link rel="stylesheet" href="kanban_assets/kanban_css/contacts.css">
+    <link rel="stylesheet" href="kanban_assets/kanban_css/contacts_small.css">
+
+    <link rel="stylesheet" href="kanban_assets/kanban_css/contact-information.css">
+
+
+
+    <script src="js/render.js" defer></script>
+    <script src="js/mini_backend.js" defer></script>
+
+    <script>
+        let users = [];
+
+        setURL('https://gruppe-319.developerakademie.net/smallest_backend_ever')
+
+        async function addUser() {
+            users.push('John');
+            await backend.setItem('users', JSON.stringify(users));
+        }
+
+        async function initDownload() {
+            await downloadFromServer();
+            users = JSON.parse(backend.getItem("users")) || [];
+            console.log(users)
+        }
+    </script>
+
+    <script src="js/login.js" defer></script>
+
+</head>
+
+<body>
+    <nav class="kanban-navbar">
+        <div class="inner-container">
+            <img class="logo" src="kanban_img/login_icons/join_white.png">
+
+            <div class="info">
+                <p class="name" onclick="renderSmallContacts()">Kanban Project Management Tool</p>
+                <a href="kanban_assets/help.html"><img class="help" src="kanban_img/small_navbar_icons/help.png"></a>
+                <img class="user-img" src="kanban_img/user_icons/user_example.png">
+            </div>
+        </div>
+    </nav>
+
+
+    <main class="kanban-main">
+        <div class="sidebar">
+            <div class="inner-sidebar">
+                <div class="kanban-btns">
+                    <a href="summary.html" class="kanban-link"><img class="kanban-img" src="kanban_img/small_navbar_icons/summary.png"><span>Summary</span></a>
+                    <a href="board.html" class="kanban-link"><img class="kanban-img" src="kanban_img/small_navbar_icons/board.png"><span>Board</span></a>
+                    <a href="addTask.html" class="kanban-link"><img class="kanban-img" src="kanban_img/small_navbar_icons/addTask.png"><span>Add Task</span></a>
+                    <a href="contacts.html" class="kanban-link"><img class="kanban-img" src="kanban_img/small_navbar_icons/contacts.png"><span>Contacts</span></a>
+                </div>
+
+                <div class="legal-notice">
+                    <a href="kanban_assets/legal_notice.html" class="kanban-link"><img class="kanban-img" src="kanban_img/small_navbar_icons/legal_notice.png"><span>Legal Notice</span></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-field">
+            <button class="add-person-btn-mobile">Add Contacts <img class="add-person-img" src="kanban_img/add_icons/add_person.png"></button>
+
+            <div class="contacts-left">
+
+                <div class="contacts-A">
+
+                    <div class="contacs-A-headline">
+                        <span>A</span>
+                    </div>
+
+                    <div class="contacts-A-data">
+                        <div class="contact-info">
+                            <div>
+                                <img class="contact-img" src="kanban_img/user_icons/user_example.png">
+                            </div>
+                            <div class="contact-data">
+                                <h3 class="contact-name">Anton Mayer</h3>
+                                <span class="darkblue-text">atom@gmail.com</span>
+                            </div>
+                        </div>
+
+                        <div class="contact-info">
+                            <div>
+                                <img class="contact-img" src="kanban_img/user_icons/user_example.png">
+                            </div>
+                            <div class="contact-data">
+                                <h3 class="contact-name">Anja Schulz</h3>
+                                <span class="darkblue-text">schulz@gmail.com</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="contacts-right">
+                <button class="add-person-btn">Add Contacts <img class="add-person-img" src="kanban_img/add_icons/add_person.png"></button>
+            </div>
+
+            <div class="sidebar-mobile">
+                <div class="kanban-btns">
+                    <a href="summary.html" class="kanban-link"><img class="kanban-img" src="kanban_img/small_navbar_icons/summary.png"><span>Summary</span></a>
+                    <a href="board.html" class="kanban-link"><img class="kanban-img" src="kanban_img/small_navbar_icons/board.png"><span>Board</span></a>
+                    <a href="addTask.html" class="kanban-link"><img class="kanban-img" src="kanban_img/small_navbar_icons/addTask.png"><span>Add Task</span></a>
+                    <a href="contacts.html" class="kanban-link"><img class="kanban-img" src="kanban_img/small_navbar_icons/contacts.png"><span>Contacts</span></a>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+</body>
+
+</html>

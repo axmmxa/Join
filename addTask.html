@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join</title>
+
+    <link rel="stylesheet" href="login_assets/login_css/fonts.css">
+    <link rel="stylesheet" href="login_assets/login_css/login.css">
+
+    <link rel="stylesheet" href="kanban_assets/kanban_css/generalKanban.css">
+    <link rel="stylesheet" href="kanban_assets/kanban_css/index.css">
+    <link rel="stylesheet" href="kanban_assets/kanban_css/task.css">
+    <link rel="stylesheet" href="kanban_assets/kanban_css/edit_task.css">
+    <link rel="stylesheet" href="kanban_assets/kanban_css/task-info.css">
+
+</head>
+
+
+<body>
+    <nav class="kanban-navbar">
+        <div class="inner-container">
+            <img class="logo" src="kanban_img/login_icons/join_white.png">
+
+            <div class="info">
+                <p class="name">Kanban Project Management Tool</p>
+                <a href="kanban_assets/help.html"><img class="help" src="kanban_img/small_navbar_icons/help.png"></a>
+                <img class="user-img" src="kanban_img/user_icons/user_example.png">
+            </div>
+        </div>
+    </nav>
+
+    <nav class="mobile-create-task-navbar">
+        <img class="mobile-logo-blue" src="kanban_img/login_icons/join_blue.png">
+        <button class="create-task-mobile-btn">Create <img class="white-clear" src="kanban_img/clear_icons/white_clear.png"></button>
+    </nav>
+
+
+    <main class="kanban-main">
+        <div class="sidebar">
+            <div class="inner-sidebar">
+                <div class="kanban-btns">
+                    <a href="summary.html" class="kanban-link"><img class="kanban-img" src="kanban_img/small_navbar_icons/summary.png"><span>Summary</span></a>
+                    <a href="board.html" class="kanban-link"><img class="kanban-img" src="kanban_img/small_navbar_icons/board.png"><span>Board</span></a>
+                    <a href="addTask.html" class="kanban-link"><img class="kanban-img" src="kanban_img/small_navbar_icons/addTask.png"><span>Add Task</span></a>
+                    <a href="contacts.html" class="kanban-link"><img class="kanban-img" src="kanban_img/small_navbar_icons/contacts.png"><span>Contacts</span></a>
+                </div>
+
+                <div class="legal-notice">
+                    <a href="kanban_assets/legal_notice.html" class="kanban-link"><img class="kanban-img" src="kanban_img/small_navbar_icons/legal_notice.png"><span>Legal Notice</span></a>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="main-field">
+
+            <div class="add-task-container">
+                <div class="task-form-left">
+                    <form class="task-form">
+                        <input class="input-title" type="text" placeholder="Enter a title">
+
+                        <div class="contacts-container">
+                            <select name="contacts" id="contacts">
+                                <option value="">select contacts to assign</option>
+                                <option value="">contact1</option>
+                                <option value="">contac2</option>
+                                <option value="">contact2</option>
+                            </select>
+                            <img class="arrow-select" src="kanban_img/arrow_icons/arrow_select.png" />
+                        </div>
+
+                        <div class="due-date-container">
+                            <label class="label-flex" for="due-date">Due date<input placeholder="dd/mm/yyyy" id="due-date"type="text"></label>
+                            <img class="date-img" src="kanban_img/date_icons/date_img.png" />
+                        </div>
+
+                        <div class="task-category-container">
+                            <select name="task-category" id="task-category">
+                                <option value="">assign task category</option>
+                                <option value="">New Category</option>
+                                <option value="">Sales</option>
+                                <option value="">Backoffice</option>
+                            </select>
+                            <img class="arrow-select" src="kanban_img/arrow_icons/arrow_select.png" />
+                        </div>
+
+                        <div class="priority-btn-container">
+                            <button class="urgent-btn">Urgent <img class="priority-urgent-img" src="kanban_img/priority_icons/urgent-red.png"></button>
+                            <button class="medium-btn">Medium <img  class="priority-urgent-img" src="kanban_img/priority_icons/middle-urgent-orange.png"></button>
+                            <button class="non-urgent-btn">Low <img class="priority-urgent-img" src="kanban_img/priority_icons/non-urgent-green.png"></button>
+                        </div>
+                        <div class="description-container">
+                            <span>Description</span>
+                            <textarea name="" id="textarea" placeholder="Enter a description"></textarea>
+                        </div>
+
+                        <div class="category-container">
+                            <label class="category-label" for="category">Subtask<input id="category" placeholder="Add new subtask" type="text"></label>
+                            <label for="subtask"><input type="checkbox" id="subtask"><span class="category-span">Subtask</span></label>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="task-form-right">
+                    <div class="create-task-container">
+                        <button class="delete-btn">Clear <span class="close-x">X</span></button>
+                        <button class="create-btn">Create Task <img class="white-clear" src="kanban_img/clear_icons/white_clear.png"></button>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="sidebar-mobile">
+                <div class="kanban-btns">
+                    <a href="summary.html" class="kanban-link"><img class="kanban-img" src="kanban_img/small_navbar_icons/summary.png"><span>Summary</span></a>
+                    <a href="board.html" class="kanban-link"><img class="kanban-img" src="kanban_img/small_navbar_icons/board.png"><span>Board</span></a>
+                    <a href="addTask.html" class="kanban-link"><img class="kanban-img" src="kanban_img/small_navbar_icons/addTask.png"><span>Add Task</span></a>
+                    <a href="contacts.html" class="kanban-link"><img class="kanban-img" src="kanban_img/small_navbar_icons/contacts.png"><span>Contacts</span></a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+</body>
+
+</html>

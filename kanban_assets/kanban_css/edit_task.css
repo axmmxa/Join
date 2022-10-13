@@ -1,0 +1,13 @@
+.edit-task {
+    position: absolute;
+    top: 15vh;
+    width: 400px;
+}
+
+.add-task-container-edit {
+    width: 400px;
+}
+
+.assigned-headline-outside {
+    margin-top: 10px;
+}

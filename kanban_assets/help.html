@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join</title>
+
+    <link rel="stylesheet" href="../login_assets/login_css/fonts.css">
+    <link rel="stylesheet" href="../login_assets/login_css/login.css">
+
+
+    <link rel="stylesheet" href="kanban_css/generalKanban.css">
+    <link rel="stylesheet" href="kanban_css/index.css">
+
+    <link rel="stylesheet" href="kanban_css/help.css">
+
+
+
+    <script src="js/render.js" defer></script>
+    <script src="js/mini_backend.js" defer></script>
+
+    <script>
+        let users = [];
+
+        setURL('https://gruppe-319.developerakademie.net/smallest_backend_ever')
+
+        async function addUser() {
+            users.push('John');
+            await backend.setItem('users', JSON.stringify(users));
+        }
+
+        async function initDownload() {
+            await downloadFromServer();
+            users = JSON.parse(backend.getItem("users")) || [];
+            console.log(users)
+        }
+    </script>
+
+    <script src="js/login.js" defer></script>
+
+</head>
+
+<body onload="init()">
+    <nav class="kanban-navbar">
+        <div class="inner-container">
+            <img class="logo" src="../kanban_img/login_icons/join_white.png">
+
+            <div class="info">
+                <p class="name" onclick="renderSmallContacts()">Kanban Project Management Tool</p>
+                <img class="help" onclick="renderHelp()" src="../kanban_img/small_navbar_icons/help.png">
+                <img class="user-img" src="../kanban_img/user_icons/user_example.png">
+            </div>
+        </div>
+    </nav>
+
+
+    <main class="kanban-main">
+        <div class="sidebar">
+            <div class="inner-sidebar">
+                <div class="kanban-btns">
+                    <a href="../summary.html" class="kanban-link"><img class="kanban-img" src="../kanban_img/small_navbar_icons/summary.png"><span>Summary</span></a>
+                    <a href="../board.html" class="kanban-link"><img class="kanban-img" src="../kanban_img/small_navbar_icons/board.png"><span>Board</span></a>
+                    <a href="../addTask.html" class="kanban-link"><img class="kanban-img" src="../kanban_img/small_navbar_icons/addTask.png"><span>Add Task</span></a>
+                    <a href="../contacts.html" class="kanban-link"><img class="kanban-img" src="../kanban_img/small_navbar_icons/contacts.png"><span>Contacts</span></a>
+                </div>
+
+                <div class="legal-notice">
+                    <a href="../kanban_assets/legal_notice.html" class="kanban-link"><img class="kanban-img" src="../kanban_img/small_navbar_icons/legal_notice.png"><span>Legal Notice</span></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-field">
+            <div class="help-container">
+                <div class="help-arrow-container">
+                    <a href="../summary.html"><img class="arrow" src="../kanban_img/arrow_icons/blue_arrow.png"></a>
+                </div>
+                <h1 id="help-headline">Help</h1>
+                <div>
+                    <h3 id="subtitle-join">What is Join</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolores esse cumque possimus dolorum adipisci nobis incidunt dolore tempora molestias, debitis ad mollitia, eos aperiam velit, reprehenderit sit aspernatur eum autem!</p>
+                </div>
+
+                <div>
+                    <h3 id="subtitle-how-to">How to use it</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Adipisci, harum saepe. Nulla pariatur quibusdam ut nisi magnam quasi maiores neque impedit illum atque? Vitae aspernatur provident atque praesentium, cupiditate obcaecati.</p>
+                </div>
+            </div>
+
+            <div class="sidebar-mobile">
+                <div class="kanban-btns">
+                    <a href="../summary.html" class="kanban-link"><img class="kanban-img" src="../kanban_img/small_navbar_icons/summary.png"><span>Summary</span></a>
+                    <a href="../board.html" class="kanban-link"><img class="kanban-img" src="../kanban_img/small_navbar_icons/board.png"><span>Board</span></a>
+                    <a href="../addTask.html" class="kanban-link"><img class="kanban-img" src="../kanban_img/small_navbar_icons/addTask.png"><span>Add Task</span></a>
+                    <a href="../contacts.html" class="kanban-link"><img class="kanban-img" src="../kanban_img/small_navbar_icons/contacts.png"><span>Contacts</span></a>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>

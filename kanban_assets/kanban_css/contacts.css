@@ -1,0 +1,154 @@
+.main-field {
+    display: flex;
+}
+
+.contacts-left {
+    height: 100%;
+    width: 35%;
+    box-shadow: 5px 0 5px -2px rgba(0, 0, 0, 0.2);
+    overflow-y: scroll;
+}
+
+.contacts-right {
+    width: 65%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.contacts-A {
+    width: 80%;
+    margin: auto;
+}
+
+.contacs-A-headline {
+    padding-top: 10px;
+    padding-bottom: 25px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    ;
+}
+
+.contacs-A-headline span {
+    margin-left: 10px;
+}
+
+.contact-img {
+    height: 40px;
+    border-radius: 50%;
+    border: 3px solid white;
+    margin-left: 10px;
+    margin-top: 5px;
+}
+
+.contact-info {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 10px;
+    border-radius: 8px;
+}
+
+.contact-info:hover {
+    background-color: #D2E3FF;
+    cursor: pointer;
+}
+
+.contact-data {
+    margin-left: 30px;
+}
+
+.contact-data h3 {
+    margin: 0;
+    font-weight: 400;
+}
+
+.add-person-btn-mobile {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background-color: #4589FF;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    margin-top: 20px;
+}
+
+.add-person-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #4589FF;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    margin-right: 20px;
+}
+
+.add-person-btn:hover {
+    cursor: pointer;
+    background-color: blue;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+
+.add-person-img {
+    width: 20px;
+    height: 20px;
+    margin-left: 5px;
+}
+
+@media (max-width: 1024px) {
+    .contacts-left {
+        width: 50%;
+    }
+    .contacts-right {
+        width: 50%;
+    }
+}
+
+@media (max-width: 874px) {
+    .contacts-right {
+        display: none;
+    }
+    .contacts-left {
+        width: 100%;
+        box-shadow: none;
+    }
+    .add-person-btn {
+        width: 150px;
+        margin-right: 0;
+    }
+    .main-field {
+        flex-direction: column;
+        align-items: flex-end;
+    }
+    .add-person-btn-mobile {
+        cursor: pointer;
+        display: flex;
+        margin-right: 0;
+    }
+}
+
+
+/* @media (max-width: 684px) {
+    .kanban-navbar {
+        display: none;
+    }
+} */
+
+@media (max-width: 420px) {
+    .contact-name {
+        font-size: 16px;
+    }
+    .darkblue-text {
+        font-size: 12px;
+    }
+    .contact-data {
+        margin-left: 10px;
+    }
+}

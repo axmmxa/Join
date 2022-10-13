@@ -1,0 +1,35 @@
+.arrow {
+    cursor: pointer;
+    width: 15px;
+    height: auto;
+}
+
+.form-inner-container {
+    height: 100%;
+    width: 95%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.form-btn {
+    cursor: pointer;
+    background-color: #4589FF;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 25px 10px 25px
+}
+
+.form-headline {
+    padding-bottom: 10px;
+    margin: 0;
+}
+
+.blue-bottom {
+    width: 100px;
+    height: 2px;
+    background-color: #4589FF;
+}

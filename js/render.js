@@ -1,489 +1,187 @@
-// function init() {
-//     renderSummary()
-// }
+function renderSmallEditTask() {
+    document.querySelector("body").innerHTML +=
 
-function renderSummary() {
-    document.querySelector(".main-field").innerHTML =
-        `<div class="summary-container">
-        <span class="gm-text">Good Morning, <span class="user-name">Name</span></span>
-        <p class="mobile-headline">Kanban Project Management Tool</p>
-        <div class="inner-summary-container">
-            <div class="upper-task-container">
-                <div class="task-urgent">
-                    <div class="task-urgent-left-part">
-                        <div class="task-urgent-left-part-1">
-                            <img src="img/kanban_logo/summary-icons/Urgent.png">
-                            <span class="summary-count-white">1</span>
-                        </div>
+        `
+    <div class="edit-task">  
+    <div class="add-task-container-edit">
+    
+        <form class="task-form">
+            <input class="input-title" type="text" placeholder="Enter a title">
 
-                        <div class="task-urgent-left-part-2">
-                            <p class="task-urgent-left-part-2-text">Task-urgent</p>
-                        </div>
-
-                    </div>
-
-                    <div class="white-border">
-
-                    </div>
-
-                    <div class="task-urgent-right-part">
-                        <div>
-                            <p class="date">16 Oktober 2022</p>
-                        </div>
-                        <div>
-                            <p class="deadline">Upcoming deadline</p>
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="task-card-upper">
-                    <div class="inner-task-card-upper">
-                        <div class="img-count-container">
-                            <div class="task-to-do">
-                                <img class="summary-img" src="img/kanban_logo/summary-icons/Board.png" alt="">
-                                <span class="summary-count-black">1</span>
-                            </div>
-                        </div>
-
-                        <div class="task-text">
-                            <p class="blue-text">Task To-do</p>
-                        </div>
-                    </div>
-
-                </div>
-
+            <div class="description-container">
+            <span>Description</span>
+            <textarea name="" id="textarea" placeholder="Enter a description"></textarea>
             </div>
 
-            <div class="lower-task-container">
-
-                <div id="task-card-lower-1" class="task-card-lower">
-                    <div class="inner-task-card">
-                        <div>
-                            <div class="task-to-do">
-                                <img class="summary-img" src="img/kanban_logo/summary-icons/Board.png" alt="">
-                                <span class="summary-count-black">5</span>
-                            </div>
-                        </div>
-
-                        <div>
-                            <p class="blue-text">Task In Board</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="task-card-lower-2" class="task-card-lower">
-                    <div class="inner-task-card">
-                        <div>
-                            <div class="task-to-do">
-                                <img class="summary-img" src="img/kanban_logo/summary-icons/In Progress.png" alt="">
-                                <span class="summary-count-black">5</span>
-                            </div>
-                        </div>
-
-                        <div>
-                            <p class="blue-text">Task In Progress</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="task-card-lower-3" class="task-card-lower">
-                    <div class="inner-task-card">
-                        <div>
-                            <div class="task-to-do">
-                                <img class="summary-img" src="img/kanban_logo/summary-icons/Awaiting feedback.png" alt="">
-                                <span class="summary-count-black">5</span>
-                            </div>
-                        </div>
-
-                        <div>
-                            <p class="blue-text">Awaiting Feedback</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="task-card-lower-4" class="task-card-lower">
-                    <div class="inner-task-card">
-                        <div>
-                            <div class="task-to-do">
-                                <img class="summary-img" src="img/kanban_logo/summary-icons/Done.png" alt="">
-                                <span class="summary-count-black">1</span>
-                            </div>
-                        </div>
-
-                        <div>
-                            <p class="blue-text">Tasks Done</p>
-                        </div>
-                    </div>
-                </div>
+            <div class="due-date-container">
+                <label class="label-flex" for="due-date">Due date<input placeholder="dd/mm/yyyy" id="due-date"type="text"></label>
+                <img class="date-img" src="img/kanban_logo/date_img.png" />
             </div>
 
-        </div>
+            
+            <div class="priority-btn-container">
+                <button class="urgent-btn">Urgent <img class="priority-urgent-img" src="img/kanban_logo/urgent-red.png"></button>
+                <button class="medium-btn">Medium <img  class="priority-urgent-img" src="img/kanban_logo/middle-priority-orange.png"></button>
+                <button class="non-urgent-btn">Low <img class="priority-urgent-img" src="img/kanban_logo/non-urgent-green.png"></button>
+            </div>
+            
+            <span class="assigned-headline-outside">Assigned to:</span>
+            <div class="contacts-container">
+                <select name="contacts" id="contacts">
+                    <option value="">select contacts to assign</option>
+                    <option value="">contact1</option>
+                    <option value="">contact2</option>
+                    <option value="">contact3</option>
+                </select>
+                <img class="arrow-select" src="img/kanban_logo/arrow_select.png" />
+            </div>
+
+            <div class="margin align-right">
+                <button class="create-btn">Ok <img class="white-clear" src="img/kanban_logo/white_clear_btn.png"/></button>
+            </div>
+
+        </form>
+        
     </div>
-    <div class="sidebar-mobile">
-        <div class="kanban-btns">
-            <div class="kanban-link" onclick="renderSummmary()"><img class="kanban-img" src="img/kanban_logo/summary.png"><span>Summary</span></div>
-            <div class="kanban-link" onclick="renderBoatd()"><img class="kanban-img" src="img/kanban_logo/board.png"><span>Board</span></div>
-            <div class="kanban-link" onclick="renderAddTasks()"><img class="kanban-img" src="img/kanban_logo/addTask.png"><span>Add Task</span></div>
-            <div class="kanban-link" onclick="renderContacts()"><img class="kanban-img" src="img/kanban_logo/contacts.png"><span>Contacts</span></div>
-        </div>
-    </div>`
-}
+    </div>
 
-
-function renderBoard() {
-    document.querySelector(".main-field").innerHTML = `
-    <div class="board-container">
-                <span class="board-headline-mobile blue-text">Kanban Project Mangement Tool</span>
-                <div class="search-field">
-                    <div class="input-container">
-                        <input placeholder="Find task" type="text" class="input">
-                        <img class="search-img" src="img/kanban_logo/search.png">
-                    </div>
-                    <button class="add-btn"><span class="white-text">Add Task</span><img class="add-img" src="img/kanban_logo/add.png"></button>
-                </div>
-
-                <div class="board-task-container">
-                    <div class="board-to-do width-25">
-                        <div class="flex">
-                            <h4 class="board-task-title">To do</h4>
-                            <img class="board-task-img" src="img/kanban_logo/plus button.png">
-                        </div>
-
-                        <div class="added-task">
-                            <span class="task-topic white-text">Design</span>
-                            <h4 class="task-headline blue-text">Redesign Website</h4>
-                            <span class="added-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</span>
-                            <div class="progress">
-                                <div class="progress-bar"></div> <span class="addTask-amount"><span>3</span>/<span>3</span> Done</span>
-                            </div>
-                            <div class="board-user-img-container">
-                                <div class="user-tasks"></div>
-                                <img src="img/kanban_logo/non-urgent-green.png" class="priority-img">
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="board-in-progress width-25">
-                        <div class="flex">
-                            <h4 class="board-task-title">In Progress</h4>
-                            <img class="board-task-img" src="img/kanban_logo/plus button.png">
-                        </div>
-
-                        <div class="added-task">
-                            <span class="task-topic white-text">Design</span>
-                            <h4 class="task-headline blue-text">Redesign Website</h4>
-                            <span class="added-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</span>
-                            <div class="progress">
-                                <div class="progress-bar"></div> <span class="addTask-amount"><span>3</span>/<span>3</span> Done</span>
-                            </div>
-                            <div class="board-user-img-container">
-                                <div class="user-tasks"></div>
-                                <img src="img/kanban_logo/non-urgent-green.png" class="priority-img">
-                            </div>
-                        </div>
-
-                        <div class="added-task">
-                            <span class="task-topic white-text">Design</span>
-                            <h4 class="task-headline blue-text">Redesign Website</h4>
-                            <span class="added-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</span>
-                            <div class="progress">
-                                <div class="progress-bar"></div> <span class="addTask-amount"><span>3</span>/<span>3</span> Done</span>
-                            </div>
-                            <div class="board-user-img-container">
-                                <div class="user-tasks"></div>
-                                <img src="img/kanban_logo/non-urgent-green.png" class="priority-img">
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="board-await-feedback width-25">
-                        <div class="flex">
-                            <h4 class="board-task-title">Await Feedback</h4>
-                            <img class="board-task-img" src="img/kanban_logo/plus button.png">
-                        </div>
-
-                        <div class="added-task">
-                            <span class="task-topic white-text">Design</span>
-                            <h4 class="task-headline blue-text">Redesign Website</h4>
-                            <span class="added-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</span>
-                            <div class="progress">
-                                <div class="progress-bar"></div> <span class="addTask-amount"><span>3</span>/<span>3</span> Done</span>
-                            </div>
-                            <div class="board-user-img-container">
-                                <div class="user-tasks"></div>
-                                <img src="img/kanban_logo/non-urgent-green.png" class="priority-img">
-                            </div>
-                        </div>
-
-                        <div class="added-task">
-                            <span class="task-topic white-text">Design</span>
-                            <h4 class="task-headline blue-text">Redesign Website</h4>
-                            <span class="added-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</span>
-                            <div class="progress">
-                                <div class="progress-bar"></div> <span class="addTask-amount"><span>3</span>/<span>3</span> Done</span>
-                            </div>
-                            <div class="board-user-img-container">
-                                <div class="user-tasks"></div>
-                                <img src="img/kanban_logo/non-urgent-green.png" class="priority-img">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="board-done width-25">
-                        <div class="flex">
-                            <h4 class="board-task-title">Done</h4>
-                            <img class="board-task-img" src="img/kanban_logo/plus button.png">
-                        </div>
-
-                        <div class="added-task">
-                            <span class="task-topic white-text">Design</span>
-                            <h4 class="task-headline blue-text">Redesign Website</h4>
-                            <span class="added-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</span>
-                            <div class="progress">
-                                <div class="progress-bar"></div> <span class="addTask-amount"><span>3</span>/<span>3</span> Done</span>
-                            </div>
-                            <div class="board-user-img-container">
-                                <div class="user-tasks"></div>
-                                <img src="img/kanban_logo/non-urgent-green.png" class="priority-img">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
     `
 }
 
-function renderAddTasks() {
-    console.log("test")
 
-    document.querySelector('body').innerHTML = `
-
-    <nav class="kanban-navbar">
-    <div class="inner-container">
-        <img class="logo" src="img/form_logo/logo_white.png">
-
-        <div class="info">
-            <p class="name">Kanban Project Management Tool</p>
-            <img class="help" src="img/kanban_logo/help.png">
-            <img class="user-img" src="img/kanban_logo/user_example.png">
-        </div>
-    </div>
-</nav>
-
-<nav class="mobile-create-task-navbar">
-    <img class="mobile-logo-blue" src="img/form_logo/logo_blue.png">
-    <button class="create-task-mobile-btn">Create <img class="white-clear" src="img/kanban_logo/white_clear_btn.png"></button>
-</nav>
-
-
-<main class="kanban-main">
-    <div class="sidebar">
-        <div class="inner-sidebar">    
-            <div class="kanban-btns">
-                <div class="kanban-link" onclick="renderSummary()"><img class="kanban-img" src="img/kanban_logo/summary.png"><span>Summary</span></div>
-                <div class="kanban-link" onclick="renderBoard()"><img class="kanban-img" src="img/kanban_logo/board.png"><span>Board</span></div>
-                <div class="kanban-link" onclick="renderAddTasks()"><img  class="kanban-img" src="img/kanban_logo/addTask.png"><span>Add Task</span></div>
-                <div class="kanban-link" onclick="renderContacts()"><img class="kanban-img" src="img/kanban_logo/contacts.png"><span>Contacts</span></div>
+function renderSmallContacts() {
+    document.querySelector("body").innerHTML +=
+        `
+        <div id="small-contacts-container">
+            <div id="small-contacts-container-close-btn-container" class="light-blue">
+                <span class="arrow white-text">X</span>
+            </div>
+            <div class="upper-part-small-contacts light-blue">
+                <img class="logo-height" src="img/form_logo/logo_white.png">
+                <h1 class="white-text">Add Contact</h1>
+                <span class="white-text">Tasks are better in a team</span>
             </div>
 
-            <div class="legal-notice">
-                <div class="kanban-link" onclick="renderLegalNotice()"><img class="kanban-img" src="img/kanban_logo/legal_notice.png"><span>Legal Notice</span></div>
-            </div>
-        </div>
-    </div>
+            <div class="lower-part-small-contacts">
+                <img class="anonymous-profile-picture" src="img/form_logo/anonym_profile_picture.png">
 
-   
-
-    <div class="main-field">
-
-        <div class="add-task-container">
-            <div class="task-form-left">
-                <form class="task-form">
-                    <input class="input-title" type="text" placeholder="Enter a title">
-
-                    <div class="contacts-container">
-                        <select name="contacts" id="contacts">
-                            <option value="">select contacts to assign</option>
-                            <option value="">contact1</option>
-                            <option value="">contac2</option>
-                            <option value="">contact2</option>
-                        </select>
-                        <img class="arrow-select" src="img/kanban_logo/arrow_select.png" />
+                <form class="small-contacts-add-data">
+                    <div class="login-data">
+                        <input id="small-add-contacts-name" type="text" placeholder="Name">
+                        <input id="small-add-contacts-email" type="text" placeholder="E-mail">
+                        <input id="small-add-contacts-phone" type="text" placeholder="Phone">
                     </div>
 
-                    <div class="due-date-container">
-                        <label class="label-flex" for="due-date">Due date<input placeholder="dd/mm/yyyy" id="due-date"type="text"></label>
-                        <img class="date-img" src="img/kanban_logo/date_img.png" />
-                    </div>
-
-                    <div class="task-category-container">
-                        <select name="task-category" id="task-category">
-                            <option value="">assign task category</option>
-                            <option value="">New Category</option>
-                            <option value="">Sales</option>
-                            <option value="">Backoffice</option>
-                        </select>
-                        <img class="arrow-select" src="img/kanban_logo/arrow_select.png" />
-                    </div>
-
-                    <div class="priority-btn-container">
-                        <button class="urgent-btn">Urgent <img class="priority-urgent-img" src="img/kanban_logo/urgent-red.png"></button>
-                        <button class="medium-btn">Medium <img  class="priority-urgent-img" src="img/kanban_logo/middle-priority-orange.png"></button>
-                        <button class="non-urgent-btn">Low <img class="priority-urgent-img" src="img/kanban_logo/non-urgent-green.png"></button>
-                    </div>
-                    <div class="description-container">
-                        <span>Description</span>
-                        <textarea name="" id="textarea" placeholder="Enter a description"></textarea>
-                    </div>
-
-                    <div class="category-container">
-                        <label class="category-label" for="category">Subtask<input id="category" placeholder="Add new subtask" type="text"></label>
-                        <label for="subtask"><input type="checkbox" id="subtask"><span class="category-span">Subtask</span></label>
+                    <div class="small-contacts-btn-container">
+                        <button class="delete-btn">Cancel <span class="close-x">X</span></button>
+                        <button class="create-btn">Create Contact <img class="white-clear" src="img/kanban_logo/white_clear_btn.png"></button>
                     </div>
                 </form>
             </div>
+        </div>
+        `
+}
 
-            <div class="task-form-right">
-                <div class="create-task-container">
-                    <button class="clear-btn">Clear <span class="close-x">X</span></button>
-                    <button class="create-task-btn">Create Task <img class="white-clear" src="img/kanban_logo/white_clear_btn.png"></button>
+
+function renderSmallEditContacts() {
+    document.querySelector("body").innerHTML +=
+        `
+    <div id="small-contacts-container">
+        <div id="small-contacts-container-close-btn-container" class="blue">
+            <span class="arrow white-text">X</span>
+        </div>
+        <div class="upper-part-small-contacts blue">
+            <img class="logo-height" src="img/form_logo/logo_white.png">
+            <h1 class="white-text">Edit Contact</h1>
+        </div>
+
+        <div class="lower-part-small-contacts">
+            <img class="anonymous-profile-picture" src="img/form_logo/anonym_profile_picture.png">
+
+            <form class="small-contacts-add-data">
+                <div class="login-data">
+                    <input id="small-edit-contacts-name" type="text" placeholder="Name">
+                    <input id="small-edit-contacts-email" type="text" placeholder="E-mail">
+                    <input id="small-edit-contacts-phone" type="text" placeholder="Phone">
                 </div>
 
-            </div>
+                <div class="small-contacts-btn-container">
+                    <button class="create-btn">Save</button>
+                </div>
+            </form>
         </div>
-
-
-        <div class="sidebar-mobile">
-            <div class="kanban-btns">
-                <div class="kanban-link" onclick="renderSummary()"><img class="kanban-img" src="img/kanban_logo/summary.png"><span>Summary</span></div>
-                <div class="kanban-link" onclick="renderBoard()"><img class="kanban-img" src="img/kanban_logo/board.png"><span>Board</span></div>
-                <div class="kanban-link" onclick="renderAddTasks()"><img class="kanban-img" src="img/kanban_logo/addTask.png"><span>Add Task</span></div>
-                <div class="kanban-link" onclick="renderContacts()"><img class="kanban-img" src="img/kanban_logo/contacts.png"><span>Contacts</span></div>
-            </div>
-        </div>
-
     </div>
-</main>
+        `
+}
+
+function renderContactInformation() {
+    // document.querySelector("").innerHTML = 
+    `
+        <div id="contact-information">
+                <div class="contact-information-upper-part">
+                    <img src="img/form_logo/anonym_profile_picture.png" class="anonymous-profile-picture">
+                    <div class="contact-information-name-container">
+                        <h1 class="contact-information-name">Vorname Nachname</h1>
+                        <div class="contact-information-add-task-container"><img src="img/kanban_logo/plus_blue.png"> <span class="light-blue-text">Add Task</span></div>
+                    </div>
+                </div>
+
+                <div class="contact-information-lower-part">
+                    <div class="contact-information-edit">
+                        <h3 class="contact-information-headline">Contact Information</h3>
+                        <div class="contact-information-edit-container"><img src="img/kanban_logo/edit_pen.png"> <span>Edit Contact</span></div>
+                    </div>
+
+                    <div class="contact-information-email-container">
+                        <h4>Email</h4>
+                        <span class="darkblue-text">atom@gmail.com</span>
+                    </div>
+
+                    <div class="contact-information-mobil-container">
+                        <h4>Mobil</h4>
+                        <span>+49 111 111 111</span>
+                    </div>
+
+                </div>
+            </div>
+
+        `
+}
+
+
+function renderBoardTaskInfo() {
+    // document.querySelector("body").innerHTML += 
 
     `
-
-    // document.querySelector(".main-field").innerHTML =
-}
-
-
-
-function renderContacts() {
-    document.querySelector(".main-field").innerHTML =
-        `<button class="add-person-btn-mobile">Add Contacts <img class="add-person-img" src="img/kanban_logo/add_person.png"></button>
-
-        <div class="contacts-left">
-
-            <div class="contacts-A">
-
-                <div class="contacs-A-headline">
-                    <span>A</span>
+    <div id="board-task-info">
+                <div class="close-btn-container-task-info">
+                    <span class="close-x-right-side">X</span>
                 </div>
-
-                <div class="contacts-A-data">
-                    <div class="contact-info">
-                        <div>
-                            <img class="contact-img" src="img/kanban_logo/user_example.png">
-                        </div>
-                        <div class="contact-data">
-                            <h3 class="contact-name">Anton Mayer</h3>
-                            <span class="darkblue-text">atom@gmail.com</span>
-                        </div>
-                    </div>
-
-                    <div class="contact-info">
-                        <div>
-                            <img class="contact-img" src="img/kanban_logo/user_example.png">
-                        </div>
-                        <div class="contact-data">
-                            <h3 class="contact-name">Anja Schulz</h3>
-                            <span class="darkblue-text">schulz@gmail.com</span>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-        </div>
-
-        <div class="contacts-right">
-            <button class="add-person-btn">Add Contacts <img class="add-person-img" src="img/kanban_logo/add_person.png"></button>
-        </div>
-
-        <div class="sidebar-mobile">
-            <div class="kanban-btns">
-                <div class="kanban-link" onclick="renderSummary()"><img class="kanban-img" src="img/kanban_logo/summary.png"><span>Summary</span></div>
-                <div class="kanban-link" onclick="renderBoard()"><img class="kanban-img" src="img/kanban_logo/board.png"><span>Board</span></div>
-                <div class="kanban-link" onclick="renderAddTasks()"><img class="kanban-img" src="img/kanban_logo/addTask.png"><span>Add Task</span></div>
-                <div class="kanban-link" onclick="renderContacts()"><img class="kanban-img" src="img/kanban_logo/contacts.png"><span>Contacts</span></div>
-            </div>
-        </div>
-`
-}
-
-function renderLegalNotice() {
-    document.querySelector(".main-field").innerHTML =
-        `
-        <div class="legal-notice">
-        <div class="legal-notice-arrow-container">
-            <img src="img/form_logo/blue_arrow.png">
-        </div>
-        <h1 id="legal-notice-headline">Legal Notice</h1>
-        <div>
-            <h3 id="subtitle-1">Subtitle-1</h3>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolores esse cumque possimus dolorum adipisci nobis incidunt dolore tempora molestias, debitis ad mollitia, eos aperiam velit, reprehenderit sit aspernatur eum autem!</p>
-        </div>
-
-        <div>
-            <h3 id="subtitle-2">Subtitle-2</h3>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Adipisci, harum saepe. Nulla pariatur quibusdam ut nisi magnam quasi maiores neque impedit illum atque? Vitae aspernatur provident atque praesentium, cupiditate obcaecati.</p>
-        </div>
-    </div>
-
-    <div class="sidebar-mobile">
-        <div class="kanban-btns">
-            <div class="kanban-link" onclick="renderSummary()"><img class="kanban-img" src="img/kanban_logo/summary.png"><span>Summary</span></div>
-            <div class="kanban-link" onclick="renderBoard()"><img class="kanban-img" src="img/kanban_logo/board.png"><span>Board</span></div>
-            <div class="kanban-link" onclick="renderAddTasks()"><img class="kanban-img" src="img/kanban_logo/addTask.png"><span>Add Task</span></div>
-            <div class="kanban-link" onclick="renderContacts()"><img class="kanban-img" src="img/kanban_logo/contacts.png"><span>Contacts</span></div>
-        </div>
-    </div>
-
-        `
-}
-
-function renderHelp() {
-    document.querySelector(".main-field").innerHTML =
-        `
-        <div class="help-container">
-                <div class="help-arrow-container">
-                    <img src="img/form_logo/blue_arrow.png">
-                </div>
-                <h1 id="help-headline">Help</h1>
                 <div>
-                    <h3 id="subtitle-join">What is Join</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolores esse cumque possimus dolorum adipisci nobis incidunt dolore tempora molestias, debitis ad mollitia, eos aperiam velit, reprehenderit sit aspernatur eum autem!</p>
+                    <span class="task-topic white-text">Sales</span>
                 </div>
 
-                <div>
-                    <h3 id="subtitle-how-to">How to use it</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Adipisci, harum saepe. Nulla pariatur quibusdam ut nisi magnam quasi maiores neque impedit illum atque? Vitae aspernatur provident atque praesentium, cupiditate obcaecati.</p>
+                <div class="board-task-info-text margin">
+                    <h1>Call Potential Clients</h1>
+                    <span>Make the product presentation to prospective buyers</span>
+                </div>
+
+                <div class="board-task-info-date margin">
+                    <b>Due Date:</b><span class="margin-left">05-08-2022</span>
+                </div>
+
+                <div class="board-task-info-priority margin">
+                    <b>Priority:</b> <span class="task-info-priority margin-left">Medium <img src="img/kanban_logo/middle-priority-orange.png" alt=""></span>
+                </div>
+
+                <b>Assigned To:</b>
+                <div class="assigned-personal">
+
+                </div>
+
+                <div class="board-task-edit-btn-container">
+                    <button class="edit-btn light-blue"><img class="edit-pen-height" src="img/kanban_logo/edit_pen_white.png"></button>
                 </div>
             </div>
-
-            <div class="sidebar-mobile">
-                <div class="kanban-btns">
-                    <div class="kanban-link" onclick="renderSummary()"><img class="kanban-img" src="img/kanban_logo/summary.png"><span>Summary</span></div>
-                    <div class="kanban-link" onclick="renderBoard()"><img class="kanban-img" src="img/kanban_logo/board.png"><span>Board</span></div>
-                    <div class="kanban-link" onclick="renderAddTasks()"><img class="kanban-img" src="img/kanban_logo/addTask.png"><span>Add Task</span></div>
-                    <div class="kanban-link" onclick="renderContacts()"><img class="kanban-img" src="img/kanban_logo/contacts.png"><span>Contacts</span></div>
-                </div>
-            </div>
-
-        `
+    `
 }

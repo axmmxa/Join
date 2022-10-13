@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign up</title>
+    <link rel="shortcut icon" href="../kanban_img/login_logos/join_blue.png" type="image/x-icon">
+
+    <link rel="stylesheet" href="login_css/generalForm.css">
+    <link rel="stylesheet" href="login_css/fonts.css">
+    <link rel="stylesheet" href="login_css/login.css">
+    <link rel="stylesheet" href="login_css/signUp.css">
+
+    <script src="js/mini_backend.js"></script>
+    <script>
+        setURL('https://gruppe-319.developerakademie.net/smallest_backend_ever')
+
+        let users = []
+
+        function save() {
+            let name = document.querySelector('#name').value
+            let email = document.querySelector('#e-mail').value
+            let password = document.querySelector('#password').value
+
+            let user = {
+                'name': name,
+                'email': email,
+                'password': password
+            }
+
+            addUser(user)
+            window.location.href = 'login.html'
+        }
+
+        function addUser(user) {
+            users.push(user)
+            backend.setItem('users', JSON.stringify(users));
+        }
+    </script>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <img src="../kanban_img/login_icons/join_white.png">
+        </div>
+    </nav>
+
+    <div class="signUp">
+
+        <div id="form-arrow-container-sign">
+            <a href="../login.html"><img class="arrow" src="../kanban_img/arrow_icons/blue_arrow.png"></a>
+        </div>
+
+        <div class="form-inner-container">
+            <h1 class="form-headline">Sign up</h1>
+            <div class="blue-bottom"></div>
+            <form onsubmit="save();return false" class="form">
+
+                <div class="login-data">
+                    <input id="name" type="text" placeholder="Name">
+                    <input id="e-mail" type="text" placeholder="E-mail">
+                    <input id="password" type="text" placeholder="Password">
+                </div>
+
+                <div class="signUp-container">
+                    <button class="form-btn">Sign up</button>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

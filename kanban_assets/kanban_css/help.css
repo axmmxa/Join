@@ -1,0 +1,60 @@
+.help-container {
+    width: 90%;
+    margin: 20px auto;
+}
+
+.help-arrow-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+#help-headline {
+    margin-top: 0;
+    color: #4589FF;
+}
+
+#subtitle-join {
+    color: #005DFF;
+}
+
+#subtitle-how-to {
+    color: #005DFF;
+}
+
+@media (max-width: 500px) {
+    .main-field {
+        height: 105%;
+    }
+    .help-container {
+        width: 100%;
+    }
+    .kanban-btns {
+        position: absolute;
+        bottom: 0;
+    }
+}
+
+@media (max-width: 400px) {
+    .main-field {
+        height: 110%;
+    }
+}
+
+@media (max-width: 380px) {
+    .main-field {
+        height: 115%;
+    }
+}
+
+@media (max-width: 360px) {
+    .main-field {
+        height: 120%;
+    }
+}
+
+@media (max-width: 340px) {
+    .main-field {
+        height: 125%;
+    }
+}

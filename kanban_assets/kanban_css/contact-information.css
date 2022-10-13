@@ -1,0 +1,42 @@
+.contact-information-upper-part {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contact-information-name-container {
+    display: flex;
+    flex-direction: column;
+    margin-left: 30px;
+}
+
+.contact-information-name-container span {
+    margin-left: 10px;
+}
+
+.contact-information-name {
+    margin: 0;
+}
+
+.contact-information-add-task-container {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.contact-information-edit {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.contact-information-edit-container {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    margin-left: 50px;
+}
+
+.contact-information-headline {
+    margin: 0
+}
