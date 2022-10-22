@@ -13,31 +13,14 @@
     <link rel="stylesheet" href="kanban_assets/kanban_css/index.css">
     <link rel="stylesheet" href="kanban_assets/kanban_css/board.css">
 
+    <link rel="stylesheet" href="kanban_assets/kanban_css/task.css">
     <link rel="stylesheet" href="kanban_assets/kanban_css/task-info.css">
     <link rel="stylesheet" href="kanban_assets/kanban_css/edit_task.css">
 
 
-    <script src="js/render.js" defer></script>
     <script src="js/mini_backend.js" defer></script>
-
-    <script>
-        let users = [];
-
-        setURL('https://gruppe-319.developerakademie.net/smallest_backend_ever')
-
-        async function addUser() {
-            users.push('John');
-            await backend.setItem('users', JSON.stringify(users));
-        }
-
-        async function initDownload() {
-            await downloadFromServer();
-            users = JSON.parse(backend.getItem("users")) || [];
-            console.log(users)
-        }
-    </script>
-
-    <script src="js/login.js" defer></script>
+    <script src="js/render.js" defer></script>
+    <script src="js/load.js" defer></script>
 
 </head>
 
@@ -47,7 +30,7 @@
             <img class="logo" src="kanban_img/login_icons/join_white.png">
 
             <div class="info">
-                <p class="name" onclick="renderSmallContacts()">Kanban Project Management Tool</p>
+                <p class="name">Kanban Project Management Tool</p>
                 <a href="kanban_assets/help.html"><img class="help" src="kanban_img/small_navbar_icons/help.png"></a>
                 <img class="user-img" src="kanban_img/user_icons/user_example.png">
             </div>
@@ -79,7 +62,7 @@
                         <input placeholder="Find task" type="text" class="input">
                         <img class="search-img" src="kanban_img/search_icons/search.png">
                     </div>
-                    <button class="add-btn"><span class="white-text">Add Task</span><img class="add-img" src="kanban_img/plus_icons/plus_white.png"></button>
+                    <button onclick="renderSmallAddTask()" class="add-btn"><span class="white-text">Add Task</span><img class="add-img" src="kanban_img/plus_icons/plus_white.png"></button>
                 </div>
 
                 <div class="board-task-container">
@@ -89,7 +72,7 @@
                             <img class="board-task-img" src="kanban_img/plus_icons/plus_button.png">
                         </div>
 
-                        <div class="added-task">
+                        <div onclick="renderBoardTaskInfo()" class="added-task">
                             <span class="task-topic white-text">Design</span>
                             <h4 class="task-headline blue-text">Redesign Website</h4>
                             <span class="added-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</span>
@@ -109,7 +92,7 @@
                             <img class="board-task-img" src="kanban_img/plus_icons/plus_button.png">
                         </div>
 
-                        <div class="added-task">
+                        <div onclick="renderBoardTaskInfo()" class="added-task">
                             <span class="task-topic white-text">Design</span>
                             <h4 class="task-headline blue-text">Redesign Website</h4>
                             <span class="added-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</span>
@@ -122,7 +105,7 @@
                             </div>
                         </div>
 
-                        <div class="added-task">
+                        <div onclick="renderBoardTaskInfo()" class="added-task">
                             <span class="task-topic white-text">Design</span>
                             <h4 class="task-headline blue-text">Redesign Website</h4>
                             <span class="added-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</span>
@@ -142,7 +125,7 @@
                             <img class="board-task-img" src="kanban_img/plus_icons/plus_button.png">
                         </div>
 
-                        <div class="added-task">
+                        <div onclick="renderBoardTaskInfo()" class="added-task">
                             <span class="task-topic white-text">Design</span>
                             <h4 class="task-headline blue-text">Redesign Website</h4>
                             <span class="added-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</span>
@@ -155,7 +138,7 @@
                             </div>
                         </div>
 
-                        <div class="added-task">
+                        <div onclick="renderBoardTaskInfo()" class="added-task">
                             <span class="task-topic white-text">Design</span>
                             <h4 class="task-headline blue-text">Redesign Website</h4>
                             <span class="added-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</span>
@@ -174,7 +157,7 @@
                             <img class="board-task-img" src="kanban_img/plus_icons/plus_button.png">
                         </div>
 
-                        <div class="added-task">
+                        <div onclick="renderBoardTaskInfo()" class="added-task">
                             <span class="task-topic white-text">Design</span>
                             <h4 class="task-headline blue-text">Redesign Website</h4>
                             <span class="added-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</span>

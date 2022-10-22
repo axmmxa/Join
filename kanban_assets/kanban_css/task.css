@@ -2,6 +2,24 @@
     display: flex;
 }
 
+#small-add-task {
+    width: 30%;
+    height: 99.5vh;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 2;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    background-color: white;
+}
+
+.create-btn-container-small {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
 .task-form-left {
     width: 50%;
 }
@@ -158,10 +176,6 @@
 
 .description-container {
     margin-top: 15px;
-}
-
-.description-container>span {
-    /* font-weight: bold; */
 }
 
 #category {

@@ -13,23 +13,24 @@
     width: 65%;
     height: 100%;
     display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
+    flex-direction: column;
+    justify-content: space-between;
+
 }
 
-.contacts-A {
+.contacts-box {
     width: 80%;
-    margin: auto;
+    margin: 10px auto;
 }
 
-.contacs-A-headline {
+.contacs-box-headline {
     padding-top: 10px;
-    padding-bottom: 25px;
+    padding-bottom: 15px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     ;
 }
 
-.contacs-A-headline span {
+.contacs-box-headline span {
     margin-left: 10px;
 }
 
@@ -77,6 +78,8 @@
     margin-top: 20px;
 }
 
+
+
 .add-person-btn {
     display: flex;
     justify-content: center;
@@ -100,6 +103,11 @@
     width: 20px;
     height: 20px;
     margin-left: 5px;
+}
+
+#contact-information {
+    margin: auto;
+    margin-top: 20px;
 }
 
 @media (max-width: 1024px) {

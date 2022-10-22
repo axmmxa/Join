@@ -15,25 +15,8 @@
 
     <script src="js/render.js" defer></script>
     <script src="js/mini_backend.js" defer></script>
-
-    <script>
-        let users = [];
-
-        setURL('https://gruppe-319.developerakademie.net/smallest_backend_ever')
-
-        async function addUser() {
-            users.push('John');
-            await backend.setItem('users', JSON.stringify(users));
-        }
-
-        async function initDownload() {
-            await downloadFromServer();
-            users = JSON.parse(backend.getItem("users")) || [];
-            console.log(users)
-        }
-    </script>
-
-    <script src="js/login.js" defer></script>
+    <script src="js/load.js" defer></script>
+    <script src="js/hover.js" defer></script>
 
 </head>
 

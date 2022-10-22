@@ -1,9 +1,14 @@
 #board-task-info {
+    width: 400px;
+    position: absolute;
+    top: 20vh;
     display: flex;
     flex-direction: column;
     border: 2px solid rgba(0, 0, 0, 0.2);
     border-radius: 8px;
-    padding: 5px;
+    padding: 10px;
+    background-color: white;
+    box-sizing: border-box;
 }
 
 .task-info-priority {

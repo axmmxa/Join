@@ -37,6 +37,10 @@
     margin-left: 50px;
 }
 
+.contact-information-edit-container>span {
+    margin-left: 5px;
+}
+
 .contact-information-headline {
     margin: 0
 }

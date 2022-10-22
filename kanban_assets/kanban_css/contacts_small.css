@@ -1,4 +1,8 @@
-#small-contacts-container {
+.d-none {
+    display: none;
+}
+
+#small-add-contacts-container {
     height: 100vh;
     width: 320px;
     box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.08);
@@ -8,14 +12,14 @@
     left: 0;
 }
 
-#small-contacts-container-close-btn-container {
+#small-add-contacts-container-close-btn-container {
     height: 45px;
     display: flex;
     align-items: center;
     justify-content: flex-end;
 }
 
-.upper-part-small-contacts {
+.upper-part-small-add-contacts {
     height: 190px;
     z-index: 2;
     display: flex;
@@ -24,17 +28,17 @@
     flex-direction: column;
 }
 
-#small-contacts-container-close-btn-container>span {
+#small-add-contacts-container-close-btn-container>span {
     font-size: 24px;
     margin-right: 10px;
     margin-top: 10px;
 }
 
-.upper-part-small-contacts span {
+.upper-part-small-add-contacts span {
     margin-bottom: 30px;
 }
 
-.lower-part-small-contacts {
+.lower-part-small-add-contacts {
     height: 365px;
     display: flex;
     justify-content: center;
@@ -43,7 +47,7 @@
     background-color: white;
 }
 
-.small-contacts-add-data {
+.small-add-contacts-add-data {
     width: 80%;
     display: flex;
     justify-content: center;
@@ -51,11 +55,11 @@
     flex-direction: column;
 }
 
-.small-contacts-btn-container {
+.small-add-contacts-btn-container {
     margin-top: 20px;
 }
 
-.small-edit-contacts-btn-container {
+.small-add-edit-contacts-btn-container {
     width: 250px;
     margin-top: 20px;
     display: flex;
