@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="login_assets/login_css/login.css">
     <script src="js/mini_backend.js"></script>
     <script src="js/load.js"></script>
+    <script src="js/login.js"></script>
     
     
 </head>
@@ -33,27 +34,28 @@
         <div class="login-container">
             <h1 class="form-headline">Log in</h1>
             <div class="blue-bottom"></div>
-            <form class="form" action="">
+            <form  class="form" >
 
                 <div class="login-data">
-                    <input type="text" placeholder="E-mail">
-                    <input type="text" placeholder="Password">
+                    <input id="e-mail" type="text" placeholder="E-mail">
+                    <input id="password" type="text" placeholder="Password">
                 </div>
 
                 <div class="login-option">
                     <label for="remember-me" class="remember-option">
-                        <input type="checkbox" id="remember-me" name="remember-me" value="Remember me"><span>Remember me</span>
+                       <input type="checkbox" id="remember-me" name="remember-me" value="Remember me"><span>Remember me</span>
                     </label>
 
                     <a href="login_assets/forgotPassword.html" class="forgot-password">Forgot my password</a>
                 </div>
 
                 <div class="login-btns">
-                    <a href="summary.html" class="login-btn">Log in </a>
+                    <a onclick="login()"  class="login-btn">Log in </a>
                     <a href="summary.html" class="guest-btn">Guest log in</a>
                 </div>
 
-                <div></div>
+                <div id="msgBox"></div>
+
             </form>
         </div>
     </div>
