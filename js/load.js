@@ -1,16 +1,22 @@
 setURL('https://gruppe-319.developerakademie.net/smallest_backend_ever')
 
 let users = [];
+let tasks = [];
 let loggedInUser;
 
 async function init() {
     await downloadFromServer();
     users = JSON.parse(backend.getItem('users')) || [];
+    tasks = JSON.parse(backend.getItem('tasks')) || [];
 }
  
-async function deleteUser(name) {
+async function deleteUsers() {
   await backend.deleteItem('users');
- }
+}
+
+async function deleteTasks() {
+  await backend.deleteItem('tasks')
+}
 
  function greetUser() {
   let user_name = document.getElementById("user-name")

@@ -271,6 +271,43 @@
     background-color: blue;
 }
 
+.add-option {
+    position: relative;
+    margin-top: 20px;
+}
+
+#add-contact-input {
+    padding-bottom: 10px;
+}
+
+.add-option-input {
+    width: 95%;
+}
+
+.add-option-input:focus {
+    outline: none;
+}
+
+.add-option-input::placeholder {
+    color: rgba(0, 0, 0, 0.2);
+}
+
+.add-option-btn-container {
+    position: absolute;
+    top: 2px;
+    right: 5px;
+}
+
+.close-x-blue-btn {
+    cursor: pointer;
+    border-right: 1px solid rgba(0, 0, 0, 0.2);
+    padding-right: 5px;
+}
+
+.blue-clear-btn {
+    cursor: pointer;
+}
+
 @media (max-width: 874px) {
     .task-form {
         width: 250px;
