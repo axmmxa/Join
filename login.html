@@ -11,14 +11,13 @@
     <link rel="stylesheet" href="login_assets/login_css/generalForm.css">
     <link rel="stylesheet" href="login_assets/login_css/fonts.css">
     <link rel="stylesheet" href="login_assets/login_css/login.css">
-    
+
     <script src="js/mini_backend.js"></script>
     <script src="js/load.js" defer></script>
     <script src="js/login.js" defer></script>
 </head>
 
-<body>
-
+<body onload="init()">
     <nav class="navbar">
         <div class="logo">
             <img src="kanban_img/login_icons/join_blue.png">
@@ -33,11 +32,11 @@
         <div class="login-container">
             <h1 class="form-headline">Log in</h1>
             <div class="blue-bottom"></div>
-            <form class="form" action="">
+            <form class="form">
 
                 <div class="login-data">
-                    <input type="text" placeholder="E-mail">
-                    <input type="text" placeholder="Password">
+                    <input id="e-mail" type="text" placeholder="E-mail">
+                    <input id="password" type="text" placeholder="Password">
                 </div>
 
                 <div class="login-option">
@@ -49,14 +48,15 @@
                 </div>
 
                 <div class="login-btns">
-                    <a href="summary.html" class="login-btn">Log in </a>
+                    <a onclick="login()" class="login-btn">Log in </a>
                     <a href="summary.html" class="guest-btn">Guest log in</a>
                 </div>
 
-                <div></div>
             </form>
         </div>
     </div>
+
+    <div id="msgBox"></div>
 
     <div class="not-a-user-mobile">
         <a class="no-user-link" href="">Not a Join User?</a>

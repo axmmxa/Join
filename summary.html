@@ -12,32 +12,13 @@
     <link rel="stylesheet" href="kanban_assets/kanban_css/generalKanban.css">
     <link rel="stylesheet" href="kanban_assets/kanban_css/index.css">
 
-
+    <script src="js/mini_backend.js"></script>
+    <script src="js/load.js" defer></script>
     <script src="js/render.js" defer></script>
-    <script src="js/mini_backend.js" defer></script>
-
-    <script>
-        let users = [];
-
-        setURL('https://gruppe-319.developerakademie.net/smallest_backend_ever')
-
-        async function addUser() {
-            users.push('John');
-            await backend.setItem('users', JSON.stringify(users));
-        }
-
-        async function initDownload() {
-            await downloadFromServer();
-            users = JSON.parse(backend.getItem("users")) || [];
-            console.log(users)
-        }
-    </script>
-
-    <script src="js/login.js" defer></script>
-
+    
 </head>
 
-<body>
+<body onload="loadLoggedInUser()">
     <nav class="kanban-navbar">
         <div class="inner-container">
             <img class="logo" src="kanban_img/login_icons/join_white.png">
@@ -69,7 +50,7 @@
 
         <div class="main-field">
             <div class="summary-container">
-                <span class="gm-text">Good Morning, <span class="user-name">Name</span></span>
+                <span class="gm-text">Good Morning, <span id="user-name" class="user-name">Name</span></span>
                 <p class="mobile-headline">Kanban Project Management Tool</p>
                 <div class="inner-summary-container">
                     <div class="upper-task-container">

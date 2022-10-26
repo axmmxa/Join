@@ -8,13 +8,12 @@ function signUp()  {
         'email': email,
         'password': password
     }
-  
-    addUser(user)
-    // window.location.href = '../login.html?msg=Du hast dich erfolgreich angemeldet'   
+    addUser(user)  
   }
   
-  function addUser(user) {
+async function addUser(user) {
     users.push(user)
-    backend.setItem('users', JSON.stringify(users));
+    await backend.setItem('users', JSON.stringify(users));
+    window.location.href = '../login.html?msg=Du hast dich erfolgreich angemeldet!' 
   }
   

@@ -154,6 +154,14 @@ body {
     display: none;
 }
 
+#msgBox {
+    margin-top: 20px;
+    color: #4589FF;
+    border: 1px solid #4589FF;
+    border-radius: 8px;
+    padding: 5px;
+}
+
 @media(max-width:540px) {
     .login {
         height: 500px;

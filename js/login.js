@@ -4,6 +4,9 @@ let msgBox = document.getElementById("msgBox")
 
 if (msg) {
     msgBox.innerHTML = msg
+    setTimeout(() => {
+        msgBox.style.display = "none"
+    },2500)
 } else {
     msgBox.style.display = "none"
 }
@@ -12,11 +15,12 @@ function login() {
     let email = document.getElementById("e-mail").value
     let password = document.getElementById("password").value
 
-    let user = users.find(u => u.email == email && u.password == password)
+    loggedInUser = users.find(u => u.email == email && u.password == password)
 
-    console.log(user)
+    console.log(loggedInUser)
 
-    if (user) {
+    if (loggedInUser) {
         console.log("User gefunden")
+        saveLoggedInUser()
     }
 }

@@ -13,32 +13,10 @@
     <link rel="stylesheet" href="login_css/login.css">
     <link rel="stylesheet" href="login_css/signUp.css">
 
-    <script src="js/mini_backend.js"></script>
-    <script>
-        setURL('https://gruppe-319.developerakademie.net/smallest_backend_ever')
+    <script src="../js/mini_backend.js"></script>
+    <script src="../js/load.js" defer></script>
+    <script src="../js/sign_up.js" defer></script>
 
-        let users = []
-
-        function save() {
-            let name = document.querySelector('#name').value
-            let email = document.querySelector('#e-mail').value
-            let password = document.querySelector('#password').value
-
-            let user = {
-                'name': name,
-                'email': email,
-                'password': password
-            }
-
-            addUser(user)
-            window.location.href = 'login.html'
-        }
-
-        function addUser(user) {
-            users.push(user)
-            backend.setItem('users', JSON.stringify(users));
-        }
-    </script>
 </head>
 
 <body>
@@ -57,7 +35,7 @@
         <div class="form-inner-container">
             <h1 class="form-headline">Sign up</h1>
             <div class="blue-bottom"></div>
-            <form onsubmit="save();return false" class="form">
+            <form onsubmit="signUp();return false" class="form">
 
                 <div class="login-data">
                     <input id="name" type="text" placeholder="Name">
