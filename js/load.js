@@ -2,6 +2,9 @@ setURL('https://gruppe-319.developerakademie.net/smallest_backend_ever')
 
 let users = [];
 let tasks = [];
+let selected_options = []
+let selected_category;
+let selected_subtasks = []
 let loggedInUser;
 
 async function init() {

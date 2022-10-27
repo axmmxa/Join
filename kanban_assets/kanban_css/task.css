@@ -17,7 +17,6 @@
 .task-form input {
     border: none;
     border-bottom: 1px solid gray;
-    /* padding-bottom: 10px; */
     padding-left: 20px;
 }
 
@@ -29,19 +28,12 @@
     position: relative;
 }
 
-.arrow-select {
-    width: 7px;
-    height: 7px;
-    position: absolute;
-    right: 14px;
-    top: 25px;
-}
 
 .date-img {
     position: absolute;
     width: 15px;
     height: 15px;
-    right: 10px;
+    right: 22px;
     top: 47px;
 }
 
@@ -59,43 +51,11 @@
     outline: none;
 }
 
-#contacts {
-    width: 100%;
-    border: none;
-    border-bottom: 1px solid gray;
-    padding-bottom: 10px;
-    padding-left: 20px;
-    margin-top: 20px;
-    -moz-appearance: none;
-    -webkit-appearance: none;
-    appearance: none;
-}
-
-#contacts:focus {
-    outline: none;
-}
-
-#task-category {
-    width: 100%;
-    border: none;
-    border-bottom: 1px solid gray;
-    padding-bottom: 10px;
-    padding-left: 20px;
-    margin-top: 20px;
-    -moz-appearance: none;
-    /* Firefox */
-    -webkit-appearance: none;
-    /* Safari and Chrome */
-    appearance: none;
-}
-
-#task-category:focus {
-    outline: none;
-}
-
 .input-title {
     margin-top: 5px;
+    padding-bottom: 5px ;
     height: 35px;
+    font-size: 32px;
 }
 
 .input-title:focus {
@@ -103,7 +63,6 @@
 }
 
 .input-title::placeholder {
-    font-size: 32px;
     color: rgba(0, 0, 0, 0.2);
 }
 
@@ -164,12 +123,12 @@
     /* font-weight: bold; */
 }
 
-#category {
+#subtask-category {
     margin-top: 10px;
     padding-bottom: 10px;
 }
 
-#category:focus {
+#subtask-category:focus {
     outline: none;
 }
 
@@ -178,14 +137,13 @@
     height: 75px;
     margin: auto;
     border-radius: 8px;
-}
-
-#textarea::placeholder {
     padding-left: 15px;
     padding-top: 10px;
+
 }
 
 .category-container {
+    position: relative;
     display: flex;
     flex-direction: column;
 }
@@ -199,7 +157,7 @@
     margin-left: 15px;
 }
 
-#category::placeholder {
+#subtask-category::placeholder {
     color: rgba(0, 0, 0, 0.2);
 }
 
@@ -298,6 +256,17 @@
     right: 5px;
 }
 
+#add-subtask-input {
+    margin-top: 10px;
+    padding-bottom: 10px;
+}
+
+.add-option-btn-container-subtask {
+    position: absolute;
+    top: 30px;
+    right: 5px;
+}
+
 .close-x-blue-btn {
     cursor: pointer;
     border-right: 1px solid rgba(0, 0, 0, 0.2);
@@ -307,6 +276,7 @@
 .blue-clear-btn {
     cursor: pointer;
 }
+
 
 @media (max-width: 874px) {
     .task-form {
@@ -327,7 +297,7 @@
     #description-container {
         width: 250px;
     }
-    #category {
+    #subtask-category {
         width: 225px
     }
     .create-task-container {
@@ -363,7 +333,7 @@
     #description-container {
         width: 100%;
     }
-    #category {
+    #subtask-category {
         width: 95%
     }
     .create-task-container {
@@ -393,7 +363,7 @@
     #due-date {
         width: 91%;
     }
-    #category {
+    #subtask-category {
         width: 91%
     }
 }

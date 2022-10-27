@@ -1,0 +1,55 @@
+.custom-select {
+    font-size: 14px;
+}
+
+.plus-select {
+    cursor: pointer;
+    width: 16px;
+    height: auto;
+    position: absolute;
+    right: 22px;
+    top: 22px;
+}
+
+.plus-select-subtask {
+    cursor: pointer;
+    width: 16px;
+    height: auto;
+    position: absolute;
+    top: 32px;
+    right: 22px;
+}
+
+.first-select-option-container {
+    cursor: pointer;
+    width: 95%;
+    border: none;
+    border-bottom: 1px solid gray;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    margin-top: 20px;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.custom-select-options-container {
+   /* display: none; */
+}
+
+.custom-select-option {
+    cursor: pointer;
+    margin: 0;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.custom-select-option p {
+    margin: 0;
+}
+
+.custom-select-option:hover {
+    background-color: #D2E3FF;
+}
