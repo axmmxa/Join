@@ -1,7 +1,11 @@
 .edit-task {
+    z-index: 2;
     position: absolute;
     top: 15vh;
-    width: 400px;
+    width: 410px;
+    background-color: white;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
 }
 
 .add-task-container-edit {

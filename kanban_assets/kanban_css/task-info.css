@@ -6,6 +6,16 @@
     padding: 5px;
 }
 
+ #small-board-task-info {
+    background-color: white;
+    position: absolute;
+    top: 20vh;
+    z-index: 2;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 5px;
+} 
+
 .task-info-priority {
     background-color: transparent;
     border: 2px solid rgba(0, 0, 0, 0.2);

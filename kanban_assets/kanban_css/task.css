@@ -345,9 +345,9 @@
     .priority-btn-container button {
         padding: 10px 15px;
     }
-    /* .kanban-navbar {
+    .kanban-navbar {
         display: none;
-    } */
+    }
     .mobile-create-task-navbar {
         display: flex;
     }

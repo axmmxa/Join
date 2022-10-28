@@ -15,32 +15,14 @@
 
     <link rel="stylesheet" href="kanban_assets/kanban_css/contacts.css">
     <link rel="stylesheet" href="kanban_assets/kanban_css/contacts_small.css">
-
     <link rel="stylesheet" href="kanban_assets/kanban_css/contact-information.css">
 
-
+    <link rel="stylesheet" href="kanban_assets/kanban_css/task.css">
+    <link rel="stylesheet" href="kanban_assets/kanban_css/custom-select.css">
 
     <script src="js/render.js" defer></script>
     <script src="js/mini_backend.js" defer></script>
-
-    <script>
-        let users = [];
-
-        setURL('https://gruppe-319.developerakademie.net/smallest_backend_ever')
-
-        async function addUser() {
-            users.push('John');
-            await backend.setItem('users', JSON.stringify(users));
-        }
-
-        async function initDownload() {
-            await downloadFromServer();
-            users = JSON.parse(backend.getItem("users")) || [];
-            console.log(users)
-        }
-    </script>
-
-    <script src="js/login.js" defer></script>
+    
 
 </head>
 
@@ -86,7 +68,7 @@
                     </div>
 
                     <div class="contacts-A-data">
-                        <div class="contact-info">
+                        <div onclick="renderContactInformation()" class="contact-info">
                             <div>
                                 <img class="contact-img" src="kanban_img/user_icons/user_example.png">
                             </div>
@@ -96,7 +78,7 @@
                             </div>
                         </div>
 
-                        <div class="contact-info">
+                        <div onclick="renderContactInformation()" class="contact-info">
                             <div>
                                 <img class="contact-img" src="kanban_img/user_icons/user_example.png">
                             </div>
@@ -112,7 +94,11 @@
             </div>
 
             <div class="contacts-right">
-                <button class="add-person-btn">Add Contacts <img class="add-person-img" src="kanban_img/add_icons/add_person.png"></button>
+                <div id="contact-information">
+
+                </div>
+
+                <button onclick="renderSmallContacts()" class="add-person-btn">Add Contacts <img class="add-person-img" src="kanban_img/add_icons/add_person.png"></button>
             </div>
 
             <div class="sidebar-mobile">

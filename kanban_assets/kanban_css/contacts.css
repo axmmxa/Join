@@ -2,6 +2,11 @@
     display: flex;
 }
 
+#contact-information {
+    margin-top: 20px;
+    margin: 0 auto;
+}
+
 .contacts-left {
     height: 100%;
     width: 35%;
@@ -13,7 +18,8 @@
     width: 65%;
     height: 100%;
     display: flex;
-    justify-content: flex-end;
+    flex-direction: column;
+    justify-content: space-between;
     align-items: flex-end;
 }
 
