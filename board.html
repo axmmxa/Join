@@ -23,6 +23,7 @@
     <script src="js/mini_backend.js"></script>
     <script src="js/load.js" defer></script>
     <script src="js/custom-select.js" defer></script>
+    <script src="js/drag_and_drop.js"  defer></script>
 
 </head>
 
@@ -68,13 +69,14 @@
                 </div>
 
                 <div class="board-task-container">
+
                     <div class="board-to-do width-25">
                         <div class="flex">
                             <h4 class="board-task-title">To do</h4>
                             <img onclick="renderSmallAddTask()" class="board-task-img" src="kanban_img/plus_icons/plus_button.png">
                         </div>
 
-                        <div onclick="renderBoardTaskInfo()" class="added-task">
+                        <div onclick="renderBoardTaskInfo()" class="added-task test">
                             <span class="task-topic white-text">Design</span>
                             <h4 class="task-headline blue-text">Redesign Website</h4>
                             <span class="added-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</span>
@@ -88,6 +90,8 @@
                         </div>
 
                     </div>
+
+                    
                     <div class="board-in-progress width-25">
                         <div class="flex">
                             <h4 class="board-task-title">In Progress</h4>
@@ -121,6 +125,8 @@
                         </div>
 
                     </div>
+
+
                     <div class="board-await-feedback width-25">
                         <div class="flex">
                             <h4 class="board-task-title">Await Feedback</h4>
@@ -153,6 +159,8 @@
                             </div>
                         </div>
                     </div>
+
+
                     <div class="board-done width-25">
                         <div class="flex">
                             <h4 class="board-task-title">Done</h4>
@@ -172,6 +180,9 @@
                             </div>
                         </div>
                     </div>
+
+
+
                 </div>
             </div>
 
