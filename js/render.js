@@ -30,7 +30,7 @@ function renderSmallContacts() {
         <div class="lower-part-small-contacts">
             <img class="anonymous-profile-picture" src="img/form_logo/anonym_profile_picture.png">
 
-            <form class="small-contacts-add-data">
+            <div class="small-contacts-add-data">
                 <div class="login-data">
                     <input id="small-add-contacts-name" type="text" placeholder="Name">
                     <input id="small-add-contacts-email" type="text" placeholder="E-mail">
@@ -38,10 +38,10 @@ function renderSmallContacts() {
                 </div>
 
                 <div class="small-contacts-btn-container">
-                    <button class="delete-btn">Cancel <span class="close-x">X</span></button>
-                    <button class="create-btn">Create Contact <img class="white-clear" src="img/kanban_logo/white_clear_btn.png"></button>
+                    <button onclick="" class="delete-btn">Cancel <span class="close-x">X</span></button>
+                    <button onclick="addContactToBook()" class="create-btn">Create Contact <img class="white-clear" src="img/kanban_logo/white_clear_btn.png"></button>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
     `
@@ -99,13 +99,18 @@ function renderSmallEditContacts() {
    
 }
 
-function renderContactInformation() {
+function renderContactInformation(email) {
+    let index = contact_emails.indexOf(email)
+
+    for (let i = 0; i < contact_names.length; i++) {
+        if (i == index) {
+             
     document.querySelector("#contact-information").innerHTML = 
     `
                 <div class="contact-information-upper-part">
                     <img src="img/form_logo/anonym_profile_picture.png" class="anonymous-profile-picture">
                     <div class="contact-information-name-container">
-                        <h1 class="contact-information-name">Vorname Nachname</h1>
+                        <h1 class="contact-information-name">${contact_names[i]}</h1>
                         <div onclick="renderSmallAddTask()" class="contact-information-add-task-container"><img src="img/kanban_logo/plus_blue.png"> <span class="light-blue-text">Add Task</span></div>
                     </div>
                 </div>
@@ -118,17 +123,20 @@ function renderContactInformation() {
 
                     <div class="contact-information-email-container">
                         <h4>Email</h4>
-                        <span class="darkblue-text">atom@gmail.com</span>
+                        <span class="darkblue-text">${contact_emails[i]}</span>
                     </div>
 
                     <div class="contact-information-mobil-container">
                         <h4>Mobil</h4>
-                        <span>+49 111 111 111</span>
+                        <span>${contact_phones[i]}</span>
                     </div>
 
                 </div>
-
         `
+        }
+        
+    }
+   
 }
 
 function closeSmallEditTask() {
@@ -230,6 +238,9 @@ function renderBoardTaskInfo() {
 
     if(document.getElementById("small-board-task-info")) {
         document.getElementById("small-board-task-info").classList.remove("d-none")
+
+        document.querySelector(".kanban-navbar").style.opacity = 1
+        document.querySelector(".kanban-main").style.opacity = 1
     } else {
         document.querySelector(".kanban-navbar").style.opacity = 0.5
         document.querySelector(".kanban-main").style.opacity = 0.5
@@ -384,6 +395,56 @@ function renderSmallAddTask() {
     </div>
 
     `
+    }
+}
+
+function renderContactBook() {
+    let alphabet = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
+
+    for (let i = 0; i < alphabet.length; i++) {
+        const letter = alphabet[i];
+        
+        document.querySelector(".contacts-left").innerHTML += 
+        `
+        <div id="contacts-${letter}" class="contacts-container">
+
+        <div id="contacs-${letter}-headline" class="contacts-headline">
+            <span>${letter}</span>
+        </div>
+
+        <div class="contacts-${letter}-data">
+            
+        </div>
+    </div>
+
+        `
 
     }
+
+}
+
+function addContactToBook() {
+    let small_add_contacts_name = document.getElementById("small-add-contacts-name").value
+    let small_add_contacts_email = document.getElementById("small-add-contacts-email").value
+    let small_add_contacts_phone = document.getElementById("small-add-contacts-phone").value
+
+    contact_names.push(small_add_contacts_name)
+    contact_emails.push(small_add_contacts_email)
+    contact_phones.push(small_add_contacts_phone)
+
+    let first_letter = small_add_contacts_name[0].toUpperCase()
+
+    document.querySelector(`.contacts-${first_letter}-data`).innerHTML += 
+        `
+        <div onclick="renderContactInformation('${small_add_contacts_email}')" class="contact-info">
+        <div>
+            <img class="contact-img" src="kanban_img/user_icons/user_example.png">
+        </div>
+        <div class="contact-data">
+            <h3 id="${small_add_contacts_email}-name" class="contact-name">${small_add_contacts_name}</h3>
+            <span id="${small_add_contacts_email}-email" class="darkblue-text">${small_add_contacts_email}</span>
+            <span id="${small_add_contacts_email}-phone" class="d-none">${small_add_contacts_phone}</span>
+        </div>
+    </div>
+        `
 }

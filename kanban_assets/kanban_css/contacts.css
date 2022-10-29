@@ -23,19 +23,19 @@
     align-items: flex-end;
 }
 
-.contacts-A {
+.contacts-container {
     width: 80%;
     margin: auto;
 }
 
-.contacs-A-headline {
+.contacts-headline {
     padding-top: 10px;
     padding-bottom: 25px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-    ;
+    
 }
 
-.contacs-A-headline span {
+.contacts-headline span {
     margin-left: 10px;
 }
 

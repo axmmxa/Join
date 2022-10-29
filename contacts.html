@@ -20,13 +20,15 @@
     <link rel="stylesheet" href="kanban_assets/kanban_css/task.css">
     <link rel="stylesheet" href="kanban_assets/kanban_css/custom-select.css">
 
+    <script src="js/mini_backend.js"></script>
+    <script src="js/load.js" defer></script>
     <script src="js/render.js" defer></script>
-    <script src="js/mini_backend.js" defer></script>
+    
     
 
 </head>
 
-<body>
+<body onload="renderContactBook()">
     <nav class="kanban-navbar">
         <div class="inner-container">
             <img class="logo" src="kanban_img/login_icons/join_white.png">
@@ -61,36 +63,7 @@
 
             <div class="contacts-left">
 
-                <div class="contacts-A">
-
-                    <div class="contacs-A-headline">
-                        <span>A</span>
-                    </div>
-
-                    <div class="contacts-A-data">
-                        <div onclick="renderContactInformation()" class="contact-info">
-                            <div>
-                                <img class="contact-img" src="kanban_img/user_icons/user_example.png">
-                            </div>
-                            <div class="contact-data">
-                                <h3 class="contact-name">Anton Mayer</h3>
-                                <span class="darkblue-text">atom@gmail.com</span>
-                            </div>
-                        </div>
-
-                        <div onclick="renderContactInformation()" class="contact-info">
-                            <div>
-                                <img class="contact-img" src="kanban_img/user_icons/user_example.png">
-                            </div>
-                            <div class="contact-data">
-                                <h3 class="contact-name">Anja Schulz</h3>
-                                <span class="darkblue-text">schulz@gmail.com</span>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
+               
             </div>
 
             <div class="contacts-right">

@@ -4,8 +4,14 @@ let users = [];
 let tasks = [];
 let selected_options = []
 let selected_category;
+let selected_priority;
 let selected_subtasks = []
 let loggedInUser;
+let currentContact = [];
+
+let contact_names = []
+let contact_emails = []
+let contact_phones = []
 
 async function init() {
     await downloadFromServer();
