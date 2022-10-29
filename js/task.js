@@ -27,8 +27,6 @@ function returnSelectedCategory(id) {
 function returnSelectedSubtasks(el, id) {
   if (el.checked) {
     selected_subtasks.push(el.value)
-  }if (selected_subtasks.includes(document.getElementById(id).value)){
-    document.getElementById(id).checked = true
   }
   else {
     selected_subtasks.pop(el.value)
@@ -43,20 +41,31 @@ function saveTask()  {
     
     let task = {
         'title': title,
+        'assignedContacts': selected_options,
         'due-date': due_date,
         'description': description,
-
-
+        'category': selected_category,
+        'priority': selected_priority,
+        'description': description,
+        'subtask': selected_subtasks
     }
 
     addTask(task)  
   }
-  
+
 async function addTask(task) {
-    tasks.push(task)
-    await backend.setItem('tasks', JSON.stringify(task));
+    for (let i = 0; i < users.length; i++) {
+      const currentUser = users[i];
+      if(currentUser.email == loggedInUser.email){
+        currentUser.tasks.push(task)
+        await backend.setItem('users', JSON.stringify(users));
+      }
+    }
   }
 
+async function taskToUser() {
+  
+}  
 
 
  function setPriotity(id) {
