@@ -24,6 +24,7 @@
     <script src="js/load.js" defer></script>
     <script src="js/custom-select.js" defer></script>
     <script src="js/drag_and_drop.js"  defer></script>
+    <script src="js/logout.js" defer></script>
 
 </head>
 
@@ -35,11 +36,22 @@
             <div class="info">
                 <p class="name" onclick="renderSmallContacts()">Kanban Project Management Tool</p>
                 <a href="kanban_assets/help.html"><img class="help" src="kanban_img/small_navbar_icons/help.png"></a>
-                <img class="user-img" src="kanban_img/user_icons/user_example.png">
+                <img onclick="toggleLogoutBox()" class="user-img" src="kanban_img/user_icons/user_example.png">
             </div>
+        </div>
+
+        <div class="logout d-none">
+            <span onclick="logout()" class="light-blue-text">Log out</span>
+        </div>
+    
+        <div class="logout-mobile d-none">
+            <a href="kanban_assets/help.html" class="light-blue-text">Help</a>
+            <a href="kanban_assets/legal_notice.html" class="light-blue-text">Legal Notice</a>
+            <a onclick="logout()" class="light-blue-text">Log out</a>
         </div>
     </nav>
 
+    
 
     <main class="kanban-main">
         <div class="sidebar">

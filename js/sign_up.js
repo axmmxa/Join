@@ -6,7 +6,9 @@ function signUp()  {
     let user = {
         'name': name,
         'email': email,
-        'password': password
+        'password': password,
+        "tasks" : [],
+        "contacts" : []
     }
     addUser(user)  
   }

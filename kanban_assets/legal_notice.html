@@ -18,25 +18,8 @@
 
     <script src="js/render.js" defer></script>
     <script src="js/mini_backend.js" defer></script>
-
-    <script>
-        let users = [];
-
-        setURL('https://gruppe-319.developerakademie.net/smallest_backend_ever')
-
-        async function addUser() {
-            users.push('John');
-            await backend.setItem('users', JSON.stringify(users));
-        }
-
-        async function initDownload() {
-            await downloadFromServer();
-            users = JSON.parse(backend.getItem("users")) || [];
-            console.log(users)
-        }
-    </script>
-
     <script src="js/login.js" defer></script>
+    <script src="../js/logout.js" defer></script>
 
 </head>
 
@@ -48,11 +31,23 @@
             <div class="info">
                 <p class="name">Kanban Project Management Tool</p>
                 <a href="../kanban_assets/help.html"><img class="help" src="../kanban_img/small_navbar_icons/help.png"></a>
-                <img class="user-img" src="../kanban_img/user_icons/user_example.png">
+                <img onclick="toggleLogoutBox()" class="user-img" src="../kanban_img/user_icons/user_example.png">
             </div>
         </div>
+
+        <div class="logout d-none">
+            <span onclick="logout()" class="light-blue-text">Log out</span>
+        </div>
+    
+        <div class="logout-mobile d-none">
+            <a href="kanban_assets/help.html" class="light-blue-text">Help</a>
+            <a href="kanban_assets/legal_notice.html" class="light-blue-text">Legal Notice</a>
+            <a onclick="logout()" class="light-blue-text">Log out</a>
+        </div>
+
     </nav>
 
+    
 
     <main class="kanban-main">
         <div class="sidebar">
