@@ -87,7 +87,7 @@
     margin-top: 15px;
 }
 
-.priority-btn-container button {
+.priority-btn-container a {
     background-color: transparent;
     border: 2px solid rgba(0, 0, 0, 0.2);
     border-radius: 8px;

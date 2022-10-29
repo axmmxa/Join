@@ -22,5 +22,6 @@ function login() {
     if (loggedInUser) {
         console.log("User gefunden")
         saveLoggedInUser()
+        window.location.href = '../summary.html'
     }
 }

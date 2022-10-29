@@ -53,3 +53,14 @@ async function addTask(task) {
     tasks.push(task)
     await backend.setItem('tasks', JSON.stringify(task));
   }
+ function setPriotity(id) {
+
+  if(id== 'urgent-btn') {
+    document.getElementById(id).style.backgroundColor = 'red'
+  } else if(id == "medium-btn") {
+    document.getElementById(id).style.backgroundColor = 'orange'
+  } else if( id == 'non-urgent-btn') {
+    document.getElementById(id).style.backgroundColor = 'lightgreen'
+  }
+    
+ }
