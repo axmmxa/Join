@@ -24,10 +24,13 @@ function returnSelectedCategory(id) {
   first_select_task_category.innerHTML = id
 }
 
-function returnSelectedSubtasks(el) {
+function returnSelectedSubtasks(el, id) {
   if (el.checked) {
     selected_subtasks.push(el.value)
-  } else {
+  }if (selected_subtasks.includes(document.getElementById(id).value)){
+    document.getElementById(id).checked = true
+  }
+  else {
     selected_subtasks.pop(el.value)
   }
   
@@ -36,14 +39,14 @@ function returnSelectedSubtasks(el) {
 function saveTask()  {
     let title = document.getElementById('input-title').value
     let due_date = document.getElementById('due-date').value
-    let priority;
     let description = document.getElementById('textarea').value
     
     let task = {
         'title': title,
         'due-date': due_date,
         'description': description,
-        'loggedInUser': loggedInUser.name
+
+
     }
 
     addTask(task)  

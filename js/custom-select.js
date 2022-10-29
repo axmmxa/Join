@@ -80,7 +80,7 @@ function showAddSubtask() {
     
 
     category_container.innerHTML += 
-        `<label for="${add_subtask_input}"><input value="${add_subtask_input}" onclick="returnSelectedSubtasks(this)" type="checkbox" id="${add_subtask_input}"><span class="category-span">${add_subtask_input}</span></label>`
+        `<label for="${add_subtask_input}"><input value="${add_subtask_input}" onclick="returnSelectedSubtasks(this, id)" type="checkbox" id="${add_subtask_input}"><span class="category-span">${add_subtask_input}</span></label>`
     
   }
   
