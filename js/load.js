@@ -1,6 +1,6 @@
 setURL('https://gruppe-319.developerakademie.net/smallest_backend_ever')
 
-
+let todos = []
 let users = [];
 let tasks = [];
 let selected_options = [] //asigned contacts
@@ -19,6 +19,22 @@ async function init() {
     await downloadFromServer();
     users = JSON.parse(backend.getItem('users')) || [];
     id = parseInt( localStorage.getItem("id"));
+
+    console.log(users)
+    loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"))
+    
+    for (let i = 0; i < users.length; i++) {
+      const currentUser = users[i];
+
+      if(currentUser.email == loggedInUser.email){
+          for (let j = 0; j < currentUser.tasks.length; j++) {
+            todos.push(currentUser.tasks[j])
+          }
+          
+      }
+  }
+
+  console.log(todos)
 }
  
 async function deleteUsers() {
@@ -47,3 +63,6 @@ function loadLoggedInUser() {
       greetUser()
   }
 }
+
+
+
