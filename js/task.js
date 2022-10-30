@@ -24,12 +24,14 @@ function returnSelectedCategory(id) {
   first_select_task_category.innerHTML = id
 }
 
-function returnSelectedSubtasks(el, id) {
+function returnSelectedSubtasks(el) {
+ 
   if (el.checked) {
     selected_subtasks.push(el.value)
   }
   else {
     selected_subtasks.pop(el.value)
+    
   }
   
 }
@@ -50,7 +52,10 @@ function saveTask()  {
         'subtask': selected_subtasks
     }
 
-    addTask(task)  
+    addTask(task) 
+    init()
+    console.log('create task')
+    console.log(users)
   }
 
 async function addTask(task) {

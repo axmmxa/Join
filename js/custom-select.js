@@ -77,11 +77,14 @@ function showAddSubtask() {
   function addNewSubtask() {
     let category_container = document.querySelector(".category-container")
     let add_subtask_input = document.getElementById("add-subtask-input").value
+
+    selected_subtasks = []
     
 
     category_container.innerHTML += 
         `<label for="${add_subtask_input}"><input value="${add_subtask_input}" onclick="returnSelectedSubtasks(this)" type="checkbox" id="${add_subtask_input}"><span class="category-span">${add_subtask_input}</span></label>`
     
   }
+  
   
 
