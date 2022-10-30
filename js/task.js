@@ -100,17 +100,17 @@ async function taskToUser() {
     document.getElementById(id).style.backgroundColor = 'red'
     document.getElementById('urgent-btn-priority-img').setAttribute('src', '../kanban_img/priority_icons/urgent_white.png')
     document.getElementById(id).style.color = 'white'
-    selected_priority =  'urgent'
+    selected_priority =  '../kanban_img/priority_icons/urgent-red.png'
   } else if(id == "medium-btn") {
     document.getElementById(id).style.backgroundColor = 'orange'
     document.getElementById('medium-btn-priority-img').setAttribute('src', '../kanban_img/priority_icons/medium_urgent_white.png')
     document.getElementById(id).style.color = 'white'
-    selected_priority = 'middle'
+    selected_priority = '../kanban_img/priority_icons/middle-urgent-orange.png'
   } else if( id == 'non-urgent-btn') {
     document.getElementById(id).style.backgroundColor = 'lightgreen'
     document.getElementById('non-urgent-btn-priority-img').setAttribute('src', '../kanban_img/priority_icons/non_urgent_white.png')
     document.getElementById(id).style.color = 'white'
-    selected_priority = 'low'
+    selected_priority = '../kanban_img/priority_icons/non-urgent-green.png'
   }
     
  }

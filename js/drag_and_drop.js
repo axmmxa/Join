@@ -20,12 +20,12 @@ function updateHTML() {
     //container with category todo
     let todo = todos.filter(t => t['status'] == 'todo')
     console.log(todo)
-    document.getElementById('todo').innerHTML =''
+    //document.getElementById('todo-container').innerHTML =''
     
     for( let index = 0; index < todo.length; index++) {
         const element = todo[index]
         console.log("test")
-        document.getElementById('todo').innerHTML += generateTodoHTML(element)
+        document.getElementById('todo-container').innerHTML += generateTodoHTML(element)
         
     }
     
@@ -33,7 +33,20 @@ function updateHTML() {
 
 function generateTodoHTML(element) {
     return `
-    <div>${element}</div>
+    <div onclick="renderBoardTaskInfo()" class="added-task">
+    <span class="task-topic white-text">${element.category}</span>
+    <h4 class="task-headline blue-text">${element.title}</h4>
+    <span class="added-text">${element.description}</span>
+    
+    <div class="progress">
+        <div class="progress-bar"></div> <span class="addTask-amount"><span>3</span>/<span>3</span> Done</span>
+    </div>
+
+    <div class="board-user-img-container">
+        <div class="user-tasks"></div>
+            <img src="${element.priority}" class="priority-img">
+        </div>
+    </div>
     `
 }
 

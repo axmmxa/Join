@@ -64,7 +64,11 @@ function loadLoggedInUser() {
 
   if (loggedInUserAsText) {
       loggedInUser = JSON.parse(loggedInUserAsText)
-      greetUser()
+      
+  }
+
+  if(document.getElementById("user-name")) {
+    greetUser()
   }
 }
 
