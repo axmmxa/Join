@@ -20,6 +20,9 @@ async function init() {
     users = JSON.parse(backend.getItem('users')) || [];
     id = parseInt( localStorage.getItem("id"));
 
+    let loggedInUserAsText = JSON.stringify(users);
+    localStorage.setItem("users", loggedInUserAsText);
+
     console.log(users)
     loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"))
     
