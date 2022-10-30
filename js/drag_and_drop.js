@@ -17,10 +17,12 @@ function updateHTML() {
       
     }
     console.log(todos)
+
+
     //container with category todo
     let todo = todos.filter(t => t['status'] == 'todo')
     console.log(todo)
-    //document.getElementById('todo-container').innerHTML =''
+    
     
     for( let index = 0; index < todo.length; index++) {
         const element = todo[index]
@@ -28,12 +30,21 @@ function updateHTML() {
         document.getElementById('todo-container').innerHTML += generateTodoHTML(element)
         
     }
+
+    //container with category In progress
+   
+    for( let index = 0; index < todo.length; index++) {
+        const element = todo[index]
+        console.log("test")
+        document.getElementById('"InProgress-container"').innerHTML += generateTodoHTML(element)
+        
+    }
     
 }
 
 function generateTodoHTML(element) {
     return `
-    <div onclick="renderBoardTaskInfo()" class="added-task">
+    <div draggable="true" ondragstart="startDragging(${element['id']})" onclick="renderBoardTaskInfo()" class="added-task">
     <span class="task-topic white-text">${element.category}</span>
     <h4 class="task-headline blue-text">${element.title}</h4>
     <span class="added-text">${element.description}</span>
@@ -50,7 +61,10 @@ function generateTodoHTML(element) {
     `
 }
 
-
+function startDragging(id) {
+    currentDraggedElement = id
+    console.log(currentDraggedElement)
+}
 
 
 function getUserDataLocolstorage() {

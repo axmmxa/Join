@@ -65,7 +65,7 @@ async function addTask(task) {
       const currentUser = users[i];
       if(currentUser.email == loggedInUser.email){
         task.id = id
-        id ++
+        id++
         let idAsText = JSON.stringify(id)
         localStorage.setItem('id', idAsText)
         currentUser.tasks.push(task)
