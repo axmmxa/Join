@@ -50,7 +50,8 @@ function saveTask()  {
         'priority': selected_priority,
         'description': description,
         'subtask': selected_subtasks,
-        'id': null
+        'id': null,
+        'status':'todo'
     }
 
     addTask(task) 
