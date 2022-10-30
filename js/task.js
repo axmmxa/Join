@@ -49,7 +49,8 @@ function saveTask()  {
         'category': selected_category,
         'priority': selected_priority,
         'description': description,
-        'subtask': selected_subtasks
+        'subtask': selected_subtasks,
+        'id': null
     }
 
     addTask(task) 
@@ -62,6 +63,10 @@ async function addTask(task) {
     for (let i = 0; i < users.length; i++) {
       const currentUser = users[i];
       if(currentUser.email == loggedInUser.email){
+        task.id = id
+        id ++
+        let idAsText = JSON.stringify(id)
+        localStorage.setItem('id', idAsText)
         currentUser.tasks.push(task)
         await backend.setItem('users', JSON.stringify(users));
       }

@@ -1,5 +1,6 @@
 setURL('https://gruppe-319.developerakademie.net/smallest_backend_ever')
 
+
 let users = [];
 let tasks = [];
 let selected_options = [] //asigned contacts
@@ -7,6 +8,7 @@ let selected_category;
 let selected_priority;
 let selected_subtasks = []
 let loggedInUser;
+let id = 0
 let currentContact = [];
 
 let contact_names = []
@@ -16,7 +18,7 @@ let contact_phones = []
 async function init() {
     await downloadFromServer();
     users = JSON.parse(backend.getItem('users')) || [];
-    tasks = JSON.parse(backend.getItem('tasks')) || [];
+    id = parseInt( localStorage.getItem("id"));
 }
  
 async function deleteUsers() {
