@@ -8,7 +8,7 @@ let selected_category;
 let selected_priority;
 let selected_subtasks = []
 let loggedInUser;
-let id = 0
+// let id = 0;
 let currentContact = [];
 
 let contact_names = []
@@ -18,7 +18,6 @@ let contact_phones = []
 async function init() {
     await downloadFromServer();
     users = JSON.parse(backend.getItem('users')) || [];
-    id = parseInt( localStorage.getItem("id"));
 
     let loggedInUserAsText = JSON.stringify(users);
     localStorage.setItem("users", loggedInUserAsText);
@@ -38,7 +37,6 @@ async function init() {
     
   }
 
-  console.log(todos)
 }
  
 async function deleteUsers() {

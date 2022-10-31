@@ -1,4 +1,6 @@
 loadLoggedInUser()
+let id = 0 
+
 
 function returnSelectedContacts(el) {
   let first_select_contact = document.getElementById("first-select-contacts")
@@ -31,12 +33,18 @@ function returnSelectedSubtasks(el) {
   }
   else {
     selected_subtasks.pop(el.value)
-    
   }
   
 }
 
-function saveTask()  {
+async function saveTask()  {
+  await downloadFromServer();
+  let idTaskFromBackend = parseInt(JSON.parse(backend.getItem('id_task')));
+
+  if (idTaskFromBackend) {
+    id = idTaskFromBackend
+  }
+
     let title = document.getElementById('input-title').value
     let due_date = document.getElementById('due-date').value
     let description = document.getElementById('textarea').value
@@ -50,24 +58,26 @@ function saveTask()  {
         'priority': selected_priority,
         'description': description,
         'subtask': selected_subtasks,
-        'id': null,
+        'id_task': id,
         'status':'todo'
     }
-
-    addTask(task) 
-    init()
-    console.log('create task')
+  
+    console.log(task.id)
     console.log(users)
+    addTask(task, id) 
+    console.log('create task')
+    
   }
 
-async function addTask(task) {
+async function addTask(task,id) {
+  
     for (let i = 0; i < users.length; i++) {
       const currentUser = users[i];
       if(currentUser.email == loggedInUser.email){
-        task.id = id
+        // task.task_id = id
         id++
-        let idAsText = JSON.stringify(id)
-        localStorage.setItem('id', idAsText)
+        await backend.setItem('id_task', JSON.stringify(id));
+        
         currentUser.tasks.push(task)
         await backend.setItem('users', JSON.stringify(users));
       }
