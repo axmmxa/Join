@@ -75,8 +75,8 @@ async function addTask(task,id) {
       const currentUser = users[i];
       if(currentUser.email == loggedInUser.email){
         // task.task_id = id
-        await backend.setItem('id_task', JSON.stringify(id));
         id++
+        await backend.setItem('id_task', JSON.stringify(id)); 
         currentUser.tasks.push(task)
         await backend.setItem('users', JSON.stringify(users));
       }
@@ -97,29 +97,29 @@ async function taskToUser() {
     priority.style.color = 'black'
     priority.style.backgroundColor = 'white'
     if(document.getElementById('urgent-btn')) {
-      document.getElementById('urgent-btn-priority-img').setAttribute('src', '../kanban_img/priority_icons/urgent-red.png')
+      document.getElementById('urgent-btn-priority-img').setAttribute('src', 'kanban_img/priority_icons/urgent-red.png')
     } if (document.getElementById('medium-btn')) {
-      document.getElementById('medium-btn-priority-img').setAttribute('src', '../kanban_img/priority_icons/middle-urgent-orange.png')
+      document.getElementById('medium-btn-priority-img').setAttribute('src', 'kanban_img/priority_icons/middle-urgent-orange.png')
     } if(document.getElementById('non-urgent-btn')){
-      document.getElementById('non-urgent-btn-priority-img').setAttribute('src', '../kanban_img/priority_icons/non-urgent-green.png')
+      document.getElementById('non-urgent-btn-priority-img').setAttribute('src', 'kanban_img/priority_icons/non-urgent-green.png')
     }
   }
   
-  if(id== 'urgent-btn') {
+  if(id == 'urgent-btn') {
     document.getElementById(id).style.backgroundColor = 'red'
-    document.getElementById('urgent-btn-priority-img').setAttribute('src', '../kanban_img/priority_icons/urgent_white.png')
+    document.getElementById('urgent-btn-priority-img').setAttribute('src', 'kanban_img/priority_icons/urgent_white.png')
     document.getElementById(id).style.color = 'white'
-    selected_priority =  '../kanban_img/priority_icons/urgent-red.png'
+    selected_priority =  'kanban_img/priority_icons/urgent-red.png'
   } else if(id == "medium-btn") {
     document.getElementById(id).style.backgroundColor = 'orange'
-    document.getElementById('medium-btn-priority-img').setAttribute('src', '../kanban_img/priority_icons/medium_urgent_white.png')
+    document.getElementById('medium-btn-priority-img').setAttribute('src', 'kanban_img/priority_icons/medium_urgent_white.png')
     document.getElementById(id).style.color = 'white'
-    selected_priority = '../kanban_img/priority_icons/middle-urgent-orange.png'
+    selected_priority = 'kanban_img/priority_icons/middle-urgent-orange.png'
   } else if( id == 'non-urgent-btn') {
     document.getElementById(id).style.backgroundColor = 'lightgreen'
-    document.getElementById('non-urgent-btn-priority-img').setAttribute('src', '../kanban_img/priority_icons/non_urgent_white.png')
+    document.getElementById('non-urgent-btn-priority-img').setAttribute('src', 'kanban_img/priority_icons/non_urgent_white.png')
     document.getElementById(id).style.color = 'white'
-    selected_priority = '../kanban_img/priority_icons/non-urgent-green.png'
+    selected_priority = 'kanban_img/priority_icons/non-urgent-green.png'
   }
     
  }

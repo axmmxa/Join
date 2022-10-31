@@ -1,62 +1,92 @@
-let currentDraggedElement
+let currentDraggedElement;
+
 
 function updateHTML() {
-    let todos = []
     getUserDataLocolstorage()
     loadLoggedInUser()
+    
     for (let i = 0; i < users.length; i++) {
-        
         const currentUser = users[i];
-  
-        if(currentUser.email == loggedInUser.email){
+        
+        if(currentUser.email == loggedInUser.email) {
             for (let j = 0; j < currentUser.tasks.length; j++) {
               todos.push(currentUser.tasks[j])
             }   
         }
     }
-    console.log(todos)
-
 
     //container with category todo
     let todo = todos.filter(t => t['status'] == 'todo')
-    console.log(todo)
     
+    document.getElementById('todo').innerHTML = ""
+    document.getElementById('todo').innerHTML += 
+        `
+        <div class="flex">
+        <h4 class="board-task-title">To do</h4>
+        <img onclick="renderSmallAddTask()" class="board-task-img" src="kanban_img/plus_icons/plus_button.png">
+        </div>
+        `
+
     for( let index = 0; index < todo.length; index++) {
         const element = todo[index]
-        console.log("test")
+        
         document.getElementById('todo').innerHTML += generateTodoHTML(element)
         
     }
 
     //container with category In progress
     let inProgress = todos.filter(t => t['status'] == 'in-progress')
-    console.log(todo)
+    
+    document.getElementById('in-progress').innerHTML = ""
+    document.getElementById('in-progress').innerHTML += 
+        `
+        <div class="flex">
+        <h4 class="board-task-title">In Progress</h4>
+        <img onclick="renderSmallAddTask()" class="board-task-img" src="kanban_img/plus_icons/plus_button.png">
+        </div>
+        `
 
     for( let index = 0; index < inProgress.length; index++) {
         const element = inProgress[index]
-        console.log("test")
+        
         document.getElementById('in-progress').innerHTML += generateTodoHTML(element)
         
     }
 
     //container with category Await Feedback
     let awaitFeedback = todos.filter(t => t['status'] == 'await-feedback')
-    console.log(todo)
+    
+    document.getElementById('await-feedback').innerHTML = ""
+    document.getElementById('await-feedback').innerHTML += 
+        `
+        <div class="flex">
+        <h4 class="board-task-title">Await Feedback</h4>
+        <img onclick="renderSmallAddTask()" class="board-task-img" src="kanban_img/plus_icons/plus_button.png">
+        </div>
+        `
 
     for( let index = 0; index < awaitFeedback.length; index++) {
         const element = awaitFeedback[index]
-        console.log("test")
+
         document.getElementById('await-feedback').innerHTML += generateTodoHTML(element)
         
     }
 
     //container with category done
     let done = todos.filter(t => t['status'] == 'done')
-    console.log(todo)
+    
+    document.getElementById('done').innerHTML = ""
+    document.getElementById('done').innerHTML += 
+        `
+        <div class="flex">
+        <h4 class="board-task-title">Done</h4>
+        <img onclick="renderSmallAddTask()" class="board-task-img" src="kanban_img/plus_icons/plus_button.png">
+        </div>
+        `
 
     for( let index = 0; index < done.length; index++) {
         const element = done[index]
-        console.log("test")
+        console.log(element)
         document.getElementById('done').innerHTML += generateTodoHTML(element)
         
     }
@@ -92,13 +122,12 @@ function allowDrop(ev) {
 }
 
 function moveTo(status) {
-    todos[currentDraggedElement]['status'] = status // category will change
+    todos[currentDraggedElement]['status'] = status // status will change
     updateHTML()
 }
 
 
 function getUserDataLocolstorage() {
-   
         let loggedInUsersAsText = localStorage.getItem('users');
       
         if (loggedInUsersAsText) {

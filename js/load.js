@@ -47,10 +47,6 @@ async function deleteIdTask() {
   await backend.deleteItem('id_task');
 }
 
-async function deleteTasks() {
-  await backend.deleteItem('tasks')
-}
-
  function greetUser() {
   let user_name = document.getElementById("user-name")
   user_name.innerHTML = loggedInUser.name
