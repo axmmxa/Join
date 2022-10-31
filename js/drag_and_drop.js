@@ -1,23 +1,44 @@
 let currentDraggedElement;
 
-
-function updateHTML() {
-    getUserDataLocolstorage()
-    loadLoggedInUser()
-    
+let x = true
+function checkUserTasks() {
     for (let i = 0; i < users.length; i++) {
         const currentUser = users[i];
         
-        if(currentUser.email == loggedInUser.email) {
+        if(currentUser.email == loggedInUser.email && x) {
             for (let j = 0; j < currentUser.tasks.length; j++) {
               todos.push(currentUser.tasks[j])
-            }   
+              x = false
+            }
+            
+            for (let index = 0; index < todos.length; index++) {
+                const element = todos[index];
+                currentUser.tasks.push(element)
+            }
         }
     }
+}
+
+
+
+function updateHTML() {
+    
+    console.log('todos', todos)
+    console.log("updateHTML function")
+    getUserDataLocolstorage()
+    loadLoggedInUser()
+    checkUserTasks()
+    //if(x) {
+      //  checkUserTasks()
+        //x = false
+    //}
+    
+    localStorage.setItem('users', JSON.stringify(users))
+    
 
     //container with category todo
     let todo = todos.filter(t => t['status'] == 'todo')
-    
+
     document.getElementById('todo').innerHTML = ""
     document.getElementById('todo').innerHTML += 
         `
