@@ -23,7 +23,6 @@ function updateHTML() {
     let todo = todos.filter(t => t['status'] == 'todo')
     console.log(todo)
     
-    
     for( let index = 0; index < todo.length; index++) {
         const element = todo[index]
         console.log("test")
@@ -32,11 +31,35 @@ function updateHTML() {
     }
 
     //container with category In progress
-   
-    for( let index = 0; index < todo.length; index++) {
-        const element = todo[index]
+    let inProgress = todos.filter(t => t['status'] == 'inProgress')
+    console.log(todo)
+
+    for( let index = 0; index < inProgress.length; index++) {
+        const element = inProgress[index]
         console.log("test")
-        document.getElementById('"InProgress-container"').innerHTML += generateTodoHTML(element)
+        document.getElementById('in-progress-container').innerHTML += generateTodoHTML(element)
+        
+    }
+
+    //container with category Await Feedback
+    let awaitFeedback = todos.filter(t => t['status'] == 'awaitFeedback')
+    console.log(todo)
+
+    for( let index = 0; index < awaitFeedback.length; index++) {
+        const element = awaitFeedback[index]
+        console.log("test")
+        document.getElementById('await-feedback-container').innerHTML += generateTodoHTML(element)
+        
+    }
+
+    //container with category done
+    let done = todos.filter(t => t['status'] == 'done')
+    console.log(todo)
+
+    for( let index = 0; index < done.length; index++) {
+        const element = done[index]
+        console.log("test")
+        document.getElementById('done-container').innerHTML += generateTodoHTML(element)
         
     }
     
@@ -44,7 +67,7 @@ function updateHTML() {
 
 function generateTodoHTML(element) {
     return `
-    <div draggable="true" ondragstart="startDragging(${element['id']})" onclick="renderBoardTaskInfo()" class="added-task">
+    <div draggable="true" ondragstart="startDragging(${element['id_task']})" onclick="renderBoardTaskInfo()" class="added-task">
     <span class="task-topic white-text">${element.category}</span>
     <h4 class="task-headline blue-text">${element.title}</h4>
     <span class="added-text">${element.description}</span>
@@ -61,9 +84,18 @@ function generateTodoHTML(element) {
     `
 }
 
-function startDragging(id) {
-    currentDraggedElement = id
+function startDragging(id_task) {
+    currentDraggedElement = id_task
     console.log(currentDraggedElement)
+}
+
+function allowDrop(ev) {
+    ev.preventDefault();
+}
+
+function moveTo(status) {
+    todos[currentDraggedElement]['status'] = status // category will change
+    updateHTML()
 }
 
 
