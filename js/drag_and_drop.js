@@ -11,10 +11,8 @@ function updateHTML() {
         if(currentUser.email == loggedInUser.email){
             for (let j = 0; j < currentUser.tasks.length; j++) {
               todos.push(currentUser.tasks[j])
-            }
-            
+            }   
         }
-      
     }
     console.log(todos)
 
@@ -26,29 +24,29 @@ function updateHTML() {
     for( let index = 0; index < todo.length; index++) {
         const element = todo[index]
         console.log("test")
-        document.getElementById('todo-container').innerHTML += generateTodoHTML(element)
+        document.getElementById('todo').innerHTML += generateTodoHTML(element)
         
     }
 
     //container with category In progress
-    let inProgress = todos.filter(t => t['status'] == 'inProgress')
+    let inProgress = todos.filter(t => t['status'] == 'in-progress')
     console.log(todo)
 
     for( let index = 0; index < inProgress.length; index++) {
         const element = inProgress[index]
         console.log("test")
-        document.getElementById('in-progress-container').innerHTML += generateTodoHTML(element)
+        document.getElementById('in-progress').innerHTML += generateTodoHTML(element)
         
     }
 
     //container with category Await Feedback
-    let awaitFeedback = todos.filter(t => t['status'] == 'awaitFeedback')
+    let awaitFeedback = todos.filter(t => t['status'] == 'await-feedback')
     console.log(todo)
 
     for( let index = 0; index < awaitFeedback.length; index++) {
         const element = awaitFeedback[index]
         console.log("test")
-        document.getElementById('await-feedback-container').innerHTML += generateTodoHTML(element)
+        document.getElementById('await-feedback').innerHTML += generateTodoHTML(element)
         
     }
 
@@ -59,7 +57,7 @@ function updateHTML() {
     for( let index = 0; index < done.length; index++) {
         const element = done[index]
         console.log("test")
-        document.getElementById('done-container').innerHTML += generateTodoHTML(element)
+        document.getElementById('done').innerHTML += generateTodoHTML(element)
         
     }
     

@@ -84,7 +84,7 @@
 
 
 
-                    <div id="todo-container" class="board-to-do width-25" ondrop="moveTo('todo-container')" ondragover="allowDrop(event)">
+                    <div id="todo" class="board-to-do width-25" ondrop="moveTo('todo')" ondragover="allowDrop(event)">
                         
                         <div class="flex">
                             <h4 class="board-task-title">To do</h4>
@@ -94,7 +94,7 @@
                     </div>
 
                     
-                    <div id="in-progress-container" class="board-in-progress width-25" ondrop="moveTo('in-progress-container')" ondragover="allowDrop(event)">
+                    <div id="in-progress" class="board-in-progress width-25" ondrop="moveTo('in-progress')" ondragover="allowDrop(event)">
                         <div class="flex">
                             <h4 class="board-task-title">In Progress</h4>
                             <img onclick="renderSmallAddTask()" class="board-task-img" src="kanban_img/plus_icons/plus_button.png">
@@ -106,7 +106,7 @@
                     </div>
 
 
-                    <div id="await-feedback-container" class="board-await-feedback width-25">
+                    <div id="await-feedback" class="board-await-feedback width-25" ondrop="moveTo('await-feedback')" ondragover="allowDrop(event)">
                         <div class="flex">
                             <h4 class="board-task-title">Await Feedback</h4>
                             <img onclick="renderSmallAddTask()" class="board-task-img" src="kanban_img/plus_icons/plus_button.png">
@@ -117,7 +117,7 @@
                     </div>
 
 
-                    <div id="done-container" class="board-done width-25">
+                    <div id="done" class="board-done width-25" ondrop="moveTo('done')" ondragover="allowDrop(event)">
                         <div class="flex">
                             <h4 class="board-task-title">Done</h4>
                             <img onclick="renderSmallAddTask()" class="board-task-img" src="kanban_img/plus_icons/plus_button.png">

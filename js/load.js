@@ -43,6 +43,10 @@ async function deleteUsers() {
   await backend.deleteItem('users');
 }
 
+async function deleteIdTask() {
+  await backend.deleteItem('id_task');
+}
+
 async function deleteTasks() {
   await backend.deleteItem('tasks')
 }

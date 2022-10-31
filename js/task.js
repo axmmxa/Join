@@ -75,9 +75,8 @@ async function addTask(task,id) {
       const currentUser = users[i];
       if(currentUser.email == loggedInUser.email){
         // task.task_id = id
-        id++
         await backend.setItem('id_task', JSON.stringify(id));
-        
+        id++
         currentUser.tasks.push(task)
         await backend.setItem('users', JSON.stringify(users));
       }
