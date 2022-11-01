@@ -2,7 +2,7 @@ setURL('https://gruppe-319.developerakademie.net/smallest_backend_ever')
 
 let todos = []
 let users = [];
-let tasks = [];
+// let tasks = [];
 let selected_options = [] //asigned contacts
 let selected_category;
 let selected_priority;

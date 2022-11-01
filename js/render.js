@@ -423,7 +423,36 @@ function renderContactBook() {
 
 }
 
-function addContactToBook() {
+function renderSavedContacts() {
+
+    for (let i = 0; i < users.length; i++) {
+        const currentUser = users[i];
+        if(currentUser.email == loggedInUser.email){
+              for (let j = 0; j < currentUser.contacts.length; j++) {
+                const contact = currentUser.contacts[j];
+                users.pop(contact)
+                let first_letter = contact.contact_name[0].toUpperCase()
+
+    document.querySelector(`.contacts-${first_letter}-data`).innerHTML += 
+        `
+        <div onclick="renderContactInformation('${contact.contact_email}')" class="contact-info">
+        <div>
+            <img class="contact-img" src="kanban_img/user_icons/user_example.png">
+        </div>
+        <div class="contact-data">
+            <h3 id="${contact.contact_name}-name" class="contact-name">${contact.contact_name}</h3>
+            <span id="${contact.contact_email}-email" class="darkblue-text">${contact.contact_email}</span>
+            <span id="${contact.contact_phone}-phone" class="d-none">${contact.contact_phone}</span>
+        </div>
+    </div>
+        `
+              }
+        }
+    }
+}
+
+
+async function addContactToBook() {
     let small_add_contacts_name = document.getElementById("small-add-contacts-name").value
     let small_add_contacts_email = document.getElementById("small-add-contacts-email").value
     let small_add_contacts_phone = document.getElementById("small-add-contacts-phone").value
@@ -431,6 +460,23 @@ function addContactToBook() {
     contact_names.push(small_add_contacts_name)
     contact_emails.push(small_add_contacts_email)
     contact_phones.push(small_add_contacts_phone)
+
+    let contact = {
+        "contact_name": small_add_contacts_name,
+        "contact_email": small_add_contacts_email,
+        "contact_phone": small_add_contacts_phone
+    }
+    
+    for (let i = 0; i < users.length; i++) {
+        const currentUser = users[i];
+  
+        if(currentUser.email == loggedInUser.email){
+              currentUser.contacts.push(contact)
+        }
+    }
+
+    await backend.setItem('users', JSON.stringify(users))
+
 
     let first_letter = small_add_contacts_name[0].toUpperCase()
 
