@@ -28,7 +28,7 @@
 
 </head>
 
-<body onload="updateHTML(), init()">
+<body onload="init()">
     <nav class="kanban-navbar">
         <div class="inner-container">
             <img class="logo" src="kanban_img/login_icons/join_white.png">
@@ -82,7 +82,7 @@
 
                 <div  class="board-task-container">
 
-                    <div id="todo" class="board-to-do width-25" ondrop="moveTo('in-progress')" ondragover="allowDrop(event)">
+                    <div id="todo" class="board-to-do width-25" ondrop="moveTo('todo')" ondragover="allowDrop(event)">
                         
                         <div class="flex">
                             <h4 class="board-task-title">To do</h4>

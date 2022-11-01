@@ -158,3 +158,11 @@
     margin: 5px 0;
 }
 
+.user-icon {
+    padding: 5px;
+    letter-spacing: 2px;
+    color: white;
+    border-radius: 50%;
+    background-color: #4589FF;
+}
+

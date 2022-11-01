@@ -1,41 +1,35 @@
+updateHTML()
+
 let currentDraggedElement;
 
-let x = true
+
 function checkUserTasks() {
+    console.log(todos)
     for (let i = 0; i < users.length; i++) {
         const currentUser = users[i];
         
-        if(currentUser.email == loggedInUser.email && x) {
+        if(currentUser.email == loggedInUser.email) {
             for (let j = 0; j < currentUser.tasks.length; j++) {
+              todos.pop(todos[j])
               todos.push(currentUser.tasks[j])
-              x = false
-            }
-            
-            for (let index = 0; index < todos.length; index++) {
-                const element = todos[index];
-                currentUser.tasks.push(element)
-            }
+            } 
         }
     }
 }
 
 
-
 function updateHTML() {
-    
     console.log('todos', todos)
     console.log("updateHTML function")
-    getUserDataLocolstorage()
+    // getUserDataLocalstorage()
     loadLoggedInUser()
     checkUserTasks()
-    //if(x) {
-      //  checkUserTasks()
-        //x = false
-    //}
     
-    localStorage.setItem('users', JSON.stringify(users))
+    // if(x) {
+    //   checkUserTasks()
+    //   x = false
+    // }
     
-
     //container with category todo
     let todo = todos.filter(t => t['status'] == 'todo')
 
@@ -52,6 +46,15 @@ function updateHTML() {
         const element = todo[index]
         
         document.getElementById('todo').innerHTML += generateTodoHTML(element)
+
+        let assignedContacts = document.querySelector(`#assigned-contact-${element.id_task}`)
+        element.assignedContacts.forEach(contact => {
+            assignedContacts.innerHTML += 
+            `<div>
+                <span class="user-icon">${getUserIcon(contact)}</span>  
+            </div>` 
+        });
+        
         
     }
 
@@ -72,6 +75,14 @@ function updateHTML() {
         
         document.getElementById('in-progress').innerHTML += generateTodoHTML(element)
         
+        let assignedContacts = document.querySelector(`#assigned-contact-${element.id_task}`)
+        element.assignedContacts.forEach(contact => {
+            assignedContacts.innerHTML += 
+            `<div>
+                <span id="${contact}" class="user-icon">${getUserIcon()}</span>  
+            </div>` 
+        });
+        
     }
 
     //container with category Await Feedback
@@ -86,11 +97,19 @@ function updateHTML() {
         </div>
         `
 
-    for( let index = 0; index < awaitFeedback.length; index++) {
+    for(let index = 0; index < awaitFeedback.length; index++) {
         const element = awaitFeedback[index]
-
-        document.getElementById('await-feedback').innerHTML += generateTodoHTML(element)
         
+        document.getElementById('await-feedback').innerHTML += generateTodoHTML(element)
+
+        let assignedContacts = document.querySelector(`#assigned-contact-${element.id_task}`)
+        element.assignedContacts.forEach(contact => {
+            assignedContacts.innerHTML += 
+            `<div>
+                <span id="${contact}" class="user-icon">${getUserIcon(contact)}</span>  
+            </div>`  
+        });
+        getUserIcon(element)
     }
 
     //container with category done
@@ -108,27 +127,48 @@ function updateHTML() {
     for( let index = 0; index < done.length; index++) {
         const element = done[index]
         console.log(element)
+
         document.getElementById('done').innerHTML += generateTodoHTML(element)
         
+        let assignedContacts = document.querySelector(`#assigned-contact-${element.id_task}`)
+        element.assignedContacts.forEach(contact => {
+            assignedContacts.innerHTML += 
+            `<div>
+            <span id="${contact}" class="user-icon">${getUserIcon(contact)}</span>  
+            </div>` 
+        });
+        getUserIcon()
     }
     
 }
 
+function getUserIcon(contact) {
+    let names = contact.split(" ");
+    let firstLetterFirstName = names[0][0];
+    let firstLetterlastName = names[1][0]
+    
+    return `${firstLetterFirstName + firstLetterlastName}`
+}
+
 function generateTodoHTML(element) {
+    
     return `
-    <div draggable="true" ondragstart="startDragging(${element['id_task']})" onclick="renderBoardTaskInfo()" class="added-task">
+    <div draggable="true" ondragstart="startDragging(${element['id_task']})" onclick="renderBoardTaskInfo(${JSON.stringify(element).split('"').join("&quot;")})" class="added-task">
     <span class="task-topic white-text">${element.category}</span>
     <h4 class="task-headline blue-text">${element.title}</h4>
     <span class="added-text">${element.description}</span>
     
     <div class="progress">
-        <div class="progress-bar"></div> <span class="addTask-amount"><span>3</span>/<span>3</span> Done</span>
+        <div class="progress-bar"></div> <span class="addTask-amount"><span>0</span>/<span>${element.subtask.length}</span> Done</span>
     </div>
 
     <div class="board-user-img-container">
-        <div class="user-tasks"></div>
-            <img src="${element.priority}" class="priority-img">
+        <div id="assigned-contact-${element.id_task}" class="user-tasks">
+            
         </div>
+        
+        <img src="${element.priority}" class="priority-img">
+        
     </div>
     `
 }
@@ -148,7 +188,7 @@ function moveTo(status) {
 }
 
 
-function getUserDataLocolstorage() {
+function getUserDataLocalstorage() {
         let loggedInUsersAsText = localStorage.getItem('users');
       
         if (loggedInUsersAsText) {

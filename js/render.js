@@ -234,7 +234,7 @@ function closeBoardTaskInfo() {
     document.querySelector(".kanban-main").style.opacity = 1
 }
 
-function renderBoardTaskInfo() {
+function renderBoardTaskInfo(element) {
 
     if(document.getElementById("small-board-task-info")) {
         document.getElementById("small-board-task-info").classList.remove("d-none")
@@ -252,20 +252,20 @@ function renderBoardTaskInfo() {
                     <span onclick="closeBoardTaskInfo()" class="close-x-right-side">X</span>
                 </div>
                 <div>
-                    <span class="task-topic white-text">Sales</span>
+                    <span class="task-topic white-text">${element.category}</span>
                 </div>
 
                 <div class="board-task-info-text margin">
-                    <h1>Call Potential Clients</h1>
-                    <span>Make the product presentation to prospective buyers</span>
+                    <h1>${element.title}</h1>
+                    <span>${element.description}</span>
                 </div>
 
                 <div class="board-task-info-date margin">
-                    <b>Due Date:</b><span class="margin-left">05-08-2022</span>
+                    <b>Due Date:</b><span class="margin-left">${element["due-date"]}</span>
                 </div>
 
                 <div class="board-task-info-priority margin">
-                    <b>Priority:</b> <span class="task-info-priority margin-left">Medium <img src="kanban_img/priority_icons/"></span>
+                    <b>Priority:</b> <span class="task-info-priority margin-left"><img src="${element.priority}"></span>
                 </div>
 
                 <b>Assigned To:</b>
