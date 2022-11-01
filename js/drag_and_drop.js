@@ -140,15 +140,10 @@ function updateHTML() {
        
     }
     
+    getCategoryColor()
+
 }
 
-function getUserIcon(contact) {
-    let names = contact.split(" ");
-    let firstLetterFirstName = names[0][0];
-    let firstLetterlastName = names[1][0]
-    
-    return `${firstLetterFirstName + firstLetterlastName}`
-}
 
 function generateTodoHTML(element) {
     

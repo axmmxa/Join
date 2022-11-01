@@ -87,7 +87,7 @@
 
 .task-topic {
     padding: 2px 10px;
-    background-color: orange;
+    /* background-color: orange; */
     text-align: center;
     border-radius: 8px;
 }

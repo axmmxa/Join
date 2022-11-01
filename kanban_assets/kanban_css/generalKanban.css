@@ -16,6 +16,26 @@
     height: auto;
 }
 
+.orange {
+    background-color: #FF7A00;
+}
+
+.pink {
+    background-color: #FC71FF;
+}
+
+.turquoise {
+    background-color: #1FD7C1;
+}
+
+.blue {
+    background-color: #0038FF;
+}
+
+.yellow {
+    background-color: #FFC701;
+}
+
 .light-blue {
     background-color: #4589FF;
 }
@@ -163,6 +183,5 @@
     letter-spacing: 2px;
     color: white;
     border-radius: 50%;
-    background-color: #4589FF;
 }
 

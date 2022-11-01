@@ -61,7 +61,6 @@ function loadLoggedInUser() {
 
   if (loggedInUserAsText) {
       loggedInUser = JSON.parse(loggedInUserAsText)
-      
   }
 
   if(document.getElementById("user-name")) {
@@ -69,5 +68,24 @@ function loadLoggedInUser() {
   }
 }
 
+function getCategoryColor() {
+  let task_topic = document.querySelectorAll(".task-topic")
+  task_topic.forEach(task_topic => {
+    let category_color = ["orange","pink","turquoise","blue","yellow"]
+    let random_color = category_color[Math.floor(Math.random() * 5)]
+
+    task_topic.classList.add(random_color)
+  })
+}
+
+function getUserIcon(contact) {
+  let colors = ["#FF7A00","#FF4646","#FC71FF","#29ABE2","#9327FF","#02CF2F","#CB02CF","#0223CF","#FFA800","#AF1616","#462F8A"]
+
+  let names = contact.split(" ");
+  let firstLetterFirstName = names[0][0];
+  let firstLetterlastName = names[1][0];
+  
+  return `${firstLetterFirstName + firstLetterlastName}`
+}
 
 
