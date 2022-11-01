@@ -32,9 +32,11 @@ async function init() {
           for (let j = 0; j < currentUser.tasks.length; j++) {
             todos.push(currentUser.tasks[j])
           }
-          
       }
   }
+
+  
+  updateHTML()
 
 }
  
@@ -69,23 +71,33 @@ function loadLoggedInUser() {
 }
 
 function getCategoryColor() {
-  let task_topic = document.querySelectorAll(".task-topic")
-  task_topic.forEach(task_topic => {
+  let task_topics = document.querySelectorAll(".task-topic")
+  task_topics.forEach(task_topic => {
     let category_color = ["orange","pink","turquoise","blue","yellow"]
     let random_color = category_color[Math.floor(Math.random() * 5)]
-
     task_topic.classList.add(random_color)
   })
 }
 
-function getUserIcon(contact) {
-  let colors = ["#FF7A00","#FF4646","#FC71FF","#29ABE2","#9327FF","#02CF2F","#CB02CF","#0223CF","#FFA800","#AF1616","#462F8A"]
+function getUserColor() {
+  let user_icons = document.querySelectorAll(".user-icon")
+  user_icons.forEach(user_icon => {
+    let user_color = ["orange","red","pink","lightblue","purple","green","darkred","darkpurple"]
+    let random_color = user_color[Math.floor(Math.random() * 7)]
+    user_icon.classList.add(random_color)
+  })
+}
 
+function getUserIcon(contact) {
   let names = contact.split(" ");
   let firstLetterFirstName = names[0][0];
   let firstLetterlastName = names[1][0];
-  
+
   return `${firstLetterFirstName + firstLetterlastName}`
 }
+
+
+
+
 
 

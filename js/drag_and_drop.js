@@ -1,5 +1,3 @@
-updateHTML()
-
 let currentDraggedElement;
 
 
@@ -24,11 +22,6 @@ function updateHTML() {
     // getUserDataLocalstorage()
     loadLoggedInUser()
     checkUserTasks()
-    
-    // if(x) {
-    //   checkUserTasks()
-    //   x = false
-    // }
     
     //container with category todo
     let todo = todos.filter(t => t['status'] == 'todo')
@@ -141,6 +134,7 @@ function updateHTML() {
     }
     
     getCategoryColor()
+    getUserColor()
 
 }
 

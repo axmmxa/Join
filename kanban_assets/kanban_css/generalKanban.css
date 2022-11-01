@@ -16,6 +16,30 @@
     height: auto;
 }
 
+.darkpurple {
+    background-color: #462F8A;
+}
+
+.darkred {
+    background-color: #AF1616;
+}
+
+.green {
+    background-color: #02CF2F;
+}
+
+.lightblue {
+    background-color: #29ABE2
+}
+
+.purple {
+    background-color: #9327FF;
+}
+
+.red {
+    background-color: #FF0000;
+}
+
 .orange {
     background-color: #FF7A00;
 }
@@ -178,8 +202,14 @@
     margin: 5px 0;
 }
 
+
 .user-icon {
-    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 45px;
+    height: 38px;
+    /* padding: 8px; */
     letter-spacing: 2px;
     color: white;
     border-radius: 50%;

@@ -421,7 +421,8 @@ function renderContactBook() {
 
         `
 
-        
+        renderSavedContacts()
+
     }
 
 }
@@ -485,14 +486,13 @@ async function addContactToBook() {
 
     await backend.setItem('users', JSON.stringify(users))
 
-
     let first_letter = small_add_contacts_name[0].toUpperCase()
 
     document.querySelector(`.contacts-${first_letter}-data`).innerHTML += 
         `
         <div onclick="renderContactInformation('${small_add_contacts_email}')" class="contact-info">
-        <div>
-            <img class="contact-img" src="kanban_img/user_icons/user_example.png">
+        <div class="user-icon-container">
+            <div class="user-icon">${getUserIcon(small_add_contacts_name)}</div>
         </div>
         <div class="contact-data">
             <h3 id="${small_add_contacts_email}-name" class="contact-name">${small_add_contacts_name}</h3>
@@ -501,4 +501,6 @@ async function addContactToBook() {
         </div>
     </div>
         `
+        getUserColor()
+    
 }
