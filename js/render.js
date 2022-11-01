@@ -99,45 +99,6 @@ function renderSmallEditContacts() {
    
 }
 
-function renderContactInformation(email) {
-    let index = contact_emails.indexOf(email)
-
-    for (let i = 0; i < contact_names.length; i++) {
-        if (i == index) {
-             
-    document.querySelector("#contact-information").innerHTML = 
-    `
-                <div class="contact-information-upper-part">
-                    <img src="img/form_logo/anonym_profile_picture.png" class="anonymous-profile-picture">
-                    <div class="contact-information-name-container">
-                        <h1 class="contact-information-name">${contact_names[i]}</h1>
-                        <div onclick="renderSmallAddTask()" class="contact-information-add-task-container"><img src="img/kanban_logo/plus_blue.png"> <span class="light-blue-text">Add Task</span></div>
-                    </div>
-                </div>
-
-                <div class="contact-information-lower-part">
-                    <div class="contact-information-edit">
-                        <h3 class="contact-information-headline">Contact Information</h3>
-                        <div onclick="renderSmallEditContacts()" class="contact-information-edit-container"><img src="img/kanban_logo/edit_pen.png"> <span>Edit Contact</span></div>
-                    </div>
-
-                    <div class="contact-information-email-container">
-                        <h4>Email</h4>
-                        <span class="darkblue-text">${contact_emails[i]}</span>
-                    </div>
-
-                    <div class="contact-information-mobil-container">
-                        <h4>Mobil</h4>
-                        <span>${contact_phones[i]}</span>
-                    </div>
-
-                </div>
-        `
-        }
-        
-    }
-   
-}
 
 function closeSmallEditTask() {
     document.querySelector(".edit-task").classList.add("d-none")
@@ -398,6 +359,47 @@ function renderSmallAddTask() {
     }
 }
 
+function renderContactInformation(email) {
+    let index = contact_emails.indexOf(email)
+
+    for (let i = 0; i < contact_names.length; i++) {
+        if (i == index) {
+             
+    document.querySelector("#contact-information").innerHTML = 
+    `
+                <div class="contact-information-upper-part">
+                    <img src="img/form_logo/anonym_profile_picture.png" class="anonymous-profile-picture">
+                    <div class="contact-information-name-container">
+                        <h1 class="contact-information-name">${contact_names[i]}</h1>
+                        <div onclick="renderSmallAddTask()" class="contact-information-add-task-container"><img src="img/kanban_logo/plus_blue.png"> <span class="light-blue-text">Add Task</span></div>
+                    </div>
+                </div>
+
+                <div class="contact-information-lower-part">
+                    <div class="contact-information-edit">
+                        <h3 class="contact-information-headline">Contact Information</h3>
+                        <div onclick="renderSmallEditContacts()" class="contact-information-edit-container"><img src="img/kanban_logo/edit_pen.png"> <span>Edit Contact</span></div>
+                    </div>
+
+                    <div class="contact-information-email-container">
+                        <h4>Email</h4>
+                        <span class="darkblue-text">${contact_emails[i]}</span>
+                    </div>
+
+                    <div class="contact-information-mobil-container">
+                        <h4>Mobil</h4>
+                        <span>${contact_phones[i]}</span>
+                    </div>
+
+                </div>
+        `
+        }
+        
+    }
+   
+}
+
+
 function renderContactBook() {
     let alphabet = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
 
@@ -419,11 +421,13 @@ function renderContactBook() {
 
         `
 
+        
     }
 
 }
 
 function renderSavedContacts() {
+    
 
     for (let i = 0; i < users.length; i++) {
         const currentUser = users[i];
@@ -431,9 +435,14 @@ function renderSavedContacts() {
               for (let j = 0; j < currentUser.contacts.length; j++) {
                 const contact = currentUser.contacts[j];
                 users.pop(contact)
-                let first_letter = contact.contact_name[0].toUpperCase()
 
-    document.querySelector(`.contacts-${first_letter}-data`).innerHTML += 
+                contact_emails.push(contact.contact_email)
+                contact_names.push(contact.contact_name)
+                contact_phones.push(contact.contact_phone)
+    
+        let first_letter = contact.contact_name[0].toUpperCase()
+
+        document.querySelector(`.contacts-${first_letter}-data`).innerHTML += 
         `
         <div onclick="renderContactInformation('${contact.contact_email}')" class="contact-info">
         <div>
@@ -444,7 +453,7 @@ function renderSavedContacts() {
             <span id="${contact.contact_email}-email" class="darkblue-text">${contact.contact_email}</span>
             <span id="${contact.contact_phone}-phone" class="d-none">${contact.contact_phone}</span>
         </div>
-    </div>
+        </div>
         `
               }
         }
