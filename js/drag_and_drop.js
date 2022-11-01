@@ -79,7 +79,7 @@ function updateHTML() {
         element.assignedContacts.forEach(contact => {
             assignedContacts.innerHTML += 
             `<div>
-                <span id="${contact}" class="user-icon">${getUserIcon()}</span>  
+                <span id="${contact}" class="user-icon">${getUserIcon(contact)}</span>  
             </div>` 
         });
         
@@ -109,7 +109,7 @@ function updateHTML() {
                 <span id="${contact}" class="user-icon">${getUserIcon(contact)}</span>  
             </div>`  
         });
-        getUserIcon(element)
+     
     }
 
     //container with category done
@@ -137,7 +137,7 @@ function updateHTML() {
             <span id="${contact}" class="user-icon">${getUserIcon(contact)}</span>  
             </div>` 
         });
-        getUserIcon()
+       
     }
     
 }
