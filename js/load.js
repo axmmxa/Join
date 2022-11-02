@@ -35,9 +35,14 @@ async function init() {
       }
   }
 
+  if (document.getElementById("board-body")) {
+    updateHTML()
+  } if (document.getElementById("contacts-body")) {
+    renderContactBook()
+  } if (document.getElementById("summary-body")) {
+    loadLoggedInUser()
+  }
   
-  updateHTML()
-
 }
  
 async function deleteUsers() {

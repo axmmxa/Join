@@ -5,12 +5,14 @@ function checkUserTasks() {
     console.log(todos)
     for (let i = 0; i < users.length; i++) {
         const currentUser = users[i];
-        
+    
         if(currentUser.email == loggedInUser.email) {
-            for (let j = 0; j < currentUser.tasks.length; j++) {
-              todos.pop(todos[j])
-              todos.push(currentUser.tasks[j])
-            } 
+            return currentUser.tasks
+
+            // for (let j = 0; j < currentUser.tasks.length; j++) {
+            //   todos.pop(todos[j])
+            //   todos.push(currentUser.tasks[j])
+            // } 
         }
     }
 }
@@ -20,11 +22,11 @@ function updateHTML() {
     console.log('todos', todos)
     console.log("updateHTML function")
     // getUserDataLocalstorage()
-    loadLoggedInUser()
-    checkUserTasks()
+    // loadLoggedInUser()
+    let user_task_array = checkUserTasks()
     
     //container with category todo
-    let todo = todos.filter(t => t['status'] == 'todo')
+    let todo = user_task_array.filter(t => t['status'] == 'todo')
 
     document.getElementById('todo').innerHTML = ""
     document.getElementById('todo').innerHTML += 
@@ -52,7 +54,7 @@ function updateHTML() {
     }
 
     //container with category In progress
-    let inProgress = todos.filter(t => t['status'] == 'in-progress')
+    let inProgress = user_task_array.filter(t => t['status'] == 'in-progress')
     
     document.getElementById('in-progress').innerHTML = ""
     document.getElementById('in-progress').innerHTML += 
@@ -79,7 +81,7 @@ function updateHTML() {
     }
 
     //container with category Await Feedback
-    let awaitFeedback = todos.filter(t => t['status'] == 'await-feedback')
+    let awaitFeedback = user_task_array.filter(t => t['status'] == 'await-feedback')
     
     document.getElementById('await-feedback').innerHTML = ""
     document.getElementById('await-feedback').innerHTML += 
@@ -106,7 +108,7 @@ function updateHTML() {
     }
 
     //container with category done
-    let done = todos.filter(t => t['status'] == 'done')
+    let done = user_task_array.filter(t => t['status'] == 'done')
     
     document.getElementById('done').innerHTML = ""
     document.getElementById('done').innerHTML += 
@@ -136,13 +138,18 @@ function updateHTML() {
     getCategoryColor()
     getUserColor()
 
+    saveUsersArray()
+}
+
+async function saveUsersArray() {
+    await backend.setItem('users', JSON.stringify(users));
 }
 
 
 function generateTodoHTML(element) {
-    
+    // ${JSON.stringify(element).split('"').join("&quot;")}
     return `
-    <div draggable="true" ondragstart="startDragging(${element['id_task']})" onclick="renderBoardTaskInfo(${JSON.stringify(element).split('"').join("&quot;")})" class="added-task">
+    <div draggable="true" ondragstart="startDragging(${element['id_task']})" onclick="renderBoardTaskInfo(${element['id_task']})" class="added-task">
     <span class="task-topic white-text">${element.category}</span>
     <h4 class="task-headline blue-text">${element.title}</h4>
     <span class="added-text">${element.description}</span>

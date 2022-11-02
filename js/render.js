@@ -106,7 +106,6 @@ function closeSmallEditTask() {
     document.querySelector(".kanban-navbar").style.opacity = 1
     document.querySelector(".kanban-main").style.opacity = 1
 
-    closeBoardTaskInfo()
 }
 
 
@@ -120,10 +119,10 @@ function renderSmallEditTask() {
         document.querySelector(".kanban-navbar").style.opacity = 0.5
         document.querySelector(".kanban-main").style.opacity = 0.5
 
-        document.querySelector("body").innerHTML +=
+        document.querySelector("#small-board-task-info").innerHTML =
 
         `
-    <div class="edit-task">  
+    <div id="edit-task" class="edit-task">  
     <div class="add-task-container-edit">
         <div class="align-right"> 
             <span onclick="closeSmallEditTask()" class="close-x-right-side">X</span>  
@@ -187,61 +186,82 @@ function renderSmallEditTask() {
     
 }
 
+function showTaskInfo(id_task) {
+    for (let i = 0; i < users.length; i++) {
+        const currentUser = users[i];            
+        if (currentUser.email == loggedInUser.email) {
+            for (let j = 0; j < currentUser.tasks.length; j++) {
+                let userTaskId = currentUser.tasks[j]
+                if (userTaskId.id_task == id_task) {
+                    document.querySelector("body").innerHTML += 
+                    `
+                    <div id="small-board-task-info-${i}" class="small-board-task-info">
+                                <div class="close-btn-container-task-info">
+                                    <span onclick="closeBoardTaskInfo()" class="close-x-right-side">X</span>
+                                </div>
+                                <div>
+                                    <span class="task-topic white-text">${userTaskId.category}</span>
+                                </div>
+                
+                                <div class="board-task-info-text margin">
+                                    <h1>${userTaskId.title}</h1>
+                                    <span>${userTaskId.description}</span>
+                                </div>
+                
+                                <div class="board-task-info-date margin">
+                                    <b>Due Date:</b><span class="margin-left">${userTaskId["due-date"]}</span>
+                                </div>
+                
+                                <div class="board-task-info-priority margin">
+                                    <b>Priority:</b> <span class="task-info-priority margin-left"><img src="${userTaskId.priority}"></span>
+                                </div>
+                
+                                <b>Assigned To:</b>
+                                <div class="assigned-personal">
+                
+                                </div>
+                
+                                <div class="board-task-edit-btn-container">
+                                    <button onclick="renderSmallEditTask()" class="edit-btn light-blue"><img class="edit-pen-height" src="kanban_img/edit_icons/edit_pen_white.png"></button>
+                                </div>
+                            </div>
+                    `
+                }
+            }
+        }
+    }
+   
+}
 
 function closeBoardTaskInfo() {
-    document.getElementById("small-board-task-info").classList.add("d-none")
-
+    document.querySelectorAll(".small-board-task-info").forEach(small_board_task_info => {
+        small_board_task_info.classList.add("d-none")
+    })
+    
     document.querySelector(".kanban-navbar").style.opacity = 1
     document.querySelector(".kanban-main").style.opacity = 1
 }
 
-function renderBoardTaskInfo(element) {
+
+function renderBoardTaskInfo(id_task) {
 
     if(document.getElementById("small-board-task-info")) {
         document.getElementById("small-board-task-info").classList.remove("d-none")
 
-        document.querySelector(".kanban-navbar").style.opacity = 1
-        document.querySelector(".kanban-main").style.opacity = 1
-    } else {
         document.querySelector(".kanban-navbar").style.opacity = 0.5
         document.querySelector(".kanban-main").style.opacity = 0.5
 
-        document.querySelector("body").innerHTML += 
-    `
-    <div id="small-board-task-info">
-                <div class="close-btn-container-task-info">
-                    <span onclick="closeBoardTaskInfo()" class="close-x-right-side">X</span>
-                </div>
-                <div>
-                    <span class="task-topic white-text">${element.category}</span>
-                </div>
+        showTaskInfo(id_task)
+    } else {
+        showTaskInfo(id_task)
+        
+        document.querySelector(".kanban-navbar").style.opacity = 0.5
+        document.querySelector(".kanban-main").style.opacity = 0.5
+    
+        }
 
-                <div class="board-task-info-text margin">
-                    <h1>${element.title}</h1>
-                    <span>${element.description}</span>
-                </div>
-
-                <div class="board-task-info-date margin">
-                    <b>Due Date:</b><span class="margin-left">${element["due-date"]}</span>
-                </div>
-
-                <div class="board-task-info-priority margin">
-                    <b>Priority:</b> <span class="task-info-priority margin-left"><img src="${element.priority}"></span>
-                </div>
-
-                <b>Assigned To:</b>
-                <div class="assigned-personal">
-
-                </div>
-
-                <div class="board-task-edit-btn-container">
-                    <button onclick="renderSmallEditTask()" class="edit-btn light-blue"><img class="edit-pen-height" src="kanban_img/edit_icons/edit_pen_white.png"></button>
-                </div>
-            </div>
-    `
     }
     
-}
 
 function closeSmallAddTask() {
     document.getElementById("small-add-task").classList.add("d-none")
@@ -420,10 +440,9 @@ function renderContactBook() {
     </div>
 
         `
-
-        renderSavedContacts()
-
     }
+
+    renderSavedContacts()
 
 }
 

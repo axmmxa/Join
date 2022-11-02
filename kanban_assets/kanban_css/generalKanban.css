@@ -215,3 +215,8 @@
     border-radius: 50%;
 }
 
+.user-tasks {
+    display: flex;
+    align-items: center;
+}
+
