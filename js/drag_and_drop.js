@@ -7,12 +7,7 @@ function checkUserTasks() {
         const currentUser = users[i];
     
         if(currentUser.email == loggedInUser.email) {
-            return currentUser.tasks
-
-            // for (let j = 0; j < currentUser.tasks.length; j++) {
-            //   todos.pop(todos[j])
-            //   todos.push(currentUser.tasks[j])
-            // } 
+            return currentUser.tasks  
         }
     }
 }
@@ -163,7 +158,7 @@ function generateTodoHTML(element) {
             
         </div>
         
-        <img src="${element.priority}" class="priority-img">
+        <img src="${element.priority_img_path}" class="priority-img">
         
     </div>
     `

@@ -6,6 +6,7 @@ let users = [];
 let selected_options = [] //asigned contacts
 let selected_category;
 let selected_priority;
+let priority_img_path;
 let selected_subtasks = []
 let loggedInUser;
 // let id = 0;
@@ -19,10 +20,10 @@ async function init() {
     await downloadFromServer();
     users = JSON.parse(backend.getItem('users')) || [];
 
-    let loggedInUserAsText = JSON.stringify(users);
-    localStorage.setItem("users", loggedInUserAsText);
+    // let loggedInUserAsText = JSON.stringify(users);
+    // localStorage.setItem("users", loggedInUserAsText);
 
-    console.log(users)
+    // console.log(users)
     loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"))
     
     for (let i = 0; i < users.length; i++) {

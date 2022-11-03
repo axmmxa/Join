@@ -187,11 +187,13 @@ function renderSmallEditTask() {
 }
 
 function showTaskInfo(id_task) {
+    let assignedPersonal = document.querySelector(".assigned-personal")
     for (let i = 0; i < users.length; i++) {
         const currentUser = users[i];            
         if (currentUser.email == loggedInUser.email) {
             for (let j = 0; j < currentUser.tasks.length; j++) {
                 let userTaskId = currentUser.tasks[j]
+ 
                 if (userTaskId.id_task == id_task) {
                     document.querySelector("body").innerHTML += 
                     `
@@ -213,7 +215,7 @@ function showTaskInfo(id_task) {
                                 </div>
                 
                                 <div class="board-task-info-priority margin">
-                                    <b>Priority:</b> <span class="task-info-priority margin-left"><img src="${userTaskId.priority}"></span>
+                                    <b>Priority:</b> <span class="task-info-priority margin-left">${userTaskId.priority}<img src="${userTaskId.priority_img_path}"></span>
                                 </div>
                 
                                 <b>Assigned To:</b>
@@ -227,9 +229,19 @@ function showTaskInfo(id_task) {
                             </div>
                     `
                 }
+
+                userTaskId.assignedContacts.forEach(contact => {
+                    assignedPersonal.innerHTML += 
+                    `<div>
+                        <span class="user-icon">${getUserIcon(contact)}</span>  
+                    </div>` 
+                })
             }
         }
     }
+
+    getCategoryColor()
+    getUserColor()
    
 }
 
