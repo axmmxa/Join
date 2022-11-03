@@ -87,6 +87,10 @@
     margin-top: 15px;
 }
 
+.assigned-to {
+    margin-top: 10px;
+}
+
 .priority-btn-container a {
     background-color: transparent;
     border: 2px solid rgba(0, 0, 0, 0.2);
@@ -177,6 +181,15 @@
     padding: 10px 15px;
     border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 8px;
+}
+
+
+
+.priority-btn-container a {
+    background-color: transparent;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 5px 10px;
 }
 
 .clear-btn:hover {

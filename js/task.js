@@ -1,4 +1,4 @@
-loadLoggedInUser()
+// loadLoggedInUser()
 let id = 0 
 
 

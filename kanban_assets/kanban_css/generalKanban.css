@@ -103,6 +103,12 @@
     margin: 15px;
 }
 
+.d-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .delete-btn {
     cursor: pointer;
     background-color: transparent;
