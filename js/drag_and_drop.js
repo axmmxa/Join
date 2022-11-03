@@ -2,7 +2,7 @@ let currentDraggedElement;
 
 
 function checkUserTasks() {
-    console.log(todos)
+
     for (let i = 0; i < users.length; i++) {
         const currentUser = users[i];
     
@@ -14,7 +14,7 @@ function checkUserTasks() {
 
 
 function updateHTML() {
-    console.log('todos', todos)
+ 
     console.log("updateHTML function")
     // getUserDataLocalstorage()
     // loadLoggedInUser()

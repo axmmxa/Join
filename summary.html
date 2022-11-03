@@ -14,6 +14,8 @@
 
     <script src="js/mini_backend.js"></script>
     <script src="js/load.js" defer></script>
+    <script src="js/drag_and_drop.js" defer></script>
+    <script src="js/summary.js" defer></script>
     <script src="js/render.js" defer></script>
     <script src="js/logout.js" defer></script>
     
@@ -99,7 +101,7 @@
                                 <div class="img-count-container">
                                     <div class="task-to-do">
                                         <img class="summary-img" src="kanban_img/summary-icons/Board.png">
-                                        <span class="summary-count-black">1</span>
+                                        <span id="task-amount-todo" class="summary-count-black">00</span>
                                     </div>
                                 </div>
 
@@ -119,7 +121,7 @@
                                 <div>
                                     <div class="task-to-do">
                                         <img class="summary-img" src="kanban_img/summary-icons/Board.png">
-                                        <span class="summary-count-black">5</span>
+                                        <span id="task-amount-in-board" class="summary-count-black">00</span>
                                     </div>
                                 </div>
 
@@ -134,7 +136,7 @@
                                 <div>
                                     <div class="task-to-do">
                                         <img class="summary-img" src="kanban_img/summary-icons/In Progress.png">
-                                        <span class="summary-count-black">5</span>
+                                        <span id="task-amount-in-progress" class="summary-count-black">00</span>
                                     </div>
                                 </div>
 
@@ -149,7 +151,7 @@
                                 <div>
                                     <div class="task-to-do">
                                         <img class="summary-img" src="kanban_img/summary-icons/Awaiting feedback.png">
-                                        <span class="summary-count-black">5</span>
+                                        <span id="task-amount-await-feedback" class="summary-count-black">00</span>
                                     </div>
                                 </div>
 
@@ -164,7 +166,7 @@
                                 <div>
                                     <div class="task-to-do">
                                         <img class="summary-img" src="kanban_img/summary-icons/Done.png" alt="">
-                                        <span class="summary-count-black">1</span>
+                                        <span id="task-amount-done" class="summary-count-black">00</span>
                                     </div>
                                 </div>
 

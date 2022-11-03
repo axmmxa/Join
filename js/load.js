@@ -1,5 +1,10 @@
 setURL('https://gruppe-319.developerakademie.net/smallest_backend_ever')
 
+let amount_to_do = 0;
+let amount_in_progress = 0;
+let amount_await_feedback = 0;
+let amount_done = 0;
+
 let todos = []
 let users = [];
 // let tasks = [];
@@ -42,10 +47,13 @@ async function init() {
     renderContactBook()
   } if (document.getElementById("summary-body")) {
     loadLoggedInUser()
+    updateSummary()
   }
   
 }
  
+
+
 async function deleteUsers() {
   await backend.deleteItem('users');
 }

@@ -108,46 +108,6 @@ function closeSmallEditTask() {
 
 }
 
-function setPrioritySmallEditTask(id) {
-
-    let priorities = document.querySelectorAll('.priority')
-    
-    for (let index = 0; index < priorities.length; index++) {
-      const priority = priorities[index];
-      priority.style.color = 'black'
-      priority.style.backgroundColor = 'white'
-      if(document.getElementById('urgent-btn')) {
-        document.getElementById('urgent-btn-priority-img').setAttribute('src', 'kanban_img/priority_icons/urgent-red.png')
-      } if (document.getElementById('medium-btn')) {
-        document.getElementById('medium-btn-priority-img').setAttribute('src', 'kanban_img/priority_icons/middle-urgent-orange.png')
-      } if(document.getElementById('non-urgent-btn')){
-        document.getElementById('non-urgent-btn-priority-img').setAttribute('src', 'kanban_img/priority_icons/non-urgent-green.png')
-      }
-    }
-    
-    if(id == 'urgent-btn') {
-      document.getElementById(id).style.backgroundColor = 'red'
-      document.getElementById('urgent-btn-priority-img').setAttribute('src', 'kanban_img/priority_icons/urgent_white.png')
-      document.getElementById(id).style.color = 'white'
-      priority_img_path =  'kanban_img/priority_icons/urgent-red.png'
-      selected_priority = "Urgent"
-    } else if(id == "medium-btn") {
-      document.getElementById(id).style.backgroundColor = 'orange'
-      document.getElementById('medium-btn-priority-img').setAttribute('src', 'kanban_img/priority_icons/medium_urgent_white.png')
-      document.getElementById(id).style.color = 'white'
-      priority_img_path = 'kanban_img/priority_icons/middle-urgent-orange.png'
-      selected_priority = "Medium"
-    } else if( id == 'non-urgent-btn') {
-      document.getElementById(id).style.backgroundColor = 'lightgreen'
-      document.getElementById('non-urgent-btn-priority-img').setAttribute('src', 'kanban_img/priority_icons/non_urgent_white.png')
-      document.getElementById(id).style.color = 'white'
-      priority_img_path = 'kanban_img/priority_icons/non-urgent-green.png'
-      selected_priority = "Low"
-    }
-      
-   }
-
-
    function setPrioritySmallEditTask(id) {
 
     let priorities = document.querySelectorAll('.priority')
@@ -198,7 +158,6 @@ function renderSmallEditTask() {
         document.querySelector(".kanban-main").style.opacity = 0.5
 
         document.querySelector("body").innerHTML +=
-
 
         `
     <div id="edit-task" class="edit-task">  
@@ -388,7 +347,7 @@ function renderSmallAddTask() {
         </div>
 
         <div class="small-add-task-container">
-             <h2>Add Task</h2> <button class="create-btn">Create Task <img class="white-clear" src="kanban_img/clear_icons/white_clear.png"></button>
+             <h2>Add Task</h2> <button onclick="saveTask()" class="create-btn">Create Task <img class="white-clear" src="kanban_img/clear_icons/white_clear.png"></button>
         </div>
 
         <form class="task-form">
@@ -442,9 +401,9 @@ function renderSmallAddTask() {
             </div>
 
             <div class="priority-btn-container">
-                <button class="urgent-btn">Urgent <img class="priority-urgent-img" src="kanban_img/priority_icons/urgent-red.png"></button>
-                <button class="medium-btn">Medium <img  class="priority-urgent-img" src="kanban_img/priority_icons/middle-urgent-orange.png"></button>
-                <button class="non-urgent-btn">Low <img class="priority-urgent-img" src="kanban_img/priority_icons/non-urgent-green.png"></button>
+                <a onclick="setPrioritySmallEditTask('urgent-btn')" id="urgent-btn" class="urgent-btn priority">Urgent <img class="priority-urgent-img" id="urgent-btn-priority-img" src="kanban_img/priority_icons/urgent-red.png"></a>
+                <a onclick="setPrioritySmallEditTask('medium-btn')" id="medium-btn" class="medium-btn priority">Medium <img  class="priority-urgent-img" id="medium-urgent-btn-priority-img" src="kanban_img/priority_icons/middle-urgent-orange.png"></a>
+                <a onclick="setPrioritySmallEditTask('non-urgent-btn')" id="non-urgent-btn" class="non-urgent-btn priority">Low <img class="priority-urgent-img" id="non-urgent-btn-priority-img" src="kanban_img/priority_icons/non-urgent-green.png"></a>
             </div>
             <div class="description-container">
                 <span>Description</span>
