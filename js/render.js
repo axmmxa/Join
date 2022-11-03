@@ -119,7 +119,8 @@ function renderSmallEditTask() {
         document.querySelector(".kanban-navbar").style.opacity = 0.5
         document.querySelector(".kanban-main").style.opacity = 0.5
 
-        document.querySelector("#small-board-task-info").innerHTML =
+        document.querySelector("body").innerHTML +=
+
 
         `
     <div id="edit-task" class="edit-task">  
@@ -187,7 +188,7 @@ function renderSmallEditTask() {
 }
 
 function showTaskInfo(id_task) {
-    let assignedPersonal = document.querySelector(".assigned-personal")
+    
     for (let i = 0; i < users.length; i++) {
         const currentUser = users[i];            
         if (currentUser.email == loggedInUser.email) {
@@ -197,7 +198,8 @@ function showTaskInfo(id_task) {
                 if (userTaskId.id_task == id_task) {
                     document.querySelector("body").innerHTML += 
                     `
-                    <div id="small-board-task-info-${i}" class="small-board-task-info">
+                    
+                    <div id="small-board-task-info-${id_task}" class="small-board-task-info">
                                 <div class="close-btn-container-task-info">
                                     <span onclick="closeBoardTaskInfo()" class="close-x-right-side">X</span>
                                 </div>
@@ -228,17 +230,32 @@ function showTaskInfo(id_task) {
                                 </div>
                             </div>
                     `
+
+                    let assignedPersonal = document.querySelectorAll(".assigned-personal")
+
+                    for (let index = 0; index < assignedPersonal.length; index++) {
+                        const element = assignedPersonal[index];
+                        if(userTaskId.id_task == index){
+                            userTaskId.assignedContacts.forEach(contact => {
+                                console.log(element)
+                                element.innerHTML += 
+                                `<div>
+                                    <span class="user-icon">${getUserIcon(contact)}</span>  
+                                </div>` 
+                            })
+                        }
+                    }
+                    
+
                 }
 
-                userTaskId.assignedContacts.forEach(contact => {
-                    assignedPersonal.innerHTML += 
-                    `<div>
-                        <span class="user-icon">${getUserIcon(contact)}</span>  
-                    </div>` 
-                })
+                
             }
         }
+
     }
+
+
 
     getCategoryColor()
     getUserColor()
@@ -257,13 +274,13 @@ function closeBoardTaskInfo() {
 
 function renderBoardTaskInfo(id_task) {
 
-    if(document.getElementById("small-board-task-info")) {
-        document.getElementById("small-board-task-info").classList.remove("d-none")
+    if(document.getElementById(`small-board-task-info-${id_task}`)) {
+        document.getElementById(`small-board-task-info-${id_task}`).classList.remove("d-none")
 
         document.querySelector(".kanban-navbar").style.opacity = 0.5
         document.querySelector(".kanban-main").style.opacity = 0.5
 
-        showTaskInfo(id_task)
+        //showTaskInfo(id_task)
     } else {
         showTaskInfo(id_task)
         
