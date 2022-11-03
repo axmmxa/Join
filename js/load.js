@@ -1,5 +1,6 @@
 setURL('https://gruppe-319.developerakademie.net/smallest_backend_ever')
 
+let amount_task_urgent = 0;
 let amount_to_do = 0;
 let amount_in_progress = 0;
 let amount_await_feedback = 0;

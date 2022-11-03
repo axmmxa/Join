@@ -18,7 +18,11 @@ function updateSummary() {
                 if (task.status == "done") {
                     amount_done++;
                 }
+                if (task.priority == "Urgent") {
+                    amount_task_urgent++
+                }
 
+                document.getElementById("task-amount-urgent").innerHTML = amount_task_urgent
                 document.getElementById("task-amount-todo").innerHTML = amount_to_do
                 document.getElementById("task-amount-in-progress").innerHTML = amount_in_progress
                 document.getElementById("task-amount-await-feedback").innerHTML = amount_await_feedback
