@@ -60,7 +60,8 @@ async function saveTask()  {
         'description': description,
         'subtask': selected_subtasks,
         'id_task': id,
-        'status':'todo'
+        'status':'todo',
+        
     }
   
     console.log(task.id)

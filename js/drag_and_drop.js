@@ -136,11 +136,6 @@ function updateHTML() {
     saveUsersArray()
 }
 
-async function saveUsersArray() {
-    await backend.setItem('users', JSON.stringify(users));
-}
-
-
 function generateTodoHTML(element) {
     // ${JSON.stringify(element).split('"').join("&quot;")}
     return `

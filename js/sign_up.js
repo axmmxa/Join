@@ -7,8 +7,9 @@ function signUp()  {
         'name': name,
         'email': email,
         'password': password,
-        "tasks" : [],
-        "contacts" : []
+        'tasks' : [],
+        'contacts' : [],
+        'user-background-color': ""
     }
     addUser(user)  
   }

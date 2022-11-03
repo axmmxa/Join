@@ -1,10 +1,11 @@
+
 function updateSummary() {
     for (let i = 0; i < users.length; i++) {
         const currentUser = users[i];
   
         if(currentUser.email == loggedInUser.email) {
             document.getElementById("task-amount-in-board").innerHTML = currentUser.tasks.length
-
+  
             currentUser.tasks.forEach(task => {
                 if (task.status == "todo") {
                     amount_to_do++;
@@ -21,13 +22,13 @@ function updateSummary() {
                 if (task.priority == "Urgent") {
                     amount_task_urgent++
                 }
+            });
 
-                document.getElementById("task-amount-urgent").innerHTML = amount_task_urgent
+            document.getElementById("task-amount-urgent").innerHTML = amount_task_urgent
                 document.getElementById("task-amount-todo").innerHTML = amount_to_do
                 document.getElementById("task-amount-in-progress").innerHTML = amount_in_progress
                 document.getElementById("task-amount-await-feedback").innerHTML = amount_await_feedback
                 document.getElementById("task-amount-done").innerHTML = amount_done
-            });
         }    
     } 
   }

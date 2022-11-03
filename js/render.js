@@ -235,6 +235,8 @@ function showTaskInfo(id_task) {
                 let userTaskId = currentUser.tasks[j]
  
                 if (userTaskId.id_task == id_task) {
+
+
                     document.querySelector("body").innerHTML += 
                     `
                     
@@ -444,17 +446,17 @@ function renderContactInformation(email) {
     document.querySelector("#contact-information").innerHTML = 
     `
                 <div class="contact-information-upper-part">
-                    <img src="img/form_logo/anonym_profile_picture.png" class="anonymous-profile-picture">
+                    <img src="kanaban_img/user_icons/anonym_profile_picture.png" class="anonymous-profile-picture">
                     <div class="contact-information-name-container">
                         <h1 class="contact-information-name">${contact_names[i]}</h1>
-                        <div onclick="renderSmallAddTask()" class="contact-information-add-task-container"><img src="img/kanban_logo/plus_blue.png"> <span class="light-blue-text">Add Task</span></div>
+                        <div onclick="renderSmallAddTask()" class="contact-information-add-task-container"><img src="kanban_img/plus_icons/plus_blue.png"> <span class="light-blue-text">Add Task</span></div>
                     </div>
                 </div>
 
                 <div class="contact-information-lower-part">
                     <div class="contact-information-edit">
                         <h3 class="contact-information-headline">Contact Information</h3>
-                        <div onclick="renderSmallEditContacts()" class="contact-information-edit-container"><img src="img/kanban_logo/edit_pen.png"> <span>Edit Contact</span></div>
+                        <div onclick="renderSmallEditContacts()" class="contact-information-edit-container"><img src="kanban_img/edit_icons/edit_pen_blue.png"> <span>Edit Contact</span></div>
                     </div>
 
                     <div class="contact-information-email-container">
@@ -520,8 +522,8 @@ function renderSavedContacts() {
         document.querySelector(`.contacts-${first_letter}-data`).innerHTML += 
         `
         <div onclick="renderContactInformation('${contact.contact_email}')" class="contact-info">
-        <div>
-            <img class="contact-img" src="kanban_img/user_icons/user_example.png">
+        <div class="user-icon-background-color-container">
+            <div class="user-icon">${getUserIcon(contact.contact_name)}</div>
         </div>
         <div class="contact-data">
             <h3 id="${contact.contact_name}-name" class="contact-name">${contact.contact_name}</h3>
@@ -533,6 +535,8 @@ function renderSavedContacts() {
               }
         }
     }
+
+    getUserColor()
 }
 
 
@@ -548,14 +552,16 @@ async function addContactToBook() {
     let contact = {
         "contact_name": small_add_contacts_name,
         "contact_email": small_add_contacts_email,
-        "contact_phone": small_add_contacts_phone
+        "contact_phone": small_add_contacts_phone,
     }
-    
+
+   
     for (let i = 0; i < users.length; i++) {
         const currentUser = users[i];
   
         if(currentUser.email == loggedInUser.email){
               currentUser.contacts.push(contact)
+            //   getUserColor()
         }
     }
 
@@ -577,5 +583,20 @@ async function addContactToBook() {
     </div>
         `
         getUserColor()
+
+        loadContactBackgroundColor()
+        
+    }
+
     
-}
+    function loadContactBackgroundColor() {
+        for (let i = 0; i < users.length; i++) {
+            const currentUser = users[i];
+            if (currentUser.email == loggedInUser.email) {
+                for (let j = 0; j < currentUser.contacts.length; j++) {
+                    const currentContact = currentUser.contacts[j];
+                    document.querySelectorAll(".user-icon")[j].classList.add(currentContact["contact-background-color"])
+                }
+            }
+        }
+    }

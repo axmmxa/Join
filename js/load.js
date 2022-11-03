@@ -26,16 +26,19 @@ async function init() {
     await downloadFromServer();
     users = JSON.parse(backend.getItem('users')) || [];
 
-    // let loggedInUserAsText = JSON.stringify(users);
-    // localStorage.setItem("users", loggedInUserAsText);
-
-    // console.log(users)
     loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"))
     
     for (let i = 0; i < users.length; i++) {
       const currentUser = users[i];
 
       if(currentUser.email == loggedInUser.email){
+        
+        document.querySelector(".user-logout-icon-container").innerHTML = `<div onclick="toggleLogoutBox()" class="user-logout-icon">${getUserIcon(currentUser.name)}</div>`
+        
+          getUserColor()
+
+          document.querySelector(".user-logout-icon").classList.add(currentUser["user-background-color"])
+       
           for (let j = 0; j < currentUser.tasks.length; j++) {
             todos.push(currentUser.tasks[j])
           }
@@ -46,6 +49,7 @@ async function init() {
     updateHTML()
   } if (document.getElementById("contacts-body")) {
     renderContactBook()
+    loadContactBackgroundColor()
   } if (document.getElementById("summary-body")) {
     loadLoggedInUser()
     updateSummary()
@@ -53,7 +57,9 @@ async function init() {
   
 }
  
-
+async function saveUsersArray() {
+  await backend.setItem('users', JSON.stringify(users));
+}
 
 async function deleteUsers() {
   await backend.deleteItem('users');
@@ -95,13 +101,31 @@ function getCategoryColor() {
 }
 
 function getUserColor() {
-  let user_icons = document.querySelectorAll(".user-icon")
-  user_icons.forEach(user_icon => {
     let user_color = ["orange","red","pink","lightblue","purple","green","darkred","darkpurple"]
-    let random_color = user_color[Math.floor(Math.random() * 7)]
-    user_icon.classList.add(random_color)
-  })
-}
+   
+        for (let i = 0; i < users.length; i++) {
+          const currentUser = users[i];
+          if(currentUser.email == loggedInUser.email && currentUser["contact-background-color"] == "") {
+              for (let j = 0; j < currentUser.contacts.length; j++) {
+                const currentContact = currentUser.contacts[j];
+                let random_color_1 = user_color[Math.floor(Math.random() * 7)]
+                currentContact["contact-background-color"] = random_color_1
+                saveUsersArray()
+              }
+            
+          }
+      
+      for (let i = 0; i < users.length; i++) {
+        const currentUser = users[i];
+        if(currentUser.email == loggedInUser.email && currentUser["user-background-color"] == ""){
+          let random_color_2 = user_color[Math.floor(Math.random() * 7)]
+          currentUser["user-background-color"] = random_color_2
+          saveUsersArray()
+      }
+    }     
+  }
+}  
+
 
 function getUserIcon(contact) {
   let names = contact.split(" ");
@@ -110,8 +134,6 @@ function getUserIcon(contact) {
 
   return `${firstLetterFirstName + firstLetterlastName}`
 }
-
-
 
 
 
