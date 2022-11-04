@@ -233,7 +233,7 @@ function showTaskInfo(id_task) {
         if (currentUser.email == loggedInUser.email) {
             for (let j = 0; j < currentUser.tasks.length; j++) {
                 let userTaskId = currentUser.tasks[j]
- 
+            
                 if (userTaskId.id_task == id_task) {
 
 
@@ -277,17 +277,51 @@ function showTaskInfo(id_task) {
                             userTaskId.assignedContacts.forEach(contact => {
                                 assignedPersonal.innerHTML += 
                                 `<div class="d-flex">
-                                    <span class="user-icon">${getUserIcon(contact)} </span>
+                                    <span class="user-icon-task-info">${getUserIcon(contact)} </span>
                                     <span>${contact}</span> 
                                 </div>` 
+
+                                for (let i = 0; i < users.length; i++) {
+                                    const currentUser = users[i];
+                                    
+                                    for (let j = 0; j < currentUser.tasks.length; j++) {
+                                        const currentNameFromTask = currentUser.tasks[j].assignedContacts[j];
+                                        const currentContact = currentUser.contacts[j]
+                                        if (document.querySelector(".user-icon-task-info") && currentNameFromTask == contact) {
+                                            document.querySelectorAll(".user-icon-task-info").forEach(user_icon_task_info => {
+                                                user_icon_task_info.classList.add(currentContact["contact-background-color"])
+                                            })
+                                        }
+                                    }
+                                }
                             })
                         }
                     }
                 }
             }
-
+        
     getCategoryColor()
-    getUserColor()
+    // loadContactBackgroundColor()
+    
+    // for (let i = 0; i < users.length; i++) {
+    //     const currentUser = users[i];
+        
+    //     for (let j = 0; j < currentUser.contacts.length; j++) {
+    //         const currentContact = currentUser.contacts[j];
+
+    //         for (let k = 0; k < currentUser.tasks.length; k++) {
+    //             let currentNameFromTask = currentUser.tasks[k].assignedContacts[k]
+
+    //             if (currentContact.contact_name == currentNameFromTask) {
+    //                 document.querySelectorAll(".user-icon")[j].classList.add(currentContact["contact-background-color"])
+    //             }
+    //         }
+            
+    //     }    
+        
+    // }
+   
+    
    
 }
 
@@ -474,14 +508,11 @@ function renderSmallAddTask() {
 
                 </div>
         `
-        }
-       
+        }  
     }
 
     await downloadFromServer();
     users = JSON.parse(backend.getItem('users')) || [];
-
-    
 
     for (let i = 0; i < users.length; i++) {
         const currentUser = users[i];
@@ -498,9 +529,8 @@ function renderSmallAddTask() {
                     
                 }
             }
-            
-        }
-        
+   
+        }   
     }
 
 }
@@ -581,7 +611,8 @@ async function addContactToBook() {
         "contact_name": small_add_contacts_name,
         "contact_email": small_add_contacts_email,
         "contact_phone": small_add_contacts_phone,
-    }
+        "contact-background-color": ""
+        }
 
    
     for (let i = 0; i < users.length; i++) {

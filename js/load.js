@@ -47,6 +47,7 @@ async function init() {
 
   if (document.getElementById("board-body")) {
     updateHTML()
+    loadContactBackgroundColor()
   } if (document.getElementById("contacts-body")) {
     renderContactBook()
     loadContactBackgroundColor()
@@ -138,7 +139,9 @@ async function loadContactBackgroundColor() {
       if (currentUser.email == loggedInUser.email) {
           for (let j = 0; j < currentUser.contacts.length; j++) {
               const currentContact = currentUser.contacts[j];
-              document.querySelectorAll(".user-icon")[j].classList.add(currentContact["contact-background-color"])
+              document.querySelectorAll(".user-icon").forEach(user_icon => {
+                user_icon.classList.add(currentContact["contact-background-color"])
+              })
           }
       }
   }

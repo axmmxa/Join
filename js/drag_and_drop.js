@@ -41,7 +41,7 @@ function updateHTML() {
         element.assignedContacts.forEach(contact => {
             assignedContacts.innerHTML += 
             `<div>
-                <span class="user-icon">${getUserIcon(contact)}</span>  
+                <span id="${contact}" class="user-icon">${getUserIcon(contact)}</span>  
             </div>` 
         });
         

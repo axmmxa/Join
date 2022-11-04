@@ -236,6 +236,17 @@
     border-radius: 50%;
 }
 
+.user-icon-task-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 45px;
+    height: 38px;
+    letter-spacing: 2px;
+    color: white;
+    border-radius: 50%;
+}
+
 .user-tasks {
     display: flex;
     align-items: center;
