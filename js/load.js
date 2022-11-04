@@ -105,15 +105,17 @@ function getUserColor() {
    
         for (let i = 0; i < users.length; i++) {
           const currentUser = users[i];
-          if(currentUser.email == loggedInUser.email && currentUser["contact-background-color"] == "") {
+          if(currentUser.email == loggedInUser.email) {
               for (let j = 0; j < currentUser.contacts.length; j++) {
                 const currentContact = currentUser.contacts[j];
-                let random_color_1 = user_color[Math.floor(Math.random() * 7)]
-                currentContact["contact-background-color"] = random_color_1
-                saveUsersArray()
+                if (currentContact["contact-background-color"] == "") {
+                  let random_color_1 = user_color[Math.floor(Math.random() * 7)]
+                  currentContact["contact-background-color"] = random_color_1
+                  saveUsersArray()
+                }
               }
-            
           }
+        }
       
       for (let i = 0; i < users.length; i++) {
         const currentUser = users[i];
@@ -123,8 +125,24 @@ function getUserColor() {
           saveUsersArray()
       }
     }     
-  }
+  
 }  
+
+
+async function loadContactBackgroundColor() {
+  await downloadFromServer();
+  users = JSON.parse(backend.getItem('users')) || [];
+
+  for (let i = 0; i < users.length; i++) {
+      const currentUser = users[i];
+      if (currentUser.email == loggedInUser.email) {
+          for (let j = 0; j < currentUser.contacts.length; j++) {
+              const currentContact = currentUser.contacts[j];
+              document.querySelectorAll(".user-icon")[j].classList.add(currentContact["contact-background-color"])
+          }
+      }
+  }
+}
 
 
 function getUserIcon(contact) {

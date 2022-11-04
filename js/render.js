@@ -22,13 +22,13 @@ function renderSmallContacts() {
             <span onclick="closeSmallContacts()" class="arrow white-text">X</span>
         </div>
         <div class="upper-part-small-contacts light-blue">
-            <img class="logo-height" src="img/form_logo/logo_white.png">
+            <img class="logo-height" src="kanban_img/login_icons/join_blue.png">
             <h1 class="white-text">Add Contact</h1>
             <span class="white-text">Tasks are better in a team</span>
         </div>
 
         <div class="lower-part-small-contacts">
-            <img class="anonymous-profile-picture" src="img/form_logo/anonym_profile_picture.png">
+            <img class="anonymous-profile-picture" src="kanban_img/user_icons/anonym_profile_picture.png">
 
             <div class="small-contacts-add-data">
                 <div class="login-data">
@@ -39,7 +39,7 @@ function renderSmallContacts() {
 
                 <div class="small-contacts-btn-container">
                     <button onclick="" class="delete-btn">Cancel <span class="close-x">X</span></button>
-                    <button onclick="addContactToBook()" class="create-btn">Create Contact <img class="white-clear" src="img/kanban_logo/white_clear_btn.png"></button>
+                    <button onclick="addContactToBook()" class="create-btn">Create Contact <img class="white-clear" src="kanban_img/clear_icons/white_clear.png"></button>
                 </div>
             </div>
         </div>
@@ -74,12 +74,12 @@ function renderSmallEditContacts() {
             <span onclick="closeSmallEditContacts()" class="arrow white-text">X</span>
         </div>
         <div class="upper-part-small-contacts blue">
-            <img class="logo-height" src="img/form_logo/logo_white.png">
+            <img class="logo-height" src="kanban_img/login_icons/join_white.png">
             <h1 class="white-text">Edit Contact</h1>
         </div>
 
         <div class="lower-part-small-contacts">
-            <img class="anonymous-profile-picture" src="img/form_logo/anonym_profile_picture.png">
+            <img class="anonymous-profile-picture" src="kanban_img/">
 
             <form class="small-contacts-add-data">
                 <div class="login-data">
@@ -589,14 +589,3 @@ async function addContactToBook() {
     }
 
     
-    function loadContactBackgroundColor() {
-        for (let i = 0; i < users.length; i++) {
-            const currentUser = users[i];
-            if (currentUser.email == loggedInUser.email) {
-                for (let j = 0; j < currentUser.contacts.length; j++) {
-                    const currentContact = currentUser.contacts[j];
-                    document.querySelectorAll(".user-icon")[j].classList.add(currentContact["contact-background-color"])
-                }
-            }
-        }
-    }
