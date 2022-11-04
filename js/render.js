@@ -437,16 +437,19 @@ function renderSmallAddTask() {
     }
 }
 
-function renderContactInformation(email) {
+ async function renderContactInformation(email) {
     let index = contact_emails.indexOf(email)
 
+   // getUserColor()
+   
     for (let i = 0; i < contact_names.length; i++) {
+
         if (i == index) {
              
     document.querySelector("#contact-information").innerHTML = 
     `
                 <div class="contact-information-upper-part">
-                    <img src="kanaban_img/user_icons/anonym_profile_picture.png" class="anonymous-profile-picture">
+                    <div class="user-icon">${getUserIcon(contact_names[i])}</div>
                     <div class="contact-information-name-container">
                         <h1 class="contact-information-name">${contact_names[i]}</h1>
                         <div onclick="renderSmallAddTask()" class="contact-information-add-task-container"><img src="kanban_img/plus_icons/plus_blue.png"> <span class="light-blue-text">Add Task</span></div>
@@ -472,9 +475,34 @@ function renderContactInformation(email) {
                 </div>
         `
         }
+       
+    }
+
+    await downloadFromServer();
+    users = JSON.parse(backend.getItem('users')) || [];
+
+    
+
+    for (let i = 0; i < users.length; i++) {
+        const currentUser = users[i];
+        for (let j = 0; j < currentUser.contacts.length; j++) {
+            
+            if (currentUser.contacts[j].contact_name == contact_names[j]) {
+                for (let j = 0; j < currentUser.contacts.length; j++) {
+                    const currentContact = currentUser.contacts[j];
+                    console.log("current contact", currentContact)
+                    if( currentContact.contact_email == email) {
+                       let correctColor = currentContact["contact-background-color"]
+                       document.querySelectorAll(".user-icon")[currentUser.contacts.length].classList.add(correctColor)
+                    }
+                    
+                }
+            }
+            
+        }
         
     }
-   
+
 }
 
 
