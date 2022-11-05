@@ -7,6 +7,7 @@
 }
 
  .small-board-task-info {
+    width: 250px;
     background-color: white;
     position: absolute;
     top: 20vh;
@@ -16,7 +17,20 @@
     padding: 5px;
 } 
 
+.board-task-info-text h1 {
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+
+.board-task-info-priority {
+    display: flex;
+    align-items: center;
+}
+
 .task-info-priority {
+    display: flex;
+    align-items: center;
     background-color: transparent;
     border: 2px solid rgba(0, 0, 0, 0.2);
     border-radius: 8px;
@@ -54,4 +68,17 @@
     border: 2px solid rgba(0, 0, 0, 0.2);
     border-radius: 8px;
     padding: 5px 10px;
+}
+
+.first-select-option-task-info-container {
+    cursor: pointer;
+    width: 95%;
+    border: none;
+    border-bottom: 1px solid gray;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    margin-top: 20px;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
 }

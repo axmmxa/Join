@@ -147,7 +147,7 @@ function closeSmallEditTask() {
       
    }
 
-function renderSmallEditTask() {
+function renderSmallEditTask(id_task) {
     if (document.querySelector(".edit-task")) {
         document.querySelector(".edit-task").classList.remove("d-none")
 
@@ -165,8 +165,8 @@ function renderSmallEditTask() {
         <div class="align-right"> 
             <span onclick="closeSmallEditTask()" class="close-x-right-side">X</span>  
         </div>
-        <form class="task-form">
-            <input class="input-title" type="text" placeholder="Enter a title">
+        <form onsubmit="saveEditedTask(${id_task}); return false" class="task-form">
+            <input id="input-title" class="input-title" type="text" placeholder="Enter a title">
 
             <div class="description-container">
             <span>Description</span>
@@ -199,10 +199,10 @@ function renderSmallEditTask() {
             </div>
 
             <div class="custom-select" id="contacts">
-                <div onclick="showCustomSelectOptions(0)" class="first-select-option-container">
+                <div onclick="showCustomSelectOptionsTaskInfo()" class="first-select-option-container">
                     <span id="first-select-contacts" class="first-select-option">Select contacts to assign</span>
                 </div>
-                <div class="custom-select-options-container d-none" >
+                <div class="custom-select-options-task-info-container d-none" >
                     <label class="custom-select-option">You <input onclick="returnSelectedContacts(this)" value="You" class="selected-option" type="checkbox"></label>
                     <label class="custom-select-option"> Maximilian Vogel <input onclick="returnSelectedContacts(this)" value="Maximilian Vogel" class="selected-option" type="checkbox"></label>   
                 </div>
@@ -211,7 +211,7 @@ function renderSmallEditTask() {
             </div>
 
             <div class="margin align-right">
-                <button class="create-btn">Ok <img class="white-clear" src="img/kanban_logo/white_clear_btn.png"/></button>
+                <button class="create-btn">Ok <img class="white-clear" src="kanban_img/clear_icons/white_clear.png"/></button>
             </div>
 
         </form>
@@ -220,8 +220,6 @@ function renderSmallEditTask() {
     </div>
 
     `
-
-  
     }
     
 }
@@ -258,7 +256,7 @@ function showTaskInfo(id_task) {
                                 </div>
                 
                                 <div class="board-task-info-priority margin">
-                                    <b>Priority:</b> <span class="task-info-priority margin-left">${userTaskId.priority}<img src="${userTaskId.priority_img_path}"></span>
+                                    <b>Priority:</b> <span class="task-info-priority margin-left">${userTaskId.priority}<img class="margin-left" src="${userTaskId.priority_img_path}"></span>
                                 </div>
                 
                                 <b>Assigned To:</b>
@@ -267,7 +265,7 @@ function showTaskInfo(id_task) {
                                 </div>
                 
                                 <div class="board-task-edit-btn-container">
-                                    <button onclick="renderSmallEditTask()" class="edit-btn light-blue"><img class="edit-pen-height" src="kanban_img/edit_icons/edit_pen_white.png"></button>
+                                    <button onclick="renderSmallEditTask(${id_task})" class="edit-btn light-blue"><img class="edit-pen-height" src="kanban_img/edit_icons/edit_pen_white.png"></button>
                                 </div>
                             </div>
                     `
@@ -277,7 +275,7 @@ function showTaskInfo(id_task) {
                             userTaskId.assignedContacts.forEach(contact => {
                                 assignedPersonal.innerHTML += 
                                 `<div class="d-flex">
-                                    <span class="user-icon-task-info">${getUserIcon(contact)} </span>
+                                    <span class="user-icon-task-info">${getUserIcon(contact)}</span>
                                     <span>${contact}</span> 
                                 </div>` 
 
@@ -301,28 +299,7 @@ function showTaskInfo(id_task) {
             }
         
     getCategoryColor()
-    // loadContactBackgroundColor()
     
-    // for (let i = 0; i < users.length; i++) {
-    //     const currentUser = users[i];
-        
-    //     for (let j = 0; j < currentUser.contacts.length; j++) {
-    //         const currentContact = currentUser.contacts[j];
-
-    //         for (let k = 0; k < currentUser.tasks.length; k++) {
-    //             let currentNameFromTask = currentUser.tasks[k].assignedContacts[k]
-
-    //             if (currentContact.contact_name == currentNameFromTask) {
-    //                 document.querySelectorAll(".user-icon")[j].classList.add(currentContact["contact-background-color"])
-    //             }
-    //         }
-            
-    //     }    
-        
-    // }
-   
-    
-   
 }
 
 function closeBoardTaskInfo() {

@@ -281,7 +281,7 @@ body {
 }
 
 .task-card-lower:hover {
-    background-color: blue;
+    background-color: #D2E3FF;
     transform: scale(1.05);
 }
 

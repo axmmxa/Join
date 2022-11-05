@@ -1,6 +1,4 @@
-// loadLoggedInUser()
 let id = 0 
-
 
 function returnSelectedContacts(el) {
   let first_select_contact = document.getElementById("first-select-contacts")
@@ -35,6 +33,32 @@ function returnSelectedSubtasks(el) {
     selected_subtasks.pop(el.value)
   }
   
+}
+
+async function saveEditedTask(id_task) {
+  
+    let title = document.getElementById('input-title').value
+    let due_date = document.getElementById('due-date').value
+    let description = document.getElementById('textarea').value
+    
+  for (let i = 0; i < users.length; i++) {
+    const currentUser = users[i];
+    
+    for (let j = 0; j < currentUser.tasks.length; j++) {
+      const currentTask = currentUser.tasks[j];
+      if (id_task == currentTask.id_task) {
+        console.log(currentTask)
+        currentTask.title = title
+        currentTask.assignedContacts = selected_options
+        currentTask.due_date = due_date
+        currentTask.description = description
+        currentTask.priority = selected_priority
+        currentTask.priority_img_path = priority_img_path
+
+      }
+    }
+  }
+  updateHTML()
 }
 
 async function saveTask()  {

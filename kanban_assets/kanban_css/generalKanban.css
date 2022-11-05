@@ -76,10 +76,6 @@
     color: blue;
 }
 
-.d-flex {
-    display: flex;
-}
-
 .logo-height {
     height: 50px;
 }
@@ -104,8 +100,13 @@
 }
 
 .d-flex {
+    margin-top: 5px;
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+}
+
+.help-btn-container {
+    display: flex;
     align-items: center;
 }
 
@@ -226,6 +227,7 @@
 }
 
 .user-icon {
+    margin-right: 5px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -240,6 +242,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-right: 5px;
     width: 45px;
     height: 38px;
     letter-spacing: 2px;

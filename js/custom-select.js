@@ -1,13 +1,16 @@
 function showCustomSelectOptions(index) {
-    
   let selects =  document.querySelectorAll(".custom-select-options-container")
-
+  
   for (let i = 0; i < selects.length; i++) {
     if (i == index) {
         selects[i].classList.toggle("d-none")   
     }
   }
       
+}
+
+function showCustomSelectOptionsTaskInfo() {
+    document.querySelector(".custom-select-options-task-info-container").classList.toggle("d-none")
 }
 
 

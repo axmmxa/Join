@@ -24,3 +24,6 @@ document.querySelector(".task-card-upper").addEventListener("mouseover", () => {
 document.querySelector(".task-card-upper").addEventListener("mouseout", () => {
     document.querySelector(".summary-count-black").style.color = "black"
 })
+
+
+

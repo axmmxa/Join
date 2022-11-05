@@ -16,22 +16,23 @@
 
     <link rel="stylesheet" href="kanban_css/legal-notice.css">
 
-    <script src="js/render.js" defer></script>
-    <script src="js/mini_backend.js" defer></script>
-    <script src="js/login.js" defer></script>
+    <script src="../js/load.js" defer></script>
+    <script src="../js/render.js" defer></script>
+    <script src="../js/mini_backend.js"></script>
+    <script src="../js/login.js" defer></script>
     <script src="../js/logout.js" defer></script>
 
 </head>
 
-<body onload="init()">
+<body id="legal-notice-body" onload="init()">
     <nav class="kanban-navbar">
         <div class="inner-container">
             <img class="logo" src="../kanban_img/login_icons/join_white.png">
 
             <div class="info">
                 <p class="name">Kanban Project Management Tool</p>
-                <a href="../kanban_assets/help.html"><img class="help" src="../kanban_img/small_navbar_icons/help.png"></a>
-                <img onclick="toggleLogoutBox()" class="user-img" src="../kanban_img/user_icons/user_example.png">
+                <a class="help-btn-container" href="kanban_assets/help.html"><img class="help" src="../kanban_img/small_navbar_icons/help.png"></a>
+                <div class="user-logout-icon-container"></div>
             </div>
         </div>
 

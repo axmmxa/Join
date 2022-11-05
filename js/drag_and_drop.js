@@ -131,9 +131,9 @@ function updateHTML() {
     }
     
     getCategoryColor()
-    getUserColor()
+    loadContactBackgroundColor()
 
-    saveUsersArray()
+   
 }
 
 function generateTodoHTML(element) {
