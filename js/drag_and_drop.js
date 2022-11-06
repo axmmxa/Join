@@ -2,7 +2,6 @@ let currentDraggedElement;
 
 
 function checkUserTasks() {
-
     for (let i = 0; i < users.length; i++) {
         const currentUser = users[i];
     
@@ -19,7 +18,7 @@ function updateHTML() {
     // getUserDataLocalstorage()
     // loadLoggedInUser()
     let user_task_array = checkUserTasks()
-    
+   console.log(user_task_array) 
     //container with category todo
     let todo = user_task_array.filter(t => t['status'] == 'todo')
 
@@ -130,10 +129,18 @@ function updateHTML() {
        
     }
     
-    getCategoryColor()
-    loadContactBackgroundColor()
+    let correctCategory;
+    let correctId
 
-   
+    for (let i = 0; i < user_task_array.length; i++) {
+        const currentTask = user_task_array[i];
+        correctId =  currentTask.id_task
+        correctCategory = currentTask.category
+        getCategoryColor(correctCategory,correctId)
+    }
+        
+    loadBoardContactBackgroundColor()
+
 }
 
 function generateTodoHTML(element) {
@@ -169,7 +176,8 @@ function allowDrop(ev) {
 }
 
 function moveTo(status) {
-    todos[currentDraggedElement]['status'] = status // status will change
+    let user_task_array = checkUserTasks()
+    user_task_array[currentDraggedElement]['status'] = status // status will change
     updateHTML()
 }
 

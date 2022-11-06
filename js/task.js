@@ -54,7 +54,6 @@ async function saveEditedTask(id_task) {
         currentTask.description = description
         currentTask.priority = selected_priority
         currentTask.priority_img_path = priority_img_path
-
       }
     }
   }
@@ -85,7 +84,6 @@ async function saveTask()  {
         'subtask': selected_subtasks,
         'id_task': id,
         'status':'todo',
-        
     }
   
     console.log(task.id)
@@ -146,6 +144,5 @@ async function addTask(task,id) {
     document.getElementById(id).style.color = 'white'
     priority_img_path = 'kanban_img/priority_icons/non-urgent-green.png'
     selected_priority = "Low"
-  }
-    
+  }  
  }

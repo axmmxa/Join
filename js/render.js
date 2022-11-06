@@ -57,9 +57,61 @@ function closeSmallEditContacts() {
 }
 
 
-function renderSmallEditContacts() {
+async function renderSmallEditContacts(contact_name,contact_email,contact_phone) {
     if (document.getElementById("edit-small-contacts-container")) {
         document.getElementById("edit-small-contacts-container").classList.remove("d-none")
+
+        document.querySelector("#edit-small-contacts-container").innerHTML =
+        `
+        <div id="small-contacts-container-close-btn-container" class="blue">
+            <span onclick="closeSmallEditContacts()" class="arrow white-text">X</span>
+        </div>
+        <div class="upper-part-small-contacts blue">
+            <img class="logo-height" src="kanban_img/login_icons/join_white.png">
+            <h1 class="white-text">Edit Contact</h1>
+        </div>
+
+        <div class="lower-part-small-contacts">
+        <div id="${contact_name}" class="user-icon-edit-contact user-icon-big fs-22">${getUserIcon(contact_name)}</div>
+
+            <div class="small-contacts-add-data">
+                <div class="login-data">
+                    <input value="${contact_name}" id="small-edit-contacts-name" type="text" placeholder="Name">
+                    <input value="${contact_email}" id="small-edit-contacts-email" type="text" placeholder="E-mail">
+                    <input value="${contact_phone}" id="small-edit-contacts-phone" type="text" placeholder="Phone">
+                </div>
+
+                <div class="small-contacts-btn-container">
+                    <a onclick="saveEditedContact('${contact_email}')" class="create-btn">Save</a>
+                </div>
+            </div>
+        </div>
+    
+        `
+
+
+        await downloadFromServer();
+        users = JSON.parse(backend.getItem('users')) || [];
+        let user_icons = document.querySelectorAll(".user-icon-edit-contact")
+        let correctColor;
+    
+        for (let i = 0; i < users.length; i++) {
+            const currentUser = users[i];
+            if (currentUser.email == loggedInUser.email) {
+              for (let j = 0; j < user_icons.length; j++) {
+                for (let k = 0; k < currentUser.contacts.length; k++) {
+                  const currentContact = currentUser.contacts[k];
+                  BackgroundColorForEditContact[currentContact.contact_name] = currentContact["contact-background-color"]
+                }
+                for (let [key, value] of Object.entries(BackgroundColorForEditContact)) {
+                  if (key == user_icons[j].id) {
+                    correctColor = value
+                  }
+                }
+                user_icons[j].classList.add(correctColor)
+              }
+          }
+        }
 
         document.querySelector(".kanban-navbar").style.opacity = 0.5
         document.querySelector(".kanban-main").style.opacity = 0.5
@@ -79,22 +131,45 @@ function renderSmallEditContacts() {
         </div>
 
         <div class="lower-part-small-contacts">
-            <img class="anonymous-profile-picture" src="kanban_img/">
+        <div id="${contact_name}" class="user-icon-edit-contact user-icon-big fs-22">${getUserIcon(contact_name)}</div>
 
-            <form class="small-contacts-add-data">
+            <div class="small-contacts-add-data">
                 <div class="login-data">
-                    <input id="small-edit-contacts-name" type="text" placeholder="Name">
-                    <input id="small-edit-contacts-email" type="text" placeholder="E-mail">
-                    <input id="small-edit-contacts-phone" type="text" placeholder="Phone">
+                    <input value="${contact_name}"  id="small-edit-contacts-name" type="text" placeholder="Name">
+                    <input value="${contact_email}" id="small-edit-contacts-email" type="text" placeholder="E-mail">
+                    <input value="${contact_phone}" id="small-edit-contacts-phone" type="text" placeholder="Phone">
                 </div>
 
                 <div class="small-contacts-btn-container">
-                    <button class="create-btn">Save</button>
+                    <a onclick="saveEditedContact('${contact_email}')" class="create-btn">Save</a>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
         `
+    }
+
+    await downloadFromServer();
+    users = JSON.parse(backend.getItem('users')) || [];
+    let user_icons = document.querySelectorAll(".user-icon-edit-contact")
+    let correctColor;
+
+    for (let i = 0; i < users.length; i++) {
+        const currentUser = users[i];
+        if (currentUser.email == loggedInUser.email) {
+          for (let j = 0; j < user_icons.length; j++) {
+            for (let k = 0; k < currentUser.contacts.length; k++) {
+              const currentContact = currentUser.contacts[k];
+              BackgroundColorForEditContact[currentContact.contact_name] = currentContact["contact-background-color"]
+            }
+            for (let [key, value] of Object.entries(BackgroundColorForEditContact)) {
+              if (key == user_icons[j].id) {
+                correctColor = value
+              }
+            }
+            user_icons[j].classList.add(correctColor)
+          }
+      }
     }
    
 }
@@ -224,26 +299,21 @@ function renderSmallEditTask(id_task) {
     
 }
 
-function showTaskInfo(id_task) {
-    
+async function showTaskInfo(id_task) {
     for (let i = 0; i < users.length; i++) {
         const currentUser = users[i];            
         if (currentUser.email == loggedInUser.email) {
             for (let j = 0; j < currentUser.tasks.length; j++) {
                 let userTaskId = currentUser.tasks[j]
-            
                 if (userTaskId.id_task == id_task) {
-
-
                     document.querySelector("body").innerHTML += 
                     `
-                    
                     <div id="small-board-task-info-${id_task}" class="small-board-task-info">
                                 <div class="close-btn-container-task-info">
                                     <span onclick="closeBoardTaskInfo()" class="close-x-right-side">X</span>
                                 </div>
                                 <div>
-                                    <span class="task-topic white-text">${userTaskId.category}</span>
+                                    <span class="task-topic-info white-text">${userTaskId.category}</span>
                                 </div>
                 
                                 <div class="board-task-info-text margin">
@@ -269,38 +339,73 @@ function showTaskInfo(id_task) {
                                 </div>
                             </div>
                     `
+                    console.log(userTaskId.category)
+                    getCategoryColorTaskInfo(userTaskId.category)
 
                     let assignedPersonal = document.querySelector(`#assigned-personal-${j}`)
 
                             userTaskId.assignedContacts.forEach(contact => {
                                 assignedPersonal.innerHTML += 
                                 `<div class="d-flex">
-                                    <span class="user-icon-task-info">${getUserIcon(contact)}</span>
+                                    <span id="${contact}" class="user-icon-task-info">${getUserIcon(contact)}</span>
                                     <span>${contact}</span> 
                                 </div>` 
-
-                                for (let i = 0; i < users.length; i++) {
-                                    const currentUser = users[i];
-                                    
-                                    for (let j = 0; j < currentUser.tasks.length; j++) {
-                                        const currentNameFromTask = currentUser.tasks[j].assignedContacts[j];
-                                        const currentContact = currentUser.contacts[j]
-                                        if (document.querySelector(".user-icon-task-info") && currentNameFromTask == contact) {
-                                            document.querySelectorAll(".user-icon-task-info").forEach(user_icon_task_info => {
-                                                user_icon_task_info.classList.add(currentContact["contact-background-color"])
-                                            })
-                                        }
-                                    }
-                                }
                             })
                         }
+                    }       
+
+                    await downloadFromServer();
+            users = JSON.parse(backend.getItem('users')) || [];
+            let user_icons = document.querySelectorAll(".user-icon-task-info")
+            let correctColor;
+            
+            for (let i = 0; i < users.length; i++) {
+                const currentUser = users[i];
+                if (currentUser.email == loggedInUser.email) {
+                    for (let j = 0; j < user_icons.length; j++) {
+                      for (let k = 0; k < currentUser.contacts.length; k++) {
+                        const currentContact = currentUser.contacts[k];
+                        BackgroundColorForBoardTaskInfo[currentContact.contact_name] = currentContact["contact-background-color"]
+                      }
+                      for (let [key, value] of Object.entries(BackgroundColorForBoardTaskInfo)) {
+                        if (key == user_icons[j].id) {
+                          correctColor = value
+                        }
+                      }
+                      user_icons[j].classList.add(correctColor)
                     }
                 }
             }
-        
-    getCategoryColor()
+
+                }
+            }
+        }
+
+
+function getCategoryColorTaskInfo(category) {
     
-}
+  let task_topics = document.querySelectorAll(".task-topic-info")
+  console.log(task_topics.length)
+
+  switch(category) {
+    case "Backoffice": 
+      task_topics[task_topics.length - 1].classList.add("turquoise")
+      break;
+    case "Sales":
+      task_topics[task_topics.length - 1].classList.add("pink")
+      break;
+    case "Media":
+      task_topics[task_topics.length - 1].classList.add("yellow")
+      break;
+    case "Design":
+      task_topics[task_topics.length - 1].classList.add("orange")
+      break;
+    case "Marketing":
+      task_topics[task_topics.length - 1].classList.add("blue")
+      break;
+    } 
+  }
+
 
 function closeBoardTaskInfo() {
     document.querySelectorAll(".small-board-task-info").forEach(small_board_task_info => {
@@ -460,7 +565,7 @@ function renderSmallAddTask() {
     document.querySelector("#contact-information").innerHTML = 
     `
                 <div class="contact-information-upper-part">
-                    <div class="user-icon">${getUserIcon(contact_names[i])}</div>
+                    <div class="user-icon user-icon-big fs-22">${getUserIcon(contact_names[i])}</div>
                     <div class="contact-information-name-container">
                         <h1 class="contact-information-name">${contact_names[i]}</h1>
                         <div onclick="renderSmallAddTask()" class="contact-information-add-task-container"><img src="kanban_img/plus_icons/plus_blue.png"> <span class="light-blue-text">Add Task</span></div>
@@ -470,7 +575,7 @@ function renderSmallAddTask() {
                 <div class="contact-information-lower-part">
                     <div class="contact-information-edit">
                         <h3 class="contact-information-headline">Contact Information</h3>
-                        <div onclick="renderSmallEditContacts()" class="contact-information-edit-container"><img src="kanban_img/edit_icons/edit_pen_blue.png"> <span>Edit Contact</span></div>
+                        <div onclick="renderSmallEditContacts('${contact_names[i]}','${contact_emails[i]}','${contact_phones[i]}')" class="contact-information-edit-container"><img src="kanban_img/edit_icons/edit_pen_blue.png"> <span>Edit Contact</span></div>
                     </div>
 
                     <div class="contact-information-email-container">
@@ -490,6 +595,7 @@ function renderSmallAddTask() {
 
     await downloadFromServer();
     users = JSON.parse(backend.getItem('users')) || [];
+    let correctColor;
 
     for (let i = 0; i < users.length; i++) {
         const currentUser = users[i];
@@ -499,8 +605,8 @@ function renderSmallAddTask() {
                 for (let j = 0; j < currentUser.contacts.length; j++) {
                     const currentContact = currentUser.contacts[j];
                     console.log("current contact", currentContact)
-                    if( currentContact.contact_email == email) {
-                       let correctColor = currentContact["contact-background-color"]
+                    correctColor = currentContact["contact-background-color"]
+                    if(currentContact.contact_email == email) {
                        document.querySelectorAll(".user-icon")[currentUser.contacts.length].classList.add(correctColor)
                     }
                     
@@ -558,7 +664,7 @@ function renderSavedContacts() {
         `
         <div onclick="renderContactInformation('${contact.contact_email}')" class="contact-info">
         <div class="user-icon-background-color-container">
-            <div class="user-icon">${getUserIcon(contact.contact_name)}</div>
+            <div id="${contact.contact_name}" class="user-icon">${getUserIcon(contact.contact_name)}</div>
         </div>
         <div class="contact-data">
             <h3 id="${contact.contact_name}-name" class="contact-name">${contact.contact_name}</h3>

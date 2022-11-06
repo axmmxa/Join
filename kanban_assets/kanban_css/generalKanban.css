@@ -16,6 +16,14 @@
     height: auto;
 }
 
+.fs-22 {
+    font-size: 22px;
+}
+
+.gray {
+    background-color: gray;
+}
+
 .darkpurple {
     background-color: #462F8A;
 }
@@ -209,6 +217,11 @@
     margin: 5px 0;
 }
 
+.task-topic-info {
+    padding: 5px 10px;
+    border-radius: 8px;
+}
+
 .user-logout-icon-container {
     cursor: pointer;
     border-radius: 50%;
@@ -226,8 +239,12 @@
     border-radius: 50%;
 }
 
+.user-icon-big {
+    padding: 10px;
+}
+
 .user-icon {
-    margin-right: 5px;
+    margin-right: -5px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -247,6 +264,12 @@
     height: 38px;
     letter-spacing: 2px;
     color: white;
+    border-radius: 50%;
+}
+
+.user-icon-edit-contact {
+    color: white;
+    padding: 15px;
     border-radius: 50%;
 }
 
