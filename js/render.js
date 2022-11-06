@@ -115,6 +115,7 @@ async function renderSmallEditContacts(contact_name,contact_email,contact_phone)
 
         document.querySelector(".kanban-navbar").style.opacity = 0.5
         document.querySelector(".kanban-main").style.opacity = 0.5
+
     } else {
         document.querySelector(".kanban-navbar").style.opacity = 0.5
         document.querySelector(".kanban-main").style.opacity = 0.5
@@ -300,7 +301,9 @@ function renderSmallEditTask(id_task) {
 }
 
 async function showTaskInfo(id_task) {
+
     for (let i = 0; i < users.length; i++) {
+        console.log(users)
         const currentUser = users[i];            
         if (currentUser.email == loggedInUser.email) {
             for (let j = 0; j < currentUser.tasks.length; j++) {
@@ -379,7 +382,8 @@ async function showTaskInfo(id_task) {
 
                 }
             }
-        }
+            
+}
 
 
 function getCategoryColorTaskInfo(category) {
@@ -553,7 +557,7 @@ function renderSmallAddTask() {
     }
 }
 
- async function renderContactInformation(email) {
+ async function renderContactInformation(email, name) {
     let index = contact_emails.indexOf(email)
 
    // getUserColor()
@@ -601,7 +605,7 @@ function renderSmallAddTask() {
         const currentUser = users[i];
         for (let j = 0; j < currentUser.contacts.length; j++) {
             
-            if (currentUser.contacts[j].contact_name == contact_names[j]) {
+            if (currentUser.contacts[j].contact_name == name) {
                 for (let j = 0; j < currentUser.contacts.length; j++) {
                     const currentContact = currentUser.contacts[j];
                     console.log("current contact", currentContact)
@@ -662,7 +666,7 @@ function renderSavedContacts() {
 
         document.querySelector(`.contacts-${first_letter}-data`).innerHTML += 
         `
-        <div onclick="renderContactInformation('${contact.contact_email}')" class="contact-info">
+        <div onclick="renderContactInformation('${contact.contact_email}', '${contact.contact_name}')" class="contact-info">
         <div class="user-icon-background-color-container">
             <div id="${contact.contact_name}" class="user-icon">${getUserIcon(contact.contact_name)}</div>
         </div>
@@ -676,7 +680,6 @@ function renderSavedContacts() {
               }
         }
     }
-
     getUserColor()
 }
 
@@ -724,9 +727,9 @@ async function addContactToBook() {
         </div>
     </div>
         `
-        getUserColor()
-
-        loadContactBackgroundColor()
+        // getUserColor()
+        // loadContactBackgroundColor()
+        location.reload()
         
     }
 

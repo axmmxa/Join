@@ -50,14 +50,15 @@ async function saveEditedTask(id_task) {
         console.log(currentTask)
         currentTask.title = title
         currentTask.assignedContacts = selected_options
-        currentTask.due_date = due_date
+        currentTask["due_date"] = due_date
         currentTask.description = description
         currentTask.priority = selected_priority
         currentTask.priority_img_path = priority_img_path
+        saveUsersArray()
       }
     }
   }
-  updateHTML()
+    location.reload() 
 }
 
 async function saveTask()  {
@@ -144,5 +145,6 @@ async function addTask(task,id) {
     document.getElementById(id).style.color = 'white'
     priority_img_path = 'kanban_img/priority_icons/non-urgent-green.png'
     selected_priority = "Low"
-  }  
+  }
+  
  }

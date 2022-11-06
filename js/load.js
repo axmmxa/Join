@@ -53,6 +53,7 @@ async function init() {
   if (document.getElementById("board-body")) {
     updateHTML()
     loadBoardContactBackgroundColor()
+    // location.reload()
   } if (document.getElementById("contacts-body")) {
     renderContactBook()
     loadContactBackgroundColor()
@@ -110,13 +111,21 @@ async function saveEditedContact(contact_email) {
           currentContact.contact_name = small_edit_contacts_name
           currentContact.contact_email = small_edit_contacts_email
           currentContact.contact_phone = small_edit_contacts_phone
+          
+          saveUsersArray()    
+         
+          // document.querySelector(".contacts-left").innerHTML = ""
+          // document.querySelector(".contacts-right").innerHTML = 
+          //   `
+          //   <div id="contact-information"></div>
+          //   <button onclick="renderSmallContacts()" class="add-person-btn">Add Contacts <img class="add-person-img" src="kanban_img/add_icons/add_person.png"></button>
+          //   `
+          // renderContactBook()
+          // loadContactBackgroundColor()
       }
     }
   }
-  saveUsersArray()
-  document.querySelector(".contacts-left").innerHTML = ""
-  renderContactBook()
-  location.reload()
+  location.reload(true)
 }
 
 
@@ -173,8 +182,8 @@ function getUserColor() {
 
 
 async function loadBoardContactBackgroundColor() {
-  await downloadFromServer();
-  users = JSON.parse(backend.getItem('users')) || [];
+  //await downloadFromServer();
+  // users = JSON.parse(backend.getItem('users')) || [];
   let user_icons = document.querySelectorAll(".user-icon")
   let correctColor;
   
