@@ -103,7 +103,7 @@ body {
 
 .kanban-link:hover {
     background-color: #D2E3FF;
-    border-radius: 16px;
+    border-radius: 8px;
 }
 
 .summary-container {
@@ -281,8 +281,22 @@ body {
 }
 
 .task-card-lower:hover {
-    background-color: #D2E3FF;
-    transform: scale(1.05);
+    background-color: blue;
+    transform: scale(1.05); 
+}
+
+.task-card-lower:hover .inner-task-card .task-to-do > span {
+    color: white;
+    
+}
+
+.task-card-lower:hover .inner-task-card .task-to-do > img {
+    border: 2px solid white;
+    border-radius: 50%;
+}
+
+.task-card-lower:hover .inner-task-card div > p {
+    color: white;
 }
 
 .img-hover-effects {

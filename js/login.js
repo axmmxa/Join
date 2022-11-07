@@ -14,14 +14,24 @@ if (msg) {
 function login() {
     let email = document.getElementById("e-mail").value
     let password = document.getElementById("password").value
-
+    
     loggedInUser = users.find(u => u.email == email && u.password == password)
-
     console.log(loggedInUser)
 
     if (loggedInUser) {
-        console.log("User gefunden")
+        console.log("User gefunden") 
         saveLoggedInUser()
-        // window.location.href = './summary.html'
+        window.location.href = './summary.html'
+    } else {
+        loggedInUser = {
+            "contacts": [],
+            "tasks": [],
+            "name": "Guest",
+            "email": "",
+            "password": "",
+            "user-background-color": "gray"
+        }
+        saveLoggedInUser()
+        window.location.href = './summary.html'
     }
 }

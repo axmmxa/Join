@@ -54,11 +54,11 @@ async function saveEditedTask(id_task) {
         currentTask.description = description
         currentTask.priority = selected_priority
         currentTask.priority_img_path = priority_img_path
-        saveUsersArray()
+        saveUsersArray() 
       }
     }
   }
-    location.reload() 
+  location.reload(true)
 }
 
 async function saveTask()  {
@@ -91,7 +91,7 @@ async function saveTask()  {
     console.log(users)
     addTask(task, id) 
     console.log('create task')
-    
+    showPopup("task-popup")
   }
 
 async function addTask(task,id) {

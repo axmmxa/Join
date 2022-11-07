@@ -2,6 +2,10 @@
     display: none;
 }
 
+.d-flex-center {
+    display: flex;
+    align-items: center;
+}
 .margin {
     margin: 10px 0px;
 }
@@ -20,8 +24,12 @@
     font-size: 22px;
 }
 
+.hover-blue {
+    background-color: #D2E3FF;
+}
+
 .gray {
-    background-color: gray;
+    background-color: rgba(0, 0, 0, 0.3);
 }
 
 .darkpurple {
@@ -226,6 +234,7 @@
     cursor: pointer;
     border-radius: 50%;
     border: 2px solid white;
+    background-color: white;
 }
 
 .user-logout-icon {
@@ -277,4 +286,45 @@
     display: flex;
     align-items: center;
 }
+
+.centered {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+.popups {
+    z-index: 2;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    padding: 10px 5px;
+    background-color: #0038FF;
+    border: 1px solid none;
+    border-radius: 8px;
+}
+
+.popups-img {
+    margin-left: 10px;
+}
+
+.popups p {
+    margin: 5px 0;
+}
+
+body::-webkit-scrollbar {
+    width: 12px;               /* width of the entire scrollbar */
+  }
+  
+  body::-webkit-scrollbar-track {
+    background: orange;        /* color of the tracking area */
+  }
+  
+  body::-webkit-scrollbar-thumb {
+    background-color: blue;    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+    border: 3px solid orange;  /* creates padding around scroll thumb */
+  }
 

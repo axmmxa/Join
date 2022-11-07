@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-control" content="no-cache">
     <title>Join</title>
     <link rel="stylesheet" href="login_assets/login_css/fonts.css">
     <link rel="stylesheet" href="login_assets/login_css/login.css">
@@ -18,7 +19,7 @@
     <link rel="stylesheet" href="kanban_assets/kanban_css/task-info.css">
     <link rel="stylesheet" href="kanban_assets/kanban_css/edit_task.css">
 
-
+    <script src="js/template.js" defer></script>
     <script src="js/load.js" defer></script>
     <script src="js/render.js" defer></script>
     <script src="js/drag_and_drop.js" defer></script>
@@ -52,20 +53,19 @@
         </div>
     </nav>
 
-    
 
     <main class="kanban-main">
         <div class="sidebar">
             <div class="inner-sidebar">
                 <div class="kanban-btns">
-                    <a href="summary.html" class="kanban-link"><img class="kanban-img" src="kanban_img/small_navbar_icons/summary.png"><span>Summary</span></a>
-                    <a href="board.html" class="kanban-link"><img class="kanban-img" src="kanban_img/small_navbar_icons/board.png"><span>Board</span></a>
-                    <a href="addTask.html" class="kanban-link"><img class="kanban-img" src="kanban_img/small_navbar_icons/addTask.png"><span>Add Task</span></a>
-                    <a href="contacts.html" class="kanban-link"><img class="kanban-img" src="kanban_img/small_navbar_icons/contacts.png"><span>Contacts</span></a>
+                    <a id="kanban-link-0" href="summary.html" class="kanban-link"><img class="kanban-img" src="kanban_img/small_navbar_icons/summary.png"><span>Summary</span></a>
+                    <a id="kanban-link-1" href="board.html" class="kanban-link"><img class="kanban-img" src="kanban_img/small_navbar_icons/board.png"><span>Board</span></a>
+                    <a id="kanban-link-2" href="addTask.html" class="kanban-link"><img class="kanban-img" src="kanban_img/small_navbar_icons/addTask.png"><span>Add Task</span></a>
+                    <a id="kanban-link-3" href="contacts.html" class="kanban-link"><img class="kanban-img" src="kanban_img/small_navbar_icons/contacts.png"><span>Contacts</span></a>
                 </div>
 
                 <div class="legal-notice">
-                    <a href="kanban_assets/legal_notice.html" class="kanban-link"><img class="kanban-img" src="kanban_img/small_navbar_icons/legal_notice.png"><span>Legal Notice</span></a>
+                    <a id="kanban-link-4" href="kanban_assets/legal_notice.html" class="kanban-link"><img class="kanban-img" src="kanban_img/small_navbar_icons/legal_notice.png"><span>Legal Notice</span></a>
                 </div>
             </div>
         </div>
@@ -98,10 +98,6 @@
                             <h4 class="board-task-title">In Progress</h4>
                             <img onclick="renderSmallAddTask()" class="board-task-img" src="kanban_img/plus_icons/plus_button.png">
                         </div>
-
-                        
-
-                        
                     </div>
 
 
@@ -110,32 +106,24 @@
                             <h4 class="board-task-title">Await Feedback</h4>
                             <img onclick="renderSmallAddTask()" class="board-task-img" src="kanban_img/plus_icons/plus_button.png">
                         </div>
-
-                        
-
                     </div>
-
 
                     <div id="done" class="board-done width-25" ondrop="moveTo('done')" ondragover="allowDrop(event)">
                         <div class="flex">
                             <h4 class="board-task-title">Done</h4>
                             <img onclick="renderSmallAddTask()" class="board-task-img" src="kanban_img/plus_icons/plus_button.png">
                         </div>
-
-                        
                     </div>
-
-
 
                 </div>
             </div>
 
             <div class="sidebar-mobile">
                 <div class="kanban-btns">
-                    <a href="summary.html" class="kanban-link"><img class="kanban-img" src="kanban_img/small_navbar_icons/summary.png"><span>Summary</span></a>
-                    <a href="board.html" class="kanban-link"><img class="kanban-img" src="kanban_img/small_navbar_icons/board.png"><span>Board</span></a>
-                    <a href="addTask.html" class="kanban-link"><img class="kanban-img" src="kanban_img/small_navbar_icons/addTask.png"><span>Add Task</span></a>
-                    <a href="contacts.html" class="kanban-link"><img class="kanban-img" src="kanban_img/small_navbar_icons/contacts.png"><span>Contacts</span></a>
+                    <a id="kanban-link-5" href="summary.html" class="kanban-link"><img class="kanban-img" src="kanban_img/small_navbar_icons/summary.png"><span>Summary</span></a>
+                    <a id="kanban-link-6" href="board.html" class="kanban-link"><img class="kanban-img" src="kanban_img/small_navbar_icons/board.png"><span>Board</span></a>
+                    <a id="kanban-link-7" href="addTask.html" class="kanban-link"><img class="kanban-img" src="kanban_img/small_navbar_icons/addTask.png"><span>Add Task</span></a>
+                    <a id="kanban-link-8" href="contacts.html" class="kanban-link"><img class="kanban-img" src="kanban_img/small_navbar_icons/contacts.png"><span>Contacts</span></a>
                 </div>
             </div>
         </div>

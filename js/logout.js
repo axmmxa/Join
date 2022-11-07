@@ -10,6 +10,6 @@ function toggleLogoutBox() {
 
 function logout() {
     localStorage.setItem('loggedInUser', '')
-     window.location.href = "../login.html"
+     window.location.href = "./login.html"
 }
 

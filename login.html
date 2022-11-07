@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-control" content="no-cache">
     <title>Log in</title>
     <link rel="shortcut icon" href="kanban_img/login_logos/join_blue.png" type="image/x-icon">
 
@@ -12,6 +13,7 @@
     <link rel="stylesheet" href="login_assets/login_css/fonts.css">
     <link rel="stylesheet" href="login_assets/login_css/login.css">
 
+    <script src="js/template.js" defer></script>
     <script src="js/mini_backend.js"></script>
     <script src="js/load.js" defer></script>
     <script src="js/login.js" defer></script>
@@ -32,7 +34,7 @@
         <div class="login-container">
             <h1 class="form-headline">Log in</h1>
             <div class="blue-bottom"></div>
-            <form class="form">
+            <form onsubmit="login();return false" class="form">
 
                 <div class="login-data">
                     <input id="e-mail" type="text" placeholder="E-mail">
@@ -48,18 +50,20 @@
                 </div>
 
                 <div class="login-btns">
-                    <a onclick="login()" class="login-btn">Log in </a>
-                    <a href="summary.html" class="guest-btn">Guest log in</a>
+                    <button class="login-btn">Log in </button>
+                    <button class="guest-btn">Guest log in</button>
                 </div>
 
             </form>
         </div>
     </div>
 
-    <div id="msgBox"></div>
+    <div id="msgBox">
+        
+    </div>
 
     <div class="not-a-user-mobile">
-        <a class="no-user-link" href="">Not a Join User?</a>
+        <a class="no-user-link">Not a Join User?</a>
         <a class="sign-up-btn" href="signUp.html">Sign up</a>
     </div>
 </body>

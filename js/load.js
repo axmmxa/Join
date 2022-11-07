@@ -36,33 +36,47 @@ async function init() {
     for (let i = 0; i < users.length; i++) {
       const currentUser = users[i];
 
-      if(currentUser.email == loggedInUser.email){
-        document.querySelector(".user-logout-icon-container").innerHTML = `<div onclick="toggleLogoutBox()" class="user-logout-icon">${getUserIcon(currentUser.name)}</div>`
+      if(currentUser.email == loggedInUser.email || loggedInUser.name == "Guest"){
         
-        getUserColor()
-
-        document.querySelector(".user-logout-icon").classList.add(currentUser["user-background-color"])
-       
-        for (let j = 0; j < currentUser.tasks.length; j++) {
-          todos.push(currentUser.tasks[j])
+        if (loggedInUser.name !== "Guest") {
+          document.querySelector(".user-logout-icon-container").innerHTML = `<div onclick="toggleLogoutBox()" class="user-logout-icon">${getUserIcon(currentUser.name)}</div>`
+          getUserColor()
+          document.querySelector(".user-logout-icon").classList.add(currentUser["user-background-color"])
+          for (let j = 0; j < currentUser.tasks.length; j++) {
+            todos.push(currentUser.tasks[j])
+          }
+        } else {
+          document.querySelector(".user-logout-icon-container").innerHTML = `<div onclick="toggleLogoutBox()" class="user-logout-icon">${getUserIcon(loggedInUser.name)}</div>`
+          document.querySelector(".user-logout-icon").classList.add(loggedInUser["user-background-color"])
         }
-
+        
       }
   }
 
+  if (document.getElementById("summary-body")) {
+    loadLoggedInUser()
+    updateSummary()
+    selectedLink("kanban-link-0")
+    selectedLink("kanban-link-5")
+  } 
   if (document.getElementById("board-body")) {
     updateHTML()
     loadBoardContactBackgroundColor()
-    // location.reload()
+    selectedLink("kanban-link-1")
+    selectedLink("kanban-link-6")
+  } if (document.getElementById("addTask-body")) {
+    selectedLink("kanban-link-2")
+    selectedLink("kanban-link-7")
   } if (document.getElementById("contacts-body")) {
     renderContactBook()
     loadContactBackgroundColor()
-  } if (document.getElementById("summary-body")) {
-    loadLoggedInUser()
-    updateSummary()
+    selectedLink("kanban-link-3")
+    selectedLink("kanban-link-8")
+  } if (document.getElementById("legal-notice-body")) {
+    selectedLink("kanban-link-4")
   }
-  
 }
+
  
 async function saveUsersArray() {
   await backend.setItem('users', JSON.stringify(users));
@@ -111,21 +125,14 @@ async function saveEditedContact(contact_email) {
           currentContact.contact_name = small_edit_contacts_name
           currentContact.contact_email = small_edit_contacts_email
           currentContact.contact_phone = small_edit_contacts_phone
-          
           saveUsersArray()    
-         
-          // document.querySelector(".contacts-left").innerHTML = ""
-          // document.querySelector(".contacts-right").innerHTML = 
-          //   `
-          //   <div id="contact-information"></div>
-          //   <button onclick="renderSmallContacts()" class="add-person-btn">Add Contacts <img class="add-person-img" src="kanban_img/add_icons/add_person.png"></button>
-          //   `
-          // renderContactBook()
-          // loadContactBackgroundColor()
       }
     }
   }
+  await backend.setItem('users', JSON.stringify(users))
+  loadContactBackgroundColor()
   location.reload(true)
+ 
 }
 
 
@@ -182,8 +189,8 @@ function getUserColor() {
 
 
 async function loadBoardContactBackgroundColor() {
-  //await downloadFromServer();
-  // users = JSON.parse(backend.getItem('users')) || [];
+  await downloadFromServer();
+  users = JSON.parse(backend.getItem('users')) || [];
   let user_icons = document.querySelectorAll(".user-icon")
   let correctColor;
   
@@ -236,9 +243,14 @@ async function loadContactBackgroundColor() {
 function getUserIcon(contact) {
   let names = contact.split(" ");
   let firstLetterFirstName = names[0][0];
-  let firstLetterlastName = names[1][0];
-
-  return `${firstLetterFirstName + firstLetterlastName}`
+  let firstLetterlastName;
+  if (names.length > 1) {
+    let firstLetterlastName = names[1][0]
+    return `${firstLetterFirstName + firstLetterlastName}`
+  } else {
+    return `${firstLetterFirstName}`
+  }
+  
 }
 
 
