@@ -75,7 +75,7 @@
                 <span class="board-headline-mobile blue-text">Kanban Project Mangement Tool</span>
                 <div class="search-field">
                     <div class="input-container">
-                        <input placeholder="Find task" type="text" class="input">
+                        <input onkeyup="searchTask()" id="search-task" placeholder="Find task" type="text" class="input">
                         <img class="search-img" src="kanban_img/search_icons/search.png">
                     </div>
                     <button onclick="renderSmallAddTask()" class="add-btn"><span class="white-text">Add Task</span><img class="add-img" src="kanban_img/plus_icons/plus_white.png"></button>

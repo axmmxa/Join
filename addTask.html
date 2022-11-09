@@ -97,13 +97,17 @@
                             <div class="custom-select" id="contacts">
                                 <div onclick="showCustomSelectOptions(0)" class="first-select-option-container">
                                     <span id="first-select-contacts" class="first-select-option">Select contacts to assign</span>
+                                    <img class="arrow-down" src="kanban_img/arrow_icons/arrow_select.png" />
                                 </div>
                                 <div class="custom-select-options-container d-none" >
-                                    <label class="custom-select-option">You <input onclick="returnSelectedContacts(this)" value="You" class="selected-option" type="checkbox"></label>
-                                    <label class="custom-select-option"> Maximilian Vogel <input onclick="returnSelectedContacts(this)" value="Maximilian Vogel" class="selected-option" type="checkbox"></label>   
+                                    <div class="custom-select-contact-container">
+                                        <label class="custom-select-option">You <input onclick="returnSelectedContacts(this)" value="You" class="selected-option" type="checkbox"></label>
+                                        <label class="custom-select-option"> Maximilian Vogel <input onclick="returnSelectedContacts(this)" value="Maximilian Vogel" class="selected-option" type="checkbox"></label>       
+                                    </div>
+                                    <label onclick="showAddContact(0)" class="custom-select-option">Invite new contact <img src="kanban_img/invite_contact.png"></label>
                                 </div>
                             </div>
-                            <img onclick="showAddContact(0)" id="plus-select-contact" class="plus-select" src="kanban_img/plus_icons/plus_blue.png" />
+                            
                         </div>
 
                         <div class="due-date-container">
@@ -113,7 +117,7 @@
 
                         <div class="task-category-container">
                             <div class="add-option d-none">
-                                <input id="add-contact-input" class="add-option-input" type="text" placeholder="New category name">
+                                <input id="add-category-input" class="add-option-input" type="text" placeholder="New category name">
                                 <div class="add-option-btn-container">
                                     <img onclick="closeAddContact(1)" class="close-x-blue-btn" src="kanban_img/close_icons/close_x_blue.png">
                                     <img onclick="addNewContactOption(1)" class="blue-clear-btn" src="kanban_img/clear_icons/blue_clear.png">
@@ -123,13 +127,17 @@
                             <div class="custom-select" id="task-category">
                                 <div onclick="showCustomSelectOptions(1)" class="first-select-option-container">
                                     <span id="first-select-task-category" class="first-select-option">Select task category</span>
+                                    <img class="arrow-down" src="kanban_img/arrow_icons/arrow_select.png"/>
                                 </div>
                                 <div class="custom-select-options-container d-none">
-                                    <label onclick="returnSelectedCategory(id)" id="Sales" class="custom-select-option">Sales</label>
-                                    <label onclick="returnSelectedCategory(id)" id="Backoffice" class="custom-select-option">Backoffice</label>   
+                                    <label onclick="showAddContact(1)" class="custom-select-option">New Category</label>
+                                    <div class="custom-select-category-container">
+                                        <label onclick="returnSelectedCategory(id)" id="Sales" class="custom-select-option">Sales</label>
+                                        <label onclick="returnSelectedCategory(id)" id="Backoffice" class="custom-select-option">Backoffice</label>       
+                                    </div>
                                 </div>
                             </div>
-                            <img onclick="showAddContact(1)" class="plus-select" src="kanban_img/plus_icons/plus_blue.png" />
+                            
                         </div>
 
                         <div class="priority-btn-container">

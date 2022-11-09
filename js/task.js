@@ -67,46 +67,53 @@ async function saveTask()  {
 
   if (idTaskFromBackend) {
     id = idTaskFromBackend
-  }
+    console.log(id)
+  } 
 
-    let title = document.getElementById('input-title').value
-    let due_date = document.getElementById('due-date').value
-    let description = document.getElementById('textarea').value
-    
-    let task = {
-        'title': title,
-        'assignedContacts': selected_options,
-        'due-date': due_date,
-        'description': description,
-        'category': selected_category,
-        'priority': selected_priority,
-        'priority_img_path': priority_img_path,
-        'description': description,
-        'subtask': selected_subtasks,
-        'id_task': id,
-        'status':'todo',
-    }
+  id = JSON.parse(localStorage.getItem("task_id"))
   
-    console.log(task.id)
-    console.log(users)
-    addTask(task, id) 
-    console.log('create task')
-    showPopup("task-popup")
+  let title = document.getElementById('input-title').value
+  let due_date = document.getElementById('due-date').value
+  let description = document.getElementById('textarea').value
+  let task = {
+      'title': title,
+      'assignedContacts': selected_options,
+      'due-date': due_date,
+      'description': description,
+      'category': selected_category,
+      'priority': selected_priority,
+      'priority_img_path': priority_img_path,
+      'description': description,
+      'subtask': selected_subtasks,
+      'id_task': id,
+      'status':'todo',
+  }
+  addTask(task, id)
+  
   }
 
 async function addTask(task,id) {
-  
+  if (loggedInUser.name !== "Guest") {
     for (let i = 0; i < users.length; i++) {
       const currentUser = users[i];
       if(currentUser.email == loggedInUser.email){
         // task.task_id = id
         id++
+        console.log(id)
         await backend.setItem('id_task', JSON.stringify(id)); 
         currentUser.tasks.push(task)
         await backend.setItem('users', JSON.stringify(users));
       }
     }
+  } else {
+    id++
+    console.log(id)
+    localStorage.setItem("task_id", JSON.stringify(id));
+    loggedInUser.tasks.push(task)
+    localStorage.setItem("loggedInUser", JSON.stringify(loggedInUser));
+    console.log(loggedInUser)
   }
+} 
 
  
 
@@ -148,3 +155,32 @@ async function addTask(task,id) {
   }
   
  }
+
+
+ function searchTask() {
+
+  let input = document.getElementById("search-task").value;
+
+  console.log(input)
+
+  input = input.toLowerCase();
+
+  // if (input == "") {
+  //     document.querySelectorAll(`.added-task`).forEach(entry => {
+  //         entry.style.display = "block"
+  //     });
+  // }
+
+  let tasks = document.querySelectorAll(".task-topic")
+
+  for (let i = 0; i < tasks.length; i++) {
+      let task = tasks[i].textContent;
+      console.log(task)
+      document.getElementById(`added-task-${i}`).style.display = "none";
+
+      if (task.includes(input)) {
+          document.getElementById(`added-task-${i}`).style.display = "block"
+      }
+  }
+
+}

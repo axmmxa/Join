@@ -32,6 +32,7 @@ function login() {
             "user-background-color": "gray"
         }
         saveLoggedInUser()
+        localStorage.setItem("task_id", JSON.stringify(0))
         window.location.href = './summary.html'
     }
 }

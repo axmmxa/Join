@@ -2,7 +2,6 @@ let currentDraggedElement;
 
 
 function checkUserTasks() {
-
     for (let i = 0; i < users.length; i++) {
         const currentUser = users[i];
     
@@ -15,10 +14,15 @@ function checkUserTasks() {
 
 async function updateHTML() {
     console.log("updateHTML function")
-    // getUserDataLocalstorage()
-    // loadLoggedInUser()
+    
     let user_task_array = checkUserTasks()
-   console.log(user_task_array) 
+
+    if (loggedInUser.name = "Guest") {
+        user_task_array = loggedInUser.tasks
+    }
+    
+    console.log(user_task_array) 
+
     //container with category todo
     let todo = user_task_array.filter(t => t['status'] == 'todo')
 
@@ -113,7 +117,7 @@ async function updateHTML() {
         </div>
         `
 
-    for( let index = 0; index < done.length; index++) {
+    for(let index = 0; index < done.length; index++) {
         const element = done[index]
         console.log(element)
 
@@ -138,7 +142,8 @@ async function updateHTML() {
         correctCategory = currentTask.category
         getCategoryColor(correctCategory,correctId)
     }
-        
+    
+    
     loadBoardContactBackgroundColor()
 
 }
@@ -146,7 +151,7 @@ async function updateHTML() {
 function generateTodoHTML(element) {
     // ${JSON.stringify(element).split('"').join("&quot;")}
     return `
-    <div draggable="true" ondragstart="startDragging(${element['id_task']})" onclick="renderBoardTaskInfo(${element['id_task']})" class="added-task">
+    <div id="added-task-${element.id_task}" draggable="true" ondragstart="startDragging(${element.id_task})" onclick="renderBoardTaskInfo(${element.id_task})" class="added-task">
     <span class="task-topic white-text">${element.category}</span>
     <h4 class="task-headline blue-text">${element.title}</h4>
     <span class="added-text">${element.description}</span>
@@ -177,6 +182,11 @@ function allowDrop(ev) {
 
 function moveTo(status) {
     let user_task_array = checkUserTasks()
+    
+    if (loggedInUser.name == "Guest") {
+        user_task_array = loggedInUser.name
+    }
+    
     user_task_array[currentDraggedElement]['status'] = status // status will change
     updateHTML()
 }

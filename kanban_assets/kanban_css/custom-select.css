@@ -17,10 +17,19 @@
     height: auto;
     position: absolute;
     top: 32px;
-    right: 22px;
+    right: 20px;
+}
+
+.arrow-down {
+   position: absolute;
+   top: 7px;
+   right: 30px;
+   height: 10px;
+   width: 10px;
 }
 
 .first-select-option-container {
+    position: relative;
     cursor: pointer;
     width: 95%;
     border: none;

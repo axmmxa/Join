@@ -17,12 +17,12 @@ function showCustomSelectOptionsTaskInfo() {
 function showAddContact(index) {
     let custom_select = document.querySelectorAll(".custom-select")
     let add_option = document.querySelectorAll(".add-option")
-    let plus_select = document.querySelectorAll(".plus-select")
+    let arrow_down = document.querySelectorAll(".arrow-down")
 
     for (let i = 0; i < add_option.length; i++) {
         if (i == index) {
             custom_select[index].classList.add("d-none")
-            plus_select[index].classList.add("d-none")
+            arrow_down[index].classList.add("d-none")
             add_option[index].classList.remove("d-none")
         }
     }
@@ -32,13 +32,12 @@ function showAddContact(index) {
   function closeAddContact(index) {
     let custom_select = document.querySelectorAll(".custom-select")
     let add_option = document.querySelectorAll(".add-option")
-    let plus_select = document.querySelectorAll(".plus-select")
-
+    let arrow_down = document.querySelectorAll(".arrow-down")
 
     for (let i = 0; i < add_option.length; i++) {
         if (i == index) {
             custom_select[index].classList.remove("d-none")
-            plus_select[index].classList.remove("d-none")
+            arrow_down[index].classList.remove("d-none")
             add_option[index].classList.add("d-none")
         }
     }
@@ -46,11 +45,16 @@ function showAddContact(index) {
   
 
   function addNewContactOption(index) {
-    let custom_select_options_container = document.querySelectorAll(".custom-select-options-container")
+    let custom_select_contact_container = document.querySelector(".custom-select-contact-container")
     let add_contact_input = document.getElementById("add-contact-input").value
 
-    custom_select_options_container[index].innerHTML += `<label class="custom-select-option"> ${add_contact_input} <input onclick="returnSelectedContacts(this)" value="${add_contact_input}" class="selected-option" type="checkbox"></label> `
+    custom_select_contact_container.innerHTML += `<label class="custom-select-option"> ${add_contact_input} <input onclick="returnSelectedContacts(this)" value="${add_contact_input}" class="selected-option" type="checkbox"></label> `
     
+    let custom_select_category_container = document.querySelector(".custom-select-category-container")
+    let add_category_input = document.getElementById("add-category-input").value
+
+    closeAddContact(index)
+
   }
 
   

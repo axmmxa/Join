@@ -5,7 +5,7 @@ function templateSmallContacts() {
             <span onclick="closeSmallContacts()" class="arrow white-text">X</span>
         </div>
         <div class="upper-part-small-contacts light-blue">
-            <img class="logo-height" src="kanban_img/login_icons/join_blue.png">
+            <img class="logo-height" src="kanban_img/login_icons/join_white.png">
             <h1 class="white-text">Add Contact</h1>
             <span class="white-text">Tasks are better in a team</span>
         </div>
@@ -358,3 +358,22 @@ function selectedLink(id) {
     document.getElementById(id).style.border = "1px solid transparent"
     document.getElementById(id).style.borderRadius = "8px"
 }
+
+if (document.getElementById("summary-body")) {
+    document.querySelector(".task-urgent").addEventListener("click", () => {
+        location.href = "board.html"
+    })
+    
+    document.querySelector(".task-card-upper").addEventListener("click", () => {
+        location.href = "board.html"
+    })
+    
+    for (let i = 1; i <=  document.querySelectorAll(".task-card-lower").length; i++) {
+        document.querySelector(`#task-card-lower-${i}`).addEventListener("click", () => {
+            location.href = "board.html"
+        })
+    }
+    
+}
+
+
