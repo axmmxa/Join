@@ -363,9 +363,11 @@ function renderSmallAddTask() {
     if (loggedInUser.name !== "Guest") {
     
       for (let i = 0; i < contact_names.length; i++) {
-      if (i == index) {     
+      if (i == index && window.innerWidth > 874) {     
       document.querySelector("#contact-information").innerHTML = templateContactInformation(email,name,i)
-      } 
+      } else {
+        document.querySelector("#contact-information-mobile").innerHTML = templateContactInformation(email,name,i)
+      }
     }
 
   await downloadFromServer();
@@ -393,7 +395,9 @@ function renderSmallAddTask() {
   for (let i = 0; i < contact_names.length; i++) {
     if (i == index) {     
     document.querySelector("#contact-information").innerHTML = templateContactInformation(email,name,i)
-    } 
+    } else if (window.innerWidth <= 874) {
+      document.querySelector("#contact-information-mobile").innerHTML = templateContactInformation(email,name,i)
+    }
   }
 
   for (let j = 0; j < loggedInUser.contacts.length; j++) {

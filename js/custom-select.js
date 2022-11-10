@@ -53,6 +53,8 @@ function showAddContact(index) {
     let custom_select_category_container = document.querySelector(".custom-select-category-container")
     let add_category_input = document.getElementById("add-category-input").value
 
+    custom_select_category_container.innerHTML += `<label onclick="returnSelectedCategory(id)" id="${add_category_input}" class="custom-select-option">${add_category_input}</label>`
+   
     closeAddContact(index)
 
   }

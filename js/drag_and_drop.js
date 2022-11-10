@@ -17,7 +17,7 @@ async function updateHTML() {
     
     let user_task_array = checkUserTasks()
 
-    if (loggedInUser.name = "Guest") {
+    if (loggedInUser.name == "Guest") {
         user_task_array = loggedInUser.tasks
     }
     
