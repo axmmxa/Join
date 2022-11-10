@@ -184,7 +184,7 @@ function moveTo(status) {
     let user_task_array = checkUserTasks()
     
     if (loggedInUser.name == "Guest") {
-        user_task_array = loggedInUser.name
+        user_task_array = loggedInUser.tasks
     }
     
     user_task_array[currentDraggedElement]['status'] = status // status will change

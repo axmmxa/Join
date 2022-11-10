@@ -35,7 +35,7 @@
             <img class="logo" src="kanban_img/login_icons/join_white.png">
 
             <div class="info">
-                <p class="name" onclick="renderSmallContacts()">Kanban Project Management Tool</p>
+                <p class="name">Kanban Project Management Tool</p>
                 <a class="help-btn-container" href="kanban_assets/help.html"><img class="help" src="kanban_img/small_navbar_icons/help.png"></a>
                 <div class="user-logout-icon-container"></div>
             </div>
@@ -70,11 +70,10 @@
         </div>
 
         <div class="main-field">
-            <button class="add-person-btn-mobile">Add Contacts <img class="add-person-img" src="kanban_img/add_icons/add_person.png"></button>
+            <button onclick="renderSmallContacts()" class="add-person-btn-mobile">New Contact <img class="add-person-img" src="kanban_img/add_icons/add_person.png"></button>
 
             <div id="contact-book" class="contacts-left">
 
-               
             </div>
 
             <div class="contacts-right">
@@ -82,7 +81,7 @@
 
                 </div>
 
-                <button onclick="renderSmallContacts()" class="add-person-btn">Add Contacts <img class="add-person-img" src="kanban_img/add_icons/add_person.png"></button>
+                <button onclick="renderSmallContacts()" class="add-person-btn">New Contact <img class="add-person-img" src="kanban_img/add_icons/add_person.png"></button>
             </div>
 
             <div class="sidebar-mobile">
@@ -97,32 +96,10 @@
 
     </main>
 
-    <div id="small-contacts-container" class="d-none">
-        <div id="small-contacts-container-close-btn-container" class="light-blue">
-            <span onclick="closeSmallContacts()" class="arrow white-text">X</span>
-        </div>
-        <div class="upper-part-small-contacts light-blue">
-            <img class="logo-height" src="kanban_img/login_icons/join_white.png">
-            <h1 class="white-text">Add Contact</h1>
-            <span class="white-text">Tasks are better in a team</span>
-        </div>
+    
 
-        <div class="lower-part-small-contacts">
-            <img class="anonymous-profile-picture" src="kanban_img/user_icons/anonym_profile_picture.png">
-
-            <div class="small-contacts-add-data">
-                <div class="login-data">
-                    <input id="small-add-contacts-name" type="text" placeholder="Name">
-                    <input id="small-add-contacts-email" type="text" placeholder="E-mail">
-                    <input id="small-add-contacts-phone" type="text" placeholder="Phone">
-                </div>
-
-                <div class="small-contacts-btn-container">
-                    <button onclick="" class="delete-btn">Cancel <span class="close-x">X</span></button>
-                    <button id="add-contact-create-btn" onclick="addContactToBook()" class="create-btn">Create Contact <img class="white-clear" src="kanban_img/clear_icons/white_clear.png"></button>
-                </div>
-            </div>
-        </div>
+    <div id="edit-small-contacts-container" class="z-index-1">
+        
     </div>
 
     <div id="task-popup" class="popups centered d-none">

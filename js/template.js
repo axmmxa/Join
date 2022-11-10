@@ -31,10 +31,11 @@ function templateSmallContacts() {
 }
 
 
-function templateSmallEditContacts(contact_name,contact_email,contact_phone) {
+function templateSmallEditContacts(contact_name,contact_email,contact_phone,i) {
     return  `
+    <div id="small-contacts-container-${i}" class="edit-contact-container"> 
     <div id="small-contacts-container-close-btn-container" class="blue">
-        <span onclick="closeSmallEditContacts()" class="arrow white-text">X</span>
+        <span onclick="closeSmallEditContacts(${i})" class="arrow white-text">X</span>
     </div>
     <div class="upper-part-small-contacts blue">
         <img class="logo-height" src="kanban_img/login_icons/join_white.png">
@@ -56,7 +57,7 @@ function templateSmallEditContacts(contact_name,contact_email,contact_phone) {
             </div>
         </form>
     </div>
-
+    </div>
     `
 }
 
@@ -296,7 +297,7 @@ function templateContactInformation(email,name,i) {
     <div class="contact-information-lower-part">
         <div class="contact-information-edit">
             <h3 class="contact-information-headline">Contact Information</h3>
-            <div onclick="renderSmallEditContacts('${contact_names[i]}','${contact_emails[i]}','${contact_phones[i]}')" class="contact-information-edit-container"><img src="kanban_img/edit_icons/edit_pen_blue.png"> <span>Edit Contact</span></div>
+            <div onclick="renderSmallEditContacts('${contact_names[i]}','${contact_emails[i]}','${contact_phones[i]}',${i})" class="contact-information-edit-container"><img src="kanban_img/edit_icons/edit_pen_blue.png"> <span>Edit Contact</span></div>
         </div>
 
         <div class="contact-information-email-container">

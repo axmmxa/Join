@@ -15,6 +15,7 @@ function login() {
     let email = document.getElementById("e-mail").value
     let password = document.getElementById("password").value
     
+    console.log(loggedInUser)
     loggedInUser = users.find(u => u.email == email && u.password == password)
     console.log(loggedInUser)
 
@@ -23,6 +24,7 @@ function login() {
         saveLoggedInUser()
         window.location.href = './summary.html'
     } else {
+        console.log("Guest login")
         loggedInUser = {
             "contacts": [],
             "tasks": [],

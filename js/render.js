@@ -1,45 +1,50 @@
 function closeSmallContacts() {
     document.getElementById("small-contacts-container").classList.add("d-none")
-    
+    document.getElementById("small-contacts-container").classList.add("z-index-1")
 
     document.querySelector(".kanban-navbar").style.opacity = 1
     document.querySelector(".kanban-main").style.opacity = 1    
 }
 
 function renderSmallContacts() {
-    if ( document.getElementById("small-contacts-container")) {
-        document.getElementById("small-contacts-container").classList.remove("d-none")
-        
-
+    if (document.getElementById("small-contacts-container")) {
+        document.querySelector("body").innerHTML += templateSmallContacts()
+        document.querySelector("#small-contacts-container").classList.remove("z-index-1")
+        // document.getElementById("small-contacts-container").classList.remove("d-none")
+    
         document.querySelector(".kanban-navbar").style.opacity = 0.5
         document.querySelector(".kanban-main").style.opacity = 0.5    
     } else {
-        document.querySelector(".kanban-navbar").style.opacity = 0.5
-        document.querySelector(".kanban-main").style.opacity = 0.5   
+      document.querySelector("body").innerHTML += templateSmallContacts()
+      document.querySelector("#small-contacts-container").classList.remove("z-index-1")
+      // document.getElementById("small-contacts-container").classList.remove("d-none")
 
-        // document.querySelector("body").innerHTML += templateSmallContacts()
-
-        // document.querySelector("#small-contacts-container").classList.remove("not-opened")
+      document.querySelector(".kanban-navbar").style.opacity = 0.5
+      document.querySelector(".kanban-main").style.opacity = 0.5  
+           
     }
-
 }
 
-function closeSmallEditContacts() {
-    document.getElementById("edit-small-contacts-container").classList.add("d-none")
-
+function closeSmallEditContacts(i) {
+    document.querySelector(`#small-contacts-container-${i}`).classList.add("d-none");
+    document.querySelector(`#small-contacts-container-${i}`).classList.remove("box-shadow");
+    document.querySelector(`#edit-small-contacts-container`).classList.add("z-index-1")
+     
     document.querySelector(".kanban-navbar").style.opacity = 1
     document.querySelector(".kanban-main").style.opacity = 1
 }
 
 
-async function renderSmallEditContacts(contact_name,contact_email,contact_phone) {
-    if (document.getElementById("edit-small-contacts-container")) {
-       
-          console.log("asdf")
-          document.getElementById("edit-small-contacts-container").classList.remove("d-none")
-
-          document.querySelector("#edit-small-contacts-container").innerHTML = templateSmallEditContacts(contact_name,contact_email,contact_phone)
-         
+async function renderSmallEditContacts(contact_name,contact_email,contact_phone, i) {
+    if (loggedInUser.name !== "Guest") {
+          
+          document.querySelector(`#edit-small-contacts-container`).innerHTML = templateSmallEditContacts(contact_name,contact_email,contact_phone, i)
+          
+          document.querySelector(`#small-contacts-container-${i}`).classList.remove("d-none");
+          document.querySelector(`#small-contacts-container-${i}`).classList.add("box-shadow");
+          document.querySelector(`#edit-small-contacts-container`).classList.remove("z-index-1")
+      
+          
           await downloadFromServer();
           users = JSON.parse(backend.getItem('users')) || [];
           let user_icons = document.querySelectorAll(".user-icon-edit-contact")
@@ -67,13 +72,16 @@ async function renderSmallEditContacts(contact_name,contact_email,contact_phone)
         document.querySelector(".kanban-main").style.opacity = 0.5
 
     } else {
-      console.log("asdf")
-
+  
         document.querySelector(".kanban-navbar").style.opacity = 0.5
         document.querySelector(".kanban-main").style.opacity = 0.5
 
-        document.querySelector("body").innerHTML += templateParentSmallEditContacts(contact_name,contact_email,contact_phone)
-
+        document.querySelector(`#edit-small-contacts-container`).innerHTML = templateSmallEditContacts(contact_name,contact_email,contact_phone, i)
+        document.querySelector(`#small-contacts-container-${i}`).classList.remove("d-none");
+        document.querySelector(`#small-contacts-container-${i}`).classList.add("box-shadow")
+        document.querySelector(`#edit-small-contacts-container`).classList.remove("z-index-1")
+         
+        
         let user_icons = document.querySelectorAll(".user-icon-edit-contact")
           let correctColor;
 
@@ -114,7 +122,6 @@ async function renderSmallEditContacts(contact_name,contact_email,contact_phone)
           }
       }
     }
-   
 }
 
 
@@ -180,9 +187,7 @@ function renderSmallEditTask(id_task) {
 }
 
 async function showTaskInfo(id_task) {
-
     if (loggedInUser.name !== "Guest") {
-      
     for (let i = 0; i < users.length; i++) {
       console.log(users)
       const currentUser = users[i];            
@@ -190,7 +195,6 @@ async function showTaskInfo(id_task) {
           for (let j = 0; j < currentUser.tasks.length; j++) {
               let userTaskId = currentUser.tasks[j]
               if (userTaskId.id_task == id_task) {
-
                   document.querySelector("body").innerHTML += templateShowTaskInfo(userTaskId, id_task, j)
                  
                   console.log(userTaskId.category)
@@ -489,7 +493,7 @@ function renderSavedContacts() {
 
       document.querySelector(`.contacts-${first_letter_contact}-data`).innerHTML += 
       `
-      <div onclick="renderContactInformation('${contact.contact_email}', '${contact.contact_name}')" class="contact-info">
+      <div onclick="renderContactInformation('${contact.contact_email}','${contact.contact_name}')" class="contact-info">
       <div class="user-icon-background-color-container">
           <div id="${contact.contact_name}" class="user-icon">${getUserIcon(contact.contact_name)}</div>
       </div>
@@ -538,7 +542,9 @@ async function addContactToBook() {
     }
   }
 
-    if (loggedInUser.name !== "Guest") {
+    if (loggedInUser.name !== "Guest") {  
+    let small_add_contacts_name = document.getElementById("small-add-contacts-name").value
+
     await backend.setItem('users', JSON.stringify(users))
     let first_letter = small_add_contacts_name[0].toUpperCase()
 
@@ -546,7 +552,7 @@ async function addContactToBook() {
 
     document.querySelector(`.contacts-${first_letter}-data`).innerHTML += 
         `
-        <div onclick="renderContactInformation('${small_add_contacts_email}','${small_add_contacts_name}')" class="contact-info">
+        <div onclick="renderContactInformation('${small_add_contacts_email}', '${small_add_contacts_name}')" class="contact-info">
         <div class="user-icon-container">
             <div id="${small_add_contacts_name}" class="user-icon">${getUserIcon(small_add_contacts_name)}</div>
         </div>
@@ -562,6 +568,8 @@ async function addContactToBook() {
       closeSmallContacts()
 
     } else {
+      let small_add_contacts_name = document.getElementById("small-add-contacts-name").value
+  
       localStorage.setItem("loggedInUser", JSON.stringify(loggedInUser)); 
       let first_letter = small_add_contacts_name[0].toUpperCase()
 
@@ -569,7 +577,7 @@ async function addContactToBook() {
 
       document.querySelector(`.contacts-${first_letter}-data`).innerHTML += 
         `
-        <div onclick="renderContactInformation('${small_add_contacts_email}',${small_add_contacts_name})" class="contact-info">
+        <div onclick="renderContactInformation('${small_add_contacts_email}', '${small_add_contacts_name}')" class="contact-info">
         <div class="user-icon-container">
             <div id="${small_add_contacts_name}" class="user-icon">${getUserIcon(small_add_contacts_name)}</div>
         </div>

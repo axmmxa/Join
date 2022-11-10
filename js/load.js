@@ -114,6 +114,7 @@ async function saveEditedContact(contact_email) {
   let small_edit_contacts_email = document.getElementById("small-edit-contacts-email").value
   let small_edit_contacts_phone = document.getElementById("small-edit-contacts-phone").value
 
+  if (loggedInUser.name !== "Guest") { 
   for (let i = 0; i < users.length; i++) {
     const currentUsers = users[i];
     for (let j = 0; j < currentUsers.contacts.length; j++) {
@@ -122,12 +123,31 @@ async function saveEditedContact(contact_email) {
           currentContact.contact_name = small_edit_contacts_name
           currentContact.contact_email = small_edit_contacts_email
           currentContact.contact_phone = small_edit_contacts_phone
-          saveUsersArray()    
+          saveUsersArray()   
+          await backend.setItem('users', JSON.stringify(users))
+          document.querySelector(".contacts-left").innerHTML = ""
+          document.querySelector(".contacts-right").innerHTML = ""
+          renderContactBook()
+          loadContactBackgroundColor() 
       }
     }
   }
-  await backend.setItem('users', JSON.stringify(users))
-  loadContactBackgroundColor()
+} else {
+  for (let j = 0; j < loggedInUser.contacts.length; j++) {
+    const currentContact = loggedInUser.contacts[j];
+    if (currentContact.contact_email == contact_email) {
+        currentContact.contact_name = small_edit_contacts_name
+        currentContact.contact_email = small_edit_contacts_email
+        currentContact.contact_phone = small_edit_contacts_phone
+        localStorage.setItem("loggedInUser", JSON.stringify(loggedInUser));
+         document.querySelector(".contacts-left").innerHTML = ""
+          document.querySelector(".contacts-right").innerHTML = ""
+        renderContactBook() 
+        loadContactBackgroundColor() 
+    }
+  }
+  }
+  
   // location.reload(true)
  
 }
