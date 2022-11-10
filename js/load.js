@@ -126,7 +126,12 @@ async function saveEditedContact(contact_email) {
           saveUsersArray()   
           await backend.setItem('users', JSON.stringify(users))
           document.querySelector(".contacts-left").innerHTML = ""
-          document.querySelector(".contacts-right").innerHTML = ""
+          document.querySelector(".contacts-right").innerHTML = 
+            `<div id='contact-information'></div>
+            <button onclick="renderSmallContacts()" class="add-person-btn">New Contact 
+            <img class='add-person-img' src="kanban_img/add_icons/add_person.png">
+            </button>
+            `
           renderContactBook()
           loadContactBackgroundColor() 
       }
@@ -140,8 +145,14 @@ async function saveEditedContact(contact_email) {
         currentContact.contact_email = small_edit_contacts_email
         currentContact.contact_phone = small_edit_contacts_phone
         localStorage.setItem("loggedInUser", JSON.stringify(loggedInUser));
-         document.querySelector(".contacts-left").innerHTML = ""
-          document.querySelector(".contacts-right").innerHTML = ""
+        document.querySelector(".contacts-left").innerHTML = ""
+        document.querySelector(".contacts-right").innerHTML = 
+        `
+        <div id='contact-information'></div>
+        <button onclick="renderSmallContacts()" class="add-person-btn">New Contact 
+        <img class='add-person-img' src="kanban_img/add_icons/add_person.png">
+        </button>
+        `
         renderContactBook() 
         loadContactBackgroundColor() 
     }

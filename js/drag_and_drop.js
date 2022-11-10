@@ -143,7 +143,7 @@ async function updateHTML() {
         getCategoryColor(correctCategory,correctId)
     }
     
-    
+    localStorage.setItem("loggedInUser", JSON.stringify(loggedInUser));
     loadBoardContactBackgroundColor()
 
 }
