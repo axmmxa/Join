@@ -6,6 +6,13 @@
     display: flex;
     align-items: center;
 }
+
+.d-flex-end {
+    width: 95%;
+    display: flex;
+    justify-content: flex-end;
+}
+
 .margin {
     margin: 10px 0px;
 }
@@ -338,4 +345,58 @@ body::-webkit-scrollbar {
     border-radius: 20px;       /* roundness of the scroll thumb */
     border: 3px solid orange;  /* creates padding around scroll thumb */
   }
+
+  
+  input[type="date"]::-webkit-calendar-picker-indicator {  
+    cursor: pointer;
+    content: url("../../kanban_img/date_icons/date_img.png");
+    background: none;
+    margin-right: 26px;
+    height: 16px;
+    width: 16px;
+}
+
+
+.edit-contact-container-mobile {
+    width: 70%;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-top-right-radius: 18px;
+    border-top-left-radius: 18px;
+    border-end-start-radius: 18px;
+    border-end-end-radius: 18px;
+}
+
+.user-icon-big-mobile {
+    padding: 30px;
+    border: 2px solid white;
+    margin-top: -160px;
+}
+
+.upper-part-small-contacts-mobile {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    height: 190px;
+    z-index: 2;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 10px;
+}
+
+.lower-part-small-contacts-mobile {
+    height: 365px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: white;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    border-end-start-radius: 18px;
+    border-end-end-radius: 18px;
+}
+
+
+
+
+
 

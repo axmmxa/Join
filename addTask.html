@@ -83,11 +83,11 @@
             <div class="add-task-container">
                 <div class="task-form-left">
                     <form class="task-form">
-                        <input id="input-title" class="input-title" type="text" placeholder="Enter a title">
+                        <input id="input-title" class="input-title" type="text" placeholder="Enter a title" required>
 
                         <div class="contacts-container">
                             <div class="add-option d-none">
-                                <input id="add-contact-input" class="add-option-input" type="text" placeholder="Contact email">
+                                <input id="add-contact-input" class="add-option-input" type="text" placeholder="Contact email" required>
                                 <div class="add-option-btn-container">
                                     <img onclick="closeAddContact(0)" class="close-x-blue-btn" src="kanban_img/close_icons/close_x_blue.png">
                                     <img onclick="addNewContactOption(0)" class="blue-clear-btn" src="kanban_img/clear_icons/blue_clear.png">
@@ -111,13 +111,12 @@
                         </div>
 
                         <div class="due-date-container">
-                            <label class="label-flex" for="due-date">Due date<input placeholder="dd/mm/yyyy" id="due-date"type="text"></label>
-                            <img class="date-img" src="kanban_img/date_icons/date_img.png" />
+                            <label class="label-flex" for="due-date">Due date<input placeholder="dd/mm/yyyy" id="due-date"type="date" required></label>
                         </div>
 
                         <div class="task-category-container">
                             <div class="add-option d-none">
-                                <input id="add-category-input" class="add-option-input" type="text" placeholder="New category name">
+                                <input id="add-category-input" class="add-option-input" type="text" placeholder="New category name" required>
                                 <div class="add-option-btn-container">
                                     <img onclick="closeAddContact(1)" class="close-x-blue-btn" src="kanban_img/close_icons/close_x_blue.png">
                                     <img onclick="addNewContactOption(1)" class="blue-clear-btn" src="kanban_img/clear_icons/blue_clear.png">

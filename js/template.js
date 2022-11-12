@@ -15,9 +15,9 @@ function templateSmallContacts() {
 
             <div class="small-contacts-add-data">
                 <div class="login-data">
-                    <input id="small-add-contacts-name" type="text" placeholder="Name">
-                    <input id="small-add-contacts-email" type="text" placeholder="E-mail">
-                    <input id="small-add-contacts-phone" type="text" placeholder="Phone">
+                    <input id="small-add-contacts-name" type="text" placeholder="Name" required>
+                    <input id="small-add-contacts-email" type="text" placeholder="E-mail" required>
+                    <input id="small-add-contacts-phone" type="text" placeholder="Phone" required>
                 </div>
 
                 <div class="small-contacts-btn-container">
@@ -47,9 +47,9 @@ function templateSmallEditContacts(contact_name,contact_email,contact_phone,i) {
 
         <form onsubmit="saveEditedContact('${contact_email}'); return false" class="small-contacts-add-data">
             <div class="login-data">
-                <input value="${contact_name}" id="small-edit-contacts-name" type="text" placeholder="Name">
-                <input value="${contact_email}" id="small-edit-contacts-email" type="text" placeholder="E-mail">
-                <input value="${contact_phone}" id="small-edit-contacts-phone" type="text" placeholder="Phone">
+                <input value="${contact_name}" id="small-edit-contacts-name" type="text" placeholder="Name" required>
+                <input value="${contact_email}" id="small-edit-contacts-email" type="text" placeholder="E-mail" required>
+                <input value="${contact_phone}" id="small-edit-contacts-phone" type="text" placeholder="Phone" required>
             </div>
 
             <div class="small-contacts-btn-container">
@@ -60,6 +60,39 @@ function templateSmallEditContacts(contact_name,contact_email,contact_phone,i) {
     </div>
     `
 }
+
+function templateSmallEditContactsMobile(contact_name,contact_email,contact_phone,i) {
+    return  `
+    <div id="small-contacts-container-mobile-${i}" class="edit-contact-container-mobile centered"> 
+    <div id="small-contacts-container-close-btn-container" class="light-blue">
+        <span onclick="closeSmallEditContactsMobile(${i})" class="arrow white-text">X</span>
+    </div>
+    <div class="upper-part-small-contacts-mobile light-blue">
+        <h1 class="white-text">Edit Contact</h1>
+        <p class="white-text">Tasks are better with a team!</p>
+    </div>
+
+    <div class="lower-part-small-contacts-mobile">
+    <div id="${contact_name}" class="user-icon-edit-contact user-icon-big-mobile fs-22">${getUserIcon(contact_name)}</div>
+
+        <form onsubmit="saveEditedContact('${contact_email}'); return false" class="small-contacts-add-data">
+            <div class="login-data margin">
+                <input value="${contact_name}" id="small-edit-contacts-name" type="text" placeholder="Name" required>
+                <input value="${contact_email}" id="small-edit-contacts-email" type="text" placeholder="E-mail" required>
+                <input value="${contact_phone}" id="small-edit-contacts-phone" type="text" placeholder="Phone" required>
+            </div>
+
+            <div class="small-contacts-btn-container">
+                <button class="create-btn">Save</button>
+            </div>
+        </form>
+    </div>
+    </div>
+    
+    `
+
+}
+
 
 function templateParentSmallEditContacts(contact_name,contact_email,contact_phone) {
     return `
@@ -77,9 +110,9 @@ function templateParentSmallEditContacts(contact_name,contact_email,contact_phon
 
             <form onsubmit="saveEditedContact('${contact_email}'); return false" class="small-contacts-add-data">
                 <div class="login-data">
-                    <input value="${contact_name}"  id="small-edit-contacts-name" type="text" placeholder="Name">
-                    <input value="${contact_email}" id="small-edit-contacts-email" type="text" placeholder="E-mail">
-                    <input value="${contact_phone}" id="small-edit-contacts-phone" type="text" placeholder="Phone">
+                    <input value="${contact_name}"  id="small-edit-contacts-name" type="text" placeholder="Name" required>
+                    <input value="${contact_email}" id="small-edit-contacts-email" type="text" placeholder="E-mail" required>
+                    <input value="${contact_phone}" id="small-edit-contacts-phone" type="text" placeholder="Phone" required>
                 </div>
 
                 <div class="small-contacts-btn-container">
@@ -156,7 +189,7 @@ function templateSmallEditTask(id_task) {
     `
 }
 
-function templateShowTaskInfo(userTaskId, id_task,j) {
+function templateShowTaskInfo(userTaskId, id_task, j) {
     return  `
     <div id="small-board-task-info-${id_task}" class="small-board-task-info">
                 <div class="close-btn-container-task-info">
@@ -263,7 +296,6 @@ function templateSmallAddTask() {
             </div>
 
             <div class="category-container">
-
                 <img class="plus-select-subtask" src="kanban_img/plus_icons/plus_blue.png">
 
                 <label class="category-label" for="subtask-category">Subtask<input onclick="showAddSubtask()" id="subtask-category" placeholder="Add new subtask" type="text"></label>
@@ -317,32 +349,51 @@ function templateContactInformation(email,name,i) {
 
 function templateContactInformationMobile(email,name,i) {
     return  `
-    <div class="contact-information-upper-part">
-        <div class="user-icon user-icon-big fs-22">${getUserIcon(contact_names[i])}</div>
-        <div class="contact-information-name-container">
-            <h1 class="contact-information-name">${contact_names[i]}</h1>
-            <div onclick="renderSmallAddTask()" class="contact-information-add-task-container"><img src="kanban_img/plus_icons/plus_blue.png"> <span class="light-blue-text">Add Task</span></div>
+    <div>
+        <p class="light-blue-text">Kanban Project Management Tool</p>
+        <div class="legal-notice-arrow-container">
+                <a class="d-flex-end" href="./contacts.html"><img class="arrow" src="kanban_img/arrow_icons/blue_arrow.png"></a>
+        </div>
+        <div class="contact-information-upper-part">
+            <div class="user-icon user-icon-big fs-22">${getUserIcon(contact_names[i])}</div>
+            <div class="contact-information-name-container">
+                <h1 class="contact-information-name">${contact_names[i]}</h1>
+                <div onclick="renderSmallAddTask()" class="contact-information-add-task-container"><img src="kanban_img/plus_icons/plus_blue.png"> <span class="light-blue-text">Add Task</span></div>
+            </div>
+        </div>      
+        <div class="contact-information-lower-part">
+            <div class="contact-information-edit">
+                <h3 class="contact-information-headline">Contact Information</h3>
+                <div onclick="renderSmallEditContacts('${contact_names[i]}','${contact_emails[i]}','${contact_phones[i]}')" class="contact-information-edit-container"><img src="kanban_img/edit_icons/edit_pen_blue.png"> <span>Edit Contact</span></div>
+            </div>      
+            <div class="contact-information-email-container">
+                <h4>Email</h4>
+                <span class="darkblue-text">${contact_emails[i]}</span>
+            </div>      
+            <div class="contact-information-mobil-container">
+                <h4>Mobil</h4>
+                <span>${contact_phones[i]}</span>
+            </div>      
+            <div class="margin d-flex-end">
+                <button onclick="renderSmallEditContactsMobile('${contact_names[i]}','${contact_emails[i]}','${contact_phones[i]}' ,${i})" class="edit-btn light-blue"><img class="edit-pen-height" src="kanban_img/edit_icons/edit_pen_white.png"></button>
+            </div>  
         </div>
     </div>
 
-    <div class="contact-information-lower-part">
-        <div class="contact-information-edit">
-            <h3 class="contact-information-headline">Contact Information</h3>
-            <div onclick="renderSmallEditContacts('${contact_names[i]}','${contact_emails[i]}','${contact_phones[i]}')" class="contact-information-edit-container"><img src="kanban_img/edit_icons/edit_pen_blue.png"> <span>Edit Contact</span></div>
-        </div>
-
-        <div class="contact-information-email-container">
-            <h4>Email</h4>
-            <span class="darkblue-text">${contact_emails[i]}</span>
-        </div>
-
-        <div class="contact-information-mobil-container">
-            <h4>Mobil</h4>
-            <span>${contact_phones[i]}</span>
-        </div>
-
+    <div class="sidebar-mobile">
+            <div class="kanban-btns">
+                <a id="kanban-link-5" href="summary.html" class="kanban-link"><img class="kanban-img" src="kanban_img/small_navbar_icons/summary.png"><span>Summary</span></a>
+                <a id="kanban-link-6" href="board.html" class="kanban-link"><img class="kanban-img" src="kanban_img/small_navbar_icons/board.png"><span>Board</span></a>
+                <a id="kanban-link-7" href="addTask.html" class="kanban-link"><img class="kanban-img" src="kanban_img/small_navbar_icons/addTask.png"><span>Add Task</span></a>
+                <a id="kanban-link-8" href="contacts.html" class="kanban-link hover-blue" style="border: 1px solid transparent; border-radius: 8px;"><img class="kanban-img" src="kanban_img/small_navbar_icons/contacts.png"><span>Contacts</span></a>
+            </div>
     </div>
+
 `
+}
+
+function template() {
+    return ``
 }
 
 function showPopup(id) {

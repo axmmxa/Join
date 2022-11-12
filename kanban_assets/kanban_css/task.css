@@ -1,14 +1,19 @@
 .add-task-container {
     display: flex;
+    
 }
 
 .task-form-left {
     width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .task-form {
     display: flex;
     flex-direction: column;
+    justify-content: flex-end;
     width: 80%;
     margin: auto;
     margin-top: 10px;

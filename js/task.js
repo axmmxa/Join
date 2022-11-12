@@ -70,7 +70,10 @@ async function saveTask()  {
     console.log(id)
   } 
 
-  id = JSON.parse(localStorage.getItem("task_id"))
+  if (loggedInUser.name == "Guest") {
+    id = JSON.parse(localStorage.getItem("task_id"))
+  }
+ 
   
   let title = document.getElementById('input-title').value
   let due_date = document.getElementById('due-date').value

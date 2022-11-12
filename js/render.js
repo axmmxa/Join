@@ -35,6 +35,57 @@ function closeSmallEditContacts(i) {
 }
 
 
+function closeSmallEditContactsMobile(i) {
+  document.querySelector(`#small-contacts-container-mobile-${i}`).classList.add("d-none");
+    // document.querySelector(`#small-contacts-container-mobile-0-${i}`).classList.remove("box-shadow");
+    // document.querySelector(`#edit-small-contacts-container`).classList.add("z-index-1")
+     
+    document.querySelector(".kanban-navbar").style.opacity = 1
+    document.querySelector(".kanban-main").style.opacity = 1
+}
+
+async function renderSmallEditContactsMobile(contact_name,contact_email,contact_phone, i) {
+  if (document.querySelector(`#small-contacts-container-mobile-${i}`)) {
+    document.querySelector(`#small-contacts-container-mobile-${i}`).classList.remove("d-none");
+
+    document.querySelector(".kanban-navbar").style.opacity = 0.5
+    document.querySelector(".kanban-main").style.opacity = 0.5
+  } else {
+    document.querySelector(`body`).innerHTML += templateSmallEditContactsMobile(contact_name,contact_email,contact_phone, i)
+
+    await downloadFromServer();
+            users = JSON.parse(backend.getItem('users')) || [];
+            let user_icons = document.querySelectorAll(".user-icon-edit-contact")
+            let correctColor;
+        
+            for (let i = 0; i < users.length; i++) {
+                const currentUser = users[i];
+                if (currentUser.email == loggedInUser.email) {
+                  for (let j = 0; j < user_icons.length; j++) {
+                    for (let k = 0; k < currentUser.contacts.length; k++) {
+                      const currentContact = currentUser.contacts[k];
+                      BackgroundColorForEditContact[currentContact.contact_name] = currentContact["contact-background-color"]
+                    }
+                    for (let [key, value] of Object.entries(BackgroundColorForEditContact)) {
+                      if (key == user_icons[j].id) {
+                        correctColor = value
+                      }
+                    }
+                    user_icons[j].classList.add(correctColor)
+                  }
+              }
+            }  
+      
+            document.querySelector(".kanban-navbar").style.opacity = 0.5
+            document.querySelector(".kanban-main").style.opacity = 0.5
+    
+  }
+
+     
+}
+
+
+
 async function renderSmallEditContacts(contact_name,contact_email,contact_phone, i) {
     if (loggedInUser.name !== "Guest") {
           
@@ -361,12 +412,11 @@ function renderSmallAddTask() {
     let index = contact_emails.indexOf(email)
 
     if (loggedInUser.name !== "Guest") {
-    
       for (let i = 0; i < contact_names.length; i++) {
       if (i == index && window.innerWidth > 874) {     
       document.querySelector("#contact-information").innerHTML = templateContactInformation(email,name,i)
       } else {
-        document.querySelector("#contact-information-mobile").innerHTML = templateContactInformation(email,name,i)
+        document.querySelector(".main-field").innerHTML = templateContactInformationMobile(email,name,i)
       }
     }
 
@@ -382,8 +432,12 @@ function renderSmallAddTask() {
                   const currentContact = currentUser.contacts[j];
                   console.log("current contact", currentContact)
                   correctColor = currentContact["contact-background-color"]
-                  if(currentContact.contact_email == email) {
+                  if(currentContact.contact_email == email && window.innerWidth > 874) {
                      document.querySelectorAll(".user-icon")[currentUser.contacts.length].classList.add(correctColor)
+                  } else {
+                    document.querySelectorAll(".user-icon")[currentUser.contacts.length - 1].classList.add(correctColor)
+                    document.querySelector(".main-field").style.justifyContent = "space-between"
+                    document.querySelector(".main-field").style.alignItems = ""
                   }
                   
               }
@@ -396,7 +450,7 @@ function renderSmallAddTask() {
     if (i == index) {     
     document.querySelector("#contact-information").innerHTML = templateContactInformation(email,name,i)
     } else if (window.innerWidth <= 874) {
-      document.querySelector("#contact-information-mobile").innerHTML = templateContactInformation(email,name,i)
+      document.querySelector(".main-field").innerHTML = templateContactInformationMobile(email,name,i)
     }
   }
 
@@ -409,7 +463,6 @@ function renderSmallAddTask() {
             if(currentContact.contact_email == email) {
                document.querySelectorAll(".user-icon")[loggedInUser.contacts.length ].classList.add(correctColor)
             }
-            
         }
     }
 } 
