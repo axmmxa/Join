@@ -6,7 +6,6 @@ function showCustomSelectOptions(index) {
         selects[i].classList.toggle("d-none")   
     }
   }
-      
 }
 
 function showCustomSelectOptionsTaskInfo() {
@@ -45,21 +44,38 @@ function showAddContact(index) {
   
 
   function addNewContactOption(index) {
+
+  let checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+  if (index == 0) {
+    for (let j = 0; j < checkboxes.length; j++) {
+      const checkbox = checkboxes[j];
+      if (checkbox.checked) {
+        selected_options.pop(selected_options[j])
+      } 
+    }
+  }
+
+  if (selected_options.length == 0) {
+    let first_select_contact = document.getElementById("first-select-contacts")
+    first_select_contact.innerHTML = `Select contacts to assign` 
+  }   
+  
     let custom_select_contact_container = document.querySelector(".custom-select-contact-container")
     let add_contact_input = document.getElementById("add-contact-input").value
 
-    custom_select_contact_container.innerHTML += `<label class="custom-select-option"> ${add_contact_input} <input onclick="returnSelectedContacts(this)" value="${add_contact_input}" class="selected-option" type="checkbox"></label> `
+    custom_select_contact_container.innerHTML += `<label class="custom-select-option"> ${add_contact_input} <input onclick="returnSelectedContacts(this)" value="${add_contact_input}" class="selected-option" type="checkbox" autocomplete="off"></label> `
     
     let custom_select_category_container = document.querySelector(".custom-select-category-container")
     let add_category_input = document.getElementById("add-category-input").value
 
     custom_select_category_container.innerHTML += `<label onclick="returnSelectedCategory(id)" id="${add_category_input}" class="custom-select-option">${add_category_input}</label>`
    
-    closeAddContact(index)
-
-  }
-
-  
+    // closeAddContact(index)
+    
+}
+    
+      
 function showAddSubtask() {
     let subtask_category_container = document.querySelector("#subtask-category")
     let add_option_subtask = document.querySelector(".add-option-subtask")

@@ -101,8 +101,8 @@
                                 </div>
                                 <div class="custom-select-options-container d-none" >
                                     <div class="custom-select-contact-container">
-                                        <label class="custom-select-option">You <input onclick="returnSelectedContacts(this)" value="You" class="selected-option" type="checkbox"></label>
-                                        <label class="custom-select-option"> Maximilian Vogel <input onclick="returnSelectedContacts(this)" value="Maximilian Vogel" class="selected-option" type="checkbox"></label>       
+                                        <label class="custom-select-option">You <input onclick="returnSelectedContacts(this)" value="You" class="selected-option" type="checkbox" autocomplete="off"></label>
+                                        <label class="custom-select-option"> Maximilian Vogel <input onclick="returnSelectedContacts(this)" value="Maximilian Vogel" class="selected-option" type="checkbox" autocomplete="off"></label>       
                                     </div>
                                     <label onclick="showAddContact(0)" class="custom-select-option">Invite new contact <img src="kanban_img/invite_contact.png"></label>
                                 </div>
@@ -111,7 +111,7 @@
                         </div>
 
                         <div class="due-date-container">
-                            <label class="label-flex" for="due-date">Due date<input placeholder="dd/mm/yyyy" id="due-date"type="date" required></label>
+                            <label class="label-flex" for="due-date">Due date<input placeholder="dd/mm/yyyy" id="due-date" type="date" required></label>
                         </div>
 
                         <div class="task-category-container">
@@ -170,25 +170,23 @@
 
                 <div class="task-form-right">
                     <div class="create-task-container">
-                        <button class="delete-btn">Clear <span class="close-x">X</span></button>
                         <button onclick="saveTask()" class="create-btn">Create Task <img class="white-clear" src="kanban_img/clear_icons/white_clear.png"></button>
+                        <button style="margin-left: 10px;" class="delete-btn">Clear <span class="close-x">X</span></button>
                     </div>
 
                 </div>
             </div>
-
-
-            <div class="sidebar-mobile">
-                <div class="kanban-btns">
-                    <a id="kanban-link-4" href="summary.html" class="kanban-link"><img class="kanban-img" src="kanban_img/small_navbar_icons/summary.png"><span>Summary</span></a>
-                    <a id="kanban-link-5" href="board.html" class="kanban-link"><img class="kanban-img" src="kanban_img/small_navbar_icons/board.png"><span>Board</span></a>
-                    <a id="kanban-link-6" href="addTask.html" class="kanban-link"><img class="kanban-img" src="kanban_img/small_navbar_icons/addTask.png"><span>Add Task</span></a>
-                    <a id="kanban-link-7" href="contacts.html" class="kanban-link"><img class="kanban-img" src="kanban_img/small_navbar_icons/contacts.png"><span>Contacts</span></a>
-                </div>
-            </div>
-
         </div>
     </main>
+
+    <div class="sidebar-mobile">
+        <div class="kanban-btns">
+            <a id="kanban-link-4" href="summary.html" class="kanban-link"><img class="kanban-img" src="kanban_img/small_navbar_icons/summary.png"><span>Summary</span></a>
+            <a id="kanban-link-5" href="board.html" class="kanban-link"><img class="kanban-img" src="kanban_img/small_navbar_icons/board.png"><span>Board</span></a>
+            <a id="kanban-link-6" href="addTask.html" class="kanban-link"><img class="kanban-img" src="kanban_img/small_navbar_icons/addTask.png"><span>Add Task</span></a>
+            <a id="kanban-link-7" href="contacts.html" class="kanban-link"><img class="kanban-img" src="kanban_img/small_navbar_icons/contacts.png"><span>Contacts</span></a>
+        </div>
+    </div>
 
     <div id="task-popup" class="popups centered">
         Task added to Board <img class="popups-img" src="kanban_img/small_navbar_icons/white_board.png">

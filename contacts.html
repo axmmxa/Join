@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="login_assets/login_css/fonts.css">
     <link rel="stylesheet" href="login_assets/login_css/login.css">
 
-
     <link rel="stylesheet" href="kanban_assets/kanban_css/generalKanban.css">
     <link rel="stylesheet" href="kanban_assets/kanban_css/index.css">
 
@@ -31,7 +30,7 @@
 </head>
 
 <body id="contacts-body" onload="init()">
-    <nav class="kanban-navbar">
+    <nav class="kanban-navbar-mobile">
         <div class="inner-container">
             <img class="logo" src="kanban_img/login_icons/join_white.png">
 
@@ -53,7 +52,7 @@
         </div>
     </nav>
 
-
+    
     <main class="kanban-main">
         <div class="sidebar">
             <div class="inner-sidebar">
@@ -71,7 +70,7 @@
         </div>
 
         <div class="main-field">
-            <button onclick="renderSmallContacts()" class="add-person-btn-mobile">New Contact <img class="add-person-img" src="kanban_img/add_icons/add_person.png"></button>
+            <button onclick="renderSmallContactsMobile()" class="add-person-btn-mobile">New Contact <img class="add-person-img" src="kanban_img/add_icons/add_person.png"></button>
             
             <div id="contact-book" class="contacts-left">
 
@@ -108,7 +107,6 @@
         Contact succesfully created 
     </div>
     
-
 </body>
 
 </html>

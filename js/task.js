@@ -1,6 +1,7 @@
 let id = 0 
 
 function returnSelectedContacts(el) {
+
   let first_select_contact = document.getElementById("first-select-contacts")
 
     if (el.checked) {
@@ -58,7 +59,7 @@ async function saveEditedTask(id_task) {
       }
     }
   }
-  location.reload(true)
+  // location.reload(true)
 }
 
 async function saveTask()  {
@@ -74,10 +75,10 @@ async function saveTask()  {
     id = JSON.parse(localStorage.getItem("task_id"))
   }
  
-  
   let title = document.getElementById('input-title').value
   let due_date = document.getElementById('due-date').value
   let description = document.getElementById('textarea').value
+
   let task = {
       'title': title,
       'assignedContacts': selected_options,
@@ -86,13 +87,20 @@ async function saveTask()  {
       'category': selected_category,
       'priority': selected_priority,
       'priority_img_path': priority_img_path,
-      'description': description,
       'subtask': selected_subtasks,
       'id_task': id,
       'status':'todo',
   }
-  addTask(task, id)
   
+  if (checkIfCreatedTaskIsEmpty(title,due_date,description)) {
+    addTask(task, id)
+    showPopup("task-popup")
+  }  
+}
+
+function checkIfCreatedTaskIsEmpty(title,due_date,description) {
+    return title !== "" && due_date !== "" && description !== "" && selected_category !== "" 
+            && selected_priority !== "" && priority_img_path !== "" && id !== ""
   }
 
 async function addTask(task,id) {
@@ -160,19 +168,14 @@ async function addTask(task,id) {
  }
 
 
- function searchTask() {
+function clear() {
+  
+}
 
+ function searchTask() {
   let input = document.getElementById("search-task").value;
 
-  console.log(input)
-
   input = input.toLowerCase();
-
-  // if (input == "") {
-  //     document.querySelectorAll(`.added-task`).forEach(entry => {
-  //         entry.style.display = "block"
-  //     });
-  // }
 
   let tasks = document.querySelectorAll(".task-topic")
 

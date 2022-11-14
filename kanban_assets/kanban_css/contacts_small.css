@@ -23,8 +23,7 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    border-top-left-radius: 18px;
-    border-top-right-radius: 18px;
+    border-top-right-radius: 18px ;
 }
 
 .upper-part-small-contacts {

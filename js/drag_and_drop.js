@@ -154,7 +154,7 @@ function generateTodoHTML(element) {
     <div id="added-task-${element.id_task}" draggable="true" ondragstart="startDragging(${element.id_task})" onclick="renderBoardTaskInfo(${element.id_task})" class="added-task">
     <span class="task-topic white-text">${element.category}</span>
     <h4 class="task-headline blue-text">${element.title}</h4>
-    <span class="added-text">${element.description}</span>
+    <span class="light-gray added-text">${element.description}</span>
     
     <div class="progress">
         <div class="progress-bar"></div> <span class="addTask-amount"><span>0</span>/<span>${element.subtask.length}</span> Done</span>

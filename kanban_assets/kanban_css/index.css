@@ -81,7 +81,7 @@ body {
 .main-field {
     width: 80%;
     height: 100%;
-    overflow-y: scroll;
+    
 }
 
 .kanban-img {
@@ -107,6 +107,7 @@ body {
 }
 
 .summary-container {
+    margin: auto;
     width: 90%;
     height: 90%;
     display: flex;
@@ -125,7 +126,6 @@ body {
 .user-name {
     font-size: 32px;
     color: #4589FF;
-    margin-left: 15px;
 }
 
 .gm-text {
@@ -282,7 +282,8 @@ body {
 
 .task-card-lower:hover {
     background-color: blue;
-    transform: scale(1.05); 
+    transform: scale(1.05);
+    border-top-left-radius: 0px ; 
 }
 
 .task-card-lower:hover .inner-task-card .task-to-do > span {
@@ -470,6 +471,10 @@ body {
     .name {
         display: none;
     }
+    .help {
+        display: none;
+    }
+    
 }
 
 @media (max-width: 540px) {

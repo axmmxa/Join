@@ -1,6 +1,6 @@
 .add-task-container {
     display: flex;
-    
+    height: 100%;
 }
 
 .task-form-left {
@@ -8,6 +8,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow-y: auto;
 }
 
 .task-form {
@@ -16,7 +17,6 @@
     justify-content: flex-end;
     width: 80%;
     margin: auto;
-    margin-top: 10px;
 }
 
 .task-form input {
@@ -189,7 +189,6 @@
 }
 
 
-
 .priority-btn-container a {
     background-color: transparent;
     border: 2px solid rgba(0, 0, 0, 0.2);
@@ -299,19 +298,28 @@
     cursor: pointer;
 }
 
+.kanban-navbar-mobile {
+    position: relative;
+    height: 15vh;
+    width: 100%;
+    background-color: #4589FF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 @media (max-width: 874px) {
     .task-form {
         width: 250px;
     }
     .input-title {
-        width: 225px;
+        width: 235px;
     }
     #contacts {
         width: 250px;
     }
     #due-date {
-        width: 225px;
+        width: 235px;
     }
     #task-category {
         width: 250px;
@@ -320,13 +328,19 @@
         width: 250px;
     }
     #subtask-category {
-        width: 225px
+        width: 235px
     }
     .create-task-container {
         width: 100%;
     }
     .priority-btn-container {
         width: 250px;
+    }
+}
+
+@media (max-width: 600px) {
+    .kanban-navbar-mobile {
+        height: 10vh;
     }
 }
 

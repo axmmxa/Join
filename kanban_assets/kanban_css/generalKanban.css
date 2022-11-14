@@ -47,6 +47,10 @@
     background-color: #D2E3FF;
 }
 
+.light-gray {
+    color: rgba(0, 0, 0, 0.2);
+}
+
 .gray {
     background-color: rgba(0, 0, 0, 0.3);
 }
@@ -332,18 +336,23 @@
     margin: 5px 0;
 }
 
-body::-webkit-scrollbar {
-    width: 12px;               /* width of the entire scrollbar */
+.contacts-left::-webkit-scrollbar {
+    width: 5px;  /* width of the entire scrollbar */
   }
   
-  body::-webkit-scrollbar-track {
-    background: orange;        /* color of the tracking area */
+  .contacts-left::-webkit-scrollbar-track {
+    background: transparent;   /* color of the tracking area */ 
+    margin-bottom: 300px;    
   }
   
-  body::-webkit-scrollbar-thumb {
-    background-color: blue;    /* color of the scroll thumb */
+  /* .contacts-left::-webkit-scrollbar-button {
+    height: 150px;
+  } */
+
+  .contacts-left::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3);    /* color of the scroll thumb */
     border-radius: 20px;       /* roundness of the scroll thumb */
-    border: 3px solid orange;  /* creates padding around scroll thumb */
+    
   }
 
   
@@ -351,19 +360,28 @@ body::-webkit-scrollbar {
     cursor: pointer;
     content: url("../../kanban_img/date_icons/date_img.png");
     background: none;
-    margin-right: 26px;
+    margin-right: 12px;
     height: 16px;
     width: 16px;
 }
 
 
 .edit-contact-container-mobile {
-    width: 70%;
+    width: 60%;
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-top-right-radius: 18px;
     border-top-left-radius: 18px;
     border-end-start-radius: 18px;
     border-end-end-radius: 18px;
+}
+
+#small-contacts-container-close-btn-container-mobile {
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    border-top-right-radius: 18px;
+    border-top-left-radius: 18px;
 }
 
 .user-icon-big-mobile {
@@ -373,7 +391,6 @@ body::-webkit-scrollbar {
 }
 
 .upper-part-small-contacts-mobile {
-    border: 1px solid rgba(0, 0, 0, 0.1);
     height: 190px;
     z-index: 2;
     display: flex;
@@ -395,7 +412,16 @@ body::-webkit-scrollbar {
     border-end-end-radius: 18px;
 }
 
+#small-contacts-container-mobile {
+    width: 60%;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 18px;
+}
 
+
+.anonymous-profile-picture-mobile {
+    margin-top: -170px;
+}
 
 
 
