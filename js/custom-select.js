@@ -24,8 +24,7 @@ function showAddContact(index) {
             arrow_down[index].classList.add("d-none")
             add_option[index].classList.remove("d-none")
         }
-    }
-    
+    } 
   }
 
   function closeAddContact(index) {
@@ -60,16 +59,22 @@ function showAddContact(index) {
     let first_select_contact = document.getElementById("first-select-contacts")
     first_select_contact.innerHTML = `Select contacts to assign` 
   }   
-  
-    let custom_select_contact_container = document.querySelector(".custom-select-contact-container")
-    let add_contact_input = document.getElementById("add-contact-input").value
 
-    custom_select_contact_container.innerHTML += `<label class="custom-select-option"> ${add_contact_input} <input onclick="returnSelectedContacts(this)" value="${add_contact_input}" class="selected-option" type="checkbox" autocomplete="off"></label> `
+  if (index == 0) {
+    addSelectContactOption()
+  }
+
+    // let custom_select_contact_container = document.querySelector(".custom-select-contact-container")
+    // let add_contact_input = document.getElementById("add-contact-input").value
+
+    // custom_select_contact_container.innerHTML += `<label class="custom-select-option"> ${add_contact_input} <input onclick="returnSelectedContacts(this)" value="${add_contact_input}" class="selected-option" type="checkbox" autocomplete="off"></label> `
     
-    let custom_select_category_container = document.querySelector(".custom-select-category-container")
-    let add_category_input = document.getElementById("add-category-input").value
-
-    custom_select_category_container.innerHTML += `<label onclick="returnSelectedCategory(id)" id="${add_category_input}" class="custom-select-option">${add_category_input}</label>`
+    if (document.getElementById("addTask-body")) {
+      let custom_select_category_container = document.querySelector(".custom-select-category-container")
+      let add_category_input = document.getElementById("add-category-input").value
+  
+      custom_select_category_container.innerHTML += `<label onclick="returnSelectedCategory(id)" id="${add_category_input}" class="custom-select-option">${add_category_input}</label>`  
+    }
    
     // closeAddContact(index)
     
@@ -105,7 +110,6 @@ function showAddSubtask() {
 
     selected_subtasks = []
     
-
     category_container.innerHTML += 
         `<label for="${add_subtask_input}"><input value="${add_subtask_input}" onclick="returnSelectedSubtasks(this)" type="checkbox" id="${add_subtask_input}"><span class="category-span">${add_subtask_input}</span></label>`
     

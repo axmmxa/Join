@@ -346,6 +346,7 @@ body {
 @media (max-width: 874px) {
     .kanban-main {
         justify-content: center;
+        height: 70vh;
     }
     .gm-text {
         display: none;
@@ -418,6 +419,7 @@ body {
     .kanban-btns {
         display: flex;
         width: 100%;
+        height: 15vh;
     }
     .kanban-link {
         display: flex;
@@ -437,7 +439,7 @@ body {
         height: 10vh;
     }
     .kanban-main {
-        height: 90vh;
+        height: 85vh;
     }
     .logo {
         height: 30px;
@@ -465,8 +467,8 @@ body {
     .blue-text {
         font-size: 10px;
     }
-    .kanban-link {
-        /* margin: 25px 0; */
+    .kanban-btns {
+        height: 15vh;
     }
     .name {
         display: none;

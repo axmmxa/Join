@@ -64,7 +64,11 @@ async function init() {
     selectedLink("kanban-link-6")
   } if (document.getElementById("addTask-body")) {
     selectedLink("kanban-link-2")
-    selectedLink("kanban-link-7")
+    selectedLink("kanban-link-6")
+    
+    let custom_select_contact_container = document.querySelector(".custom-select-contact-container")
+    custom_select_contact_container.innerHTML += `<label class="custom-select-option"> ${loggedInUser.name} (You) <input onclick="returnSelectedContacts(this)" value="${loggedInUser.name}" class="selected-option" type="checkbox" autocomplete="off"></label>`
+
   } if (document.getElementById("contacts-body")) {
     renderContactBook()
     loadContactBackgroundColor()
@@ -157,10 +161,33 @@ async function saveEditedContact(contact_email) {
         loadContactBackgroundColor() 
     }
   }
+  } 
+}
+
+function addSelectContactOption() {
+  let add_contact_input = document.getElementById("add-contact-input").value
+  let custom_select_contact_container = document.querySelector(".custom-select-contact-container")
+
+  if (loggedInUser.name !== "Guest") {
+    for (let i = 0; i < users.length; i++) {
+      const currentUser = users[i];
+      if(currentUser.email == loggedInUser.email) {
+          for (let j = 0; j < currentUser.contacts.length; j++) {
+            const currentContact = currentUser.contacts[j];
+            if (currentContact.contact_email == add_contact_input) {
+              custom_select_contact_container.innerHTML += `<label class="custom-select-option"> ${currentContact.contact_name} <input onclick="returnSelectedContacts(this)" value="${currentContact.contact_name}" class="selected-option" type="checkbox" autocomplete="off"></label>`
+            } 
+          }
+      }
+    }
+  } else {
+    for (let i = 0; i < loggedInUser.contacts.length; i++) {
+      const currentContact = loggedInUser.contacts[i];   
+      if (currentContact.contact_email == add_contact_input)
+      custom_select_contact_container.innerHTML += `<label class="custom-select-option"> ${currentContact.contact_name} <input onclick="returnSelectedContacts(this)" value="${currentContact.contact_name}" class="selected-option" type="checkbox" autocomplete="off"></label>`
+    }
   }
   
-  // location.reload(true)
- 
 }
 
 
@@ -249,6 +276,11 @@ async function loadBoardContactBackgroundColor() {
               }
             }
             user_icons[j].classList.add(correctColor)
+
+            if (user_icons[j].id == currentUser.name) {
+              user_icons[j].classList.add(currentUser["user-background-color"])
+            }
+
           }
       }
     }
@@ -267,6 +299,10 @@ async function loadBoardContactBackgroundColor() {
           }
         }
         user_icons[j].classList.add(correctColor)
+
+        if (user_icons[j].id == "Guest") {
+          user_icons[j].classList.add(loggedInUser["user-background-color"])
+        }
       }
   }
 }
@@ -316,13 +352,16 @@ async function loadContactBackgroundColor() {
   
 }
 
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
 function getUserIcon(contact) {
   let names = contact.split(" ");
-  let firstLetterFirstName = names[0][0];
+  let firstLetterFirstName = names[0][0].toUpperCase();
   let firstLetterlastName;
   if (names.length > 1) {
-    let firstLetterlastName = names[1][0]
+    let firstLetterlastName = names[1][0].toUpperCase()
     return `${firstLetterFirstName + firstLetterlastName}`
   } else {
     return `${firstLetterFirstName}`

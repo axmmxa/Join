@@ -47,8 +47,6 @@ async function updateHTML() {
                 <span id="${contact}" class="user-icon">${getUserIcon(contact)}</span>  
             </div>` 
         });
-        
-        
     }
 
     //container with category In progress
@@ -156,9 +154,11 @@ function generateTodoHTML(element) {
     <h4 class="task-headline blue-text">${element.title}</h4>
     <span class="light-gray added-text">${element.description}</span>
     
+    <!--
     <div class="progress">
         <div class="progress-bar"></div> <span class="addTask-amount"><span>0</span>/<span>${element.subtask.length}</span> Done</span>
     </div>
+    -->
 
     <div class="board-user-img-container">
         <div id="assigned-contact-${element.id_task}" class="user-tasks">

@@ -135,7 +135,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 15px;
+    margin: 0 15px;
 }
 
 .d-flex {
@@ -301,8 +301,9 @@
 
 .user-icon-edit-contact {
     color: white;
-    padding: 15px;
+    padding: 20px;
     border-radius: 50%;
+    margin-bottom: 20px;
 }
 
 .user-tasks {
@@ -360,7 +361,7 @@
     cursor: pointer;
     content: url("../../kanban_img/date_icons/date_img.png");
     background: none;
-    margin-right: 12px;
+    margin-right: 15px;
     height: 16px;
     width: 16px;
 }
@@ -418,11 +419,19 @@
     border-radius: 18px;
 }
 
-
 .anonymous-profile-picture-mobile {
     margin-top: -170px;
 }
 
 
+@media (max-width: 684px) {
+    .logout {
+        display: none;
+    }
+}
 
-
+@media (min-width: 684px) {
+    .logout-mobile {
+        display: none;
+    }
+}

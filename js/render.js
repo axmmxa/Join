@@ -1,26 +1,26 @@
 function closeSmallContacts() {
     document.getElementById("small-contacts-container").classList.add("d-none")
-    document.getElementById("small-contacts-container").classList.add("z-index-1")
+    
 
-    document.querySelector(".kanban-navbar-mobile").style.opacity = 1
-    document.querySelector(".kanban-main").style.opacity = 1    
+    document.querySelector(".kanban-navbar").style.opacity = 1
+    document.querySelector(".kanban-main").style.opacity = 1  
+    document.querySelector(".sidebar-mobile").style.opacity = 1  
 }
 
 function renderSmallContacts() {
     if (document.getElementById("small-contacts-container")) {
-        document.querySelector("body").innerHTML += templateSmallContacts()
-        document.querySelector("#small-contacts-container").classList.remove("z-index-1")
-        // document.getElementById("small-contacts-container").classList.remove("d-none")
-    
-        document.querySelector(".kanban-navbar-mobile").style.opacity = 0.5
-        document.querySelector(".kanban-main").style.opacity = 0.5    
+        document.getElementById("small-contacts-container").classList.remove("d-none")
+
+        document.querySelector(".kanban-navbar").style.opacity = 0.5
+        document.querySelector(".kanban-main").style.opacity = 0.5 
+        document.querySelector(".sidebar-mobile").style.opacity = 0.5    
     } else {
       document.querySelector("body").innerHTML += templateSmallContacts()
-      document.querySelector("#small-contacts-container").classList.remove("z-index-1")
       // document.getElementById("small-contacts-container").classList.remove("d-none")
 
-      document.querySelector(".kanban-navbar-mobile").style.opacity = 0.5
+      document.querySelector(".kanban-navbar").style.opacity = 0.5
       document.querySelector(".kanban-main").style.opacity = 0.5  
+      document.querySelector(".sidebar-mobile").style.opacity = 0.5 
            
     }
 }
@@ -29,25 +29,25 @@ function renderSmallContacts() {
 function closeSmallContactsMobile() {
   document.getElementById("small-contacts-container-mobile").classList.add("d-none")
   
-  document.querySelector(".kanban-navbar-mobile").style.opacity = 1
-  document.querySelector(".kanban-main").style.opacity = 1   
+  document.querySelector(".kanban-navbar").style.opacity = 1
+  document.querySelector(".kanban-main").style.opacity = 1 
+  document.querySelector(".sidebar-mobile").style.opacity = 1   
 }
 
 
 function renderSmallContactsMobile() {
-  if (document.getElementById("small-contacts-container-mobile")) {
- 
-  
+  if (document.getElementById("small-contacts-container-mobile")) { 
     document.getElementById("small-contacts-container-mobile").classList.remove("d-none")
 
-    document.querySelector(".kanban-navbar-mobile").style.opacity = 0.5
-    document.querySelector(".kanban-main").style.opacity = 0.5    
+    document.querySelector(".kanban-navbar").style.opacity = 0.5
+    document.querySelector(".kanban-main").style.opacity = 0.5   
+    document.querySelector(".sidebar-mobile").style.opacity = 0.5  
 } else {
   document.querySelector("body").innerHTML += templateSmallContactsMobile()
   
-
-  document.querySelector(".kanban-navbar-mobile").style.opacity = 0.5
+  document.querySelector(".kanban-navbar").style.opacity = 0.5
   document.querySelector(".kanban-main").style.opacity = 0.5  
+  document.querySelector(".sidebar-mobile").style.opacity = 0.5 
        
 }
 }
@@ -60,6 +60,7 @@ function closeSmallEditContacts(i) {
      
     document.querySelector(".kanban-navbar").style.opacity = 1
     document.querySelector(".kanban-main").style.opacity = 1
+    document.querySelector(".sidebar-mobile").style.opacity = 1 
 }
 
 
@@ -68,21 +69,22 @@ function closeSmallEditContactsMobile(i) {
     // document.querySelector(`#small-contacts-container-mobile-0-${i}`).classList.remove("box-shadow");
     // document.querySelector(`#edit-small-contacts-container`).classList.add("z-index-1")
      
-    document.querySelector(".kanban-navbar-mobile").style.opacity = 1
+    document.querySelector(".kanban-navbar").style.opacity = 1
     document.querySelector(".kanban-main").style.opacity = 1
+    document.querySelector(".sidebar-mobile").style.opacity = 1 
 }
 
 async function renderSmallEditContactsMobile(contact_name,contact_email,contact_phone, i) {
   if (document.querySelector(`#small-contacts-container-mobile-${i}`)) {
     document.querySelector(`#small-contacts-container-mobile-${i}`).classList.remove("d-none");
 
-    document.querySelector(".kanban-navbar-mobile").style.opacity = 0.5
+    document.querySelector(".kanban-navbar").style.opacity = 0.5
     document.querySelector(".kanban-main").style.opacity = 0.5
+    document.querySelector(".sidebar-mobile").style.opacity = 0.5 
   } else {
     document.querySelector(`body`).innerHTML += templateSmallEditContactsMobile(contact_name,contact_email,contact_phone, i)
 
     if (loggedInUser.name !== "Guest") {
-      
     await downloadFromServer();
     users = JSON.parse(backend.getItem('users')) || [];
     let user_icons = document.querySelectorAll(".user-icon-edit-contact")
@@ -104,8 +106,9 @@ async function renderSmallEditContactsMobile(contact_name,contact_email,contact_
             user_icons[j].classList.add(correctColor)
           }
       }
-      document.querySelector(".kanban-navbar-mobile").style.opacity = 0.5
+      document.querySelector(".kanban-navbar").style.opacity = 0.5
       document.querySelector(".kanban-main").style.opacity = 0.5
+      document.querySelector(".sidebar-mobile").style.opacity = 0.5 
     } 
   } else {
     let user_icons = document.querySelectorAll(".user-icon-edit-contact")
@@ -123,8 +126,9 @@ async function renderSmallEditContactsMobile(contact_name,contact_email,contact_
       }
       user_icons[j].classList.add(correctColor)
     }
-    document.querySelector(".kanban-navbar-mobile").style.opacity = 0.5
+    document.querySelector(".kanban-navbar").style.opacity = 0.5
     document.querySelector(".kanban-main").style.opacity = 0.5
+    document.querySelector(".sidebar-mobile").style.opacity = 0.5 
   }
  }
 }
@@ -166,11 +170,13 @@ async function renderSmallEditContacts(contact_name,contact_email,contact_phone,
         
         document.querySelector(".kanban-navbar").style.opacity = 0.5
         document.querySelector(".kanban-main").style.opacity = 0.5
+        document.querySelector(".sidebar-mobile").style.opacity = 0.5 
 
     } else {
   
         document.querySelector(".kanban-navbar").style.opacity = 0.5
         document.querySelector(".kanban-main").style.opacity = 0.5
+        document.querySelector(".sidebar-mobile").style.opacity = 0.5 
 
         document.querySelector(`#edit-small-contacts-container`).innerHTML = templateSmallEditContacts(contact_name,contact_email,contact_phone, i)
         document.querySelector(`#small-contacts-container-${i}`).classList.remove("d-none");
@@ -227,6 +233,8 @@ function closeSmallEditTask() {
     document.querySelector(".kanban-navbar").style.opacity = 1
     document.querySelector(".kanban-main").style.opacity = 1
 
+    closeBoardTaskInfo()
+
 }
 
    function setPrioritySmallEditTask(id) {
@@ -278,7 +286,11 @@ function renderSmallEditTask(id_task) {
         document.querySelector(".kanban-navbar").style.opacity = 0.5
         document.querySelector(".kanban-main").style.opacity = 0.5
 
-        document.querySelector("body").innerHTML += templateSmallEditTask(id_task)      
+        document.querySelector("body").innerHTML += templateSmallEditTask(id_task) 
+        
+        let custom_select_contact_container = document.querySelector(".custom-select-contact-container")
+        custom_select_contact_container.innerHTML += `<label class="custom-select-option"> ${loggedInUser.name} (You) <input onclick="returnSelectedContacts(this)" value="${loggedInUser.name}" class="selected-option" type="checkbox" autocomplete="off"></label>`
+
     }
 }
 
@@ -329,6 +341,10 @@ async function showTaskInfo(id_task) {
                       }
                     }
                     user_icons[j].classList.add(correctColor)
+
+                    if (user_icons[j].id == currentUser.name) {
+                      user_icons[j].classList.add(currentUser["user-background-color"])
+                    }
                   }
               }
           }
@@ -370,6 +386,10 @@ async function showTaskInfo(id_task) {
               }
             }
             user_icons[j].classList.add(correctColor)
+
+            if (user_icons[j].id == "Guest") {
+              user_icons[j].classList.add(loggedInUser["user-background-color"])
+            }
           }
   }    
 }
@@ -450,6 +470,10 @@ function renderSmallAddTask() {
         document.querySelector(".kanban-main").style.opacity = 0.5
 
         document.querySelector("body").innerHTML += templateSmallAddTask()
+
+        let custom_select_contact_container = document.querySelector(".custom-select-contact-container")
+        custom_select_contact_container.innerHTML += `<label class="custom-select-option"> ${loggedInUser.name} (You) <input onclick="returnSelectedContacts(this)" value="${loggedInUser.name}" class="selected-option" type="checkbox" autocomplete="off"></label>`
+    
     }
 }
 
@@ -460,7 +484,7 @@ function renderSmallAddTask() {
       for (let i = 0; i < contact_names.length; i++) {
       if (i == index && window.innerWidth > 874) {     
       document.querySelector("#contact-information").innerHTML = templateContactInformation(email,name,i)
-      } else {
+      } else if (i == index) {
         document.querySelector(".main-field").innerHTML = templateContactInformationMobile(email,name,i)
       }
     }
@@ -468,6 +492,7 @@ function renderSmallAddTask() {
   await downloadFromServer();
   users = JSON.parse(backend.getItem('users')) || [];
   let correctColor;
+  let user_icons = document.querySelectorAll(".user-icon")
 
   for (let i = 0; i < users.length; i++) {
       const currentUser = users[i];
@@ -478,13 +503,12 @@ function renderSmallAddTask() {
                   console.log("current contact", currentContact)
                   correctColor = currentContact["contact-background-color"]
                   if(currentContact.contact_email == email && window.innerWidth > 874) {
-                     document.querySelectorAll(".user-icon")[currentUser.contacts.length].classList.add(correctColor)
-                  } else {
-                    document.querySelectorAll(".user-icon")[currentUser.contacts.length - 1].classList.add(correctColor)
+                     user_icons[currentUser.contacts.length].classList.add(correctColor)
+                  } else if (currentContact.contact_email == email && window.innerWidth < 874) {
+                    user_icons[user_icons.length - 1].classList.add(correctColor)
                     document.querySelector(".main-field").style.justifyContent = "space-between"
                     document.querySelector(".main-field").style.alignItems = ""
                   }
-                  
               }
           }
       }   
@@ -493,8 +517,8 @@ function renderSmallAddTask() {
 
   for (let i = 0; i < contact_names.length; i++) {
     if (i == index && window.innerWidth > 874) {     
-    document.querySelector("#contact-information").innerHTML = templateContactInformation(email,name,i)
-    } else {
+      document.querySelector("#contact-information").innerHTML = templateContactInformation(email,name,i)
+    } else if (i == index) {
       document.querySelector(".main-field").innerHTML = templateContactInformationMobile(email,name,i)
     }
   }
@@ -624,12 +648,12 @@ async function addContactToBook() {
     let small_add_contacts_email = document.getElementById("small-add-contacts-email").value
     let small_add_contacts_phone = document.getElementById("small-add-contacts-phone").value
 
-    contact_names.push(small_add_contacts_name)
+    contact_names.push(capitalizeFirstLetter(small_add_contacts_name))
     contact_emails.push(small_add_contacts_email)
     contact_phones.push(small_add_contacts_phone)
 
     let contact = {
-        "contact_name": small_add_contacts_name,
+        "contact_name": capitalizeFirstLetter(small_add_contacts_name),
         "contact_email": small_add_contacts_email,
         "contact_phone": small_add_contacts_phone,
         "contact-background-color": ""

@@ -18,12 +18,24 @@
     <link rel="stylesheet" href="kanban_assets/kanban_css/task-info.css">
     <link rel="stylesheet" href="kanban_assets/kanban_css/custom-select.css">
 
+    <style>
+        @media (max-width: 684px) {
+        .kanban-navbar {
+            display: none;
+          }
+        .kanban-main {
+            height: 75vh;
+        }
+        }
+    </style>
+
     <script src="js/template.js" defer></script>
     <script src="js/mini_backend.js"></script>
     <script src="js/load.js" defer></script>
     <script src="js/task.js" defer></script>
     <script src="js/custom-select.js" defer></script>
     <script src="js/logout.js" defer></script>
+
 
 </head>
 
@@ -72,14 +84,11 @@
                 <div class="legal-notice">
                     <a id="kanban-link-4" href="kanban_assets/legal_notice.html" class="kanban-link"><img class="kanban-img" src="kanban_img/small_navbar_icons/legal_notice.png"><span>Legal Notice</span></a>
                 </div>
-            </div>
-
-           
+            </div> 
         </div>
 
 
         <div class="main-field">
-
             <div class="add-task-container">
                 <div class="task-form-left">
                     <form class="task-form">
@@ -101,9 +110,9 @@
                                 </div>
                                 <div class="custom-select-options-container d-none" >
                                     <div class="custom-select-contact-container">
-                                        <label class="custom-select-option">You <input onclick="returnSelectedContacts(this)" value="You" class="selected-option" type="checkbox" autocomplete="off"></label>
-                                        <label class="custom-select-option"> Maximilian Vogel <input onclick="returnSelectedContacts(this)" value="Maximilian Vogel" class="selected-option" type="checkbox" autocomplete="off"></label>       
-                                    </div>
+                                        <!-- <label class="custom-select-option">You <input onclick="returnSelectedContacts(this)" value="You" class="selected-option" type="checkbox" autocomplete="off"></label>
+                                        <label class="custom-select-option"> Maximilian Vogel <input onclick="returnSelectedContacts(this)" value="Maximilian Vogel" class="selected-option" type="checkbox" autocomplete="off"></label> -->      
+                                    </div> 
                                     <label onclick="showAddContact(0)" class="custom-select-option">Invite new contact <img src="kanban_img/invite_contact.png"></label>
                                 </div>
                             </div>
@@ -162,16 +171,14 @@
                                     <img onclick="addNewSubtask()" class="blue-clear-btn" src="kanban_img/clear_icons/blue_clear.png">
                                 </div>
                             </div>   
-                            
-                        </div>
-                       
+                        </div>            
                     </form>
                 </div>
 
                 <div class="task-form-right">
                     <div class="create-task-container">
                         <button onclick="saveTask()" class="create-btn">Create Task <img class="white-clear" src="kanban_img/clear_icons/white_clear.png"></button>
-                        <button style="margin-left: 10px;" class="delete-btn">Clear <span class="close-x">X</span></button>
+                        <button onclick="clear()" style="margin-left: 10px;" class="delete-btn">Clear <span class="close-x">X</span></button>
                     </div>
 
                 </div>

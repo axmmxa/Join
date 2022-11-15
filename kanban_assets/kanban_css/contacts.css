@@ -4,6 +4,7 @@
 
 #small-add-task {
     height: 99.2vh;
+    width: 400px;
     position: absolute;
     top: 0;
     right: 0;
@@ -19,8 +20,7 @@
 }
 
 #contact-information {
-    margin-top: 20px;
-    margin: 0 auto;
+    margin: 20px  auto;
 }
 
 .contacts-left {
@@ -42,6 +42,10 @@
 .contacts-container {
     width: 80%;
     margin: auto;
+}
+
+.contacts-add-task {
+    width: 100%;
 }
 
 .contacts-headline {
@@ -155,7 +159,7 @@
     }
     .main-field {
         flex-direction: column;
-        /* align-items: flex-end; */
+        align-items: center;
         /* justify-content: space-between; */
     }
     .add-person-btn-mobile {
@@ -167,11 +171,12 @@
 }
 
 
-/* @media (max-width: 684px) {
-    .kanban-navbar {
-        display: none;
+@media (min-width: 684px) {
+    .contact-information-mobile {
+        margin-left: 20px;
+        width: 70vh;
     }
-} */
+}
 
 @media (max-width: 420px) {
     .contact-name {
