@@ -3,6 +3,7 @@ body {
 }
 
 .signUp {
+    position: relative;
     height: 350px;
     width: 500px;
     box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.08);
@@ -36,9 +37,5 @@ body {
     }
     .signUp-container {
         margin: 0;
-    }
-    .arrow {
-        margin-top: -30px;
-        margin-right: -30px;
     }
 }

@@ -4,6 +4,12 @@
     height: auto;
 }
 
+.position-arrow {
+    position: absolute;
+    top: 40px;
+    left: 30px;
+}
+
 .form-inner-container {
     height: 100%;
     width: 95%;
