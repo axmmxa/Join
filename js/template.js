@@ -76,7 +76,7 @@ function templateSmallEditContacts(contact_name,contact_email,contact_phone,i) {
     <div class="lower-part-small-contacts">
     <div id="${contact_name}" class="user-icon-edit-contact user-icon-big fs-22">${getUserIcon(contact_name)}</div>
 
-        <form onsubmit="saveEditedContact('${contact_email}'); return false" class="small-contacts-add-data">
+        <form onsubmit="saveEditedContact('${contact_email}','${contact_name}'); return false" class="small-contacts-add-data">
             <div class="login-data">
                 <input value="${contact_name}" id="small-edit-contacts-name" type="text" placeholder="Name" required>
                 <input value="${contact_email}" id="small-edit-contacts-email" type="text" placeholder="E-mail" required>
@@ -106,7 +106,7 @@ function templateSmallEditContactsMobile(contact_name,contact_email,contact_phon
     <div class="lower-part-small-contacts-mobile">
     <div id="${contact_name}" class="user-icon-edit-contact user-icon-big-mobile fs-22">${getUserIcon(contact_name)}</div>
 
-        <form onsubmit="saveEditedContact('${contact_email}'); return false" class="small-contacts-add-data">
+        <form onsubmit="saveEditedContact('${contact_email}','${contact_name}'); return false" class="small-contacts-add-data">
             <div class="login-data margin">
                 <input value="${contact_name}" id="small-edit-contacts-name" type="text" placeholder="Name" required>
                 <input value="${contact_email}" id="small-edit-contacts-email" type="text" placeholder="E-mail" required>
@@ -139,7 +139,7 @@ function templateParentSmallEditContacts(contact_name,contact_email,contact_phon
         <div class="lower-part-small-contacts">
         <div id="${contact_name}" class="user-icon-edit-contact user-icon-big fs-22">${getUserIcon(contact_name)}</div>
 
-            <form onsubmit="saveEditedContact('${contact_email}'); return false" class="small-contacts-add-data">
+            <form onsubmit="saveEditedContact('${contact_email}','${contact_name}'); return false" class="small-contacts-add-data">
                 <div class="login-data">
                     <input value="${contact_name}"  id="small-edit-contacts-name" type="text" placeholder="Name" required>
                     <input value="${contact_email}" id="small-edit-contacts-email" type="text" placeholder="E-mail" required>

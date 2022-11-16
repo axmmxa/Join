@@ -1,7 +1,7 @@
 let currentDraggedElement;
 
-
 function checkUserTasks() {
+    
     for (let i = 0; i < users.length; i++) {
         const currentUser = users[i];
     
@@ -191,12 +191,3 @@ function moveTo(status) {
     updateHTML()
 }
 
-
-function getUserDataLocalstorage() {
-        let loggedInUsersAsText = localStorage.getItem('users');
-      
-        if (loggedInUsersAsText) {
-            users = JSON.parse(loggedInUsersAsText)
-        }
-        return users
-}

@@ -113,10 +113,21 @@ function loadLoggedInUser() {
   }
 }
 
-async function saveEditedContact(contact_email) {
+async function saveEditedContact(contact_email, contact_name) {
   let small_edit_contacts_name = document.getElementById("small-edit-contacts-name").value
   let small_edit_contacts_email = document.getElementById("small-edit-contacts-email").value
   let small_edit_contacts_phone = document.getElementById("small-edit-contacts-phone").value
+
+  for (let i = 0; i < users.length; i++) {
+    const currentUsers = users[i];
+  for (let k = 0; k < currentUsers.tasks.length; k++) {
+    const currentContact = currentUsers.tasks[k];
+    for (let l = 0; l < currentContact.assignedContacts.length; l++) {
+      if (currentContact.assignedContacts[l] == contact_name) {
+        currentContact.assignedContacts[l] == small_edit_contacts_name
+      }
+    }
+  }  
 
   if (loggedInUser.name !== "Guest") { 
   for (let i = 0; i < users.length; i++) {
@@ -128,7 +139,6 @@ async function saveEditedContact(contact_email) {
           currentContact.contact_email = small_edit_contacts_email
           currentContact.contact_phone = small_edit_contacts_phone
           saveUsersArray()   
-          await backend.setItem('users', JSON.stringify(users))
           document.querySelector(".contacts-left").innerHTML = ""
           document.querySelector(".contacts-right").innerHTML = 
             `<div id='contact-information'></div>
@@ -139,9 +149,21 @@ async function saveEditedContact(contact_email) {
           renderContactBook()
           loadContactBackgroundColor() 
       }
+    } 
+  }  
+} else {
+  for (let i = 0; i < users.length; i++) {
+    const currentUsers = users[i];
+  for (let k = 0; k < currentUsers.tasks.length; k++) {
+    const currentContact = currentUsers.tasks[k];
+    for (let l = 0; l < currentContact.assignedContacts.length; l++) {
+      if (currentContact.assignedContacts[l] == contact_name) {
+        currentContact.assignedContacts[l] == small_edit_contacts_name
+      }
     }
   }
-} else {
+ 
+
   for (let j = 0; j < loggedInUser.contacts.length; j++) {
     const currentContact = loggedInUser.contacts[j];
     if (currentContact.contact_email == contact_email) {
@@ -161,8 +183,11 @@ async function saveEditedContact(contact_email) {
         loadContactBackgroundColor() 
     }
   }
-  } 
+  }
+ } 
 }
+}
+
 
 function addSelectContactOption() {
   let add_contact_input = document.getElementById("add-contact-input").value
