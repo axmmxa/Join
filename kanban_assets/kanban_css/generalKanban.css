@@ -253,6 +253,13 @@
     border-radius: 8px;
 }
 
+.summary-urgent-img{
+    border-radius: 50%;
+    border: 2px solid white;
+    height: 45px;
+    margin-top: 10px;
+}
+
 .user-logout-icon-container {
     cursor: pointer;
     border-radius: 50%;
