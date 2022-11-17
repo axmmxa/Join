@@ -1,11 +1,12 @@
 function showCustomSelectOptions(index) {
   let selects =  document.querySelectorAll(".custom-select-options-container")
   
-  for (let i = 0; i < selects.length; i++) {
-    if (i == index) {
-        selects[i].classList.toggle("d-none")   
-    }
+  if (document.getElementById("addTask-body") || document.getElementById("contacts-body")) {
+    selects[index].classList.toggle("d-none")
+  } else {
+    selects[selects.length - 1].classList.toggle("d-none")
   }
+  
 }
 
 function showCustomSelectOptionsTaskInfo() {
@@ -41,34 +42,32 @@ function showAddContact(index) {
     }
   }
   
-
   function addNewContactOption(index) {
 
   let checkboxes = document.querySelectorAll('input[type="checkbox"]');
 
-  if (index == 0) {
     for (let j = 0; j < checkboxes.length; j++) {
       const checkbox = checkboxes[j];
       if (checkbox.checked) {
         selected_options.pop(selected_options[j])
       } 
     }
-  }
+  
 
   if (selected_options.length == 0) {
     let first_select_contact = document.getElementById("first-select-contacts")
     first_select_contact.innerHTML = `Select contacts to assign` 
   }   
 
-  if (index == 0) {
-    addSelectContactOption()
-  }
+    if (index == 0) {
+      addSelectContactOption()
+    }
 
     if (document.getElementById("addTask-body")) {
       let custom_select_category_container = document.querySelector(".custom-select-category-container")
       let add_category_input = document.getElementById("add-category-input").value
   
-      custom_select_category_container.innerHTML += `<label onclick="returnSelectedCategory(id)" id="${add_category_input}" class="custom-select-option">${add_category_input} <span class="category-color"></span></label>` 
+      custom_select_category_container.innerHTML += `<label onclick="returnSelectedCategory(id)" id="${add_category_input}" class="custom-select-option-category">${add_category_input} <span class="category-color"></span></label>` 
       
       let category_color = document.querySelectorAll(".category-color")
 
@@ -89,8 +88,7 @@ function showAddContact(index) {
           category_color[category_color.length - 1].classList.add("blue")
           break;
         } 
-      }
-      
+      }      
     }
    
     // closeAddContact(index)

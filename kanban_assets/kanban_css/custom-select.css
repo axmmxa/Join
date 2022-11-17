@@ -51,8 +51,21 @@
     margin: 0;
     padding: 10px 20px;
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.custom-select-option-category {
+    cursor: pointer;
+    margin: 0;
+    padding: 10px 20px;
+    display: flex;
     justify-content: flex-start;
     align-items: center;
+}
+
+.custom-select-option-category:hover {
+    background-color: #D2E3FF;
 }
 
 .custom-select-option p {

@@ -227,17 +227,18 @@ async function renderSmallEditContacts(contact_name,contact_email,contact_phone,
 }
 
 
-function closeSmallEditTask() {
-    document.querySelector(".edit-task").classList.add("d-none")
+function closeSmallEditTask(id) {
+    document.querySelector(`#edit-task-${id}`).classList.add("d-none")
 
     document.querySelector(".kanban-navbar").style.opacity = 1
     document.querySelector(".kanban-main").style.opacity = 1
+    document.querySelector(".sidebar-mobile").style.opacity = 1 
 
     closeBoardTaskInfo()
 
 }
 
-   function setPrioritySmallEditTask(id) {
+   function setPrioritySmallEditTask(id, id_task) {
 
     let priorities = document.querySelectorAll('.priority')
     
@@ -245,51 +246,58 @@ function closeSmallEditTask() {
       const priority = priorities[index];
       priority.style.color = 'black'
       priority.style.backgroundColor = 'white'
-      if(document.getElementById('urgent-btn')) {
-        document.getElementById('urgent-btn-priority-img').setAttribute('src', 'kanban_img/priority_icons/urgent-red.png')
-      } if (document.getElementById('medium-btn')) {
-        document.getElementById('medium-urgent-btn-priority-img').setAttribute('src', 'kanban_img/priority_icons/middle-urgent-orange.png')
-      } if(document.getElementById('non-urgent-btn')){
-        document.getElementById('non-urgent-btn-priority-img').setAttribute('src', 'kanban_img/priority_icons/non-urgent-green.png')
+      if(document.getElementById(`urgent-btn-${id_task}`)) {
+        document.getElementById(`urgent-btn-priority-img-${id_task}`).setAttribute('src', 'kanban_img/priority_icons/urgent-red.png')
+      } if (document.getElementById(`medium-btn-${id_task}`)) {
+        document.getElementById(`medium-urgent-btn-priority-img-${id_task}`).setAttribute('src', 'kanban_img/priority_icons/middle-urgent-orange.png')
+      } if(document.getElementById(`non-urgent-btn-${id_task}`)){
+        document.getElementById(`non-urgent-btn-priority-img-${id_task}`).setAttribute('src', 'kanban_img/priority_icons/non-urgent-green.png')
       }
     }
     
-    if(id == 'urgent-btn') {
-      document.getElementById(id).style.backgroundColor = 'red'
-      document.getElementById('urgent-btn-priority-img').setAttribute('src', 'kanban_img/priority_icons/urgent_white.png')
-      document.getElementById(id).style.color = 'white'
+    if(id == `Urgent`) {
+      document.getElementById(`urgent-btn-${id_task}`).style.backgroundColor = 'red'
+      document.getElementById(`urgent-btn-priority-img-${id_task}`).setAttribute('src', 'kanban_img/priority_icons/urgent_white.png')
+      document.getElementById(`urgent-btn-${id_task}`).style.color = 'white'
       priority_img_path =  'kanban_img/priority_icons/urgent-red.png'
       selected_priority = "Urgent"
-    } else if(id == "medium-btn") {
-      document.getElementById(id).style.backgroundColor = 'orange'
-      document.getElementById('medium-urgent-btn-priority-img').setAttribute('src', 'kanban_img/priority_icons/medium_urgent_white.png')
-      document.getElementById(id).style.color = 'white'
+    } else if( id == `Medium`) {
+      document.getElementById(`medium-btn-${id_task}`).style.backgroundColor = 'orange'
+      document.getElementById(`medium-urgent-btn-priority-img-${id_task}`).setAttribute('src', 'kanban_img/priority_icons/medium_urgent_white.png')
+      document.getElementById(`medium-btn-${id_task}`).style.color = 'white'
       priority_img_path = 'kanban_img/priority_icons/middle-urgent-orange.png'
       selected_priority = "Medium"
-    } else if( id == 'non-urgent-btn') {
-      document.getElementById(id).style.backgroundColor = 'lightgreen'
-      document.getElementById('non-urgent-btn-priority-img').setAttribute('src', 'kanban_img/priority_icons/non_urgent_white.png')
-      document.getElementById(id).style.color = 'white'
+    } else if( id == `Low` ) {
+      document.getElementById(`non-urgent-btn-${id_task}`).style.backgroundColor = 'lightgreen'
+      document.getElementById(`non-urgent-btn-priority-img-${id_task}`).setAttribute('src', 'kanban_img/priority_icons/non_urgent_white.png')
+      document.getElementById(`non-urgent-btn-${id_task}`).style.color = 'white'
       priority_img_path = 'kanban_img/priority_icons/non-urgent-green.png'
       selected_priority = "Low"
     }
       
    }
 
-function renderSmallEditTask(id_task) {
-    if (document.querySelector(".edit-task")) {
-        document.querySelector(".edit-task").classList.remove("d-none")
+function renderSmallEditTask(id_task,title,description,due_date,priority) {
+    if (document.querySelector(`#edit-task-${id_task}`)) {
+        document.querySelector(`#edit-task-${id_task}`).classList.remove("d-none")
+
+        setPrioritySmallEditTask(priority, id_task)
 
         document.querySelector(".kanban-navbar").style.opacity = 0.5
         document.querySelector(".kanban-main").style.opacity = 0.5
+        document.querySelector(".sidebar-mobile").style.opacity = 0.5 
     } else {
         document.querySelector(".kanban-navbar").style.opacity = 0.5
         document.querySelector(".kanban-main").style.opacity = 0.5
+        document.querySelector(".sidebar-mobile").style.opacity = 0.5 
 
-        document.querySelector("body").innerHTML += templateSmallEditTask(id_task) 
-        
-        let custom_select_contact_container = document.querySelector(".custom-select-contact-container")
-        custom_select_contact_container.innerHTML += `<label class="custom-select-option"> ${loggedInUser.name} (You) <input onclick="returnSelectedContacts(this)" value="${loggedInUser.name}" class="selected-option" type="checkbox" autocomplete="off"></label>`
+        document.querySelector("body").innerHTML += templateSmallEditTask(id_task,title,description,due_date) 
+
+        setPrioritySmallEditTask(priority, id_task)
+
+        let custom_select_contact_container = document.querySelectorAll(".custom-select-contact-container")
+        console.log(custom_select_contact_container)
+        custom_select_contact_container[custom_select_contact_container.length - 1].innerHTML += `<label class="custom-select-option"> ${loggedInUser.name} (You) <input onclick="returnSelectedContacts(this)" value="${loggedInUser.name}" class="selected-option" type="checkbox" autocomplete="off"></label>`
 
     }
 }
@@ -427,6 +435,7 @@ function closeBoardTaskInfo() {
     
     document.querySelector(".kanban-navbar").style.opacity = 1
     document.querySelector(".kanban-main").style.opacity = 1
+    document.querySelector(".sidebar-mobile").style.opacity = 1 
 }
 
 
@@ -437,6 +446,7 @@ function renderBoardTaskInfo(id_task) {
 
         document.querySelector(".kanban-navbar").style.opacity = 0.5
         document.querySelector(".kanban-main").style.opacity = 0.5
+        document.querySelector(".sidebar-mobile").style.opacity = 0.5 
 
         //showTaskInfo(id_task)
     } else {
@@ -444,6 +454,7 @@ function renderBoardTaskInfo(id_task) {
         
         document.querySelector(".kanban-navbar").style.opacity = 0.5
         document.querySelector(".kanban-main").style.opacity = 0.5
+        document.querySelector(".sidebar-mobile").style.opacity = 0.5 
     
         }
 
@@ -455,6 +466,7 @@ function closeSmallAddTask() {
     
     document.querySelector(".kanban-navbar").style.opacity = 1
     document.querySelector(".kanban-main").style.opacity = 1
+    document.querySelector(".sidebar-mobile").style.opacity = 1 
     
 }
 
@@ -464,10 +476,12 @@ function renderSmallAddTask() {
 
         document.querySelector(".kanban-navbar").style.opacity = 0.5
         document.querySelector(".kanban-main").style.opacity = 0.5
+        document.querySelector(".sidebar-mobile").style.opacity = 0.5 
             
     } else {
         document.querySelector(".kanban-navbar").style.opacity = 0.5
         document.querySelector(".kanban-main").style.opacity = 0.5
+        document.querySelector(".sidebar-mobile").style.opacity = 0.5 
 
         document.querySelector("body").innerHTML += templateSmallAddTask()
 

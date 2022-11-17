@@ -156,31 +156,31 @@ function templateParentSmallEditContacts(contact_name,contact_email,contact_phon
 }
 
 
-function templateSmallEditTask(id_task) { 
+function templateSmallEditTask(id_task, title, description, due_date) { 
 
     return   `
-    <div id="edit-task" class="edit-task">  
+    <div id="edit-task-${id_task}" class="edit-task centered">  
         <div class="add-task-container-edit">
             <div class="align-right"> 
-                <span onclick="closeSmallEditTask()" class="close-x-right-side">X</span>  
+                <span onclick="closeSmallEditTask(${id_task})" class="close-x-right-side">X</span>  
             </div>
         
             <form onsubmit="saveEditedTask(${id_task}); return false" class="task-form">
-                        <input id="input-title" class="input-title" type="text" placeholder="Enter a title">
+                        <input value="${title}" id="input-title" class="input-title" type="text" placeholder="Enter a title">
 
                         <div class="description-container">
                             <span>Description</span>
-                            <textarea id="textarea" placeholder="Enter a description"></textarea>
+                            <textarea id="textarea" placeholder="Enter a description">${description}</textarea>
                         </div>
 
                         <div class="due-date-container">
-                            <label class="label-flex" for="due-date">Due date<input placeholder="dd/mm/yyyy" id="due-date" type="date"></label>
+                            <label class="label-flex" for="due-date">Due date<input value="${due_date}" placeholder="dd/mm/yyyy" id="due-date" type="date"></label>
                         </div>
 
                         <div class="priority-btn-container">
-                            <a id="urgent-btn" class="urgent-btn priority" onclick="setPriotity(id)">Urgent <img id="urgent-btn-priority-img" class="priority-urgent-img" src="kanban_img/priority_icons/urgent-red.png"></a>
-                            <a id="medium-btn" class="medium-btn priority" onclick="setPriotity(id)">Medium <img  id="medium-btn-priority-img" class="priority-urgent-img" src="kanban_img/priority_icons/middle-urgent-orange.png"></a>
-                            <a id="non-urgent-btn" class="non-urgent-btn priority" onclick="setPriotity(id)">Low <img id="non-urgent-btn-priority-img" class="priority-urgent-img" src="kanban_img/priority_icons/non-urgent-green.png"></a>
+                            <a id="urgent-btn-${id_task}" class="urgent-btn priority" onclick="setPrioritySmallEditTask('Urgent', ${id_task})">Urgent <img id="urgent-btn-priority-img-${id_task}" class="priority-urgent-img" src="kanban_img/priority_icons/urgent-red.png"></a>
+                            <a id="medium-btn-${id_task}" class="medium-btn priority" onclick="setPrioritySmallEditTask('Medium', ${id_task})">Medium <img  id="medium-urgent-btn-priority-img-${id_task}" class="priority-urgent-img" src="kanban_img/priority_icons/middle-urgent-orange.png"></a>
+                            <a id="non-urgent-btn-${id_task}" class="non-urgent-btn priority" onclick="setPrioritySmallEditTask('Low', ${id_task})">Low <img id="non-urgent-btn-priority-img-${id_task}" class="priority-urgent-img" src="kanban_img/priority_icons/non-urgent-green.png"></a>
                         </div>
                         
     
@@ -194,7 +194,7 @@ function templateSmallEditTask(id_task) {
                             </div>
 
                             <div class="custom-select" id="contacts">
-                                <div onclick="showCustomSelectOptions(0)" class="first-select-option-container">
+                                <div onclick="showCustomSelectOptions(${id_task})" class="first-select-option-container">
                                     <span id="first-select-contacts" class="first-select-option">Select contacts to assign</span>
                                     <img class="arrow-down" src="kanban_img/arrow_icons/arrow_select.png" />
                                 </div>
@@ -211,6 +211,7 @@ function templateSmallEditTask(id_task) {
                         <div class="margin align-right">
                             <button class="create-btn">Ok <img class="white-clear" src="kanban_img/clear_icons/white_clear.png"/></button>
                         </div>
+                        
                     </form>          
         </div>
     </div>
@@ -219,7 +220,7 @@ function templateSmallEditTask(id_task) {
 
 function templateShowTaskInfo(userTaskId, id_task, j) {
     return  `
-    <div id="small-board-task-info-${id_task}" class="small-board-task-info">
+    <div id="small-board-task-info-${id_task}" class="small-board-task-info centered">
                 <div class="close-btn-container-task-info">
                     <span onclick="closeBoardTaskInfo()" class="close-x-right-side">X</span>
                 </div>
@@ -246,7 +247,7 @@ function templateShowTaskInfo(userTaskId, id_task, j) {
                 </div>
 
                 <div class="board-task-edit-btn-container">
-                    <button onclick="renderSmallEditTask(${id_task})" class="edit-btn light-blue"><img class="edit-pen-height" src="kanban_img/edit_icons/edit_pen_white.png"></button>
+                    <button onclick="renderSmallEditTask(${id_task},'${userTaskId.title}','${userTaskId.description}','${userTaskId["due-date"]}','${userTaskId.priority}')" class="edit-btn light-blue"><img class="edit-pen-height" src="kanban_img/edit_icons/edit_pen_white.png"></button>
                 </div>
             </div>
     `

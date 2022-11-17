@@ -189,9 +189,9 @@ async function saveEditedContact(contact_email, contact_name) {
 }
 
 
-function addSelectContactOption() {
+function addSelectContactOption(index) {
   let add_contact_input = document.getElementById("add-contact-input").value
-  let custom_select_contact_container = document.querySelector(".custom-select-contact-container")
+  let custom_select_contact_container = document.querySelectorAll(".custom-select-contact-container")
 
   if (loggedInUser.name !== "Guest") {
     for (let i = 0; i < users.length; i++) {
@@ -200,7 +200,7 @@ function addSelectContactOption() {
           for (let j = 0; j < currentUser.contacts.length; j++) {
             const currentContact = currentUser.contacts[j];
             if (currentContact.contact_email == add_contact_input) {
-              custom_select_contact_container.innerHTML += `<label class="custom-select-option"> ${currentContact.contact_name} <input onclick="returnSelectedContacts(this)" value="${currentContact.contact_name}" class="selected-option" type="checkbox" autocomplete="off"></label>`
+              custom_select_contact_container[index].innerHTML += `<label class="custom-select-option"> ${currentContact.contact_name} <input onclick="returnSelectedContacts(this)" value="${currentContact.contact_name}" class="selected-option" type="checkbox" autocomplete="off"></label>`
             } 
           }
       }
