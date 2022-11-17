@@ -11,19 +11,29 @@ if (msg) {
     msgBox.style.display = "none"
 }
 
-function login() {
+ async function login() {
     let email = document.getElementById("e-mail").value
     let password = document.getElementById("password").value
     
-    console.log(loggedInUser)
-    loggedInUser = users.find(u => u.email == email && u.password == password)
-    console.log(loggedInUser)
+    
+    await downloadFromServer();
+    users = JSON.parse(backend.getItem('users')) || [];
+    
 
-    if (loggedInUser) {
-        console.log("User gefunden") 
+    document.querySelector('.login-btn').addEventListener('click', ()=> {
+        console.log(users)
+    loggedInUser = users.find(u => u.email == email && u.password == password)
+
+    console.log(loggedInUser)
+        if (loggedInUser) {
+            console.log("User gefunden") 
         saveLoggedInUser()
         window.location.href = './summary.html'
-    } else {
+        } 
+        
+    })
+
+    document.querySelector('.guest-btn').addEventListener('click', ()=> {
         console.log("Guest login")
         loggedInUser = {
             "contacts": [],
@@ -36,5 +46,11 @@ function login() {
         saveLoggedInUser()
         localStorage.setItem("task_id", JSON.stringify(0))
         window.location.href = './summary.html'
-    }
+    })
 }
+ 
+    
+        
+        
+        
+    
