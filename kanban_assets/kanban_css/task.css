@@ -111,17 +111,17 @@
 
 .urgent-btn:hover {
     cursor: pointer;
-    border-bottom: 2px solid red;
+    border-bottom: 1px solid red;
 }
 
 .medium-btn:hover {
     cursor: pointer;
-    border-bottom: 2px solid orange;
+    border-bottom: 1px solid orange;
 }
 
 .non-urgent-btn:hover {
     cursor: pointer;
-    border-bottom: 2px solid lightgreen;
+    border-bottom: 1px solid lightgreen;
 }
 
 .description-container {

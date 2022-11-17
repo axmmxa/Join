@@ -51,7 +51,7 @@
     margin: 0;
     padding: 10px 20px;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
 }
 
@@ -61,6 +61,14 @@
 
 .custom-select-option:hover {
     background-color: #D2E3FF;
+}
+
+.category-color {
+    padding: 6px;
+    border-radius: 50%;
+    border: 2px solid white;
+    margin-left: 10px;
+
 }
 
 .add-task-contacts-container {

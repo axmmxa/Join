@@ -64,21 +64,36 @@ function showAddContact(index) {
     addSelectContactOption()
   }
 
-    // let custom_select_contact_container = document.querySelector(".custom-select-contact-container")
-    // let add_contact_input = document.getElementById("add-contact-input").value
-
-    // custom_select_contact_container.innerHTML += `<label class="custom-select-option"> ${add_contact_input} <input onclick="returnSelectedContacts(this)" value="${add_contact_input}" class="selected-option" type="checkbox" autocomplete="off"></label> `
-    
     if (document.getElementById("addTask-body")) {
       let custom_select_category_container = document.querySelector(".custom-select-category-container")
       let add_category_input = document.getElementById("add-category-input").value
   
-      custom_select_category_container.innerHTML += `<label onclick="returnSelectedCategory(id)" id="${add_category_input}" class="custom-select-option">${add_category_input}</label>`  
+      custom_select_category_container.innerHTML += `<label onclick="returnSelectedCategory(id)" id="${add_category_input}" class="custom-select-option">${add_category_input} <span class="category-color"></span></label>` 
+      
+      let category_color = document.querySelectorAll(".category-color")
+
+      switch(add_category_input) {
+        case "Backoffice": 
+          category_color[category_color.length - 1].classList.add("turquoise")
+          break;
+        case "Sales":
+          category_color[category_color.length - 1].classList.add("pink")
+          break;
+        case "Media":
+          category_color[category_color.length - 1].classList.add("yellow")
+          break;
+        case "Design":
+          category_color[category_color.length - 1].classList.add("orange")
+          break;
+        case "Marketing":
+          category_color[category_color.length - 1].classList.add("blue")
+          break;
+        } 
+      }
+      
     }
    
     // closeAddContact(index)
-    
-}
     
       
 function showAddSubtask() {
