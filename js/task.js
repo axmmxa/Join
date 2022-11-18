@@ -22,7 +22,27 @@ function returnSelectedContacts(el) {
 function returnSelectedCategory(id) {
   selected_category = id
   let first_select_task_category = document.getElementById("first-select-task-category")
-  first_select_task_category.innerHTML = id
+  first_select_task_category.innerHTML = `${id} <div class="category-color-selected"></div>`
+
+  let category_color = document.querySelector(".category-color-selected")
+
+      switch(id) {
+        case "Backoffice": 
+          category_color.classList.add("turquoise")
+          break;
+        case "Sales":
+          category_color.classList.add("pink")
+          break;
+        case "Media":
+          category_color.classList.add("yellow")
+          break;
+        case "Design":
+          category_color.classList.add("orange")
+          break;
+        case "Marketing":
+          category_color.classList.add("blue")
+          break;
+        }  
 }
 
 function returnSelectedSubtasks(el) {

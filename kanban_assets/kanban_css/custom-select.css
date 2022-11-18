@@ -84,6 +84,15 @@
 
 }
 
+.category-color-selected {
+    display: inline-block;
+    border-radius: 50%;
+    margin-bottom: -1px;
+    margin-left: 10px;
+    height: 12px;
+    width: 12px;
+}
+
 .add-task-contacts-container {
     width: 99%;
 }

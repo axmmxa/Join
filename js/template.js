@@ -211,7 +211,7 @@ function templateSmallEditTask(id_task, title, description, due_date) {
                         <div class="margin align-right">
                             <button class="create-btn">Ok <img class="white-clear" src="kanban_img/clear_icons/white_clear.png"/></button>
                         </div>
-                        
+
                     </form>          
         </div>
     </div>
@@ -299,29 +299,30 @@ function templateSmallAddTask() {
                 </div>
 
                 <div class="task-category-container">
-                    <div class="add-option d-none">
-                        <input id="add-category-input" class="add-option-input" type="text" placeholder="New category name" required>
-                        <div class="add-option-btn-container">
-                            <img onclick="closeAddContact(1)" class="close-x-blue-btn" src="kanban_img/close_icons/close_x_blue.png">
-                            <img onclick="addNewContactOption(1)" class="blue-clear-btn" src="kanban_img/clear_icons/blue_clear.png">
-                        </div>
-                    </div>
-
-                    <div class="custom-select" id="task-category">
-                        <div onclick="showCustomSelectOptions(1)" class="first-select-option-container">
-                            <span id="first-select-task-category" class="first-select-option">Select task category</span>
-                            <img class="arrow-down" src="kanban_img/arrow_icons/arrow_select.png"/>
-                        </div>
-                        <div class="custom-select-options-container d-none">
-                            <label onclick="showAddContact(1)" class="custom-select-option">New Category</label>
-                            <div class="custom-select-category-container">
-                                <label onclick="returnSelectedCategory(id)" id="Sales" class="custom-select-option">Sales</label>
-                                <label onclick="returnSelectedCategory(id)" id="Backoffice" class="custom-select-option">Backoffice</label>       
+                            <div class="add-option d-none">
+                                <input id="add-category-input" class="add-option-input" type="text" placeholder="New category name" required>
+                                <div class="add-option-btn-container">
+                                    <img onclick="closeAddContact(1)" class="close-x-blue-btn" src="kanban_img/close_icons/close_x_blue.png">
+                                    <img onclick="addNewContactOption(1)" class="blue-clear-btn" src="kanban_img/clear_icons/blue_clear.png">
+                                </div>
                             </div>
+
+                            <div class="custom-select" id="task-category">
+                                <div onclick="showCustomSelectOptions(1)" class="first-select-option-container">
+                                    <span id="first-select-task-category" class="first-select-option">Select task category</span>
+                                    <img class="arrow-down" src="kanban_img/arrow_icons/arrow_select.png"/>
+                                </div>
+                                <div class="custom-select-options-container d-none">
+                                    <label onclick="showAddContact(1)" class="custom-select-option">New Category</label>
+                                    <div class="custom-select-category-container">
+                                        <label onclick="returnSelectedCategory(id)" id="Sales" class="custom-select-option-category">Sales <span class="category-color pink"></span></label>
+                                        <label onclick="returnSelectedCategory(id)" id="Backoffice" class="custom-select-option-category">Backoffice <span class="category-color turquoise"></span></label>       
+                                    </div>
+                                </div>
+                            </div>
+                            
                         </div>
-                    </div>
-                    
-                </div>
+
 
                 <div class="priority-btn-container">
                     <a id="urgent-btn" class="urgent-btn priority" onclick="setPriotity(id)">Urgent <img id="urgent-btn-priority-img" class="priority-urgent-img" src="kanban_img/priority_icons/urgent-red.png"></a>

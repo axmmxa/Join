@@ -19,13 +19,12 @@ function showAddContact(index) {
     let add_option = document.querySelectorAll(".add-option")
     let arrow_down = document.querySelectorAll(".arrow-down")
 
-    for (let i = 0; i < add_option.length; i++) {
-        if (i == index) {
-            custom_select[index].classList.add("d-none")
-            arrow_down[index].classList.add("d-none")
-            add_option[index].classList.remove("d-none")
-        }
-    } 
+    console.log(add_option)
+
+    custom_select[index].classList.add("d-none")
+    arrow_down[index].classList.add("d-none")
+    add_option[index].classList.remove("d-none")
+    
   }
 
   function closeAddContact(index) {
