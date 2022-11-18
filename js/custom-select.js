@@ -1,131 +1,133 @@
 function showCustomSelectOptions(index) {
-  let selects =  document.querySelectorAll(".custom-select-options-container")
-  
-  if (document.getElementById("addTask-body") || document.getElementById("contacts-body")) {
-    selects[index].classList.toggle("d-none")
+  let selects = document.querySelectorAll(".custom-select-options-container");
+
+  if (
+    document.getElementById("addTask-body") ||
+    document.getElementById("contacts-body")
+  ) {
+    selects[index].classList.toggle("d-none");
   } else {
-    selects[selects.length - 1].classList.toggle("d-none")
+    selects[selects.length - 1].classList.toggle("d-none");
   }
-  
 }
 
 function showCustomSelectOptionsTaskInfo() {
-    document.querySelector(".custom-select-options-task-info-container").classList.toggle("d-none")
+  document
+    .querySelector(".custom-select-options-task-info-container")
+    .classList.toggle("d-none");
 }
 
-
 function showAddContact(index) {
-    let custom_select = document.querySelectorAll(".custom-select")
-    let add_option = document.querySelectorAll(".add-option")
-    let arrow_down = document.querySelectorAll(".arrow-down")
+  let custom_select = document.querySelectorAll(".custom-select");
+  let add_option = document.querySelectorAll(".add-option");
+  let arrow_down = document.querySelectorAll(".arrow-down");
 
-    console.log(add_option)
+  console.log(add_option);
 
-    custom_select[index].classList.add("d-none")
-    arrow_down[index].classList.add("d-none")
-    add_option[index].classList.remove("d-none")
-    
-  }
+  custom_select[index].classList.add("d-none");
+  arrow_down[index].classList.add("d-none");
+  add_option[index].classList.remove("d-none");
+}
 
-  function closeAddContact(index) {
-    let custom_select = document.querySelectorAll(".custom-select")
-    let add_option = document.querySelectorAll(".add-option")
-    let arrow_down = document.querySelectorAll(".arrow-down")
+function closeAddContact(index) {
+  let custom_select = document.querySelectorAll(".custom-select");
+  let add_option = document.querySelectorAll(".add-option");
+  let arrow_down = document.querySelectorAll(".arrow-down");
 
-    for (let i = 0; i < add_option.length; i++) {
-        if (i == index) {
-            custom_select[index].classList.remove("d-none")
-            arrow_down[index].classList.remove("d-none")
-            add_option[index].classList.add("d-none")
-        }
+  for (let i = 0; i < add_option.length; i++) {
+    if (i == index) {
+      custom_select[index].classList.remove("d-none");
+      arrow_down[index].classList.remove("d-none");
+      add_option[index].classList.add("d-none");
     }
   }
-  
-  function addNewContactOption(index) {
+}
 
-  let checkboxes = document.querySelectorAll('input[type="checkbox"]');
-
-    for (let j = 0; j < checkboxes.length; j++) {
-      const checkbox = checkboxes[j];
-      if (checkbox.checked) {
-        selected_options.pop(selected_options[j])
-      } 
+function resetContactOptions(checkboxes, index) {
+  for (let j = 0; j < checkboxes.length; j++) {
+    const checkbox = checkboxes[j];
+    if (checkbox.checked) {
+      selected_options.pop(selected_options[j]);
     }
-  
+  }
 
   if (selected_options.length == 0) {
-    let first_select_contact = document.getElementById("first-select-contacts")
-    first_select_contact.innerHTML = `Select contacts to assign` 
-  }   
+    let first_select_contact = document.getElementById("first-select-contacts");
+    first_select_contact.innerHTML = `Select contacts to assign`;
+  }
 
-    if (index == 0) {
-      addSelectContactOption(index)
+  if (index == 0) {
+    addSelectContactOption(index);
+  }
+}
+
+function addNewContactOption(index) {
+  let checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+  resetContactOptions(checkboxes, index);
+
+  if (document.getElementById("addTask-body")) {
+    let custom_select_category_container = document.querySelector(
+      ".custom-select-category-container"
+    );
+    let add_category_input =
+      document.getElementById("add-category-input").value;
+
+    custom_select_category_container.innerHTML += `<label onclick="returnSelectedCategory(id)" id="${add_category_input}" class="custom-select-option-category">${add_category_input} <span class="category-color"></span></label>`;
+
+    let category_color = document.querySelectorAll(".category-color");
+
+    setColorCategory(category_color, add_category_input);
+  }
+
+  function setColorCategory(category_color, add_category_input) {
+    switch (add_category_input) {
+      case "Backoffice":
+        category_color[category_color.length - 1].classList.add("turquoise");
+        break;
+      case "Sales":
+        category_color[category_color.length - 1].classList.add("pink");
+        break;
+      case "Media":
+        category_color[category_color.length - 1].classList.add("yellow");
+        break;
+      case "Design":
+        category_color[category_color.length - 1].classList.add("orange");
+        break;
+      case "Marketing":
+        category_color[category_color.length - 1].classList.add("blue");
+        break;
     }
+  }
+}
 
-    if (document.getElementById("addTask-body")) {
-      let custom_select_category_container = document.querySelector(".custom-select-category-container")
-      let add_category_input = document.getElementById("add-category-input").value
-  
-      custom_select_category_container.innerHTML += `<label onclick="returnSelectedCategory(id)" id="${add_category_input}" class="custom-select-option-category">${add_category_input} <span class="category-color"></span></label>` 
-      
-      let category_color = document.querySelectorAll(".category-color")
+// closeAddContact(index)
 
-      switch(add_category_input) {
-        case "Backoffice": 
-          category_color[category_color.length - 1].classList.add("turquoise")
-          break;
-        case "Sales":
-          category_color[category_color.length - 1].classList.add("pink")
-          break;
-        case "Media":
-          category_color[category_color.length - 1].classList.add("yellow")
-          break;
-        case "Design":
-          category_color[category_color.length - 1].classList.add("orange")
-          break;
-        case "Marketing":
-          category_color[category_color.length - 1].classList.add("blue")
-          break;
-        } 
-      }      
-    }
-   
-    // closeAddContact(index)
-    
-      
 function showAddSubtask() {
-    let subtask_category_container = document.querySelector("#subtask-category")
-    let add_option_subtask = document.querySelector(".add-option-subtask")
-    let plus_select = document.querySelector(".plus-select-subtask")
+  let subtask_category_container = document.querySelector("#subtask-category");
+  let add_option_subtask = document.querySelector(".add-option-subtask");
+  let plus_select = document.querySelector(".plus-select-subtask");
 
-    subtask_category_container.classList.add("d-none")
-    plus_select.classList.add("d-none")
-    add_option_subtask.classList.remove("d-none")
-         
-  }
+  subtask_category_container.classList.add("d-none");
+  plus_select.classList.add("d-none");
+  add_option_subtask.classList.remove("d-none");
+}
 
+function closeAddSubtask() {
+  let subtask_category_container = document.querySelector("#subtask-category");
+  let add_option_subtask = document.querySelector(".add-option-subtask");
+  let plus_select = document.querySelector(".plus-select-subtask");
 
-  function closeAddSubtask() {
-    let subtask_category_container = document.querySelector("#subtask-category")
-    let add_option_subtask = document.querySelector(".add-option-subtask")
-    let plus_select = document.querySelector(".plus-select-subtask")
+  subtask_category_container.classList.remove("d-none");
+  plus_select.classList.remove("d-none");
+  add_option_subtask.classList.add("d-none");
+}
 
-    subtask_category_container.classList.remove("d-none")
-    plus_select.classList.remove("d-none")
-    add_option_subtask.classList.add("d-none")
-     
-  }
+function addNewSubtask() {
+  let category_container = document.querySelector(".category-container");
+  let add_subtask_input = document.getElementById("add-subtask-input").value;
 
-  function addNewSubtask() {
-    let category_container = document.querySelector(".category-container")
-    let add_subtask_input = document.getElementById("add-subtask-input").value
+  selected_subtasks = [];
 
-    selected_subtasks = []
-    
-    category_container.innerHTML += 
-        `<label for="${add_subtask_input}"><input value="${add_subtask_input}" onclick="returnSelectedSubtasks(this)" type="checkbox" id="${add_subtask_input}"><span class="category-span">${add_subtask_input}</span></label>`
-    
-  }
-  
-  
-
+  category_container.innerHTML += `<label for="${add_subtask_input}"><input value="${add_subtask_input}" onclick="returnSelectedSubtasks(this)" type="checkbox" id="${add_subtask_input}"><span class="category-span">${add_subtask_input}</span></label>`;
+}
