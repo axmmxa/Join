@@ -28,8 +28,7 @@ let BackgroundColorForContactBook = {}
 let BackgroundColorForEditContact = {}
 
 async function init() {
-    await downloadFromServer();
-    users = JSON.parse(backend.getItem('users')) || [];
+    await getUsersFromBackend()
 
     loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"))
     
@@ -73,7 +72,6 @@ function initBoard() {
 function initAddTask() {
   selectedLink("kanban-link-2")
   selectedLink("kanban-link-6")
-  
   let custom_select_contact_container = document.querySelector(".custom-select-contact-container")
   custom_select_contact_container.innerHTML += `<label class="custom-select-option"> ${loggedInUser.name} (You) <input onclick="returnSelectedContacts(this)" value="${loggedInUser.name}" class="selected-option" type="checkbox" autocomplete="off"></label>`
 }
@@ -103,6 +101,11 @@ function initUserIcon() {
 function initGuestIcon() {
   document.querySelector(".user-logout-icon-container").innerHTML = `<div onclick="toggleLogoutBox()" class="user-logout-icon">${getUserIcon(loggedInUser.name)}</div>`
   document.querySelector(".user-logout-icon").classList.add(loggedInUser["user-background-color"])
+}
+
+async function getUsersFromBackend() {
+  await downloadFromServer();
+  users = JSON.parse(backend.getItem('users')) || [];
 }
 
 async function saveUsersArray() {
@@ -265,45 +268,54 @@ function getCategoryColor(category, id_task) {
   }
 
 function getUserColor() {
-    let user_color = ["orange","red","pink","lightblue","purple","green","darkred","darkpurple"]
-   
-    if (loggedInUser.name !== "Guest") {
-      for (let i = 0; i < users.length; i++) {
-        const currentUser = users[i];
-        if(currentUser.email == loggedInUser.email) {
-            for (let j = 0; j < currentUser.contacts.length; j++) {
-              const currentContact = currentUser.contacts[j];
-              if (currentContact["contact-background-color"] == "") {
-                let random_color_1 = user_color[Math.floor(Math.random() * 7)]
-                currentContact["contact-background-color"] = random_color_1
-              }
-            }
-        }
-      }
-    
-    for (let i = 0; i < users.length; i++) {
-      const currentUser = users[i];
-      if(currentUser.email == loggedInUser.email && currentUser["user-background-color"] == ""){
-        let random_color_2 = user_color[Math.floor(Math.random() * 7)]
-        currentUser["user-background-color"] = random_color_2
-        saveUsersArray()
-    }
-  }     
-} else {
-      let random_color_1 = user_color[Math.floor(Math.random() * 7)]
-      loggedInUser.contacts["contact-background-color"] = random_color_1
-      localStorage.setItem("loggedInUser", JSON.stringify(loggedInUser));
-
-      for (let j = 0; j < loggedInUser.contacts.length; j++) {
-      const currentContact = loggedInUser.contacts[j];
-      if (currentContact["contact-background-color"] == "") {
-      let random_color_1 = user_color[Math.floor(Math.random() * 7)]
-      currentContact["contact-background-color"] = random_color_1
-    }
-   }
+  let user_color = ["orange","red","pink","lightblue","purple","green","darkred","darkpurple"]
+  
+  if (loggedInUser.name !== "Guest") {
+    randomBackgroundColorForUser(user_color)
+  } else {
+    randomBackgroundColorForUser(user_color)
   }
 }  
 
+
+function randomBackgroundColorForUser(user_color) {
+  for (let i = 0; i < users.length; i++) {
+    const currentUser = users[i];
+    if(currentUser.email == loggedInUser.email) {
+        for (let j = 0; j < currentUser.contacts.length; j++) {
+          const currentContact = currentUser.contacts[j];
+          if (currentContact["contact-background-color"] == "") {
+            let random_color_1 = user_color[Math.floor(Math.random() * 7)]
+            currentContact["contact-background-color"] = random_color_1
+          }
+        }
+    }
+  }
+
+  for (let i = 0; i < users.length; i++) {
+    const currentUser = users[i];
+    if(currentUser.email == loggedInUser.email && currentUser["user-background-color"] == ""){
+      let random_color_2 = user_color[Math.floor(Math.random() * 7)]
+      currentUser["user-background-color"] = random_color_2
+      saveUsersArray()
+    }
+  }     
+}
+
+
+function randomBackgroundColorForGuest(user_color) {
+  let random_color_1 = user_color[Math.floor(Math.random() * 7)]
+  loggedInUser.contacts["contact-background-color"] = random_color_1
+  localStorage.setItem("loggedInUser", JSON.stringify(loggedInUser));
+
+  for (let j = 0; j < loggedInUser.contacts.length; j++) {
+  const currentContact = loggedInUser.contacts[j];
+    if (currentContact["contact-background-color"] == "") {
+    let random_color_1 = user_color[Math.floor(Math.random() * 7)]
+    currentContact["contact-background-color"] = random_color_1
+    }
+  }
+}
 
 async function loadBoardContactBackgroundColor() {
   if (loggedInUser.name !== "Guest") {
@@ -315,109 +327,70 @@ async function loadBoardContactBackgroundColor() {
   for (let i = 0; i < users.length; i++) {
       const currentUser = users[i];
       if (currentUser.email == loggedInUser.email) {
-          for (let j = 0; j < user_icons.length; j++) {
-            for (let k = 0; k < currentUser.contacts.length; k++) {
-              const currentContact = currentUser.contacts[k];
-              BackgroundColorForBoard[currentContact.contact_name] = currentContact["contact-background-color"]
-            }
-            for (let [key, value] of Object.entries(BackgroundColorForBoard)) {
-              if (key == user_icons[j].id) {
-                correctColor = value
-              }
-            }
-            user_icons[j].classList.add(correctColor)
-
-            if (user_icons[j].id == currentUser.name) {
-              user_icons[j].classList.add(currentUser["user-background-color"])
-            }
-
-          }
+        setBoardBackgroundColor(currentUser,user_icons)
       }
     }
   } else {
       let user_icons = document.querySelectorAll(".user-icon")
-      let correctColor;
+      setBoardBackgroundColor(loggedInUser, user_icons)
+  }
+}
 
-      for (let j = 0; j < user_icons.length; j++) {
-        for (let k = 0; k < loggedInUser.contacts.length; k++) {
-          const currentContact = loggedInUser.contacts[k];
-          BackgroundColorForBoard[currentContact.contact_name] = currentContact["contact-background-color"]
-        }
-        for (let [key, value] of Object.entries(BackgroundColorForBoard)) {
-          if (key == user_icons[j].id) {
-            correctColor = value
-          }
-        }
-        user_icons[j].classList.add(correctColor)
 
-        if (user_icons[j].id == "Guest") {
-          user_icons[j].classList.add(loggedInUser["user-background-color"])
-        }
+function setBoardBackgroundColor(user, user_icons) {
+  let correctColor;
+
+  for (let j = 0; j < user_icons.length; j++) {
+    for (let k = 0; k < user.contacts.length; k++) {
+      const currentContact = user.contacts[k];
+      BackgroundColorForBoard[currentContact.contact_name] = currentContact["contact-background-color"]
+    }
+    for (let [key, value] of Object.entries(BackgroundColorForBoard)) {
+      if (key == user_icons[j].id) {
+        correctColor = value
       }
+    }
+    
+    if (user_icons[j].id == user.name) {
+      user_icons[j].classList.add(user["user-background-color"])
+    } else {
+      user_icons[j].classList.add(correctColor)
+    }
+
   }
 }
 
 
 async function loadContactBackgroundColor() {
   if (loggedInUser.name !== "Guest") {
-  await downloadFromServer();
-  users = JSON.parse(backend.getItem('users')) || [];
+  await getUsersFromBackend()
   let user_icons = document.querySelectorAll(".user-icon")
-  let correctColor
-
-  for (let i = 0; i < users.length; i++) {
-      const currentUser = users[i];
-      if (currentUser.email == loggedInUser.email) {
-        for (let j = 0; j < user_icons.length; j++) {
-          for (let k = 0; k < currentUser.contacts.length; k++) {
-            const currentContact = currentUser.contacts[k];
-            BackgroundColorForContactBook[currentContact.contact_name] = currentContact["contact-background-color"]
-          }
-          for (let [key, value] of Object.entries(BackgroundColorForContactBook)) {
-            if (key == user_icons[j].id) {
-              correctColor = value
-            }
-          }
-          user_icons[j].classList.add(correctColor)
-      }
-    }
-  }
+  setBackgroundColor(BackgroundColorForContactBook, user_icons, loggedInUser)
 } else {
   let user_icons = document.querySelectorAll(".user-icon")
-  let correctColor
+  setBackgroundColor(BackgroundColorForContactBook, user_icons, loggedInUser) 
+} 
+}
 
-  for (let j = 0; j < user_icons.length; j++) {
-    for (let k = 0; k < loggedInUser.contacts.length; k++) {
-      const currentContact = loggedInUser.contacts[k];
-      BackgroundColorForContactBook[currentContact.contact_name] = currentContact["contact-background-color"]
+function setBackgroundColor(obj, user_icons, user) {
+  let correctColor;
+  let user_icons_general = user_icons
+
+  for (let j = 0; j < user_icons_general.length; j++) {
+    for (let k = 0; k < user.contacts.length; k++) {
+      const currentContact = user.contacts[k];
+      obj[currentContact.contact_name] = currentContact["contact-background-color"]
     }
-    for (let [key, value] of Object.entries(BackgroundColorForContactBook)) {
-      if (key == user_icons[j].id) {
+    for (let [key, value] of Object.entries(obj)) {
+      if (key == user_icons_general[j].id) {
         correctColor = value
       }
     }
-    user_icons[j].classList.add(correctColor)
+    user_icons_general[j].classList.add(correctColor)
+
   }
 }
-  
-}
 
-function capitalizeFirstLetter(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-}
-
-function getUserIcon(contact) {
-  let names = contact.split(" ");
-  let firstLetterFirstName = names[0][0].toUpperCase();
-  let firstLetterlastName;
-  if (names.length > 1) {
-    let firstLetterlastName = names[1][0].toUpperCase()
-    return `${firstLetterFirstName + firstLetterlastName}`
-  } else {
-    return `${firstLetterFirstName}`
-  }
-  
-}
 
 
 

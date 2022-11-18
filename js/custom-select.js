@@ -67,41 +67,36 @@ function addNewContactOption(index) {
   resetContactOptions(checkboxes, index);
 
   if (document.getElementById("addTask-body")) {
-    let custom_select_category_container = document.querySelector(
-      ".custom-select-category-container"
-    );
-    let add_category_input =
-      document.getElementById("add-category-input").value;
+    let custom_select_category_container = document.querySelector(".custom-select-category-container");
+    let add_category_input = document.getElementById("add-category-input").value;
 
     custom_select_category_container.innerHTML += `<label onclick="returnSelectedCategory(id)" id="${add_category_input}" class="custom-select-option-category">${add_category_input} <span class="category-color"></span></label>`;
-
     let category_color = document.querySelectorAll(".category-color");
 
     setColorCategory(category_color, add_category_input);
   }
 
-  function setColorCategory(category_color, add_category_input) {
-    switch (add_category_input) {
-      case "Backoffice":
-        category_color[category_color.length - 1].classList.add("turquoise");
-        break;
-      case "Sales":
-        category_color[category_color.length - 1].classList.add("pink");
-        break;
-      case "Media":
-        category_color[category_color.length - 1].classList.add("yellow");
-        break;
-      case "Design":
-        category_color[category_color.length - 1].classList.add("orange");
-        break;
-      case "Marketing":
-        category_color[category_color.length - 1].classList.add("blue");
-        break;
-    }
-  }
 }
 
-// closeAddContact(index)
+function setColorCategory(category_color, add_category_input) {
+  switch (add_category_input) {
+    case "Backoffice":
+      category_color[category_color.length - 1].classList.add("turquoise");
+      break;
+    case "Sales":
+      category_color[category_color.length - 1].classList.add("pink");
+      break;
+    case "Media":
+      category_color[category_color.length - 1].classList.add("yellow");
+      break;
+    case "Design":
+      category_color[category_color.length - 1].classList.add("orange");
+      break;
+    case "Marketing":
+      category_color[category_color.length - 1].classList.add("blue");
+      break;
+  }
+}
 
 function showAddSubtask() {
   let subtask_category_container = document.querySelector("#subtask-category");

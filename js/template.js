@@ -422,6 +422,50 @@ function templateContactInformationMobile(email,name,i) {
 `
 }
 
+function templateContactsLeft(firstLetterContainer) {
+    return `
+    <div id="contacts-${firstLetterContainer}" class="contacts-container d-none">
+
+      <div id="contacs-${firstLetterContainer}-headline" class="contacts-headline">
+          <span>${firstLetterContainer}</span>
+      </div>
+
+      <div class="contacts-${firstLetterContainer}-data">
+      
+      </div>
+    </div>
+    `
+}
+
+function templateContactUserInContactBook(contact) {
+    return `
+    <div onclick="renderContactInformation('${contact.contact_email}', '${contact.contact_name}')" class="contact-info">
+    <div class="user-icon-background-color-container">
+        <div id="${contact.contact_name}" class="user-icon">${getUserIcon(contact.contact_name)}</div>
+    </div>
+    <div class="contact-data">
+        <h3 id="${contact.contact_name}-name" class="contact-name">${contact.contact_name}</h3>
+        <span id="${contact.contact_email}-email" class="darkblue-text">${contact.contact_email}</span>
+        <span id="${contact.contact_phone}-phone" class="d-none">${contact.contact_phone}</span>
+    </div>
+    </div>
+    `
+}
+
+function templateUserContactAddContact(small_add_contacts_name,small_add_contacts_email,small_add_contacts_phone) {
+    return `
+    <div onclick="renderContactInformation('${small_add_contacts_email}', '${small_add_contacts_name}')" class="contact-info">
+      <div class="user-icon-container">
+        <div id="${small_add_contacts_name}" class="user-icon">${getUserIcon(small_add_contacts_name)}</div>
+      </div>
+      <div class="contact-data">
+        <h3 id="${small_add_contacts_email}-name" class="contact-name">${small_add_contacts_name}</h3>
+        <span id="${small_add_contacts_email}-email" class="darkblue-text">${small_add_contacts_email}</span>
+        <span id="${small_add_contacts_email}-phone" class="d-none">${small_add_contacts_phone}</span>
+      </div>
+    </div>
+    `
+  }
 
 
 function showPopup(id) {
@@ -439,21 +483,35 @@ function selectedLink(id) {
     document.getElementById(id).style.borderRadius = "8px"
 }
 
+
 if (document.getElementById("summary-body")) {
     document.querySelector(".task-urgent").addEventListener("click", () => {
         location.href = "board.html"
     })
-    
     document.querySelector(".task-card-upper").addEventListener("click", () => {
         location.href = "board.html"
     })
-    
     for (let i = 1; i <=  document.querySelectorAll(".task-card-lower").length; i++) {
         document.querySelector(`#task-card-lower-${i}`).addEventListener("click", () => {
             location.href = "board.html"
         })
     }
-    
 }
+
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+  
+  function getUserIcon(contact) {
+    let names = contact.split(" ");
+    let firstLetterFirstName = names[0][0].toUpperCase();
+    let firstLetterlastName;
+    if (names.length > 1) {
+      let firstLetterlastName = names[1][0].toUpperCase()
+      return `${firstLetterFirstName + firstLetterlastName}`
+    } else {
+      return `${firstLetterFirstName}`
+    }
+  }
 
 

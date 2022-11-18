@@ -1,5 +1,4 @@
 
-
 function toggleLogoutBox() {
     if (window.innerWidth <= 684) {
         document.querySelector(".logout-mobile").classList.toggle("d-none")

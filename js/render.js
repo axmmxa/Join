@@ -1,88 +1,61 @@
-function closeSmallContacts() {
-    document.getElementById("small-contacts-container").classList.add("d-none")
-    
+function setOpacity(number) {
+  document.querySelector(".kanban-navbar").style.opacity = number
+  document.querySelector(".kanban-main").style.opacity = number
+  document.querySelector(".sidebar-mobile").style.opacity = number
+}
 
-    document.querySelector(".kanban-navbar").style.opacity = 1
-    document.querySelector(".kanban-main").style.opacity = 1  
-    document.querySelector(".sidebar-mobile").style.opacity = 1  
+function closeSmallContacts() {
+  document.getElementById("small-contacts-container").classList.add("d-none")
+  setOpacity(1)
 }
 
 function renderSmallContacts() {
-    if (document.getElementById("small-contacts-container")) {
-        document.getElementById("small-contacts-container").classList.remove("d-none")
-
-        document.querySelector(".kanban-navbar").style.opacity = 0.5
-        document.querySelector(".kanban-main").style.opacity = 0.5 
-        document.querySelector(".sidebar-mobile").style.opacity = 0.5    
-    } else {
-      document.querySelector("body").innerHTML += templateSmallContacts()
-      // document.getElementById("small-contacts-container").classList.remove("d-none")
-
-      document.querySelector(".kanban-navbar").style.opacity = 0.5
-      document.querySelector(".kanban-main").style.opacity = 0.5  
-      document.querySelector(".sidebar-mobile").style.opacity = 0.5 
-           
-    }
+  if (document.getElementById("small-contacts-container")) {
+      document.getElementById("small-contacts-container").classList.remove("d-none")
+      setOpacity(0.5)  
+  } else {
+    document.querySelector("body").innerHTML += templateSmallContacts()
+    setOpacity(0.5)
+  }
 }
 
 
 function closeSmallContactsMobile() {
   document.getElementById("small-contacts-container-mobile").classList.add("d-none")
-  
-  document.querySelector(".kanban-navbar").style.opacity = 1
-  document.querySelector(".kanban-main").style.opacity = 1 
-  document.querySelector(".sidebar-mobile").style.opacity = 1   
+  setOpacity(1) 
 }
-
 
 function renderSmallContactsMobile() {
   if (document.getElementById("small-contacts-container-mobile")) { 
     document.getElementById("small-contacts-container-mobile").classList.remove("d-none")
-
-    document.querySelector(".kanban-navbar").style.opacity = 0.5
-    document.querySelector(".kanban-main").style.opacity = 0.5   
-    document.querySelector(".sidebar-mobile").style.opacity = 0.5  
+    setOpacity(0.5)
 } else {
   document.querySelector("body").innerHTML += templateSmallContactsMobile()
-  
-  document.querySelector(".kanban-navbar").style.opacity = 0.5
-  document.querySelector(".kanban-main").style.opacity = 0.5  
-  document.querySelector(".sidebar-mobile").style.opacity = 0.5 
-       
+  setOpacity(0.5)      
 }
 }
 
 
 function closeSmallEditContacts(i) {
-    document.querySelector(`#small-contacts-container-${i}`).classList.add("d-none");
-    document.querySelector(`#small-contacts-container-${i}`).classList.remove("box-shadow");
-    document.querySelector(`#edit-small-contacts-container`).classList.add("z-index-1")
-     
-    document.querySelector(".kanban-navbar").style.opacity = 1
-    document.querySelector(".kanban-main").style.opacity = 1
-    document.querySelector(".sidebar-mobile").style.opacity = 1 
+  document.querySelector(`#small-contacts-container-${i}`).classList.add("d-none");
+  document.querySelector(`#small-contacts-container-${i}`).classList.remove("box-shadow");
+  document.querySelector(`#edit-small-contacts-container`).classList.add("z-index-1")
+  setOpacity(1)  
 }
 
 
 function closeSmallEditContactsMobile(i) {
   document.querySelector(`#small-contacts-container-mobile-${i}`).classList.add("d-none");
-    // document.querySelector(`#small-contacts-container-mobile-0-${i}`).classList.remove("box-shadow");
-    // document.querySelector(`#edit-small-contacts-container`).classList.add("z-index-1")
-     
-    document.querySelector(".kanban-navbar").style.opacity = 1
-    document.querySelector(".kanban-main").style.opacity = 1
-    document.querySelector(".sidebar-mobile").style.opacity = 1 
+  setOpacity(1)
 }
 
 async function renderSmallEditContactsMobile(contact_name,contact_email,contact_phone, i) {
   if (document.querySelector(`#small-contacts-container-mobile-${i}`)) {
     document.querySelector(`#small-contacts-container-mobile-${i}`).classList.remove("d-none");
-
-    document.querySelector(".kanban-navbar").style.opacity = 0.5
-    document.querySelector(".kanban-main").style.opacity = 0.5
-    document.querySelector(".sidebar-mobile").style.opacity = 0.5 
+    setOpacity(0.5)
   } else {
     document.querySelector(`body`).innerHTML += templateSmallEditContactsMobile(contact_name,contact_email,contact_phone, i)
+    setOpacity(0.5)
 
     if (loggedInUser.name !== "Guest") {
     await downloadFromServer();
@@ -93,135 +66,62 @@ async function renderSmallEditContactsMobile(contact_name,contact_email,contact_
     for (let i = 0; i < users.length; i++) {
         const currentUser = users[i];
         if (currentUser.email == loggedInUser.email) {
-          for (let j = 0; j < user_icons.length; j++) {
-            for (let k = 0; k < currentUser.contacts.length; k++) {
-              const currentContact = currentUser.contacts[k];
-              BackgroundColorForEditContact[currentContact.contact_name] = currentContact["contact-background-color"]
-            }
-            for (let [key, value] of Object.entries(BackgroundColorForEditContact)) {
-              if (key == user_icons[j].id) {
-                correctColor = value
-              }
-            }
-            user_icons[j].classList.add(correctColor)
-          }
-      }
-      document.querySelector(".kanban-navbar").style.opacity = 0.5
-      document.querySelector(".kanban-main").style.opacity = 0.5
-      document.querySelector(".sidebar-mobile").style.opacity = 0.5 
+          setBackgroundColor(BackgroundColorForEditContact, user_icons, currentUser)
+      } 
     } 
   } else {
     let user_icons = document.querySelectorAll(".user-icon-edit-contact")
     let correctColor;
-
-    for (let j = 0; j < user_icons.length; j++) {
-      for (let k = 0; k < loggedInUser.contacts.length; k++) {
-        const currentContact = loggedInUser.contacts[k];
-        BackgroundColorForEditContact[currentContact.contact_name] = currentContact["contact-background-color"]
-      }
-      for (let [key, value] of Object.entries(BackgroundColorForEditContact)) {
-        if (key == user_icons[j].id) {
-          correctColor = value
-        }
-      }
-      user_icons[j].classList.add(correctColor)
-    }
-    document.querySelector(".kanban-navbar").style.opacity = 0.5
-    document.querySelector(".kanban-main").style.opacity = 0.5
-    document.querySelector(".sidebar-mobile").style.opacity = 0.5 
+    setBackgroundColor(BackgroundColorForEditContact, user_icons, loggedInUser)
+    setOpacity(0.5)
   }
  }
 }
-     
-
 
 async function renderSmallEditContacts(contact_name,contact_email,contact_phone, i) {
     if (loggedInUser.name !== "Guest") {
           
-          document.querySelector(`#edit-small-contacts-container`).innerHTML = templateSmallEditContacts(contact_name,contact_email,contact_phone, i)
+    document.querySelector(`#edit-small-contacts-container`).innerHTML = templateSmallEditContacts(contact_name,contact_email,contact_phone, i)
           
-          document.querySelector(`#small-contacts-container-${i}`).classList.remove("d-none");
-          document.querySelector(`#small-contacts-container-${i}`).classList.add("box-shadow");
-          document.querySelector(`#edit-small-contacts-container`).classList.remove("z-index-1")
-      
-          
-          await downloadFromServer();
-          users = JSON.parse(backend.getItem('users')) || [];
-          let user_icons = document.querySelectorAll(".user-icon-edit-contact")
-          let correctColor;
-      
-          for (let i = 0; i < users.length; i++) {
-              const currentUser = users[i];
-              if (currentUser.email == loggedInUser.email) {
-                for (let j = 0; j < user_icons.length; j++) {
-                  for (let k = 0; k < currentUser.contacts.length; k++) {
-                    const currentContact = currentUser.contacts[k];
-                    BackgroundColorForEditContact[currentContact.contact_name] = currentContact["contact-background-color"]
-                  }
-                  for (let [key, value] of Object.entries(BackgroundColorForEditContact)) {
-                    if (key == user_icons[j].id) {
-                      correctColor = value
-                    }
-                  }
-                  user_icons[j].classList.add(correctColor)
-                }
-            }
-          }  
-        
-        document.querySelector(".kanban-navbar").style.opacity = 0.5
-        document.querySelector(".kanban-main").style.opacity = 0.5
-        document.querySelector(".sidebar-mobile").style.opacity = 0.5 
+    document.querySelector(`#small-contacts-container-${i}`).classList.remove("d-none");
+    document.querySelector(`#small-contacts-container-${i}`).classList.add("box-shadow");
+    document.querySelector(`#edit-small-contacts-container`).classList.remove("z-index-1")
+
+    await downloadFromServer();
+    users = JSON.parse(backend.getItem('users')) || [];
+    let user_icons = document.querySelectorAll(".user-icon-edit-contact")
+  
+    for (let i = 0; i < users.length; i++) {
+        const currentUser = users[i];
+        if (currentUser.email == loggedInUser.email) {
+          setBackgroundColor(BackgroundColorForEditContact, user_icons, currentUser)
+      }
+    } 
+    setOpacity(0.5)
 
     } else {
-  
-        document.querySelector(".kanban-navbar").style.opacity = 0.5
-        document.querySelector(".kanban-main").style.opacity = 0.5
-        document.querySelector(".sidebar-mobile").style.opacity = 0.5 
+    setOpacity(0.5)
 
-        document.querySelector(`#edit-small-contacts-container`).innerHTML = templateSmallEditContacts(contact_name,contact_email,contact_phone, i)
-        document.querySelector(`#small-contacts-container-${i}`).classList.remove("d-none");
-        document.querySelector(`#small-contacts-container-${i}`).classList.add("box-shadow")
-        document.querySelector(`#edit-small-contacts-container`).classList.remove("z-index-1")
+    document.querySelector(`#edit-small-contacts-container`).innerHTML = templateSmallEditContacts(contact_name,contact_email,contact_phone, i)
+    document.querySelector(`#small-contacts-container-${i}`).classList.remove("d-none");
+    document.querySelector(`#small-contacts-container-${i}`).classList.add("box-shadow")
+    document.querySelector(`#edit-small-contacts-container`).classList.remove("z-index-1")
          
-        
-        let user_icons = document.querySelectorAll(".user-icon-edit-contact")
-          let correctColor;
+    let user_icons = document.querySelectorAll(".user-icon-edit-contact")
 
-          for (let j = 0; j < user_icons.length; j++) {
-            for (let k = 0; k < loggedInUser.contacts.length; k++) {
-              const currentContact = loggedInUser.contacts[k];
-              BackgroundColorForEditContact[currentContact.contact_name] = currentContact["contact-background-color"]
-            }
-            for (let [key, value] of Object.entries(BackgroundColorForEditContact)) {
-              if (key == user_icons[j].id) {
-                correctColor = value
-              }
-            }
-            user_icons[j].classList.add(correctColor)
-          }
-        
+    setBackgroundColor(BackgroundColorForEditContact, user_icons, loggedInUser)
+
     }
 
     await downloadFromServer();
     users = JSON.parse(backend.getItem('users')) || [];
     let user_icons = document.querySelectorAll(".user-icon-edit-contact")
-    let correctColor;
+
 
     for (let i = 0; i < users.length; i++) {
         const currentUser = users[i];
         if (currentUser.email == loggedInUser.email) {
-          for (let j = 0; j < user_icons.length; j++) {
-            for (let k = 0; k < currentUser.contacts.length; k++) {
-              const currentContact = currentUser.contacts[k];
-              BackgroundColorForEditContact[currentContact.contact_name] = currentContact["contact-background-color"]
-            }
-            for (let [key, value] of Object.entries(BackgroundColorForEditContact)) {
-              if (key == user_icons[j].id) {
-                correctColor = value
-              }
-            }
-            user_icons[j].classList.add(correctColor)
-          }
+          setBackgroundColor(BackgroundColorForEditContact, user_icons, currentUser)
       }
     }
 }
@@ -229,11 +129,7 @@ async function renderSmallEditContacts(contact_name,contact_email,contact_phone,
 
 function closeSmallEditTask(id) {
     document.querySelector(`#edit-task-${id}`).classList.add("d-none")
-
-    document.querySelector(".kanban-navbar").style.opacity = 1
-    document.querySelector(".kanban-main").style.opacity = 1
-    document.querySelector(".sidebar-mobile").style.opacity = 1 
-
+    setOpacity(1)
     closeBoardTaskInfo()
 
 }
@@ -280,19 +176,12 @@ function closeSmallEditTask(id) {
 function renderSmallEditTask(id_task,title,description,due_date,priority) {
     if (document.querySelector(`#edit-task-${id_task}`)) {
         document.querySelector(`#edit-task-${id_task}`).classList.remove("d-none")
-
         setPrioritySmallEditTask(priority, id_task)
+        setOpacity(0.5)
 
-        document.querySelector(".kanban-navbar").style.opacity = 0.5
-        document.querySelector(".kanban-main").style.opacity = 0.5
-        document.querySelector(".sidebar-mobile").style.opacity = 0.5 
     } else {
-        document.querySelector(".kanban-navbar").style.opacity = 0.5
-        document.querySelector(".kanban-main").style.opacity = 0.5
-        document.querySelector(".sidebar-mobile").style.opacity = 0.5 
-
+        setOpacity(0.5)
         document.querySelector("body").innerHTML += templateSmallEditTask(id_task,title,description,due_date) 
-
         setPrioritySmallEditTask(priority, id_task)
 
         let custom_select_contact_container = document.querySelectorAll(".custom-select-contact-container")
@@ -308,53 +197,16 @@ async function showTaskInfo(id_task) {
       console.log(users)
       const currentUser = users[i];            
       if (currentUser.email == loggedInUser.email) {
-          for (let j = 0; j < currentUser.tasks.length; j++) {
-              let userTaskId = currentUser.tasks[j]
-              if (userTaskId.id_task == id_task) {
-                  document.querySelector("body").innerHTML += templateShowTaskInfo(userTaskId, id_task, j)
-                 
-                  console.log(userTaskId.category)
-                  getCategoryColorTaskInfo(userTaskId.category)
+          renderBoardTask(currentUser, id_task)
 
-                  let assignedPersonal = document.querySelector(`#assigned-personal-${j}`)
-
-                          userTaskId.assignedContacts.forEach(contact => {
-                              assignedPersonal.innerHTML += 
-                              `<div class="d-flex">
-                                  <span id="${contact}" class="user-icon-task-info">${getUserIcon(contact)}</span>
-                                  <span>${contact}</span> 
-                              </div>` 
-                          })
-                      }
-                  }       
-
-          await downloadFromServer();
-          users = JSON.parse(backend.getItem('users')) || [];
-          let user_icons = document.querySelectorAll(".user-icon-task-info")
-          let correctColor;
-          
+          await getUsersFromBackend()
+          let user_icons = document.querySelectorAll(".user-icon-task-info")       
           loadBoardContactBackgroundColor()
 
           for (let i = 0; i < users.length; i++) {
               const currentUser = users[i];
               if (currentUser.email == loggedInUser.email) {
-                  for (let j = 0; j < user_icons.length; j++) {
-                    for (let k = 0; k < currentUser.contacts.length; k++) {
-                      const currentContact = currentUser.contacts[k];
-                      BackgroundColorForBoardTaskInfo[currentContact.contact_name] = currentContact["contact-background-color"]
-                    }
-                    for (let [key, value] of Object.entries(BackgroundColorForBoardTaskInfo)) {
-                      if (key == user_icons[j].id) {
-                        correctColor = value
-                      }
-                    }
-                  
-                    if (user_icons[j].id == currentUser.name) {
-                      user_icons[j].classList.add(currentUser["user-background-color"])
-                    } else {
-                      user_icons[j].classList.add(correctColor)
-                    }
-                  }
+                setBoardBackgroundColor(currentUser, user_icons)
               }
           }
       }
@@ -368,45 +220,43 @@ async function showTaskInfo(id_task) {
          
           console.log(userTaskId.category)
           getCategoryColorTaskInfo(userTaskId.category)
-
-          let assignedPersonal = document.querySelector(`#assigned-personal-${j}`)
-
-                  userTaskId.assignedContacts.forEach(contact => {
-                      assignedPersonal.innerHTML += 
-                      `<div class="d-flex">
-                          <span id="${contact}" class="user-icon-task-info">${getUserIcon(contact)}</span>
-                          <span>${contact}</span> 
-                      </div>` 
-                  })
-              }
-          }       
+          assignedPersonal(userTaskId, j)
 
           let user_icons = document.querySelectorAll(".user-icon-task-info")
-          let correctColor;
 
-          for (let j = 0; j < user_icons.length; j++) {
-            for (let k = 0; k < loggedInUser.contacts.length; k++) {
-              const currentContact = loggedInUser.contacts[k];
-              BackgroundColorForBoardTaskInfo[currentContact.contact_name] = currentContact["contact-background-color"]
-            }
-            for (let [key, value] of Object.entries(BackgroundColorForBoardTaskInfo)) {
-              if (key == user_icons[j].id) {
-                correctColor = value
-              }
-            }
-           
-            if (user_icons[j].id == "Guest") {
-              user_icons[j].classList.add(loggedInUser["user-background-color"])
-            } else {
-              user_icons[j].classList.add(correctColor)
-            }
-          }
+          setBoardBackgroundColor(loggedInUser, user_icons)
+      }
+    }
   }    
+}
+
+function renderBoardTask(currentUser, id_task) {
+  for (let j = 0; j < currentUser.tasks.length; j++) {
+    let userTaskId = currentUser.tasks[j]
+    if (userTaskId.id_task == id_task) {
+        document.querySelector("body").innerHTML += templateShowTaskInfo(userTaskId, id_task, j)
+       
+        console.log(userTaskId.category)
+        getCategoryColorTaskInfo(userTaskId.category)
+        assignedPersonal(userTaskId, j)
+      }
+}    
+}
+
+function assignedPersonal(userTaskId, j) {
+  let assignedPersonal = document.querySelector(`#assigned-personal-${j}`)
+
+  userTaskId.assignedContacts.forEach(contact => {
+      assignedPersonal.innerHTML += 
+      `<div class="d-flex">
+          <span id="${contact}" class="user-icon-task-info">${getUserIcon(contact)}</span>
+          <span>${contact}</span> 
+      </div>` 
+  })
 }
 
 
 function getCategoryColorTaskInfo(category) {
-    
   let task_topics = document.querySelectorAll(".task-topic-info")
   console.log(task_topics.length)
 
@@ -434,10 +284,7 @@ function closeBoardTaskInfo() {
     document.querySelectorAll(".small-board-task-info").forEach(small_board_task_info => {
         small_board_task_info.classList.add("d-none")
     })
-    
-    document.querySelector(".kanban-navbar").style.opacity = 1
-    document.querySelector(".kanban-main").style.opacity = 1
-    document.querySelector(".sidebar-mobile").style.opacity = 1 
+    setOpacity(1)
 }
 
 
@@ -445,68 +292,40 @@ function renderBoardTaskInfo(id_task) {
 
     if(document.getElementById(`small-board-task-info-${id_task}`)) {
         document.getElementById(`small-board-task-info-${id_task}`).classList.remove("d-none")
-
-        document.querySelector(".kanban-navbar").style.opacity = 0.5
-        document.querySelector(".kanban-main").style.opacity = 0.5
-        document.querySelector(".sidebar-mobile").style.opacity = 0.5 
-
-        //showTaskInfo(id_task)
+        setOpacity(0.5)
     } else {
         showTaskInfo(id_task)
-        
-        document.querySelector(".kanban-navbar").style.opacity = 0.5
-        document.querySelector(".kanban-main").style.opacity = 0.5
-        document.querySelector(".sidebar-mobile").style.opacity = 0.5 
-    
+        setOpacity(0.5)
         }
-
     }
     
 
 function closeSmallAddTask() {
     document.getElementById("small-add-task").classList.add("d-none")
-    
-    document.querySelector(".kanban-navbar").style.opacity = 1
-    document.querySelector(".kanban-main").style.opacity = 1
-    document.querySelector(".sidebar-mobile").style.opacity = 1 
-    
+    setOpacity(1)
 }
 
 function renderSmallAddTask() {
-    if (document.getElementById("small-add-task")) {
-        document.getElementById("small-add-task").classList.remove("d-none")
 
-        document.querySelector(".kanban-navbar").style.opacity = 0.5
-        document.querySelector(".kanban-main").style.opacity = 0.5
-        document.querySelector(".sidebar-mobile").style.opacity = 0.5 
-            
-    } else {
-        document.querySelector(".kanban-navbar").style.opacity = 0.5
-        document.querySelector(".kanban-main").style.opacity = 0.5
-        document.querySelector(".sidebar-mobile").style.opacity = 0.5 
+  if (document.getElementById("small-add-task")) {
+      document.getElementById("small-add-task").classList.remove("d-none")
+      setOpacity(0.5)
+  } else {
+    setOpacity(0.5) 
+    document.querySelector("body").innerHTML += templateSmallAddTask()
 
-        document.querySelector("body").innerHTML += templateSmallAddTask()
-
-        let custom_select_contact_container = document.querySelector(".custom-select-contact-container")
-        custom_select_contact_container.innerHTML += `<label class="custom-select-option"> ${loggedInUser.name} (You) <input onclick="returnSelectedContacts(this)" value="${loggedInUser.name}" class="selected-option" type="checkbox" autocomplete="off"></label>`
-    
+    let custom_select_contact_container = document.querySelector(".custom-select-contact-container")
+    custom_select_contact_container.innerHTML += `<label class="custom-select-option"> ${loggedInUser.name} (You) <input onclick="returnSelectedContacts(this)" value="${loggedInUser.name}" class="selected-option" type="checkbox" autocomplete="off"></label>` 
     }
 }
 
  async function renderContactInformation(email, name) {
-    let index = contact_emails.indexOf(email)
+  let index = contact_emails.indexOf(email)
+  
+  if (loggedInUser.name !== "Guest") {
+    renderTemplateContactInformation(index, name, email)
 
-    if (loggedInUser.name !== "Guest") {
-      for (let i = 0; i < contact_names.length; i++) {
-      if (i == index && window.innerWidth > 874) {     
-      document.querySelector("#contact-information").innerHTML = templateContactInformation(email,name,i)
-      } else if (i == index) {
-        document.querySelector(".main-field").innerHTML = templateContactInformationMobile(email,name,i)
-      }
-    }
-
-  await downloadFromServer();
-  users = JSON.parse(backend.getItem('users')) || [];
+  await getUsersFromBackend()
   let correctColor;
   let user_icons = document.querySelectorAll(".user-icon")
 
@@ -530,34 +349,36 @@ function renderSmallAddTask() {
       }   
   }
 } else {
-
-  for (let i = 0; i < contact_names.length; i++) {
-    if (i == index && window.innerWidth > 874) {     
-      document.querySelector("#contact-information").innerHTML = templateContactInformation(email,name,i)
-    } else if (i == index) {
-      document.querySelector(".main-field").innerHTML = templateContactInformationMobile(email,name,i)
-    }
-  }
-
+  renderTemplateContactInformation(index, name, email)
   let correctColor;
 
-        for (let j = 0; j < loggedInUser.contacts.length; j++) {
-          if (loggedInUser.contacts[j].contact_name == name) {
-            const currentContact = loggedInUser.contacts[j];
-            console.log("current contact", currentContact)
-            correctColor = currentContact["contact-background-color"]
-            if(currentContact.contact_email == email && window.innerWidth > 874) {
-               document.querySelectorAll(".user-icon")[loggedInUser.contacts.length].classList.add(correctColor)
-            } else {
-              document.querySelector(".user-icon-big").classList.add(correctColor)
-              document.querySelector(".main-field").style.justifyContent = "space-between"
-              document.querySelector(".main-field").style.alignItems = ""
-            }
-        }
+  for (let j = 0; j < loggedInUser.contacts.length; j++) {
+    if (loggedInUser.contacts[j].contact_name == name) {
+      const currentContact = loggedInUser.contacts[j];
+      console.log("current contact", currentContact)
+      correctColor = currentContact["contact-background-color"]
+      if(currentContact.contact_email == email && window.innerWidth > 874) {
+         document.querySelectorAll(".user-icon")[loggedInUser.contacts.length].classList.add(correctColor)
+      } else {
+        document.querySelector(".user-icon-big").classList.add(correctColor)
+        document.querySelector(".main-field").style.justifyContent = "space-between"
+        document.querySelector(".main-field").style.alignItems = ""
+      }
     }
+  }
 }
 
 }
+
+function renderTemplateContactInformation(index, name, email) {
+    for (let i = 0; i < contact_names.length; i++) {
+      if (i == index && window.innerWidth > 874) {     
+        document.querySelector("#contact-information").innerHTML = templateContactInformation(email,name,i)
+      } else if (i == index) {
+        document.querySelector(".main-field").innerHTML = templateContactInformationMobile(email,name,i)
+      }
+    }
+  }
 
 
 function renderContactBook() {
@@ -565,22 +386,8 @@ function renderContactBook() {
     let firstLetterContainer;
     for (let i = 0; i < alphabet.length; i++) {
         firstLetterContainer = alphabet[i];
-        
-        document.querySelector(".contacts-left").innerHTML += 
-        `
-        <div id="contacts-${firstLetterContainer}" class="contacts-container d-none">
-
-        <div id="contacs-${firstLetterContainer}-headline" class="contacts-headline">
-            <span>${firstLetterContainer}</span>
-        </div>
-
-        <div class="contacts-${firstLetterContainer}-data">
-            
-        </div>
-    </div>
-
-        `
-    }
+        document.querySelector(".contacts-left").innerHTML += templateContactsLeft(firstLetterContainer)
+      }
 
     renderSavedContacts()
 
@@ -603,23 +410,11 @@ function renderSavedContacts() {
         let first_letter_contact = contact.contact_name[0].toUpperCase()
                 
         document.querySelector(`#contacts-${first_letter_contact}`).classList.remove("d-none")
-
-        document.querySelector(`.contacts-${first_letter_contact}-data`).innerHTML += 
-        `
-        <div onclick="renderContactInformation('${contact.contact_email}', '${contact.contact_name}')" class="contact-info">
-        <div class="user-icon-background-color-container">
-            <div id="${contact.contact_name}" class="user-icon">${getUserIcon(contact.contact_name)}</div>
-        </div>
-        <div class="contact-data">
-            <h3 id="${contact.contact_name}-name" class="contact-name">${contact.contact_name}</h3>
-            <span id="${contact.contact_email}-email" class="darkblue-text">${contact.contact_email}</span>
-            <span id="${contact.contact_phone}-phone" class="d-none">${contact.contact_phone}</span>
-        </div>
-        </div>
-        `
-              }
-        }
+        document.querySelector(`.contacts-${first_letter_contact}-data`).innerHTML += templateContactUserInContactBook(contact)
+        
+      }
     }
+  }
     getUserColor()
   } else {
       for (let j = 0; j < loggedInUser.contacts.length; j++) {
@@ -637,27 +432,13 @@ function renderSavedContacts() {
               
       document.querySelector(`#contacts-${first_letter_contact}`).classList.remove("d-none")
 
-      document.querySelector(`.contacts-${first_letter_contact}-data`).innerHTML += 
-      `
-      <div onclick="renderContactInformation('${contact.contact_email}','${contact.contact_name}')" class="contact-info">
-      <div class="user-icon-background-color-container">
-          <div id="${contact.contact_name}" class="user-icon">${getUserIcon(contact.contact_name)}</div>
-      </div>
-      <div class="contact-data">
-          <h3 id="${contact.contact_name}-name" class="contact-name">${contact.contact_name}</h3>
-          <span id="${contact.contact_email}-email" class="darkblue-text">${contact.contact_email}</span>
-          <span id="${contact.contact_phone}-phone" class="d-none">${contact.contact_phone}</span>
-      </div>
-      </div>
-      `
-            }
-            getUserColor()
+      document.querySelector(`.contacts-${first_letter_contact}-data`).innerHTML += templateContactUserInContactBook(contact)
+      }
+      getUserColor()
       }
      
   }
   
-
-
 
 async function addContactToBook() {
     let small_add_contacts_name = document.getElementById("small-add-contacts-name").value
@@ -698,19 +479,8 @@ async function addContactToBook() {
   
       document.querySelector(`#contacts-${first_letter}`).classList.remove("d-none")
   
-      document.querySelector(`.contacts-${first_letter}-data`).innerHTML += 
-          `
-          <div onclick="renderContactInformation('${small_add_contacts_email}', '${small_add_contacts_name}')" class="contact-info">
-          <div class="user-icon-container">
-              <div id="${small_add_contacts_name}" class="user-icon">${getUserIcon(small_add_contacts_name)}</div>
-          </div>
-          <div class="contact-data">
-              <h3 id="${small_add_contacts_email}-name" class="contact-name">${small_add_contacts_name}</h3>
-              <span id="${small_add_contacts_email}-email" class="darkblue-text">${small_add_contacts_email}</span>
-              <span id="${small_add_contacts_email}-phone" class="d-none">${small_add_contacts_phone}</span>
-          </div>
-      </div>
-          `
+      document.querySelector(`.contacts-${first_letter}-data`).innerHTML += templateUserContactAddContact(small_add_contacts_name,small_add_contacts_email,small_add_contacts_phone)
+          
         loadContactBackgroundColor()
         showPopup("task-popup")
         closeSmallContacts()
@@ -723,24 +493,12 @@ async function addContactToBook() {
   
         document.querySelector(`#contacts-${first_letter}`).classList.remove("d-none")
   
-        document.querySelector(`.contacts-${first_letter}-data`).innerHTML += 
-          `
-          <div onclick="renderContactInformation('${small_add_contacts_email}', '${small_add_contacts_name}')" class="contact-info">
-          <div class="user-icon-container">
-              <div id="${small_add_contacts_name}" class="user-icon">${getUserIcon(small_add_contacts_name)}</div>
-          </div>
-          <div class="contact-data">
-              <h3 id="${small_add_contacts_email}-name" class="contact-name">${small_add_contacts_name}</h3>
-              <span id="${small_add_contacts_email}-email" class="darkblue-text">${small_add_contacts_email}</span>
-              <span id="${small_add_contacts_email}-phone" class="d-none">${small_add_contacts_phone}</span>
-          </div>
-      </div>
-          `
-          loadContactBackgroundColor()
-          showPopup("task-popup")
-          closeSmallContacts()
+        document.querySelector(`.contacts-${first_letter}-data`).innerHTML += templateUserContactAddContact(small_add_contacts_name,small_add_contacts_email,small_add_contacts_phone)
+        
+        loadContactBackgroundColor()
+        showPopup("task-popup")
+        closeSmallContacts()
       }
-
     } 
 }
 
