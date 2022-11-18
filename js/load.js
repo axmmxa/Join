@@ -34,49 +34,75 @@ async function init() {
     loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"))
     
     if (loggedInUser.name == "Guest") {
-      document.querySelector(".user-logout-icon-container").innerHTML = `<div onclick="toggleLogoutBox()" class="user-logout-icon">${getUserIcon(loggedInUser.name)}</div>`
-      document.querySelector(".user-logout-icon").classList.add(loggedInUser["user-background-color"])
-    } else {
-    for (let i = 0; i < users.length; i++) {
-      const currentUser = users[i];
-
-      if(currentUser.email == loggedInUser.email){
-          document.querySelector(".user-logout-icon-container").innerHTML = `<div onclick="toggleLogoutBox()" class="user-logout-icon">${getUserIcon(currentUser.name)}</div>`
-          getUserColor()
-          document.querySelector(".user-logout-icon").classList.add(currentUser["user-background-color"])
-          for (let j = 0; j < currentUser.tasks.length; j++) {
-            todos.push(currentUser.tasks[j])
-          }
-        }
-      }
+      initGuestIcon()
+   } else {
+      initUserIcon()
     }
 
   if (document.getElementById("summary-body")) {
-    loadLoggedInUser()
-    updateSummary()
-    selectedLink("kanban-link-0")
-    selectedLink("kanban-link-5")
+    initSummary()
   } 
   if (document.getElementById("board-body")) {
-    updateHTML()
-    loadBoardContactBackgroundColor()
-    selectedLink("kanban-link-1")
-    selectedLink("kanban-link-6")
-  } if (document.getElementById("addTask-body")) {
-    selectedLink("kanban-link-2")
-    selectedLink("kanban-link-6")
-    
-    let custom_select_contact_container = document.querySelector(".custom-select-contact-container")
-    custom_select_contact_container.innerHTML += `<label class="custom-select-option"> ${loggedInUser.name} (You) <input onclick="returnSelectedContacts(this)" value="${loggedInUser.name}" class="selected-option" type="checkbox" autocomplete="off"></label>`
-
-  } if (document.getElementById("contacts-body")) {
-    renderContactBook()
-    loadContactBackgroundColor()
-    selectedLink("kanban-link-3")
-    selectedLink("kanban-link-8")
-  } if (document.getElementById("legal-notice-body")) {
+    initBoard()
+  } 
+  if (document.getElementById("addTask-body")) {
+    initAddTask()
+  } 
+  if (document.getElementById("contacts-body")) {
+    initContacts()
+  } 
+  if (document.getElementById("legal-notice-body")) {
     selectedLink("kanban-link-4")
   }
+}
+
+function initSummary() {
+  loadLoggedInUser()
+  updateSummary()
+  selectedLink("kanban-link-0")
+  selectedLink("kanban-link-5")
+}
+
+function initBoard() {
+  updateHTML()
+  loadBoardContactBackgroundColor()
+  selectedLink("kanban-link-1")
+  selectedLink("kanban-link-6")
+}
+
+function initAddTask() {
+  selectedLink("kanban-link-2")
+  selectedLink("kanban-link-6")
+  
+  let custom_select_contact_container = document.querySelector(".custom-select-contact-container")
+  custom_select_contact_container.innerHTML += `<label class="custom-select-option"> ${loggedInUser.name} (You) <input onclick="returnSelectedContacts(this)" value="${loggedInUser.name}" class="selected-option" type="checkbox" autocomplete="off"></label>`
+}
+
+function initContacts() {
+  renderContactBook()
+  loadContactBackgroundColor()
+  selectedLink("kanban-link-3")
+  selectedLink("kanban-link-8")  
+}
+
+function initUserIcon() {
+  for (let i = 0; i < users.length; i++) {
+    const currentUser = users[i];
+
+    if(currentUser.email == loggedInUser.email){
+        document.querySelector(".user-logout-icon-container").innerHTML = `<div onclick="toggleLogoutBox()" class="user-logout-icon">${getUserIcon(currentUser.name)}</div>`
+        getUserColor()
+        document.querySelector(".user-logout-icon").classList.add(currentUser["user-background-color"])
+        for (let j = 0; j < currentUser.tasks.length; j++) {
+          todos.push(currentUser.tasks[j])
+        }
+      }
+    }
+}
+
+function initGuestIcon() {
+  document.querySelector(".user-logout-icon-container").innerHTML = `<div onclick="toggleLogoutBox()" class="user-logout-icon">${getUserIcon(loggedInUser.name)}</div>`
+  document.querySelector(".user-logout-icon").classList.add(loggedInUser["user-background-color"])
 }
 
 async function saveUsersArray() {
@@ -124,7 +150,7 @@ async function saveEditedContact(contact_email, contact_name) {
     const currentContact = currentUsers.tasks[k];
     for (let l = 0; l < currentContact.assignedContacts.length; l++) {
       if (currentContact.assignedContacts[l] == contact_name) {
-        currentContact.assignedContacts[l] == small_edit_contacts_name
+        currentContact.assignedContacts[l] = small_edit_contacts_name
       }
     }
   }  
@@ -152,17 +178,16 @@ async function saveEditedContact(contact_email, contact_name) {
     } 
   }  
 } else {
-  for (let i = 0; i < users.length; i++) {
-    const currentUsers = users[i];
-  for (let k = 0; k < currentUsers.tasks.length; k++) {
-    const currentContact = currentUsers.tasks[k];
+
+  for (let k = 0; k < loggedInUser.tasks.length; k++) {
+    const currentContact = loggedInUser.tasks[k];
     for (let l = 0; l < currentContact.assignedContacts.length; l++) {
       if (currentContact.assignedContacts[l] == contact_name) {
-        currentContact.assignedContacts[l] == small_edit_contacts_name
+        currentContact.assignedContacts[l] = small_edit_contacts_name
+        saveLoggedInUser()
       }
-    }
   }
- 
+}
 
   for (let j = 0; j < loggedInUser.contacts.length; j++) {
     const currentContact = loggedInUser.contacts[j];
@@ -182,11 +207,11 @@ async function saveEditedContact(contact_email, contact_name) {
         renderContactBook() 
         loadContactBackgroundColor() 
     }
-  }
+   }
   }
  } 
 }
-}
+
 
 
 function addSelectContactOption(index) {
@@ -209,7 +234,7 @@ function addSelectContactOption(index) {
     for (let i = 0; i < loggedInUser.contacts.length; i++) {
       const currentContact = loggedInUser.contacts[i];   
       if (currentContact.contact_email == add_contact_input)
-      custom_select_contact_container.innerHTML += `<label class="custom-select-option"> ${currentContact.contact_name} <input onclick="returnSelectedContacts(this)" value="${currentContact.contact_name}" class="selected-option" type="checkbox" autocomplete="off"></label>`
+      custom_select_contact_container[index].innerHTML += `<label class="custom-select-option"> ${currentContact.contact_name} <input onclick="returnSelectedContacts(this)" value="${currentContact.contact_name}" class="selected-option" type="checkbox" autocomplete="off"></label>`
     }
   }
   

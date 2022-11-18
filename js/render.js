@@ -348,10 +348,11 @@ async function showTaskInfo(id_task) {
                         correctColor = value
                       }
                     }
-                    user_icons[j].classList.add(correctColor)
-
+                  
                     if (user_icons[j].id == currentUser.name) {
                       user_icons[j].classList.add(currentUser["user-background-color"])
+                    } else {
+                      user_icons[j].classList.add(correctColor)
                     }
                   }
               }
@@ -393,10 +394,11 @@ async function showTaskInfo(id_task) {
                 correctColor = value
               }
             }
-            user_icons[j].classList.add(correctColor)
-
+           
             if (user_icons[j].id == "Guest") {
               user_icons[j].classList.add(loggedInUser["user-background-color"])
+            } else {
+              user_icons[j].classList.add(correctColor)
             }
           }
   }    

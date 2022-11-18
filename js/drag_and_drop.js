@@ -1,7 +1,6 @@
 let currentDraggedElement;
 
 function checkUserTasks() {
-    
     for (let i = 0; i < users.length; i++) {
         const currentUser = users[i];
     
@@ -41,12 +40,24 @@ async function updateHTML() {
         document.getElementById('todo').innerHTML += generateTodoHTML(element)
 
         let assignedContacts = document.querySelector(`#assigned-contact-${element.id_task}`)
-        element.assignedContacts.forEach(contact => {
+        for (let i = 0; i < element.assignedContacts.length; i++) {
+            const contact = element.assignedContacts[i];
+            
+            if (i == 1 && window.innerWidth > 874) {
             assignedContacts.innerHTML += 
             `<div>
-                <span id="${contact}" class="user-icon">${getUserIcon(contact)}</span>  
-            </div>` 
-        });
+                <span class="user-icon blue">+${element.assignedContacts.length - 1}</span>  
+            </div>`
+            break
+            } else {
+                assignedContacts.innerHTML += 
+                `<div>
+                    <span id="${contact}" class="user-icon">${getUserIcon(contact)}</span>  
+                </div>`
+            }
+
+        }
+        
     }
 
     //container with category In progress
@@ -67,14 +78,23 @@ async function updateHTML() {
         document.getElementById('in-progress').innerHTML += generateTodoHTML(element)
         
         let assignedContacts = document.querySelector(`#assigned-contact-${element.id_task}`)
-        element.assignedContacts.forEach(contact => {
+        for (let i = 0; i < element.assignedContacts.length; i++) {
+            const contact = element.assignedContacts[i];
+            
+            if (i == 1 && window.innerWidth > 874) {
             assignedContacts.innerHTML += 
             `<div>
-                <span id="${contact}" class="user-icon">${getUserIcon(contact)}</span>  
-            </div>` 
-        });
-        
-    }
+                <span class="user-icon blue">+${element.assignedContacts.length - 1}</span>  
+            </div>`
+            break
+            } else {
+                assignedContacts.innerHTML += 
+                `<div>
+                    <span id="${contact}" class="user-icon">${getUserIcon(contact)}</span>  
+                </div>`
+            }
+          }
+        }
 
     //container with category Await Feedback
     let awaitFeedback = user_task_array.filter(t => t['status'] == 'await-feedback')
@@ -94,13 +114,22 @@ async function updateHTML() {
         document.getElementById('await-feedback').innerHTML += generateTodoHTML(element)
 
         let assignedContacts = document.querySelector(`#assigned-contact-${element.id_task}`)
-        element.assignedContacts.forEach(contact => {
+        for (let i = 0; i < element.assignedContacts.length; i++) {
+            const contact = element.assignedContacts[i];
+            
+            if (i == 1 && window.innerWidth > 874) {
             assignedContacts.innerHTML += 
             `<div>
-                <span id="${contact}" class="user-icon">${getUserIcon(contact)}</span>  
-            </div>`  
-        });
-     
+                <span class="user-icon blue">+${element.assignedContacts.length - 1}</span>  
+            </div>`
+            break
+            } else {
+                assignedContacts.innerHTML += 
+                `<div>
+                    <span id="${contact}" class="user-icon">${getUserIcon(contact)}</span>  
+                </div>`
+            }
+        }
     }
 
     //container with category done
@@ -122,13 +151,22 @@ async function updateHTML() {
         document.getElementById('done').innerHTML += generateTodoHTML(element)
         
         let assignedContacts = document.querySelector(`#assigned-contact-${element.id_task}`)
-        element.assignedContacts.forEach(contact => {
+        for (let i = 0; i < element.assignedContacts.length; i++) {
+            const contact = element.assignedContacts[i];
+            
+            if (i == 1 && window.innerWidth > 874) {
             assignedContacts.innerHTML += 
             `<div>
-            <span id="${contact}" class="user-icon">${getUserIcon(contact)}</span>  
-            </div>` 
-        });
-       
+                <span class="user-icon blue">+${element.assignedContacts.length - 1}</span>  
+            </div>`
+            break
+            } else {
+                assignedContacts.innerHTML += 
+                `<div>
+                    <span id="${contact}" class="user-icon">${getUserIcon(contact)}</span>  
+                </div>`
+            }
+        }
     }
     
     let correctCategory;

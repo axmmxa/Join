@@ -59,7 +59,7 @@ function showAddContact(index) {
   }   
 
     if (index == 0) {
-      addSelectContactOption()
+      addSelectContactOption(index)
     }
 
     if (document.getElementById("addTask-body")) {

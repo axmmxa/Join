@@ -90,7 +90,6 @@ async function saveEditedTask(id_task) {
           currentTask.priority = selected_priority
           currentTask.priority_img_path = priority_img_path
           saveLoggedInUser()
-
         }
       }
     }
