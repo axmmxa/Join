@@ -19,7 +19,7 @@ function signUp() {
 }
 
 async function addUser(user) {
-  if (!checkUserExist) {
+  if (!checkUserExist()) {
     users.push(user);
     await backend.setItem("users", JSON.stringify(users));
     window.location.href =
@@ -32,9 +32,9 @@ async function addUser(user) {
   }
 }
 
-async function checkUserExist() {
-  await getUsersFromBackend();
+getUsersFromBackend();
 
+function checkUserExist() {
   for (let i = 0; i < users.length; i++) {
     const element = users[i].email;
     if (element == email) {
@@ -43,4 +43,5 @@ async function checkUserExist() {
       return false;
     }
   }
+  return false;
 }
