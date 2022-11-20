@@ -21,8 +21,8 @@ function templateSmallContacts() {
                 </div>
 
                 <div class="small-contacts-btn-container">
-                    <button onclick="" class="delete-btn">Cancel <span class="close-x">X</span></button>
-                    <button id="add-contact-create-btn" onclick="addContactToBook()" class="create-btn">Create Contact <img class="white-clear" src="kanban_img/clear_icons/white_clear.png"></button>
+                    <button class="delete-btn">Cancel <span class="close-x">X</span></button>
+                    <button id="add-contact-create-btn" onclick="addContactToBook('not-mobile')" class="create-btn add-create-btn">Create Contact <img class="white-clear" src="kanban_img/clear_icons/white_clear.png"></button>
                 </div>
             </div>
         </div>
@@ -47,13 +47,13 @@ function templateSmallContactsMobile() {
 
           <div class="small-contacts-add-data">
               <div class="login-data">
-                  <input id="small-add-contacts-name" type="text" placeholder="Name" required>
-                  <input id="small-add-contacts-email" type="text" placeholder="E-mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
-                  <input id="small-add-contacts-phone" type="text" placeholder="Phone" pattern="[0-9]{9}" required>
+                  <input id="small-add-contacts-name-mobile" type="text" placeholder="Name" required>
+                  <input id="small-add-contacts-email-mobile" type="text" placeholder="E-mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+                  <input id="small-add-contacts-phone-mobile" type="text" placeholder="Phone" pattern="[0-9]{9}" required>
               </div>
 
               <div class="small-contacts-btn-container">
-                  <button id="add-contact-create-btn" onclick="addContactToBook()" class="create-btn">Create Contact <img class="white-clear" src="kanban_img/clear_icons/white_clear.png"></button>
+                  <button id="add-contact-create-btn-mobile" onclick="addContactToBook('mobile')" class="create-btn add-create-btn-mobile">Create Contact <img class="white-clear" src="kanban_img/clear_icons/white_clear.png"></button>
               </div>
           </div>
       </div>
@@ -76,7 +76,7 @@ function templateSmallEditContacts(contact_name,contact_email,contact_phone,i) {
     <div class="lower-part-small-contacts">
     <div id="${contact_name}" class="user-icon-edit-contact user-icon-big fs-22">${getUserIcon(contact_name)}</div>
 
-        <form onsubmit="saveEditedContact('${contact_email}','${contact_name}'); return false" class="small-contacts-add-data">
+        <form onsubmit="saveEditedContact('${contact_email}','${contact_name}', 'not-mobile'); return false" class="small-contacts-add-data">
             <div class="login-data">
                 <input value="${contact_name}" id="small-edit-contacts-name" type="text" placeholder="Name" required>
                 <input value="${contact_email}" id="small-edit-contacts-email" type="text" placeholder="E-mail" required>
@@ -106,15 +106,15 @@ function templateSmallEditContactsMobile(contact_name,contact_email,contact_phon
     <div class="lower-part-small-contacts-mobile">
     <div id="${contact_name}" class="user-icon-edit-contact user-icon-big-mobile fs-22">${getUserIcon(contact_name)}</div>
 
-        <form onsubmit="saveEditedContact('${contact_email}','${contact_name}'); return false" class="small-contacts-add-data">
+        <form onsubmit="saveEditedContact('${contact_email}','${contact_name}', 'mobile'); return false" class="small-contacts-add-data">
             <div class="login-data margin">
-                <input value="${contact_name}" id="small-edit-contacts-name" type="text" placeholder="Name" required>
-                <input value="${contact_email}" id="small-edit-contacts-email" type="text" placeholder="E-mail" required>
-                <input value="${contact_phone}" id="small-edit-contacts-phone" type="text" placeholder="Phone" required>
+                <input value="${contact_name}" id="small-edit-contacts-name-mobile" type="text" placeholder="Name" required>
+                <input value="${contact_email}" id="small-edit-contacts-email-mobile" type="text" placeholder="E-mail" required>
+                <input value="${contact_phone}" id="small-edit-contacts-phone-mobile" type="text" placeholder="Phone" required>
             </div>
 
             <div class="small-contacts-btn-container">
-                <button class="create-btn">Save</button>
+                <button class="create-btn save-create-btn-mobile">Save</button>
             </div>
         </form>
     </div>
@@ -139,7 +139,7 @@ function templateParentSmallEditContacts(contact_name,contact_email,contact_phon
         <div class="lower-part-small-contacts">
         <div id="${contact_name}" class="user-icon-edit-contact user-icon-big fs-22">${getUserIcon(contact_name)}</div>
 
-            <form onsubmit="saveEditedContact('${contact_email}','${contact_name}'); return false" class="small-contacts-add-data">
+            <form onsubmit="saveEditedContact('${contact_email}','${contact_name}', 'not-mobile'); return false" class="small-contacts-add-data">
                 <div class="login-data">
                     <input value="${contact_name}"  id="small-edit-contacts-name" type="text" placeholder="Name" required>
                     <input value="${contact_email}" id="small-edit-contacts-email" type="text" placeholder="E-mail" required>
@@ -147,7 +147,7 @@ function templateParentSmallEditContacts(contact_name,contact_email,contact_phon
                 </div>
 
                 <div class="small-contacts-btn-container">
-                    <button class="create-btn">Save</button>
+                    <button class="create-btn save-create-btn">Save</button>
                 </div>
             </form>
         </div>
@@ -200,7 +200,6 @@ function templateSmallEditTask(id_task, title, description, due_date) {
                                 </div>
                                 <div class="custom-select-options-container d-none" >
                                     <div class="custom-select-contact-container">
-                                        <!-- <label class="custom-select-option">You <input onclick="returnSelectedContacts(this)" value="You" class="selected-option" type="checkbox" autocomplete="off"></label>
                                         <label class="custom-select-option"> Maximilian Vogel <input onclick="returnSelectedContacts(this)" value="Maximilian Vogel" class="selected-option" type="checkbox" autocomplete="off"></label> -->      
                                     </div> 
                                     <label onclick="showAddContact(0)" class="custom-select-option">Invite new contact <img src="kanban_img/invite_contact.png"></label>
@@ -325,9 +324,9 @@ function templateSmallAddTask() {
 
 
                 <div class="priority-btn-container">
-                    <a id="urgent-btn" class="urgent-btn priority" onclick="setPriotity(id)">Urgent <img id="urgent-btn-priority-img" class="priority-urgent-img" src="kanban_img/priority_icons/urgent-red.png"></a>
-                    <a id="medium-btn" class="medium-btn priority" onclick="setPriotity(id)">Medium <img  id="medium-btn-priority-img" class="priority-urgent-img" src="kanban_img/priority_icons/middle-urgent-orange.png"></a>
-                    <a id="non-urgent-btn" class="non-urgent-btn priority" onclick="setPriotity(id)">Low <img id="non-urgent-btn-priority-img" class="priority-urgent-img" src="kanban_img/priority_icons/non-urgent-green.png"></a>
+                    <a id="urgent-btn" class="urgent-btn priority" onclick="setPriority(id)">Urgent <img id="urgent-btn-priority-img" class="priority-urgent-img" src="kanban_img/priority_icons/urgent-red.png"></a>
+                    <a id="medium-btn" class="medium-btn priority" onclick="setPriority(id)">Medium <img  id="medium-btn-priority-img" class="priority-urgent-img" src="kanban_img/priority_icons/middle-urgent-orange.png"></a>
+                    <a id="non-urgent-btn" class="non-urgent-btn priority" onclick="setPriority(id)">Low <img id="non-urgent-btn-priority-img" class="priority-urgent-img" src="kanban_img/priority_icons/non-urgent-green.png"></a>
                 </div>
                 <div class="description-container">
                     <span>Description</span>
@@ -481,21 +480,6 @@ function selectedLink(id) {
     document.getElementById(id).classList.add("hover-blue")
     document.getElementById(id).style.border = "1px solid transparent"
     document.getElementById(id).style.borderRadius = "8px"
-}
-
-
-if (document.getElementById("summary-body")) {
-    document.querySelector(".task-urgent").addEventListener("click", () => {
-        location.href = "board.html"
-    })
-    document.querySelector(".task-card-upper").addEventListener("click", () => {
-        location.href = "board.html"
-    })
-    for (let i = 1; i <=  document.querySelectorAll(".task-card-lower").length; i++) {
-        document.querySelector(`#task-card-lower-${i}`).addEventListener("click", () => {
-            location.href = "board.html"
-        })
-    }
 }
 
 function capitalizeFirstLetter(string) {

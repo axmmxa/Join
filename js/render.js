@@ -1,3 +1,4 @@
+    
 function setOpacity(number) {
   document.querySelector(".kanban-navbar").style.opacity = number
   document.querySelector(".kanban-main").style.opacity = number
@@ -5,7 +6,9 @@ function setOpacity(number) {
 }
 
 function closeSmallContacts() {
-  document.getElementById("small-contacts-container").classList.add("d-none")
+  if (document.getElementById("small-contacts-container")) {
+    document.getElementById("small-contacts-container").classList.add("d-none")
+  }
   setOpacity(1)
 }
 
@@ -134,43 +137,38 @@ function closeSmallEditTask(id) {
 
 }
 
-   function setPrioritySmallEditTask(id, id_task) {
+function setPrioritySmallEditTask(id, id_task) {
+ let priorities = document.querySelectorAll('.priority')
+ 
+ for (let index = 0; index < priorities.length; index++) {
+   const priority = priorities[index];
+   priority.style.color = 'black'
+   priority.style.backgroundColor = 'white'
+   if(document.getElementById(`urgent-btn-${id_task}`)) {
+     document.getElementById(`urgent-btn-priority-img-${id_task}`).setAttribute('src', 'kanban_img/priority_icons/urgent-red.png')
+   } if (document.getElementById(`medium-btn-${id_task}`)) {
+     document.getElementById(`medium-urgent-btn-priority-img-${id_task}`).setAttribute('src', 'kanban_img/priority_icons/middle-urgent-orange.png')
+   } if(document.getElementById(`non-urgent-btn-${id_task}`)){
+     document.getElementById(`non-urgent-btn-priority-img-${id_task}`).setAttribute('src', 'kanban_img/priority_icons/non-urgent-green.png')
+   }
+ }
+ 
+ if(id == `Urgent`) {
+   changeStyleSelectedPriorityButtonEditTask('red', 'kanban_img/priority_icons/urgent_white.png', 'white', 'kanban_img/priority_icons/urgent-red.png', 'Urgent')
+ } else if( id == `Medium`) {
+   changeStyleSelectedPriorityButtonEditTask('orange', 'kanban_img/priority_icons/medium_urgent_white.png', 'white', 'kanban_img/priority_icons/middle-urgent-orange.png', 'Medium')
+ } else if( id == `Low` ) {
+   changeStyleSelectedPriorityButtonEditTask('lightgreen', 'kanban_img/priority_icons/non_urgent_white.png', 'white', 'kanban_img/priority_icons/non-urgent-green.png', 'Low')
+ }
+   
+}
 
-    let priorities = document.querySelectorAll('.priority')
-    
-    for (let index = 0; index < priorities.length; index++) {
-      const priority = priorities[index];
-      priority.style.color = 'black'
-      priority.style.backgroundColor = 'white'
-      if(document.getElementById(`urgent-btn-${id_task}`)) {
-        document.getElementById(`urgent-btn-priority-img-${id_task}`).setAttribute('src', 'kanban_img/priority_icons/urgent-red.png')
-      } if (document.getElementById(`medium-btn-${id_task}`)) {
-        document.getElementById(`medium-urgent-btn-priority-img-${id_task}`).setAttribute('src', 'kanban_img/priority_icons/middle-urgent-orange.png')
-      } if(document.getElementById(`non-urgent-btn-${id_task}`)){
-        document.getElementById(`non-urgent-btn-priority-img-${id_task}`).setAttribute('src', 'kanban_img/priority_icons/non-urgent-green.png')
-      }
-    }
-    
-    if(id == `Urgent`) {
-      document.getElementById(`urgent-btn-${id_task}`).style.backgroundColor = 'red'
-      document.getElementById(`urgent-btn-priority-img-${id_task}`).setAttribute('src', 'kanban_img/priority_icons/urgent_white.png')
-      document.getElementById(`urgent-btn-${id_task}`).style.color = 'white'
-      priority_img_path =  'kanban_img/priority_icons/urgent-red.png'
-      selected_priority = "Urgent"
-    } else if( id == `Medium`) {
-      document.getElementById(`medium-btn-${id_task}`).style.backgroundColor = 'orange'
-      document.getElementById(`medium-urgent-btn-priority-img-${id_task}`).setAttribute('src', 'kanban_img/priority_icons/medium_urgent_white.png')
-      document.getElementById(`medium-btn-${id_task}`).style.color = 'white'
-      priority_img_path = 'kanban_img/priority_icons/middle-urgent-orange.png'
-      selected_priority = "Medium"
-    } else if( id == `Low` ) {
-      document.getElementById(`non-urgent-btn-${id_task}`).style.backgroundColor = 'lightgreen'
-      document.getElementById(`non-urgent-btn-priority-img-${id_task}`).setAttribute('src', 'kanban_img/priority_icons/non_urgent_white.png')
-      document.getElementById(`non-urgent-btn-${id_task}`).style.color = 'white'
-      priority_img_path = 'kanban_img/priority_icons/non-urgent-green.png'
-      selected_priority = "Low"
-    }
-      
+   function changeStyleSelectedPriorityButtonEditTask(backgroundColor, reset_img_path, color, img_path, priority, id_task) {
+    document.getElementById(`non-urgent-btn-${id_task}`).style.backgroundColor = backgroundColor
+    document.getElementById(`non-urgent-btn-priority-img-${id_task}`).setAttribute('src', reset_img_path)
+    document.getElementById(`non-urgent-btn-${id_task}`).style.color = color
+    priority_img_path = img_path
+    selected_priority = priority
    }
 
 function renderSmallEditTask(id_task,title,description,due_date,priority) {
@@ -192,42 +190,47 @@ function renderSmallEditTask(id_task,title,description,due_date,priority) {
 }
 
 async function showTaskInfo(id_task) {
-    if (loggedInUser.name !== "Guest") {
-    for (let i = 0; i < users.length; i++) {
-      console.log(users)
-      const currentUser = users[i];            
-      if (currentUser.email == loggedInUser.email) {
-          renderBoardTask(currentUser, id_task)
-
-          await getUsersFromBackend()
-          let user_icons = document.querySelectorAll(".user-icon-task-info")       
-          loadBoardContactBackgroundColor()
-
-          for (let i = 0; i < users.length; i++) {
-              const currentUser = users[i];
-              if (currentUser.email == loggedInUser.email) {
-                setBoardBackgroundColor(currentUser, user_icons)
-              }
-          }
-      }
-    } 
+  let user_icons = document.querySelectorAll(".user-icon-task-info") 
+  
+  if (loggedInUser.name !== "Guest") {
+    renderUsersTaskInfo(user_icons, id_task)
   } else {
-    for (let j = 0; j < loggedInUser.tasks.length; j++) {
-      let userTaskId = loggedInUser.tasks[j]
-      if (userTaskId.id_task == id_task) {
+    renderGuestInfoTask(id_task)
+  }
 
-          document.querySelector("body").innerHTML += templateShowTaskInfo(userTaskId, id_task, j)
-         
-          console.log(userTaskId.category)
-          getCategoryColorTaskInfo(userTaskId.category)
-          assignedPersonal(userTaskId, j)
+}
 
-          let user_icons = document.querySelectorAll(".user-icon-task-info")
-
-          setBoardBackgroundColor(loggedInUser, user_icons)
-      }
+function renderGuestInfoTask(id_task) {
+  for (let j = 0; j < loggedInUser.tasks.length; j++) {
+    let userTaskId = loggedInUser.tasks[j]
+    if (userTaskId.id_task == id_task) {
+        document.querySelector("body").innerHTML += templateShowTaskInfo(userTaskId, id_task, j)
+        console.log(userTaskId.category)
+        getCategoryColorTaskInfo(userTaskId.category)
+        assignedPersonal(userTaskId, j)
+        let user_icons = document.querySelectorAll(".user-icon-task-info")
+        setBoardBackgroundColor(loggedInUser, user_icons)
     }
-  }    
+  }
+}    
+
+async function renderUsersTaskInfo(user_icons, id_task) {
+  for (let i = 0; i < users.length; i++) {
+    console.log(users)
+    const currentUser = users[i];            
+    if (currentUser.email == loggedInUser.email) {
+        renderBoardTask(currentUser, id_task)
+        await getUsersFromBackend()
+              
+        loadBoardContactBackgroundColor()
+        for (let i = 0; i < users.length; i++) {
+            const currentUser = users[i];
+            if (currentUser.email == loggedInUser.email) {
+              setBoardBackgroundColor(currentUser, user_icons)
+            }
+        }
+    }
+  } 
 }
 
 function renderBoardTask(currentUser, id_task) {
@@ -258,46 +261,27 @@ function assignedPersonal(userTaskId, j) {
 
 function getCategoryColorTaskInfo(category) {
   let task_topics = document.querySelectorAll(".task-topic-info")
-  console.log(task_topics.length)
-
-  switch(category) {
-    case "Backoffice": 
-      task_topics[task_topics.length - 1].classList.add("turquoise")
-      break;
-    case "Sales":
-      task_topics[task_topics.length - 1].classList.add("pink")
-      break;
-    case "Media":
-      task_topics[task_topics.length - 1].classList.add("yellow")
-      break;
-    case "Design":
-      task_topics[task_topics.length - 1].classList.add("orange")
-      break;
-    case "Marketing":
-      task_topics[task_topics.length - 1].classList.add("blue")
-      break;
-    } 
-  }
+  returnSuitableCategoryColor(task_topics, category, task_topics.length - 1)
+}
 
 
 function closeBoardTaskInfo() {
-    document.querySelectorAll(".small-board-task-info").forEach(small_board_task_info => {
-        small_board_task_info.classList.add("d-none")
-    })
-    setOpacity(1)
+  document.querySelectorAll(".small-board-task-info").forEach(small_board_task_info => {
+      small_board_task_info.classList.add("d-none")
+  })
+  setOpacity(1)
 }
 
 
 function renderBoardTaskInfo(id_task) {
-
-    if(document.getElementById(`small-board-task-info-${id_task}`)) {
-        document.getElementById(`small-board-task-info-${id_task}`).classList.remove("d-none")
-        setOpacity(0.5)
-    } else {
-        showTaskInfo(id_task)
-        setOpacity(0.5)
-        }
-    }
+  if(document.getElementById(`small-board-task-info-${id_task}`)) {
+      document.getElementById(`small-board-task-info-${id_task}`).classList.remove("d-none")
+      setOpacity(0.5)
+  } else {
+      showTaskInfo(id_task)
+      setOpacity(0.5)
+      }
+}
     
 
 function closeSmallAddTask() {
@@ -305,8 +289,8 @@ function closeSmallAddTask() {
     setOpacity(1)
 }
 
-function renderSmallAddTask() {
 
+function renderSmallAddTask() {
   if (document.getElementById("small-add-task")) {
       document.getElementById("small-add-task").classList.remove("d-none")
       setOpacity(0.5)
@@ -319,56 +303,55 @@ function renderSmallAddTask() {
     }
 }
 
- async function renderContactInformation(email, name) {
+
+async function renderContactInformation(email, name) {
   let index = contact_emails.indexOf(email)
   
   if (loggedInUser.name !== "Guest") {
-    renderTemplateContactInformation(index, name, email)
-
+  renderTemplateContactInformation(index, name, email)
   await getUsersFromBackend()
-  let correctColor;
-  let user_icons = document.querySelectorAll(".user-icon")
-
   for (let i = 0; i < users.length; i++) {
-      const currentUser = users[i];
-      for (let j = 0; j < currentUser.contacts.length; j++) {
-          if (currentUser.contacts[j].contact_name == name) {
-              for (let j = 0; j < currentUser.contacts.length; j++) {
-                  const currentContact = currentUser.contacts[j];
-                  console.log("current contact", currentContact)
-                  correctColor = currentContact["contact-background-color"]
-                  if(currentContact.contact_email == email && window.innerWidth > 874) {
-                     user_icons[currentUser.contacts.length].classList.add(correctColor)
-                  } else if (currentContact.contact_email == email && window.innerWidth < 874) {
-                    user_icons[user_icons.length - 1].classList.add(correctColor)
-                    document.querySelector(".main-field").style.justifyContent = "space-between"
-                    document.querySelector(".main-field").style.alignItems = ""
-                  }
-              }
-          }
-      }   
+    const currentUser = users[i];
+    loadUserIconContactInformation(currentUser, name, email)
   }
 } else {
   renderTemplateContactInformation(index, name, email)
-  let correctColor;
+  loadUserIconContactInformation(loggedInUser, name, email)
+}
+}
 
-  for (let j = 0; j < loggedInUser.contacts.length; j++) {
-    if (loggedInUser.contacts[j].contact_name == name) {
-      const currentContact = loggedInUser.contacts[j];
-      console.log("current contact", currentContact)
-      correctColor = currentContact["contact-background-color"]
-      if(currentContact.contact_email == email && window.innerWidth > 874) {
-         document.querySelectorAll(".user-icon")[loggedInUser.contacts.length].classList.add(correctColor)
-      } else {
-        document.querySelector(".user-icon-big").classList.add(correctColor)
-        document.querySelector(".main-field").style.justifyContent = "space-between"
-        document.querySelector(".main-field").style.alignItems = ""
+
+function loadUserIconContactInformation(user, name, email) {
+  let correctColor;
+  let user_icons = document.querySelectorAll(".user-icon")
+
+  for (let j = 0; j < user.contacts.length; j++) {
+      if (user.contacts[j].contact_name == name) {
+          for (let j = 0; j < user.contacts.length; j++) {
+              const currentContact = user.contacts[j];
+              console.log("current contact", currentContact)
+              correctColor = currentContact["contact-background-color"]
+              if(currentContact.contact_email == email && window.innerWidth > 874) {
+                 user_icons[user.contacts.length].classList.add(correctColor)
+              } else if (currentContact.contact_email == email && window.innerWidth < 874) {
+                returnCorrectColorForGuestOrUser(user_icons, correctColor)
+                document.querySelector(".main-field").style.justifyContent = "space-between"
+                document.querySelector(".main-field").style.alignItems = ""
+              }
+          }
       }
-    }
+  }   
+}
+
+
+function returnCorrectColorForGuestOrUser(user_icons, correctColor) {
+  if (loggedInUser.name == "Guest") {
+    return document.querySelector(".user-icon-big").classList.add(correctColor)
+  } else {
+    return user_icons[user_icons.length - 1].classList.add(correctColor)
   }
 }
 
-}
 
 function renderTemplateContactInformation(index, name, email) {
     for (let i = 0; i < contact_names.length; i++) {
@@ -381,125 +364,82 @@ function renderTemplateContactInformation(index, name, email) {
   }
 
 
-function renderContactBook() {
-    let alphabet = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
-    let firstLetterContainer;
-    for (let i = 0; i < alphabet.length; i++) {
-        firstLetterContainer = alphabet[i];
-        document.querySelector(".contacts-left").innerHTML += templateContactsLeft(firstLetterContainer)
-      }
+async function addContactToBook(btn) {
+  setCorrectInputValueFromAddContact(btn)
+  pushContactInfo(small_add_contacts_name, small_add_contacts_email, small_add_contacts_phone)
 
-    renderSavedContacts()
-
-}
-
-function renderSavedContacts() {
-    if (loggedInUser.name !== "Guest") {
-      
-      for (let i = 0; i < users.length; i++) {
-        const currentUser = users[i];
-        if(currentUser.email == loggedInUser.email){
-              for (let j = 0; j < currentUser.contacts.length; j++) {
-                const contact = currentUser.contacts[j];
-                // users.pop(contact)
-
-                contact_emails.push(contact.contact_email)
-                contact_names.push(contact.contact_name)
-                contact_phones.push(contact.contact_phone)
-    
-        let first_letter_contact = contact.contact_name[0].toUpperCase()
-                
-        document.querySelector(`#contacts-${first_letter_contact}`).classList.remove("d-none")
-        document.querySelector(`.contacts-${first_letter_contact}-data`).innerHTML += templateContactUserInContactBook(contact)
-        
-      }
-    }
+  let contact = {
+    "contact_name": capitalizeFirstLetter(small_add_contacts_name),
+    "contact_email": small_add_contacts_email,
+    "contact_phone": small_add_contacts_phone,
+    "contact-background-color": ""
   }
-    getUserColor()
-  } else {
-      for (let j = 0; j < loggedInUser.contacts.length; j++) {
-        const contact = loggedInUser.contacts[j];
-        // users.pop(contact)
-
-        contact_emails.push(contact.contact_email)
-        contact_names.push(contact.contact_name)
-        contact_phones.push(contact.contact_phone)
-  
-      console.log(loggedInUser.contacts.length)
-      console.log(j, contact.contact_name)
-
-      let first_letter_contact = contact.contact_name[0].toUpperCase()
-              
-      document.querySelector(`#contacts-${first_letter_contact}`).classList.remove("d-none")
-
-      document.querySelector(`.contacts-${first_letter_contact}-data`).innerHTML += templateContactUserInContactBook(contact)
-      }
-      getUserColor()
-      }
-     
-  }
-  
-
-async function addContactToBook() {
-    let small_add_contacts_name = document.getElementById("small-add-contacts-name").value
-    let small_add_contacts_email = document.getElementById("small-add-contacts-email").value
-    let small_add_contacts_phone = document.getElementById("small-add-contacts-phone").value
-
-    contact_names.push(capitalizeFirstLetter(small_add_contacts_name))
-    contact_emails.push(small_add_contacts_email)
-    contact_phones.push(small_add_contacts_phone)
-
-    let contact = {
-        "contact_name": capitalizeFirstLetter(small_add_contacts_name),
-        "contact_email": small_add_contacts_email,
-        "contact_phone": small_add_contacts_phone,
-        "contact-background-color": ""
-    }
 
     if (small_add_contacts_name !== "" && small_add_contacts_email !== "" && small_add_contacts_phone !== "") {
-
       if (loggedInUser.name == "Guest") {
-        loggedInUser.contacts.push(contact)
-        getUserColor()  
+      pushAddedContactIntoUser(loggedInUser, contact)
       } else {
         for (let i = 0; i < users.length; i++) {
           const currentUser = users[i];
-            if(currentUser.email == loggedInUser.email){
-              currentUser.contacts.push(contact)
-              getUserColor()  
-          } 
+          pushAddedContactIntoUser(currentUser, contact)
         }
       }
-  
-      if (loggedInUser.name !== "Guest") {  
-      let small_add_contacts_name = document.getElementById("small-add-contacts-name").value
-  
-      await backend.setItem('users', JSON.stringify(users))
-      let first_letter = small_add_contacts_name[0].toUpperCase()
-  
-      document.querySelector(`#contacts-${first_letter}`).classList.remove("d-none")
-  
-      document.querySelector(`.contacts-${first_letter}-data`).innerHTML += templateUserContactAddContact(small_add_contacts_name,small_add_contacts_email,small_add_contacts_phone)
-          
-        loadContactBackgroundColor()
-        showPopup("task-popup")
-        closeSmallContacts()
-  
+    } else {
+      if (document.querySelector(".create-btn").classList.contains("create-mobile")) {
+        document.querySelector(".add-contact-create-btn-mobile").style.color = '1px solid rgb(255,0,0)'
       } else {
-        let small_add_contacts_name = document.getElementById("small-add-contacts-name").value
-    
-        localStorage.setItem("loggedInUser", JSON.stringify(loggedInUser)); 
-        let first_letter = small_add_contacts_name[0].toUpperCase()
-  
-        document.querySelector(`#contacts-${first_letter}`).classList.remove("d-none")
-  
-        document.querySelector(`.contacts-${first_letter}-data`).innerHTML += templateUserContactAddContact(small_add_contacts_name,small_add_contacts_email,small_add_contacts_phone)
-        
-        loadContactBackgroundColor()
-        showPopup("task-popup")
-        closeSmallContacts()
+        document.querySelector(".add-contact-create-btn").style.color = '1px solid rgb(255,0,0)'
       }
-    } 
+    }
+      if (loggedInUser.name !== "Guest") {  
+        showAddedContactInContactBook(small_add_contacts_name,small_add_contacts_email,small_add_contacts_phone, btn)
+      } else {
+        showAddedContactInContactBook(small_add_contacts_name,small_add_contacts_email,small_add_contacts_phone, btn)
+      }
+} 
+
+
+function setCorrectInputValueFromAddContact(btn) {
+  if (btn == "mobile") {
+    small_add_contacts_name = document.getElementById("small-add-contacts-name-mobile").value
+    small_add_contacts_email = document.getElementById("small-add-contacts-email-mobile").value
+    small_add_contacts_phone = document.getElementById("small-add-contacts-phone-mobile").value
+  } else {
+    small_add_contacts_name = document.getElementById("small-add-contacts-name").value
+    small_add_contacts_email = document.getElementById("small-add-contacts-email").value
+    small_add_contacts_phone = document.getElementById("small-add-contacts-phone").value
+  }
 }
 
+function pushContactInfo(small_add_contacts_name, small_add_contacts_email, small_add_contacts_phone) {
+  contact_names.push(capitalizeFirstLetter(small_add_contacts_name))
+  contact_emails.push(small_add_contacts_email)
+  contact_phones.push(small_add_contacts_phone)
+}
+
+function pushAddedContactIntoUser(user, contact) {
+  if (user.name == "Guest") {
+    loggedInUser.contacts.push(contact)
+    getUserColor()
+  }  
+}
+
+
+function showAddedContactInContactBook(small_add_contacts_name,small_add_contacts_email,small_add_contacts_phone, btn) {
+  let small_add_contacts_name_general;
+  if (btn == 'mobile') {
+    small_add_contacts_name_general = document.getElementById("small-add-contacts-name-mobile").value
+  } else {
+    small_add_contacts_name_general = document.getElementById("small-add-contacts-name-mobile").value
+  }
+  saveDependingOnUserName()
+  let first_letter = small_add_contacts_name_general[0].toUpperCase()
+
+  document.querySelector(`#contacts-${first_letter}`).classList.remove("d-none")
+  document.querySelector(`.contacts-${first_letter}-data`).innerHTML += templateUserContactAddContact(small_add_contacts_name,small_add_contacts_email,small_add_contacts_phone)
+      
+  loadContactBackgroundColor()
+  showPopup("task-popup")
+  closeSmallContacts()
+}
     

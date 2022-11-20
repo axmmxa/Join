@@ -5,7 +5,6 @@ function toggleLogoutBox() {
     } else {
         document.querySelector(".logout").classList.toggle("d-none")
     }
-
 }
 
 function logout() {

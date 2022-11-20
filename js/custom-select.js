@@ -79,23 +79,7 @@ function addNewContactOption(index) {
 }
 
 function setColorCategory(category_color, add_category_input) {
-  switch (add_category_input) {
-    case "Backoffice":
-      category_color[category_color.length - 1].classList.add("turquoise");
-      break;
-    case "Sales":
-      category_color[category_color.length - 1].classList.add("pink");
-      break;
-    case "Media":
-      category_color[category_color.length - 1].classList.add("yellow");
-      break;
-    case "Design":
-      category_color[category_color.length - 1].classList.add("orange");
-      break;
-    case "Marketing":
-      category_color[category_color.length - 1].classList.add("blue");
-      break;
-  }
+  returnSuitableCategoryColor(category_color, add_category_input)
 }
 
 function showAddSubtask() {

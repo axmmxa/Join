@@ -384,7 +384,7 @@
 }
 
 #small-contacts-container-close-btn-container-mobile {
-    height: 48px;
+    height: 5vh;
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -399,17 +399,17 @@
 }
 
 .upper-part-small-contacts-mobile {
-    height: 190px;
+    height: 35vh;
     z-index: 2;
     display: flex;
     justify-content: flex-start;
     align-items: center;
     flex-direction: column;
-    padding-top: 10px;
+    /* padding-top: 10px; */
 }
 
 .lower-part-small-contacts-mobile {
-    height: 365px;
+    height: 60vh;
     display: flex;
     justify-content: center;
     align-items: center;

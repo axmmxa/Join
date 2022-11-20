@@ -8,14 +8,12 @@ let amount_done = 0;
 
 let todos = []
 let users = [];
-// let tasks = [];
 let selected_options = [] //asigned contacts
 let selected_category;
 let selected_priority;
 let priority_img_path;
 let selected_subtasks = []
 let loggedInUser;
-// let id = 0;
 let currentContact = [];
 
 let contact_names = []
@@ -26,6 +24,15 @@ let BackgroundColorForBoard = {}
 let BackgroundColorForBoardTaskInfo = {}
 let BackgroundColorForContactBook = {}
 let BackgroundColorForEditContact = {}
+
+let small_add_contacts_name;
+let small_add_contacts_email;
+let small_add_contacts_phone;
+
+let small_edit_contacts_name;
+let small_edit_contacts_email;
+let small_edit_contacts_phone;
+
 
 async function init() {
     await getUsersFromBackend()
@@ -98,6 +105,14 @@ function initUserIcon() {
     }
 }
 
+function saveDependingOnUserName() {
+  if (loggedInUser.name == "Guest") {
+    saveLoggedInUser() 
+  } else {
+    saveUsersArray()
+  }
+}
+
 function initGuestIcon() {
   document.querySelector(".user-logout-icon-container").innerHTML = `<div onclick="toggleLogoutBox()" class="user-logout-icon">${getUserIcon(loggedInUser.name)}</div>`
   document.querySelector(".user-logout-icon").classList.add(loggedInUser["user-background-color"])
@@ -106,6 +121,10 @@ function initGuestIcon() {
 async function getUsersFromBackend() {
   await downloadFromServer();
   users = JSON.parse(backend.getItem('users')) || [];
+}
+
+function saveLoggedInUser() {
+  localStorage.setItem("loggedInUser", JSON.stringify(loggedInUser));
 }
 
 async function saveUsersArray() {
@@ -125,63 +144,90 @@ async function deleteIdTask() {
   user_name.innerHTML = loggedInUser.name
  }
 
- function saveLoggedInUser() {
-  let loggedInUserAsText = JSON.stringify(loggedInUser);
-  localStorage.setItem("loggedInUser", loggedInUserAsText);
-}
-
 function loadLoggedInUser() {
   let loggedInUserAsText = localStorage.getItem("loggedInUser");
 
   if (loggedInUserAsText) {
       loggedInUser = JSON.parse(loggedInUserAsText)
   }
-
   if(document.getElementById("user-name")) {
     greetUser()
   }
 }
 
-async function saveEditedContact(contact_email, contact_name) {
-  let small_edit_contacts_name = document.getElementById("small-edit-contacts-name").value
-  let small_edit_contacts_email = document.getElementById("small-edit-contacts-email").value
-  let small_edit_contacts_phone = document.getElementById("small-edit-contacts-phone").value
+function checkIfEditContactInputsNotEmpty() {
+    return small_edit_contacts_name !== "" && small_add_contacts_email !== "" && small_add_contacts_phone !== ""
+}
 
-  for (let i = 0; i < users.length; i++) {
-    const currentUsers = users[i];
-  for (let k = 0; k < currentUsers.tasks.length; k++) {
-    const currentContact = currentUsers.tasks[k];
-    for (let l = 0; l < currentContact.assignedContacts.length; l++) {
-      if (currentContact.assignedContacts[l] == contact_name) {
-        currentContact.assignedContacts[l] = small_edit_contacts_name
-      }
+async function saveEditedContact(contact_email, contact_name, btn) {
+    if (btn == 'mobile') {
+      small_edit_contacts_name = document.getElementById("small-edit-contacts-name-mobile").value
+      small_edit_contacts_email = document.getElementById("small-edit-contacts-email-mobile").value
+      small_edit_contacts_phone = document.getElementById("small-edit-contacts-phone-mobile").value
+    } else {
+      small_edit_contacts_name = document.getElementById("small-edit-contacts-name").value
+      small_edit_contacts_email = document.getElementById("small-edit-contacts-email").value
+      small_edit_contacts_phone = document.getElementById("small-edit-contacts-phone").value
     }
-  }  
-
+  
+  changeAssignedContact(contact_name)
   if (loggedInUser.name !== "Guest") { 
   for (let i = 0; i < users.length; i++) {
     const currentUsers = users[i];
     for (let j = 0; j < currentUsers.contacts.length; j++) {
       const currentContact = currentUsers.contacts[j];
       if (currentContact.contact_email == contact_email) {
-          currentContact.contact_name = small_edit_contacts_name
-          currentContact.contact_email = small_edit_contacts_email
-          currentContact.contact_phone = small_edit_contacts_phone
-          saveUsersArray()   
-          document.querySelector(".contacts-left").innerHTML = ""
-          document.querySelector(".contacts-right").innerHTML = 
-            `<div id='contact-information'></div>
-            <button onclick="renderSmallContacts()" class="add-person-btn">New Contact 
-            <img class='add-person-img' src="kanban_img/add_icons/add_person.png">
-            </button>
-            `
-          renderContactBook()
-          loadContactBackgroundColor() 
+        changeContactAndRenderContactsInformationRight(currentContact, small_edit_contacts_name, small_edit_contacts_email, small_edit_contacts_phone)
       }
     } 
   }  
 } else {
+  changeAssignedContact(contact_name)
+  for (let j = 0; j < loggedInUser.contacts.length; j++) {
+    const currentContact = loggedInUser.contacts[j];
+    if (currentContact.contact_email == contact_email) {
+      changeContactAndRenderContactsInformationRight(currentContact, small_edit_contacts_name, small_edit_contacts_email, small_edit_contacts_phone)
+    }
+   }
+  }
+ } 
 
+
+function changeContactAndRenderContactsInformationRight(currentContact, small_edit_contacts_name, small_edit_contacts_email, small_edit_contacts_phone) {
+  currentContact.contact_name = small_edit_contacts_name
+  currentContact.contact_email = small_edit_contacts_email
+  currentContact.contact_phone = small_edit_contacts_phone
+  saveDependingOnUserName()
+  if (document.querySelector(".contacts-left") && document.querySelector(".contacts-right")) {
+    document.querySelector(".contacts-left").innerHTML = ""
+    document.querySelector(".contacts-right").innerHTML = 
+    `<div id='contact-information'></div>
+    <button onclick="renderSmallContacts()" class="add-person-btn">New Contact 
+    <img class='add-person-img' src="kanban_img/add_icons/add_person.png">
+    </button>
+    `
+    renderContactBook()
+    loadContactBackgroundColor() 
+  }
+  location.reload(true)
+}
+
+
+function changeAssignedContact(contact_name) {
+  if (loggedInUser.name !== "Guest") {
+    for (let i = 0; i < users.length; i++) {
+      const currentUsers = users[i];
+    for (let k = 0; k < currentUsers.tasks.length; k++) {
+      const currentContact = currentUsers.tasks[k];
+      for (let l = 0; l < currentContact.assignedContacts.length; l++) {
+        if (currentContact.assignedContacts[l] == contact_name) {
+          currentContact.assignedContacts[l] = small_edit_contacts_name
+          saveUsersArray()
+        }
+      }
+    } 
+  }
+} else {
   for (let k = 0; k < loggedInUser.tasks.length; k++) {
     const currentContact = loggedInUser.tasks[k];
     for (let l = 0; l < currentContact.assignedContacts.length; l++) {
@@ -191,30 +237,8 @@ async function saveEditedContact(contact_email, contact_name) {
       }
   }
 }
-
-  for (let j = 0; j < loggedInUser.contacts.length; j++) {
-    const currentContact = loggedInUser.contacts[j];
-    if (currentContact.contact_email == contact_email) {
-        currentContact.contact_name = small_edit_contacts_name
-        currentContact.contact_email = small_edit_contacts_email
-        currentContact.contact_phone = small_edit_contacts_phone
-        localStorage.setItem("loggedInUser", JSON.stringify(loggedInUser));
-        document.querySelector(".contacts-left").innerHTML = ""
-        document.querySelector(".contacts-right").innerHTML = 
-        `
-        <div id='contact-information'></div>
-        <button onclick="renderSmallContacts()" class="add-person-btn">New Contact 
-        <img class='add-person-img' src="kanban_img/add_icons/add_person.png">
-        </button>
-        `
-        renderContactBook() 
-        loadContactBackgroundColor() 
-    }
-   }
-  }
- } 
 }
-
+}
 
 
 function addSelectContactOption(index) {
@@ -240,32 +264,52 @@ function addSelectContactOption(index) {
       custom_select_contact_container[index].innerHTML += `<label class="custom-select-option"> ${currentContact.contact_name} <input onclick="returnSelectedContacts(this)" value="${currentContact.contact_name}" class="selected-option" type="checkbox" autocomplete="off"></label>`
     }
   }
-  
 }
 
-
-function getCategoryColor(category, id_task) {
-  
-  let task_topics = document.querySelectorAll(".task-topic")
-  
+function returnSuitableCategoryColor(task_topics, category, index) {
   switch(category) {
     case "Backoffice": 
-      task_topics[id_task].classList.add("turquoise")
+      if (index === "") {
+        task_topics.classList.add("turquoise")
+      } else {
+        task_topics[index].classList.add("turquoise")
+      }
       break;
     case "Sales":
-      task_topics[id_task].classList.add("pink")
+      if (index === "") {
+        task_topics.classList.add("pink")
+      } else {
+        task_topics[index].classList.add("pink")
+      }
       break;
     case "Media":
-      task_topics[id_task].classList.add("yellow")
+      if (index === "") {
+        task_topics.classList.add("yellow")
+      } else {
+        task_topics[index].classList.add("yellow")
+      }
       break;
     case "Design":
-      task_topics[id_task].classList.add("orange")
+      if (index === "") {
+        task_topics.classList.add("orange")
+      } else {
+        task_topics[index].classList.add("orange")
+      }
       break;
     case "Marketing":
-      task_topics[id_task].classList.add("blue")
+      if (index === "") {
+        task_topics.classList.add("blue")
+      } else {
+        task_topics[index].classList.add("blue")
+      }
       break;
     } 
-  }
+}
+
+function getCategoryColor(category, id_task) {
+  let task_topics = document.querySelectorAll(".task-topic")
+  returnSuitableCategoryColor(task_topics, category, id_task)  
+}
 
 function getUserColor() {
   let user_color = ["orange","red","pink","lightblue","purple","green","darkred","darkpurple"]
@@ -273,12 +317,25 @@ function getUserColor() {
   if (loggedInUser.name !== "Guest") {
     randomBackgroundColorForUser(user_color)
   } else {
-    randomBackgroundColorForUser(user_color)
+    randomBackgroundColorForGuestContacts(user_color)
   }
 }  
 
 
 function randomBackgroundColorForUser(user_color) {
+  randomBackgroundColorForUserContacts(user_color)
+
+  for (let i = 0; i < users.length; i++) {
+    const currentUser = users[i];
+    if(currentUser.email == loggedInUser.email && currentUser["user-background-color"] == ""){
+      let random_color_2 = user_color[Math.floor(Math.random() * 7)]
+      currentUser["user-background-color"] = random_color_2
+      saveUsersArray()
+    }
+  }     
+}
+
+function randomBackgroundColorForUserContacts(user_color) {
   for (let i = 0; i < users.length; i++) {
     const currentUser = users[i];
     if(currentUser.email == loggedInUser.email) {
@@ -291,19 +348,10 @@ function randomBackgroundColorForUser(user_color) {
         }
     }
   }
-
-  for (let i = 0; i < users.length; i++) {
-    const currentUser = users[i];
-    if(currentUser.email == loggedInUser.email && currentUser["user-background-color"] == ""){
-      let random_color_2 = user_color[Math.floor(Math.random() * 7)]
-      currentUser["user-background-color"] = random_color_2
-      saveUsersArray()
-    }
-  }     
 }
 
 
-function randomBackgroundColorForGuest(user_color) {
+function randomBackgroundColorForGuestContacts(user_color) {
   let random_color_1 = user_color[Math.floor(Math.random() * 7)]
   loggedInUser.contacts["contact-background-color"] = random_color_1
   localStorage.setItem("loggedInUser", JSON.stringify(loggedInUser));
@@ -322,7 +370,6 @@ async function loadBoardContactBackgroundColor() {
   await downloadFromServer();
   users = JSON.parse(backend.getItem('users')) || [];
   let user_icons = document.querySelectorAll(".user-icon")
-  let correctColor;
   
   for (let i = 0; i < users.length; i++) {
       const currentUser = users[i];
@@ -372,6 +419,7 @@ async function loadContactBackgroundColor() {
 } 
 }
 
+
 function setBackgroundColor(obj, user_icons, user) {
   let correctColor;
   let user_icons_general = user_icons
@@ -379,6 +427,7 @@ function setBackgroundColor(obj, user_icons, user) {
   for (let j = 0; j < user_icons_general.length; j++) {
     for (let k = 0; k < user.contacts.length; k++) {
       const currentContact = user.contacts[k];
+      getUserColor()
       obj[currentContact.contact_name] = currentContact["contact-background-color"]
     }
     for (let [key, value] of Object.entries(obj)) {
@@ -387,10 +436,50 @@ function setBackgroundColor(obj, user_icons, user) {
       }
     }
     user_icons_general[j].classList.add(correctColor)
-
   }
 }
 
+
+function renderContactBook() {
+  let alphabet = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
+  let firstLetterContainer;
+  for (let i = 0; i < alphabet.length; i++) {
+      firstLetterContainer = alphabet[i];
+      document.querySelector(".contacts-left").innerHTML += templateContactsLeft(firstLetterContainer)
+    }
+  renderSavedContacts()
+}
+
+function renderSavedContacts() {
+  if (loggedInUser.name !== "Guest") {  
+    for (let i = 0; i < users.length; i++) {
+      const currentUser = users[i];
+      if(currentUser.email == loggedInUser.email){
+        showSavedContactInContactBook(currentUser)
+      }
+        getUserColor()
+  } 
+ } else {
+      showSavedContactInContactBook(loggedInUser)
+      getUserColor()
+    }
+  }
+
+
+  function showSavedContactInContactBook(user) {
+    for (let j = 0; j < user.contacts.length; j++) {
+      const contact = user.contacts[j];
+      
+      contact_emails.push(contact.contact_email)
+      contact_names.push(contact.contact_name)
+      contact_phones.push(contact.contact_phone)
+
+      let first_letter_contact = contact.contact_name[0].toUpperCase()
+
+      document.querySelector(`#contacts-${first_letter_contact}`).classList.remove("d-none")
+      document.querySelector(`.contacts-${first_letter_contact}-data`).innerHTML += templateContactUserInContactBook(contact)
+    }
+  }
 
 
 

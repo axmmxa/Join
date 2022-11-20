@@ -18,8 +18,6 @@ async function updateHTML() {
     user_task_array = loggedInUser.tasks;
   }
 
-  console.log(user_task_array);
-
   generateTask(user_task_array, "todo");
   generateTask(user_task_array, "in-progress");
   generateTask(user_task_array, "await-feedback");
@@ -34,15 +32,16 @@ function loadAndStoreCorrectColor(user_task_array) {
     let correctId;
   
     for (let i = 0; i < user_task_array.length; i++) {
-      const currentTask = user_task_array[i];
-      correctId = currentTask.id_task;
-      correctCategory = currentTask.category;
+      let currentTaskTopic = document.querySelectorAll(".task-topic")
+      correctId = i;
+      correctCategory = currentTaskTopic[i].textContent;
       getCategoryColor(correctCategory, correctId);
     }
   
     localStorage.setItem("loggedInUser", JSON.stringify(loggedInUser));
     loadBoardContactBackgroundColor();
 }
+
 
 function generateTask(user_task_array, status) {
   let task = user_task_array.filter((t) => t["status"] == status);
@@ -64,7 +63,6 @@ function generateTask(user_task_array, status) {
 }
 
 function generateTodoHTML(element) {
-  
     return `
       <div id="added-task-${element.id_task}" draggable="true" ondragstart="startDragging(${element.id_task})" onclick="renderBoardTaskInfo(${element.id_task})" class="added-task">
       <span class="task-topic white-text">${element.category}</span>
@@ -107,7 +105,6 @@ function addUserIcons(element) {
   );
   for (let i = 0; i < element.assignedContacts.length; i++) {
     const contact = element.assignedContacts[i];
-
     if (i == 1 && window.innerWidth > 874) {
       assignedContacts.innerHTML += 
        `<div>

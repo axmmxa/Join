@@ -1,9 +1,7 @@
 let id = 0 
 
 function returnSelectedContacts(el) {
-
   let first_select_contact = document.getElementById("first-select-contacts")
-
     if (el.checked) {
       selected_options.push(el.value)
     } else {
@@ -26,27 +24,11 @@ function returnSelectedCategory(id) {
 
   let category_color = document.querySelector(".category-color-selected")
 
-      switch(id) {
-        case "Backoffice": 
-          category_color.classList.add("turquoise")
-          break;
-        case "Sales":
-          category_color.classList.add("pink")
-          break;
-        case "Media":
-          category_color.classList.add("yellow")
-          break;
-        case "Design":
-          category_color.classList.add("orange")
-          break;
-        case "Marketing":
-          category_color.classList.add("blue")
-          break;
-        }  
+  returnSuitableCategoryColor(category_color, id, "")
+      
 }
 
 function returnSelectedSubtasks(el) {
- 
   if (el.checked) {
     selected_subtasks.push(el.value)
   }
@@ -56,7 +38,6 @@ function returnSelectedSubtasks(el) {
 }
 
 async function saveEditedTask(id_task) {
-  
     let title = document.getElementById('input-title').value
     let due_date = document.getElementById('due-date').value
     let description = document.getElementById('textarea').value
@@ -64,37 +45,30 @@ async function saveEditedTask(id_task) {
     if (checkIfCreatedTaskIsEmpty(title,due_date,description) && loggedInUser.name !== "Guest") {
       for (let i = 0; i < users.length; i++) {
         const currentUser = users[i];
-        for (let j = 0; j < currentUser.tasks.length; j++) {
-          const currentTask = currentUser.tasks[j];
-          if (id_task == currentTask.id_task) {
-            console.log(currentTask)
-            currentTask.title = title
-            currentTask.assignedContacts = selected_options
-            currentTask["due-date"] = due_date
-            currentTask.description = description
-            currentTask.priority = selected_priority
-            currentTask.priority_img_path = priority_img_path
-            saveUsersArray() 
-          }
-        }
-      }
+        changeTaskJSON(currentUser, id_task)
+    }
     } else {
-      for (let j = 0; j < loggedInUser.tasks.length; j++) {
-        const currentTask = loggedInUser.tasks[j];
-        if (id_task == currentTask.id_task) {
-          console.log(currentTask)
-          currentTask.title = title
-          currentTask.assignedContacts = selected_options
-          currentTask["due-date"] = due_date
-          currentTask.description = description
-          currentTask.priority = selected_priority
-          currentTask.priority_img_path = priority_img_path
-          saveLoggedInUser()
-        }
-      }
+        changeTaskJSON(loggedInUser, id_task)
     }
     
   location.reload(true)
+}
+
+
+function changeTaskJSON(user, id_task) {
+  for (let j = 0; j < user.tasks.length; j++) {
+    const currentTask = user.tasks[j];
+    if (id_task == currentTask.id_task) {
+      console.log(currentTask)
+      currentTask.title = title
+      currentTask.assignedContacts = selected_options
+      currentTask["due-date"] = due_date
+      currentTask.description = description
+      currentTask.priority = selected_priority
+      currentTask.priority_img_path = priority_img_path
+      saveDependingOnUserName()
+    }
+  }
 }
 
 async function saveTask()  {
@@ -128,9 +102,12 @@ async function saveTask()  {
   }
   
   if (checkIfCreatedTaskIsEmpty(title,due_date,description)) {
+    document.querySelector(".create-btn").style.border = '1px solid rgb(0, 255, 0)';
     addTask(task, id)
     showPopup("task-popup")
-  }  
+  }  else {
+    document.querySelector(".create-btn").style.border = '1px solid rgb(255, 0, 0)';
+  }
 }
 
 function checkIfCreatedTaskIsEmpty(title,due_date,description) {
@@ -161,7 +138,7 @@ async function addTask(task,id) {
   }
 } 
 
- function setPriotity(id) {
+ function setPriority(id) {
 
   let priorities = document.querySelectorAll('.priority')
   
@@ -179,100 +156,102 @@ async function addTask(task,id) {
   }
   
   if(id == 'urgent-btn') {
-    document.getElementById(id).style.backgroundColor = 'red'
-    document.getElementById('urgent-btn-priority-img').setAttribute('src', 'kanban_img/priority_icons/urgent_white.png')
-    document.getElementById(id).style.color = 'white'
-    priority_img_path =  'kanban_img/priority_icons/urgent-red.png'
-    selected_priority = "Urgent"
+    changeStyleSelectedPriorityButton('red', 'kanban_img/priority_icons/urgent_white.png' , 'white', 'kanban_img/priority_icons/urgent-red.png', 'Urgent', id)
   } else if(id == "medium-btn") {
-    document.getElementById(id).style.backgroundColor = 'orange'
-    document.getElementById('medium-btn-priority-img').setAttribute('src', 'kanban_img/priority_icons/medium_urgent_white.png')
-    document.getElementById(id).style.color = 'white'
-    priority_img_path = 'kanban_img/priority_icons/middle-urgent-orange.png'
-    selected_priority = "Medium"
+    changeStyleSelectedPriorityButton('orange', 'kanban_img/priority_icons/medium_urgent_white.png', 'white', 'kanban_img/priority_icons/middle-urgent-orange.png', 'Medium', id)
   } else if(id == 'non-urgent-btn') {
-    document.getElementById(id).style.backgroundColor = 'lightgreen'
-    document.getElementById('non-urgent-btn-priority-img').setAttribute('src', 'kanban_img/priority_icons/non_urgent_white.png')
-    document.getElementById(id).style.color = 'white'
-    priority_img_path = 'kanban_img/priority_icons/non-urgent-green.png'
-    selected_priority = "Low"
+    changeStyleSelectedPriorityButton('lightgreen', 'kanban_img/priority_icons/non_urgent_white.png', 'white', 'kanban_img/priority_icons/non-urgent-green.png', 'Low', id)
   }
   
  }
 
 
+function changeStyleSelectedPriorityButton(backgroundColor, reset_img_path, color, img_path, priority, id) {
+  document.getElementById(id).style.backgroundColor = backgroundColor
+  document.getElementById('non-urgent-btn-priority-img').setAttribute('src', reset_img_path)
+  document.getElementById(id).style.color = color
+  priority_img_path = img_path
+  selected_priority = priority
+}
+
 function clear() {
-    document.getElementById("input-title").value = ""
-    document.getElementById("due-date").value = ""
+  clearFirstPart() 
+  clearSecondPart()
+  clearThirdPart() 
+  clearFourthPart()
+}
 
-    let checkboxes = document.querySelectorAll('input[type="checkbox"]');
+function clearFirstPart() {
+  document.getElementById("input-title").value = ""
+  document.getElementById("due-date").value = ""
 
-    for (let j = 0; j < checkboxes.length; j++) {
-      const checkbox = checkboxes[j];
-      if (checkbox.checked) {
-        checkbox.checked = false
-        selected_options.pop(selected_options[j])
-      } 
-    }
-    
-    if (selected_options.length ==  0) {
-      document.querySelector("#first-select-contacts").innerHTML = "Select contacts to assign"
-    }
+  let checkboxes = document.querySelectorAll('input[type="checkbox"]');
 
-    selected_category = ""
+  for (let j = 0; j < checkboxes.length; j++) {
+    const checkbox = checkboxes[j];
+    if (checkbox.checked) {
+      checkbox.checked = false
+      selected_options.pop(selected_options[j])
+    } 
+  }
+}
 
-    if (selected_category == "") {
-      document.querySelector("#first-select-task-category").innerHTML = "Select task category"
-    }
-
-    let priorities = document.querySelectorAll('.priority')
-
-    for (let index = 0; index < priorities.length; index++) {
-      const priority = priorities[index];
-      priority.style.color = 'black'
-      priority.style.backgroundColor = 'white'
-      if(document.getElementById('urgent-btn')) {
-        document.getElementById('urgent-btn-priority-img').setAttribute('src', 'kanban_img/priority_icons/urgent-red.png')
-      } if (document.getElementById('medium-btn')) {
-        document.getElementById('medium-btn-priority-img').setAttribute('src', 'kanban_img/priority_icons/middle-urgent-orange.png')
-      } if(document.getElementById('non-urgent-btn')){
-        document.getElementById('non-urgent-btn-priority-img').setAttribute('src', 'kanban_img/priority_icons/non-urgent-green.png')
-      }
-    }
-
-    priority_img_path = ""
-    selected_priority = ""
-
-    document.getElementById("textarea").value = ""
-
-    document.querySelector(".category-container").innerHTML = 
-      `<div class="category-container">
-
-      <img class="plus-select-subtask" src="kanban_img/plus_icons/plus_blue.png">
-
-      <label class="category-label" for="subtask-category">Subtask<input onclick="showAddSubtask()" id="subtask-category" placeholder="Add new subtask" type="text"></label>
-      
-      <div class="add-option-subtask d-none">
-          <input id="add-subtask-input" class="add-option-input" type="text" placeholder="Add new subtask">
-          <div class="add-option-btn-container-subtask">
-              <img onclick="closeAddSubtask()" class="close-x-blue-btn" src="kanban_img/close_icons/close_x_blue.png">
-              <img onclick="addNewSubtask()" class="blue-clear-btn" src="kanban_img/clear_icons/blue_clear.png">
-          </div>
-      </div>   
-      
-  </div>`
+function clearSecondPart() {
+  if (selected_options.length ==  0) {
+    document.querySelector("#first-select-contacts").innerHTML = "Select contacts to assign"
+  }
+  selected_category = ""
+  if (selected_category == "") {
+    document.querySelector("#first-select-task-category").innerHTML = "Select task category"
+  }
 
 }
 
+ function clearThirdPart() {
+  let priorities = document.querySelectorAll('.priority')
+
+  for (let index = 0; index < priorities.length; index++) {
+    const priority = priorities[index];
+    priority.style.color = 'black'
+    priority.style.backgroundColor = 'white'
+    if(document.getElementById('urgent-btn')) {
+      document.getElementById('urgent-btn-priority-img').setAttribute('src', 'kanban_img/priority_icons/urgent-red.png')
+    } if (document.getElementById('medium-btn')) {
+      document.getElementById('medium-btn-priority-img').setAttribute('src', 'kanban_img/priority_icons/middle-urgent-orange.png')
+    } if(document.getElementById('non-urgent-btn')){
+      document.getElementById('non-urgent-btn-priority-img').setAttribute('src', 'kanban_img/priority_icons/non-urgent-green.png')
+    }
+  }
+  priority_img_path = ""
+  selected_priority = ""
+ }
+
+ function clearFourthPart() {
+  document.getElementById("textarea").value = ""
+  document.querySelector(".category-container").innerHTML = 
+    `<div class="category-container">
+    <img class="plus-select-subtask" src="kanban_img/plus_icons/plus_blue.png">
+    <label class="category-label" for="subtask-category">Subtask<input onclick="showAddSubtask()" id="subtask-category" placeholder="Add new subtask" type="text"></label>
+    
+    <div class="add-option-subtask d-none">
+        <input id="add-subtask-input" class="add-option-input" type="text" placeholder="Add new subtask">
+        <div class="add-option-btn-container-subtask">
+            <img onclick="closeAddSubtask()" class="close-x-blue-btn" src="kanban_img/close_icons/close_x_blue.png">
+            <img onclick="addNewSubtask()" class="blue-clear-btn" src="kanban_img/clear_icons/blue_clear.png">
+        </div>
+    </div>   
+      
+  </div>`
+ }
+
+
  function searchTask() {
   let input = document.getElementById("search-task").value;
-
   input = input.toLowerCase();
 
   let tasks = document.querySelectorAll(".task-topic")
-
   for (let i = 0; i < tasks.length; i++) {
-      let task = tasks[i].textContent;
+      let task = tasks[i].textContent.toLowerCase();
       console.log(task)
       document.getElementById(`added-task-${i}`).style.display = "none";
 
