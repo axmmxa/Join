@@ -1,11 +1,9 @@
-let email;
-let name;
-let password;
+getUsersFromBackend();
 
 function signUp() {
-  email = document.getElementById("e-mail").value;
-  name = document.getElementById("name").value;
-  password = document.getElementById("password").value;
+  let email = document.getElementById("e-mail").value;
+  let name = document.getElementById("name").value;
+  let password = document.getElementById("password").value;
 
   let user = {
     name: name,
@@ -19,7 +17,7 @@ function signUp() {
 }
 
 async function addUser(user) {
-  if (!checkUserExist()) {
+  if (!checkUserExist(user.email)) {
     users.push(user);
     await backend.setItem("users", JSON.stringify(users));
     window.location.href =
@@ -32,16 +30,3 @@ async function addUser(user) {
   }
 }
 
-getUsersFromBackend();
-
-function checkUserExist() {
-  for (let i = 0; i < users.length; i++) {
-    const element = users[i].email;
-    if (element == email) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-  return false;
-}

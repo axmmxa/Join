@@ -139,9 +139,8 @@ async function addTask(task,id) {
 } 
 
  function setPriority(id) {
-
   let priorities = document.querySelectorAll('.priority')
-  
+
   for (let index = 0; index < priorities.length; index++) {
     const priority = priorities[index];
     priority.style.color = 'black'
@@ -174,7 +173,7 @@ function changeStyleSelectedPriorityButton(backgroundColor, reset_img_path, colo
   selected_priority = priority
 }
 
-function clear() {
+function clearForm() {
   clearFirstPart() 
   clearSecondPart()
   clearThirdPart() 

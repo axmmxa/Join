@@ -30,6 +30,7 @@
    
     </style>
 
+<script src="js/request.js" defer></script>
     <script src="js/template.js" defer></script>
     <script src="js/mini_backend.js"></script>
     <script src="js/load.js" defer></script>
@@ -178,10 +179,9 @@
 
                 <div class="task-form-right">
                     <div class="create-task-container">
+                        <button onclick="clearForm()" style="margin-right: 10px;" class="delete-btn">Clear <span class="close-x">X</span></button>
                         <button onclick="saveTask()" class="create-btn">Create Task <img class="white-clear" src="kanban_img/clear_icons/white_clear.png"></button>
-                        <button onclick="clear()" style="margin-left: 10px;" class="delete-btn">Clear <span class="close-x">X</span></button>
                     </div>
-
                 </div>
             </div>
         </div>
