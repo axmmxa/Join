@@ -94,7 +94,18 @@ function initUserIcon() {
     const currentUser = users[i];
 
     if(currentUser.email == loggedInUser.email){
-        document.querySelector(".user-logout-icon-container").innerHTML = `<div onclick="toggleLogoutBox()" class="user-logout-icon">${getUserIcon(currentUser.name)}</div>`
+        document.querySelector(".user-logout-icon-container").innerHTML = 
+        `<div onclick="toggleLogoutBox()" class="user-logout-icon">${getUserIcon(currentUser.name)}</div>
+          <div class="logout d-none">
+          <span onclick="logout()" class="light-blue-text">Log out</span>
+        </div>
+
+        <div class="logout-mobile d-none">
+          <a href="kanban_assets/help.html" class="light-blue-text">Help</a>
+          <a href="kanban_assets/legal_notice.html" class="light-blue-text">Legal Notice</a>
+          <a onclick="logout()" class="light-blue-text">Log out</a>
+        </div>
+        `
         getUserColor()
         document.querySelector(".user-logout-icon").classList.add(currentUser["user-background-color"])
         for (let j = 0; j < currentUser.tasks.length; j++) {
@@ -113,7 +124,18 @@ function saveDependingOnUserName() {
 }
 
 function initGuestIcon() {
-  document.querySelector(".user-logout-icon-container").innerHTML = `<div onclick="toggleLogoutBox()" class="user-logout-icon">${getUserIcon(loggedInUser.name)}</div>`
+  document.querySelector(".user-logout-icon-container").innerHTML = 
+  `<div onclick="toggleLogoutBox()" class="user-logout-icon">${getUserIcon(loggedInUser.name)}</div>
+    <div class="logout d-none">
+    <span onclick="logout()" class="light-blue-text">Log out</span>
+   </div>
+
+   <div class="logout-mobile d-none">
+    <a href="kanban_assets/help.html" class="light-blue-text">Help</a>
+    <a href="kanban_assets/legal_notice.html" class="light-blue-text">Legal Notice</a>
+    <a onclick="logout()" class="light-blue-text">Log out</a>
+   </div>
+  `
   document.querySelector(".user-logout-icon").classList.add(loggedInUser["user-background-color"])
 }
 
@@ -254,12 +276,22 @@ function checkAssignedContactsInEditTask(id_task) {
 }
 
 function deleteTask(id_task) {
+    let id_array = []
+    let index
+    
     if (loggedInUser.name !== "Guest") {
         for (let i = 0; i < users.length; i++) {
             const currentUser = users[i];
             if (loggedInUser.email == currentUser.email) {
+                for (let i = 0; i < currentUser.tasks.length; i++) {
+                    let id_tasks = currentUser.tasks[i].id_task
+                    id_array.push(id_tasks) 
+                }  
                 for (let j = 0; j < currentUser.tasks.length; j++) {
-                    currentUser.tasks[j].splice(id_task, 1)
+                    if (id_task == id_array[j]) {
+                        index = id_array.indexOf(id_array[j])
+                        loggedInUser.tasks.splice(index, 1)
+                    }
                 }
             }
         }

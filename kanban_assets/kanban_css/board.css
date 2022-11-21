@@ -127,6 +127,8 @@
 }
 
 #small-add-task {
+    box-sizing: border-box;
+    padding: 20px 0;
     height: 100%;
     background-color: white;
     border: 1px solid rgba(0, 0, 0, 0.2);
@@ -143,6 +145,35 @@
     align-items: center;
 }
 
+#small-add-task::-webkit-scrollbar {
+    width: 5px;  /* width of the entire scrollbar */
+  }
+  
+  #small-add-task::-webkit-scrollbar-track {
+    background: transparent;   /* color of the tracking area */ 
+    margin-bottom: 450px;    
+  }
+  
+  #small-add-task::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3);    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+    
+  }
+
+  .edit-task::-webkit-scrollbar { 
+    width: 5px;
+    height: 4px;  
+  }
+  
+  .edit-task::-webkit-scrollbar-track {
+    background: transparent;   /* color of the tracking area */ 
+    margin-bottom: 350px;    
+  }
+  
+  .edit-task::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3);    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */ 
+  }
 
 @media (max-width: 1124px) {
     .board-task-container {

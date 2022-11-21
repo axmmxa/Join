@@ -3,7 +3,7 @@ function showCustomSelectOptions(index) {
 
   if (
     document.getElementById("addTask-body") ||
-    document.getElementById("contacts-body")
+    document.getElementById("contacts-body") || document.getElementById("board-body")
   ) {
     selects[index].classList.toggle("d-none");
   } else {
@@ -74,6 +74,7 @@ function addNewContactOption(index) {
     let category_color = document.querySelectorAll(".category-color");
 
     setColorCategory(category_color, add_category_input);
+    closeAddContact(index)
   }
 
 }

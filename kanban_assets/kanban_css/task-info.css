@@ -101,3 +101,19 @@
 }
 
 
+.small-board-task-info::-webkit-scrollbar {
+    width: 5px;  
+    height: 4px;  
+  }
+  
+  .small-board-task-info::-webkit-scrollbar-track {
+    background: transparent;   /* color of the tracking area */ 
+    margin-bottom: 450px;    
+  }
+  
+  .small-board-task-info::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3);    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */ 
+  }
+
+

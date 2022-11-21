@@ -163,9 +163,9 @@ function templateSmallEditTask(id_task, title, description, due_date) {
     return   `
     <div id="edit-task-${id_task}" class="edit-task centered">  
         <div class="add-task-container-edit">
-            <div class="align-right"> 
-                <span onclick="closeSmallEditTask(${id_task})" class="close-x-right-side">X</span>  
-            </div>
+             
+                <span onclick="closeSmallEditTask(${id_task})" class="close-x-absolute">X</span>  
+            
         
             <form onsubmit="saveEditedTask(${id_task}); return false" class="task-form">
                         <input value="${title}" id="input-title" class="input-title" type="text" placeholder="Enter a title">
@@ -258,10 +258,8 @@ function templateShowTaskInfo(userTaskId, id_task, j) {
 function templateSmallAddTask() {
     return  `
     <div id="small-add-task">
-        <div class="align-right">
-            <span onclick="closeSmallAddTask()" class="close-x-right-side">X</span>
-        </div>
-
+        <span onclick="closeSmallAddTask()" class="close-x-absolute">X</span>
+        
         <div class="small-add-task-container">
              <h2>Add Task</h2> <button onclick="saveTask()" class="create-btn">Create Task <img class="white-clear" src="kanban_img/clear_icons/white_clear.png"></button>
         </div>

@@ -4,6 +4,8 @@
 }
 
 .task-form-left {
+    box-sizing: border-box;
+    padding: 20px 0;
     width: 50%;
     display: flex;
     justify-content: center;
@@ -308,6 +310,21 @@
     align-items: center;
 }
 
+.task-form-left::-webkit-scrollbar {
+    width: 5px;  
+    height: 4px;  
+  }
+  
+  .task-form-left::-webkit-scrollbar-track {
+    background: transparent;   /* color of the tracking area */ 
+    margin-bottom: 450px;    
+  }
+
+  .task-form-left::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3);    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */ 
+  }
+
 @media (max-width: 874px) {
     .task-form {
         width: 250px;
@@ -389,12 +406,6 @@
 @media (max-width: 480px) {
     .priority-btn-container button {
         padding: 5px 10px;
-    }
-    .input-title {
-        width: 91%;
-    }
-    #due-date {
-        width: 91%;
     }
     #subtask-category {
         width: 91%

@@ -3,14 +3,17 @@
 }
 
 #small-add-task {
-    height: 99.2vh;
+    box-sizing: border-box;
+    padding: 20px 0;
+    height: 100%;
     width: 400px;
     position: absolute;
     top: 0;
     right: 0;
     background-color: white;
-    border: 2px solid rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 8px;
+    overflow-y: auto;
 }
 
 .small-add-task-container {
@@ -135,6 +138,25 @@
     border-radius: 4px;
     border: 2px solid rgba(0, 0, 0, 0.2);
 }
+
+#small-add-task::-webkit-scrollbar {
+    width: 5px;  /* width of the entire scrollbar */
+  }
+  
+  #small-add-task::-webkit-scrollbar-track {
+    background: transparent;   /* color of the tracking area */ 
+    margin-bottom: 450px;    
+  }
+  
+  /* #small-add-task::-webkit-scrollbar-button {
+    height: 100px;
+  } */
+
+  #small-add-task::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3);    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+    
+  }
 
 @media (max-width: 1024px) {
     .contacts-left {

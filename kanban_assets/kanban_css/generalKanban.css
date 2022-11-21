@@ -205,7 +205,7 @@
     cursor: pointer;
     position: absolute;
     top: 5px;
-    right: 5px;
+    right: 10px;
 }
 
 .white-clear {
@@ -230,6 +230,7 @@
 }
 
 .logout {
+    width: 70px;
     background-color: white;
     cursor: pointer;
     z-index: 2;
@@ -237,8 +238,8 @@
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
     border-radius: 8px;
     position: absolute;
-    right: 30px;
-    bottom: -42px;
+    bottom: -70px;
+    right: -25px;
 }
 
 .logout:hover {
@@ -246,6 +247,7 @@
 }
 
 .logout-mobile {
+    width: 70px;
     background-color: white;
     cursor: pointer;
     z-index: 2;
@@ -253,8 +255,8 @@
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
     border-radius: 8px;
     position: absolute;
-    right: 30px;
-    bottom: -100px;
+    bottom: -70px;
+    right: -25px;
 }
 
 .logout-mobile a {
@@ -276,6 +278,7 @@
 }
 
 .user-logout-icon-container {
+    position: relative;
     cursor: pointer;
     border-radius: 50%;
     border: 2px solid white;
@@ -374,8 +377,7 @@
 
   .contacts-left::-webkit-scrollbar-thumb {
     background-color: rgba(0, 0, 0, 0.3);    /* color of the scroll thumb */
-    border-radius: 20px;       /* roundness of the scroll thumb */
-    
+    border-radius: 20px;       /* roundness of the scroll thumb */ 
   }
 
   
@@ -397,15 +399,6 @@
     border-end-start-radius: 18px;
     border-end-end-radius: 18px;
 }
-
-/* #small-contacts-container-close-btn-container-mobile {
-    height: 5vh;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    border-top-right-radius: 18px;
-    border-top-left-radius: 18px;
-} */
 
 .user-icon-big-mobile {
     padding: 20px;

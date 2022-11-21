@@ -10,12 +10,28 @@
     <link rel="stylesheet" href="../login_assets/login_css/fonts.css">
     <link rel="stylesheet" href="../login_assets/login_css/login.css">
 
-
     <link rel="stylesheet" href="kanban_css/generalKanban.css">
     <link rel="stylesheet" href="kanban_css/index.css">
 
     <link rel="stylesheet" href="kanban_css/help.css">
 
+    <link rel="shortcut icon" href="../kanban_img/login_icons/join_blue.png" type="image/x-icon">
+
+    <style>
+         @media (max-width: 874px) {
+        .kanban-main {
+            overflow-y: auto;
+        }
+    }
+
+        @media (max-width: 600px) {
+        .kanban-main {
+            height: 75vh;
+        }
+    }
+    </style>
+
+    <script src="../js/request.js" defer></script>
     <script src="../js/template.js" defer></script>
     <script src="../js/load.js" defer></script>
     <script src="../js/render.js" defer></script>
@@ -33,20 +49,11 @@
             <div class="info">
                 <p class="name">Kanban Project Management Tool</p>
                 <a class="help-btn-container" href="kanban_assets/help.html"><img class="help" src="../kanban_img/small_navbar_icons/help.png"></a>
-                <div class="user-logout-icon-container"></div>
+                <div class="user-logout-icon-container">
+                    
+                </div>
             </div>
         </div>
-
-    <div class="logout d-none">
-        <span onclick="logout()" class="light-blue-text">Log out</span>
-    </div>
-
-    <div class="logout-mobile d-none">
-        <a href="kanban_assets/help.html" class="light-blue-text">Help</a>
-        <a href="kanban_assets/legal_notice.html" class="light-blue-text">Legal Notice</a>
-        <a onclick="logout()" class="light-blue-text">Log out</a>
-    </div>
-
     </nav>
 
 
@@ -73,12 +80,12 @@
                 </div>
                 <h1 id="help-headline">Help</h1>
                 <div>
-                    <h3 id="subtitle-join">What is Join</h3>
+                    <h3 class="subtitles">What is Join</h3>
                     <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolores esse cumque possimus dolorum adipisci nobis incidunt dolore tempora molestias, debitis ad mollitia, eos aperiam velit, reprehenderit sit aspernatur eum autem!</p>
                 </div>
 
                 <div>
-                    <h3 id="subtitle-how-to">How to use it</h3>
+                    <h3 class="subtitles">How to use it</h3>
                     <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Adipisci, harum saepe. Nulla pariatur quibusdam ut nisi magnam quasi maiores neque impedit illum atque? Vitae aspernatur provident atque praesentium, cupiditate obcaecati.</p>
                 </div>
             </div>

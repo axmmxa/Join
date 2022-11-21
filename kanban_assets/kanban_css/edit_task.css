@@ -4,6 +4,10 @@
     background-color: white;
     border: 2px solid rgba(0, 0, 0, 0.2);
     border-radius: 8px;
+    height: 450px;
+    overflow-y: auto;
+    box-sizing: border-box;
+    padding: 10px 0;
 }
 
 .add-task-container-edit {
@@ -13,3 +17,4 @@
 .assigned-headline-outside {
     margin-top: 10px;
 }
+
