@@ -79,9 +79,9 @@ function templateSmallEditContacts(contact_name,contact_email,contact_phone,i) {
         <form onsubmit="saveEditedContact('${contact_email}','${contact_name}', 'not-mobile'); return false" class="small-contacts-add-data">
             <div class="login-data">
                 <input value="${contact_name}" id="small-edit-contacts-name" type="text" placeholder="Name" required>
-                <input value="${contact_email}" id="small-edit-contacts-email" type="text" placeholder="E-mail" required>
+                <input value="${contact_email}" id="small-edit-contacts-email" type="text" placeholder="E-mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
                 <div class="edit-contact-email-exist red-text d-none fs-12">Email already exists!</div>
-                <input value="${contact_phone}" id="small-edit-contacts-phone" type="text" placeholder="Phone" required>
+                <input value="${contact_phone}" id="small-edit-contacts-phone" type="text" placeholder="Phone" pattern="[0-9]{9}" required>
             </div>
 
             <div class="small-contacts-btn-container">
@@ -110,9 +110,9 @@ function templateSmallEditContactsMobile(contact_name,contact_email,contact_phon
         <form onsubmit="saveEditedContact('${contact_email}','${contact_name}', 'mobile'); return false" class="small-contacts-add-data">
             <div class="login-data margin">
                 <input value="${contact_name}" id="small-edit-contacts-name-mobile" type="text" placeholder="Name" required>
-                <input value="${contact_email}" id="small-edit-contacts-email-mobile" type="text" placeholder="E-mail" required>
+                <input value="${contact_email}" id="small-edit-contacts-email-mobile" type="text" placeholder="E-mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
                 <div class="edit-contact-email-exist-mobile red-text d-none fs-12">Email already exists!</div>
-                <input value="${contact_phone}" id="small-edit-contacts-phone-mobile" type="text" placeholder="Phone" required>
+                <input value="${contact_phone}" id="small-edit-contacts-phone-mobile" type="text" placeholder="Phone" pattern="[0-9]{9}" required>
             </div>
 
             <div class="small-contacts-btn-container">

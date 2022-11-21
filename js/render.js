@@ -164,9 +164,23 @@ function setPrioritySmallEditTask(id, id_task) {
 }
 
    function changeStyleSelectedPriorityButtonEditTask(backgroundColor, reset_img_path, color, img_path, priority, id_task) {
-    document.getElementById(`non-urgent-btn-${id_task}`).style.backgroundColor = backgroundColor
-    document.getElementById(`non-urgent-btn-priority-img-${id_task}`).setAttribute('src', reset_img_path)
-    document.getElementById(`non-urgent-btn-${id_task}`).style.color = color
+    let id_style;
+    let id_img;
+
+    if(priority == `Urgent`) {
+      id_style =  `urgent-btn-${id_task}`
+      id_img = `urgent-btn-priority-img-${id_task}`
+    } else if( priority == `Medium`) {
+      id_style =`medium-btn-${id_task}`
+      id_img = `medium-urgent-btn-priority-img-${id_task}`
+    } else if( priority == `Low` ) {
+      id_style = `non-urgent-btn-${id_task}`
+      id_img = `non-urgent-btn-priority-img-${id_task}`
+    }
+
+    document.getElementById(id_style).style.backgroundColor = backgroundColor
+    document.getElementById(id_img).setAttribute('src', reset_img_path)
+    document.getElementById(id_style).style.color = color
     priority_img_path = img_path
     selected_priority = priority
    }
@@ -184,7 +198,6 @@ function renderSmallEditTask(id_task,title,description,due_date,priority) {
         console.log(custom_select_contact_container)
         custom_select_contact_container[custom_select_contact_container.length - 1].innerHTML += `<label class="custom-select-option"> ${loggedInUser.name} (You) <input onclick="returnSelectedContacts(this)" value="${loggedInUser.name}" class="selected-option contact-option" type="checkbox" autocomplete="off"></label>`
         addContactOptionToCustomSelectOption(id_task)
-
     }
 }
 
@@ -196,7 +209,6 @@ async function showTaskInfo(id_task) {
   } else {
     renderGuestInfoTask(id_task)
   }
-
 }
 
 function renderGuestInfoTask(id_task) {

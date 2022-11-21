@@ -27,33 +27,34 @@
         </div>
     </nav>
 
-    <div class="signUp">
-
-        <a href="../login.html"><img class="arrow position-arrow" src="../kanban_img/arrow_icons/blue_arrow.png"></a>
-        
-        <div class="form-inner-container">
-            <h1 class="form-headline">Sign up</h1>
-            <div class="blue-bottom"></div>
-            <form onsubmit="signUp();return false" class="form">
-
-                <div class="login-data">
-                    <input id="name" type="text" placeholder="Name">
-                    <input id="e-mail" type="text" placeholder="E-mail">
-                    <input id="password" type="password" placeholder="Password">
-                </div>
-
-                <div class="signUp-container">
-                    <button class="form-btn">Sign up</button>
-                </div>
-
-                <div class="email-exist d-none"> 
-                    Email exists already!
-                </div>
-                
-            </form>
+    <div class="overlay-container">
+        <div class="signUp">
+            <a href="../login.html"><img class="arrow position-arrow" src="../kanban_img/arrow_icons/blue_arrow.png"></a>
+            
+            <div class="form-inner-container">
+                <h1 class="form-headline">Sign up</h1>
+                <div class="blue-bottom"></div>
+                <form onsubmit="signUp(); return false" class="form">
+    
+                    <div class="login-data">
+                        <input id="name" type="text" placeholder="Name" required>
+                        <input id="e-mail" type="text" placeholder="E-mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+                        <input id="password" type="password" placeholder="Password" required>
+                    </div>
+    
+                    <div class="signUp-container">
+                        <button class="form-btn">Sign up</button>
+                    </div>
+    
+                    <div class="email-exist d-none"> 
+                        Email exists already!
+                    </div>
+                    
+                </form>
+            </div>
         </div>
-
     </div>
+   
 
 </body>
 

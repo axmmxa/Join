@@ -170,7 +170,22 @@
     margin-bottom: 350px;    
   }
   
-  .edit-task::-webkit-scrollbar-thumb {
+  .main-field::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3);    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */ 
+  }
+
+  .main-field::-webkit-scrollbar { 
+    width: 5px;
+    height: 4px;  
+  }
+  
+  .main-field::-webkit-scrollbar-track {
+    background: transparent;   /* color of the tracking area */ 
+    margin-bottom: 350px;    
+  }
+  
+  .main-field::-webkit-scrollbar-thumb {
     background-color: rgba(0, 0, 0, 0.3);    /* color of the scroll thumb */
     border-radius: 20px;       /* roundness of the scroll thumb */ 
   }

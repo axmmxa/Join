@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="login_assets/login_css/generalForm.css">
     <link rel="stylesheet" href="login_assets/login_css/fonts.css">
     <link rel="stylesheet" href="login_assets/login_css/login.css">
+
     <link rel="shortcut icon" href="kanban_img/login_icons/join_blue.png" type="image/x-icon">
 
     <script src="js/request.js" defer></script>
@@ -21,13 +22,10 @@
     <script src="js/login.js" defer></script>
 </head>
 
-<body>
-    <!-- <div class="opening-animation-layout">
-        <img class="opening-animation-icon" src="kanban_img/login_icons/join_white.png">
-    </div>   -->
+<body id="login-body">
     <nav class="navbar">
         <div class="logo">
-            <img class="main-login-icon w3-animate-right" src="kanban_img/login_icons/join_blue.png">
+            <img class="main-login-icon" src="kanban_img/login_icons/join_blue.png">
         </div>
         <div class="not-a-user">
             <a class="no-user-link" href="">Not a Join User?</a>
@@ -35,35 +33,38 @@
         </div>
     </nav>
 
-    <div class="login">
-        <div class="login-container">
-            <h1 class="form-headline">Log in</h1>
-            <div class="blue-bottom"></div>
-            
-            <form onsubmit="login();return false" class="form">
-
-                <div class="login-data">
-                    <input id="e-mail" type="text" placeholder="E-mail">
-                    <input id="password" type="text" placeholder="Password">
-                </div>
-
-                <div class="login-option">
-                    <label for="remember-me" class="remember-option">
-                        <input type="checkbox" id="remember-me" name="remember-me" value="Remember me"><span>Remember me</span>
-                    </label>
-
-                    <a href="login_assets/forgotPassword.html" class="forgot-password">Forgot my password</a>
-                </div>
-
-                <div class="login-btns">
-                    <button class="login-btn">Log in </button>
-                    <button class="guest-btn">Guest log in</button>
-                </div>
-
-            </form>
+    <div class="overlay-container">
+        <div class="login">
+            <div class="login-container">
+                <h1 class="form-headline">Log in</h1>
+                <div class="blue-bottom"></div>
+                
+                <form onsubmit="login(); return false" class="form">
+    
+                    <div class="login-data">
+                        <input id="e-mail" type="text" placeholder="E-mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+                        <input id="password" type="password" placeholder="Password" required>
+                    </div>
+    
+                    <div class="login-option">
+                        <label for="remember-me" class="remember-option">
+                            <input type="checkbox" id="remember-me" name="remember-me" value="Remember me"><span>Remember me</span>
+                        </label>
+    
+                        <a href="login_assets/forgotPassword.html" class="forgot-password">Forgot my password</a>
+                    </div>
+    
+                    <div class="login-btns">
+                        <button class="login-btn">Log in </button>
+                        <button class="guest-btn">Guest log in</button>
+                    </div>
+    
+                </form>
+            </div>
         </div>
+    
     </div>
-
+    
     <div id="msgBox">
         
     </div>

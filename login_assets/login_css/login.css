@@ -5,70 +5,26 @@
 @keyframes moveToTopLeftCorner {
     0% {
         position: absolute;
-        top: 300px;
-        left: 500px;
+        top: 100px;
+        left: 200px;
     }
 
     100% {
         position: absolute;
-        top: 50px;
-        left: 50px;
+        top: 20px;
+        left: 45px;
     }
 }
-
-/* .opening-animation-icon {
-    height: 100px;
-    width: 100px;
-    animation: MoveSlightlyTopLeftCorner 500ms ease-in-out
-}
-
-.opening-animation-layout {
-    position: absolute;
-    top: 0;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #4589FF;
-    animation: disappearBackground 5000ms ease-in-out
-} */
-
-/* 
-@keyframes disappearBackground {
-    0% {
-        z-index: -1;
-        opacity: 0;
-        visibility: hidden;
-    }
-}
-
-@keyframes MoveSlightlyTopLeftCorner {
-    0% {
-        position: absolute;
-        top: 150px;
-        left: 350px;
-    }
-} */
 
 body {
+    height: 100vh;
     margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
     font-family: "Open Sans";
 }
 
-.navbar {
-    margin: 40px auto;
-    width: 90%;
-    display: flex;
-    justify-content: space-between;
-}
-
 .logo>img {
-    height: 100px;
+    height: 70px;
+    width: auto;
 }
 
 .sign-up-btn {

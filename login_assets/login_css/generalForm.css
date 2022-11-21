@@ -71,21 +71,48 @@
     border-radius: 8px;
 }
 
+.navbar {
+    box-sizing: border-box;
+    height: 20vh;
+    width: 90%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.overlay-container {
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .popups-img {
     margin-left: 10px;
 }
 
-body::-webkit-scrollbar {
-    width: 12px;               /* width of the entire scrollbar */
+.centered {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
-  
-  body::-webkit-scrollbar-track {
-    background: orange;        /* color of the tracking area */
-  }
-  
-  body::-webkit-scrollbar-thumb {
-    background-color: blue;    /* color of the scroll thumb */
-    border-radius: 20px;       /* roundness of the scroll thumb */
-    border: 3px solid orange;  /* creates padding around scroll thumb */
-  }
+
+.popups {
+    z-index: 2;
+    display: none;
+    align-items: center;
+    color: white;
+    padding: 10px 5px;
+    background-color: #0038FF;
+    border: 1px solid none;
+    border-radius: 8px;
+}
+
+.popups-img {
+    margin-left: 10px;
+}
+
+
 

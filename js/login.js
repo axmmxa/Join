@@ -2,7 +2,7 @@ const URLParams = new URLSearchParams(window.location.search)
 const msg = URLParams.get("msg")
 let msgBox = document.getElementById("msgBox")
 
-if (msg) {
+if (msg && document.getElementById("login-body")) {
     msgBox.innerHTML = msg
     setTimeout(() => {
         msgBox.style.display = "none"
@@ -44,7 +44,23 @@ document.querySelector('.guest-btn').addEventListener('click', () => {
 })
  
     
-        
+function sendEmail() {
+    showPopup("forgotPassword-popup")
+    document.querySelector(".navbar").style.opacity = 0.5
+    document.querySelector(".overlay-container").style.opacity = 0.5
+    setTimeout(() => {
+        location.href = "resetPassword.html"
+    }, 2000)
+}
+
+function resetPassword() {
+    showPopup("resetPassword-popup")
+    document.querySelector(".navbar").style.opacity = 0.5
+    document.querySelector(".overlay-container").style.opacity = 0.5
+    setTimeout(() => {
+        location.href = "../login.html"
+    }, 2000)
+}
         
         
     
