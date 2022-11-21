@@ -31,13 +31,6 @@ body {
     margin-right: 50px;
 }
 
-.email-exist {
-    color: red;
-}
-
-.d-none {
-    display: none;
-}
 
 @media(max-width:540px) {
     .signUp {

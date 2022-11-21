@@ -55,9 +55,10 @@
 }
 
 .board-task-edit-btn-container {
+    margin-top: 15px;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: space-between;
 }
 
 .priority-btn-container a {
@@ -79,3 +80,24 @@
     -webkit-appearance: none;
     appearance: none;
 }
+
+.delete-task-btn {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    margin-right: 5px;
+}
+
+.delete-task-btn:hover {
+    background-color: darkred;
+}
+
+.delete-task-btn-img {
+    height: 25px;
+    width: 21px;   
+}
+
+

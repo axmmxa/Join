@@ -9,7 +9,8 @@ async function saveEditedContact(contact_email, contact_name, btn) {
       small_edit_contacts_phone = document.getElementById("small-edit-contacts-phone").value
     }
   
-  changeAssignedContact(contact_name)
+  if (!checkContactEmailExist(small_edit_contacts_email)) {
+    changeAssignedContact(contact_name)
   if (loggedInUser.name !== "Guest") { 
   for (let i = 0; i < users.length; i++) {
     const currentUsers = users[i];
@@ -29,6 +30,16 @@ async function saveEditedContact(contact_email, contact_name, btn) {
     }
    }
   }
+  } else {
+    if (btn == 'mobile') {
+      document.querySelector("#edit-contact-create-btn-mobile").style.border = `1px solid rgb(255,0,0)`
+      document.querySelector(".edit-contact-email-exist-mobile").classList.remove("d-none");
+    } else {
+      document.querySelector("#edit-contact-create-btn").style.border = `1px solid rgb(255,0,0)`
+      document.querySelector(".edit-contact-email-exist").classList.remove("d-none");
+    }
+  }
+
  } 
 
 

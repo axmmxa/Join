@@ -17,7 +17,7 @@ function signUp() {
 }
 
 async function addUser(user) {
-  if (!checkUserExist(user.email)) {
+  if (!checkUserEmailExist(user.email)) {
     users.push(user);
     await backend.setItem("users", JSON.stringify(users));
     window.location.href =

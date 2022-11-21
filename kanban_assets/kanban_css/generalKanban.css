@@ -27,6 +27,10 @@
     height: auto;
 }
 
+.fs-12 {
+    font-size: 12px;
+}
+
 .fs-22 {
     font-size: 22px;
 }
@@ -45,6 +49,10 @@
 
 .hover-blue {
     background-color: #D2E3FF;
+}
+
+.red-text {
+    color: red;
 }
 
 .light-gray {
@@ -191,6 +199,13 @@
     margin-right: 5px;
     width: 12px;
     height: 10px;
+}
+
+.close-x-absolute {
+    cursor: pointer;
+    position: absolute;
+    top: 5px;
+    right: 5px;
 }
 
 .white-clear {
@@ -383,29 +398,30 @@
     border-end-end-radius: 18px;
 }
 
-#small-contacts-container-close-btn-container-mobile {
+/* #small-contacts-container-close-btn-container-mobile {
     height: 5vh;
     display: flex;
     align-items: center;
     justify-content: flex-end;
     border-top-right-radius: 18px;
     border-top-left-radius: 18px;
-}
+} */
 
 .user-icon-big-mobile {
-    padding: 30px;
+    padding: 20px;
     border: 2px solid white;
-    margin-top: -160px;
+    margin-top: -140px;
 }
 
 .upper-part-small-contacts-mobile {
     height: 35vh;
     z-index: 2;
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
     flex-direction: column;
-    /* padding-top: 10px; */
+    border-top-left-radius: 18px;
+    border-top-right-radius: 18px;
 }
 
 .lower-part-small-contacts-mobile {

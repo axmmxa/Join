@@ -17,6 +17,7 @@ function templateSmallContacts() {
                 <div class="login-data">
                     <input id="small-add-contacts-name" type="text" placeholder="Name" required>
                     <input id="small-add-contacts-email" type="text" placeholder="E-mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+                    <div class="add-contact-email-exist red-text d-none fs-12">Email already exists!</div>
                     <input id="small-add-contacts-phone" type="text" placeholder="Phone" pattern="[0-9]{9}" required>
                 </div>
 
@@ -34,9 +35,7 @@ function templateSmallContacts() {
 
 function templateSmallContactsMobile() {
     return  `<div id="small-contacts-container-mobile" class="centered">
-      <div id="small-contacts-container-close-btn-container-mobile" class="light-blue">
-          <span onclick="closeSmallContactsMobile()" class="arrow white-text">X</span>
-      </div>
+        <span onclick="closeSmallContactsMobile()" class="arrow white-text close-x-absolute">X</span>
       <div class="upper-part-small-contacts-mobile light-blue">
           <h1 class="white-text">Add Contact</h1>
           <span class="white-text">Tasks are better in a team</span>
@@ -49,6 +48,7 @@ function templateSmallContactsMobile() {
               <div class="login-data">
                   <input id="small-add-contacts-name-mobile" type="text" placeholder="Name" required>
                   <input id="small-add-contacts-email-mobile" type="text" placeholder="E-mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+                  <div class="add-contact-email-exist-mobile red-text d-none fs-12">Email already exists!</div>
                   <input id="small-add-contacts-phone-mobile" type="text" placeholder="Phone" pattern="[0-9]{9}" required>
               </div>
 
@@ -80,6 +80,7 @@ function templateSmallEditContacts(contact_name,contact_email,contact_phone,i) {
             <div class="login-data">
                 <input value="${contact_name}" id="small-edit-contacts-name" type="text" placeholder="Name" required>
                 <input value="${contact_email}" id="small-edit-contacts-email" type="text" placeholder="E-mail" required>
+                <div class="edit-contact-email-exist red-text d-none fs-12">Email already exists!</div>
                 <input value="${contact_phone}" id="small-edit-contacts-phone" type="text" placeholder="Phone" required>
             </div>
 
@@ -95,9 +96,9 @@ function templateSmallEditContacts(contact_name,contact_email,contact_phone,i) {
 function templateSmallEditContactsMobile(contact_name,contact_email,contact_phone,i) {
     return  `
     <div id="small-contacts-container-mobile-${i}" class="edit-contact-container-mobile centered"> 
-    <div id="small-contacts-container-close-btn-container-mobile" class="light-blue">
-        <span onclick="closeSmallEditContactsMobile(${i})" class="arrow white-text">X</span>
-    </div>
+    
+    <span onclick="closeSmallEditContactsMobile(${i})" class="arrow white-text close-x-absolute">X</span>
+    
     <div class="upper-part-small-contacts-mobile light-blue">
         <h1 class="white-text">Edit Contact</h1>
         <p class="white-text">Tasks are better with a team!</p>
@@ -110,11 +111,12 @@ function templateSmallEditContactsMobile(contact_name,contact_email,contact_phon
             <div class="login-data margin">
                 <input value="${contact_name}" id="small-edit-contacts-name-mobile" type="text" placeholder="Name" required>
                 <input value="${contact_email}" id="small-edit-contacts-email-mobile" type="text" placeholder="E-mail" required>
+                <div class="edit-contact-email-exist-mobile red-text d-none fs-12">Email already exists!</div>
                 <input value="${contact_phone}" id="small-edit-contacts-phone-mobile" type="text" placeholder="Phone" required>
             </div>
 
             <div class="small-contacts-btn-container">
-                <button class="create-btn save-create-btn-mobile">Save</button>
+                <button id="edit-contact-create-btn-mobile" class="create-btn">Save</button>
             </div>
         </form>
     </div>
@@ -147,7 +149,7 @@ function templateParentSmallEditContacts(contact_name,contact_email,contact_phon
                 </div>
 
                 <div class="small-contacts-btn-container">
-                    <button class="create-btn save-create-btn">Save</button>
+                    <button id="edit-contact-create-btn" class="create-btn edit-contact-email-exist-mobile">Save</button>
                 </div>
             </form>
         </div>
@@ -198,9 +200,9 @@ function templateSmallEditTask(id_task, title, description, due_date) {
                                     <span id="first-select-contacts" class="first-select-option">Select contacts to assign</span>
                                     <img class="arrow-down" src="kanban_img/arrow_icons/arrow_select.png" />
                                 </div>
-                                <div class="custom-select-options-container d-none" >
+                                <div class="custom-select-options-container d-none">
                                     <div class="custom-select-contact-container">
-                                        <label class="custom-select-option"> Maximilian Vogel <input onclick="returnSelectedContacts(this)" value="Maximilian Vogel" class="selected-option" type="checkbox" autocomplete="off"></label> -->      
+
                                     </div> 
                                     <label onclick="showAddContact(0)" class="custom-select-option">Invite new contact <img src="kanban_img/invite_contact.png"></label>
                                 </div>
@@ -246,6 +248,7 @@ function templateShowTaskInfo(userTaskId, id_task, j) {
                 </div>
 
                 <div class="board-task-edit-btn-container">
+                    <button onclick="deleteTask(${id_task})" class="delete-task-btn red"><img src="kanban_img/icons8-trash-can.svg" class="delete-task-btn-img"></button>
                     <button onclick="renderSmallEditTask(${id_task},'${userTaskId.title}','${userTaskId.description}','${userTaskId["due-date"]}','${userTaskId.priority}')" class="edit-btn light-blue"><img class="edit-pen-height" src="kanban_img/edit_icons/edit_pen_white.png"></button>
                 </div>
             </div>
@@ -284,8 +287,7 @@ function templateSmallAddTask() {
                         </div>
                         <div class="custom-select-options-container d-none" >
                             <div class="custom-select-contact-container">
-                                <!-- <label class="custom-select-option">You <input onclick="returnSelectedContacts(this)" value="You" class="selected-option" type="checkbox" autocomplete="off"></label>
-                                <label class="custom-select-option"> Maximilian Vogel <input onclick="returnSelectedContacts(this)" value="Maximilian Vogel" class="selected-option" type="checkbox" autocomplete="off"></label> -->      
+
                             </div> 
                             <label onclick="showAddContact(0)" class="custom-select-option">Invite new contact <img src="kanban_img/invite_contact.png"></label>
                         </div>
