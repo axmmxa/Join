@@ -18,10 +18,10 @@ async function updateHTML() {
     user_task_array = loggedInUser.tasks;
   }
 
-  generateTask(user_task_array, "todo");
-  generateTask(user_task_array, "in-progress");
-  generateTask(user_task_array, "await-feedback");
-  generateTask(user_task_array, "done");
+  await generateTask(user_task_array, "todo");
+  await generateTask(user_task_array, "in-progress");
+  await generateTask(user_task_array, "await-feedback");
+  await generateTask(user_task_array, "done");
 
   loadAndStoreCorrectColor(user_task_array);
 }
@@ -127,7 +127,7 @@ function allowDrop(ev) {
   ev.preventDefault();
 }
 
-function moveTo(status) {
+async function moveTo(status) {
   let user_task_array = getUserTasks();
 
   if (loggedInUser.name == "Guest") {
@@ -135,5 +135,5 @@ function moveTo(status) {
   }
 
   user_task_array[currentDraggedElement]["status"] = status; // status will change
-  updateHTML();
+  await updateHTML();
 }
