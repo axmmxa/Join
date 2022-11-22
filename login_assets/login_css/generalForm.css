@@ -88,6 +88,10 @@
     align-items: center;
 }
 
+.white-overlay {
+    height: 100vh;
+}
+
 .popups-img {
     margin-left: 10px;
 }
@@ -111,6 +115,7 @@
 }
 
 .popups-img {
+    z-index: 2;
     margin-left: 10px;
 }
 

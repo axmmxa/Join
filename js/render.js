@@ -202,10 +202,8 @@ function renderSmallEditTask(id_task,title,description,due_date,priority) {
 }
 
 async function showTaskInfo(id_task) {
-  let user_icons = document.querySelectorAll(".user-icon-task-info") 
-  
   if (loggedInUser.name !== "Guest") {
-    renderUsersTaskInfo(user_icons, id_task)
+    renderUsersTaskInfo(id_task)
   } else {
     renderGuestInfoTask(id_task)
   }
@@ -225,14 +223,15 @@ function renderGuestInfoTask(id_task) {
   }
 }    
 
-async function renderUsersTaskInfo(user_icons, id_task) {
+async function renderUsersTaskInfo(id_task) {
+  
   for (let i = 0; i < users.length; i++) {
     console.log(users)
     const currentUser = users[i];            
     if (currentUser.email == loggedInUser.email) {
         renderBoardTask(currentUser, id_task)
         await getUsersFromBackend()
-              
+        let user_icons = document.querySelectorAll(".user-icon-task-info")
         loadBoardContactBackgroundColor()
         for (let i = 0; i < users.length; i++) {
             const currentUser = users[i];

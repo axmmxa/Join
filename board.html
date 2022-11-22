@@ -30,16 +30,36 @@
             .priority-btn-container a {
                 padding: 5px 5px;
             }
+          }
         }
-    }
+
+        @media (max-width: 874px) {
+            #small-add-task {
+                width: 400px;
+            }
+                .task-form {
+                width: 65%;
+            }
+            .priority-btn-container a {
+                padding: 5px 5px;
+            }
+        }
+
+            @media (max-width: 684px) {
+                .task-form {
+                width: 65%;
+            }
+        }
+
     </style>
 
+    
     <script src="js/request.js" defer></script>
     <script src="js/template.js" defer></script>
     <script src="js/load.js" defer></script>
     <script src="js/render.js" defer></script>
-    <script src="js/drag_and_drop.js" defer></script>
     <script src="js/task.js" defer></script>
+    <script src="js/drag_and_drop.js" defer></script>
     <script src="js/mini_backend.js"></script>
     <script src="js/custom-select.js" defer></script>
     <script src="js/logout.js" defer></script>

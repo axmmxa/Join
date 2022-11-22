@@ -104,7 +104,9 @@ async function saveTask()  {
   if (checkIfCreatedTaskIsEmpty(title,due_date,description)) {
     document.querySelector(".create-btn").style.border = '1px solid rgb(0, 255, 0)';
     addTask(task, id)
-    showPopup("task-popup")
+    if (document.querySelector("addTask-body")) {
+      showPopup("task-popup")  
+    }
   }  else {
     document.querySelector(".create-btn").style.border = '1px solid rgb(255, 0, 0)';
   }

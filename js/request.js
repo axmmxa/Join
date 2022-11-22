@@ -275,27 +275,33 @@ function checkAssignedContactsInEditTask(id_task) {
     }
 }
 
-function deleteTask(id_task) {
+async function deleteTask(id_task) {
     let id_array = []
     let index
     
+    console.log(users)
     if (loggedInUser.name !== "Guest") {
         for (let i = 0; i < users.length; i++) {
             const currentUser = users[i];
             if (loggedInUser.email == currentUser.email) {
-                for (let i = 0; i < currentUser.tasks.length; i++) {
-                    let id_tasks = currentUser.tasks[i].id_task
+                for (let j = 0; j < currentUser.tasks.length; j++) {
+                    let id_tasks = currentUser.tasks[j].id_task
                     id_array.push(id_tasks) 
                 }  
-                for (let j = 0; j < currentUser.tasks.length; j++) {
-                    if (id_task == id_array[j]) {
-                        index = id_array.indexOf(id_array[j])
-                        loggedInUser.tasks.splice(index, 1)
+                for (let k = 0; k < currentUser.tasks.length; k++) {
+                    if (id_task == id_array[k]) {
+                        index = id_array.indexOf(id_array[k])
+                        currentUser.tasks.splice(index, 1)
+                        await saveUsersArray()
+                        // console.log(users)
+                        // updateHTML()
+                        // closeBoardTaskInfo()
                     }
                 }
             }
         }
-        saveUsersArray()
+        
+        
     } else {
         let id_array = []
         let index
@@ -309,12 +315,14 @@ function deleteTask(id_task) {
             if (id_task == id_array[j]) {
                 index = id_array.indexOf(id_array[j])
                 loggedInUser.tasks.splice(index, 1)
+                saveLoggedInUser()
+
+                // updateHTML()
+                // closeBoardTaskInfo()
             }
         }
         
-        saveLoggedInUser()
     }
-
     location.reload(true)
 }
 
