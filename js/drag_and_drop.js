@@ -22,28 +22,26 @@ async function updateHTML() {
   generateTask(user_task_array, "in-progress");
   generateTask(user_task_array, "await-feedback");
   generateTask(user_task_array, "done");
-  
-  loadAndStoreCorrectColor(user_task_array)
 
+  loadAndStoreCorrectColor(user_task_array);
 }
 
 function loadAndStoreCorrectColor(user_task_array) {
-    let correctCategory;
-    let correctId;
-  
-    for (let i = 0; i < user_task_array.length; i++) {
-      let currentTaskTopic = document.querySelectorAll(".task-topic")
-      correctId = i;
-      correctCategory = currentTaskTopic[i].textContent;
-      getCategoryColor(correctCategory, correctId);
-    }
-  
-    localStorage.setItem("loggedInUser", JSON.stringify(loggedInUser));
-    loadBoardContactBackgroundColor();
+  let correctCategory;
+  let correctId;
+
+  for (let i = 0; i < user_task_array.length; i++) {
+    let currentTaskTopic = document.querySelectorAll(".task-topic");
+    correctId = i;
+    correctCategory = currentTaskTopic[i].textContent;
+    getCategoryColor(correctCategory, correctId);
+  }
+
+  localStorage.setItem("loggedInUser", JSON.stringify(loggedInUser));
+  loadBoardContactBackgroundColor();
 }
 
-
-function generateTask(user_task_array, status) {
+async function generateTask(user_task_array, status) {
   let task = user_task_array.filter((t) => t["status"] == status);
 
   document.getElementById(status).innerHTML = "";
@@ -60,10 +58,11 @@ function generateTask(user_task_array, status) {
     document.getElementById(status).innerHTML += generateTodoHTML(element);
     addUserIcons(element);
   }
+  await saveUsersArray();
 }
 
 function generateTodoHTML(element) {
-    return `
+  return `
       <div id="added-task-${element.id_task}" draggable="true" ondragstart="startDragging(${element.id_task})" onclick="renderBoardTaskInfo(${element.id_task})" class="added-task">
       <span class="task-topic white-text">${element.category}</span>
       <h4 class="task-headline blue-text">${element.title}</h4>
@@ -84,19 +83,18 @@ function generateTodoHTML(element) {
           
       </div>
       `;
-  }
-  
+}
 
 function getStatusTitle(status) {
-    if (status == "todo") {
-        return "To do"
-    } else if (status == "in-progress") {
-        return "In Progress"
-    }  else if (status == "await-feedback") {
-        return "Await Feedback"
-    }  else if (status == "done") {
-        return "Done"
-    } 
+  if (status == "todo") {
+    return "To do";
+  } else if (status == "in-progress") {
+    return "In Progress";
+  } else if (status == "await-feedback") {
+    return "Await Feedback";
+  } else if (status == "done") {
+    return "Done";
+  }
 }
 
 function addUserIcons(element) {
@@ -106,14 +104,14 @@ function addUserIcons(element) {
   for (let i = 0; i < element.assignedContacts.length; i++) {
     const contact = element.assignedContacts[i];
     if (i == 1 && window.innerWidth > 874) {
-      assignedContacts.innerHTML += 
-       `<div>
-         <span class="user-icon blue">+${element.assignedContacts.length - 1}</span>  
+      assignedContacts.innerHTML += `<div>
+         <span class="user-icon blue">+${
+           element.assignedContacts.length - 1
+         }</span>  
         </div>`;
       break;
     } else {
-      assignedContacts.innerHTML += 
-      `<div>
+      assignedContacts.innerHTML += `<div>
         <span id="${contact}" class="user-icon">${getUserIcon(contact)}</span>  
        </div>`;
     }
