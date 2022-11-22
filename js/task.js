@@ -45,17 +45,17 @@ async function saveEditedTask(id_task) {
     if (checkIfCreatedTaskIsEmpty(title,due_date,description) && loggedInUser.name !== "Guest") {
       for (let i = 0; i < users.length; i++) {
         const currentUser = users[i];
-        changeTaskJSON(currentUser, id_task)
+        changeTaskJSON(currentUser, id_task, title, due_date, description)
     }
     } else {
-        changeTaskJSON(loggedInUser, id_task)
+        changeTaskJSON(loggedInUser, id_task, title, due_date, description)
     }
     
   location.reload(true)
 }
 
 
-function changeTaskJSON(user, id_task) {
+async function changeTaskJSON(user, id_task, title, due_date, description) {
   for (let j = 0; j < user.tasks.length; j++) {
     const currentTask = user.tasks[j];
     if (id_task == currentTask.id_task) {
@@ -66,7 +66,7 @@ function changeTaskJSON(user, id_task) {
       currentTask.description = description
       currentTask.priority = selected_priority
       currentTask.priority_img_path = priority_img_path
-      saveDependingOnUserName()
+      await saveDependingOnUserName()
     }
   }
 }

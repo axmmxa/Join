@@ -194,23 +194,22 @@ function checkContactEmailExist(input_email) {
 if (loggedInUser.name !== "Guest") {
     for (let i = 0; i < users.length; i++) {
         const currentUser = users[i]
-        for (let j = 0; j < currentUser.contacts.length; j++) {
-          const currentContactEmail = currentUser.contacts[j].contact_email;
-          if (currentContactEmail == input_email) {
-              return true;
-            } 
-        };
+        compareInputEmailAndEmailsFromDatabase(currentUser, input_email)
     }
     return false;
 } else {
-    for (let i = 0; i < loggedInUser.contacts.length; i++) {
-        const currentContactEmail = loggedInUser.contacts[i].contact_email;
-        if (currentContactEmail == input_email) {
-            return true;
-          }
-      };
+  compareInputEmailAndEmailsFromDatabase(loggedInUser, input_email)
   }
   return false;
+}
+
+function compareInputEmailAndEmailsFromDatabase(user, input_email) {
+    for (let i = 0; i < user.contacts.length; i++) {
+      const currentContactEmail = user.contacts[i].contact_email;
+      if (currentContactEmail == input_email) {
+          return true;
+        } 
+    };
 }
 
 
@@ -220,19 +219,20 @@ function addContactOptionToCustomSelectOption(id_task) {
     if (loggedInUser.name !== "Guest") {
         for (let i = 0; i < users.length; i++) {
             const currentUser = users[i];
-            for (let j = 0; j < currentUser.contacts.length; j++) {
-                const currentContact = currentUser.contacts[j];
-                custom_select_contact_container[custom_select_contact_container.length - 1].innerHTML += `<label class="custom-select-option"> ${currentContact.contact_name}<input onclick="returnSelectedContacts(this)" value="${currentContact.contact_name}" class="selected-option contact-option" type="checkbox" autocomplete="off"></label>` 
-            }
+            renderLabelContactOption(currentUser, custom_select_contact_container)
         }
         checkAssignedContactsInEditTask(id_task)
     } else {
-        for (let j = 0; j < loggedInUser.contacts.length; j++) {
-            const currentContact = loggedInUser.contacts[j];
-            custom_select_contact_container[custom_select_contact_container.length - 1].innerHTML += `<label class="custom-select-option"> ${currentContact.contact_name}<input onclick="returnSelectedContacts(this)" value="${currentContact.contact_name}" class="selected-option contact-option" type="checkbox" autocomplete="off"></label>` 
-        }
+        renderLabelContactOption(loggedInUser, custom_select_contact_container)
         checkAssignedContactsInEditTask(id_task)
     }
+}
+
+function renderLabelContactOption(user, custom_select_contact_container) {
+  for (let j = 0; j < user.contacts.length; j++) {
+    const currentContact = user.contacts[j];
+    custom_select_contact_container[custom_select_contact_container.length - 1].innerHTML += `<label class="custom-select-option"> ${currentContact.contact_name}<input onclick="returnSelectedContacts(this)" value="${currentContact.contact_name}" class="selected-option contact-option" type="checkbox" autocomplete="off"></label>` 
+}
 }
 
 function checkAssignedContactsInEditTask(id_task) {
@@ -241,39 +241,29 @@ function checkAssignedContactsInEditTask(id_task) {
     if (loggedInUser.name !== "Guest") {
         for (let i = 0; i < users.length; i++) {
             const currentUser = users[i];
-            for (let j = 0; j < currentUser.tasks.length; j++) {
-                const currentTask = currentUser.tasks[j];
-                if (j == id_task) {
-                    for (let j = 0; j < currentTask.assignedContacts.length; j++) {
-                        assignedContactName = currentTask.assignedContacts[j]
-                        for (let k = 0; k < selected_contact_option.length ; k++) {
-                            const currentContact = selected_contact_option[k].value;
-                            if (currentContact == assignedContactName) {
-                                selected_contact_option[k].checked = true 
-                            } 
-                        }
-                    } 
+            checkContactsNameInEditTask(currentUser, assignedContactName, selected_contact_option, id_task)
+        } 
+    } else {
+        checkContactsNameInEditTask(loggedInUser, assignedContactName, selected_contact_option, id_task)
+    }
+}
+
+
+function checkContactsNameInEditTask(user, assignedContactName, selected_contact_option, id_task) {
+  for (let j = 0; j < user.tasks.length; j++) {
+    const currentTask = user.tasks[j];
+    if (j == id_task) {
+        for (let j = 0; j < currentTask.assignedContacts.length; j++) {
+            assignedContactName = currentTask.assignedContacts[j]
+            for (let k = 0; k < selected_contact_option.length ; k++) {
+                const currentContact = selected_contact_option[k].value;
+                if (currentContact == assignedContactName) {
+                    selected_contact_option[k].checked = true 
                 } 
             }
         } 
-    } else {
-        let assignedContactName;
-        let selected_contact_option = document.querySelectorAll(".contact-option")
-        for (let i = 0; i < loggedInUser.tasks.length; i++) {
-            const currentTask = loggedInUser.tasks[i];
-            if (i == id_task) {
-                for (let j = 0; j < currentTask.assignedContacts.length; j++) {
-                    assignedContactName = currentTask.assignedContacts[j]
-                    for (let k = 0; k < selected_contact_option.length ; k++) {
-                        const currentContact = selected_contact_option[k].value;
-                        if (currentContact == assignedContactName) {
-                            selected_contact_option[k].checked = true 
-                        } 
-                    }
-                } 
-            } 
-        }
-    }
+    } 
+}
 }
 
 async function deleteTask(id_task) {
@@ -284,38 +274,26 @@ async function deleteTask(id_task) {
     if (loggedInUser.name !== "Guest") {
         for (let i = 0; i < users.length; i++) {
             const currentUser = users[i];
-            if (loggedInUser.email == currentUser.email) {
-                for (let j = 0; j < currentUser.tasks.length; j++) {
-                    let id_tasks = currentUser.tasks[j].id_task
-                    id_array.push(id_tasks) 
-                }  
-                for (let k = 0; k < currentUser.tasks.length; k++) {
-                    if (id_task == id_array[k]) {
-                        index = id_array.indexOf(id_array[k])
-                        currentUser.tasks.splice(index, 1)
-                        await saveUsersArray()
-                    }
-                }
-            }
+            await getIndexOfIdTask(currentUser, id_array, index) 
         }
     } else {
-        let id_array = []
-        let index
-        
-        for (let i = 0; i < loggedInUser.tasks.length; i++) {
-            let id_tasks = loggedInUser.tasks[i].id_task
-            id_array.push(id_tasks) 
-        }  
-
-        for (let j = 0; j < loggedInUser.tasks.length; j++) {
-            if (id_task == id_array[j]) {
-                index = id_array.indexOf(id_array[j])
-                loggedInUser.tasks.splice(index, 1)
-                saveLoggedInUser()
-            }
-        }
-        
+      await getIndexOfIdTask(loggedInUser, id_array, index) 
+            
     }
     location.reload(true)
 }
 
+
+async function getIndexOfIdTask(user,id_array, index) {
+  for (let j = 0; j < currentUser.tasks.length; j++) {
+    let id_tasks = currentUser.tasks[j].id_task
+    id_array.push(id_tasks) 
+}  
+for (let k = 0; k < currentUser.tasks.length; k++) {
+    if (id_task == id_array[k]) {
+        index = id_array.indexOf(id_array[k])
+        currentUser.tasks.splice(index, 1)
+        await saveUsersArray()
+    }
+}
+}

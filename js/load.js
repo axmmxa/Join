@@ -1,47 +1,59 @@
 async function saveEditedContact(contact_email, contact_name, btn) {
-    if (btn == 'mobile') {
-      small_edit_contacts_name = document.getElementById("small-edit-contacts-name-mobile").value
-      small_edit_contacts_email = document.getElementById("small-edit-contacts-email-mobile").value
-      small_edit_contacts_phone = document.getElementById("small-edit-contacts-phone-mobile").value
-    } else {
-      small_edit_contacts_name = document.getElementById("small-edit-contacts-name").value
-      small_edit_contacts_email = document.getElementById("small-edit-contacts-email").value
-      small_edit_contacts_phone = document.getElementById("small-edit-contacts-phone").value
-    }
-  
+  extractInputValueFromCorrectInputs(btn)
+    
   if (!checkContactEmailExist(small_edit_contacts_email)) {
     changeAssignedContact(contact_name)
+    renderUserOrGuestContactInformation(contact_email, contact_name)
+  } else {
+    styleButtonWithRedBorder(btn)
+  }
+ } 
+
+ function renderUserOrGuestContactInformation(contact_email, contact_name) {
   if (loggedInUser.name !== "Guest") { 
-  for (let i = 0; i < users.length; i++) {
-    const currentUsers = users[i];
-    for (let j = 0; j < currentUsers.contacts.length; j++) {
-      const currentContact = currentUsers.contacts[j];
-      if (currentContact.contact_email == contact_email) {
-        changeContactAndRenderContactsInformationRight(currentContact, small_edit_contacts_name, small_edit_contacts_email, small_edit_contacts_phone)
-      }
-    } 
-  }  
-} else {
-  changeAssignedContact(contact_name)
-  for (let j = 0; j < loggedInUser.contacts.length; j++) {
-    const currentContact = loggedInUser.contacts[j];
+    for (let i = 0; i < users.length; i++) {
+      const currentUsers = users[i];
+      loopThroughUserAndRenderContactInformation(currentUsers, contact_email)
+    }  
+  } else {
+    changeAssignedContact(contact_name)
+    loopThroughUserAndRenderContactInformation(loggedInUser, contact_email)
+  }
+ }
+
+
+ function extractInputValueFromCorrectInputs(btn) {
+  if (btn == 'mobile') {
+    small_edit_contacts_name = document.getElementById("small-edit-contacts-name-mobile").value
+    small_edit_contacts_email = document.getElementById("small-edit-contacts-email-mobile").value
+    small_edit_contacts_phone = document.getElementById("small-edit-contacts-phone-mobile").value
+  } else {
+    small_edit_contacts_name = document.getElementById("small-edit-contacts-name").value
+    small_edit_contacts_email = document.getElementById("small-edit-contacts-email").value
+    small_edit_contacts_phone = document.getElementById("small-edit-contacts-phone").value
+  }
+ }
+
+
+ function loopThroughUserAndRenderContactInformation(user, contact_email) {
+  for (let j = 0; j < user.contacts.length; j++) {
+    const currentContact = user.contacts[j];
     if (currentContact.contact_email == contact_email) {
       changeContactAndRenderContactsInformationRight(currentContact, small_edit_contacts_name, small_edit_contacts_email, small_edit_contacts_phone)
     }
-   }
-  }
+  } 
+ }
+
+
+ function styleButtonWithRedBorder(btn) {
+  if (btn == 'mobile') {
+    document.querySelector("#edit-contact-create-btn-mobile").style.border = `1px solid rgb(255,0,0)`
+    document.querySelector(".edit-contact-email-exist-mobile").classList.remove("d-none");
   } else {
-    if (btn == 'mobile') {
-      document.querySelector("#edit-contact-create-btn-mobile").style.border = `1px solid rgb(255,0,0)`
-      document.querySelector(".edit-contact-email-exist-mobile").classList.remove("d-none");
-    } else {
-      document.querySelector("#edit-contact-create-btn").style.border = `1px solid rgb(255,0,0)`
-      document.querySelector(".edit-contact-email-exist").classList.remove("d-none");
-    }
+    document.querySelector("#edit-contact-create-btn").style.border = `1px solid rgb(255,0,0)`
+    document.querySelector(".edit-contact-email-exist").classList.remove("d-none");
   }
-
- } 
-
+ }
 
 async function changeContactAndRenderContactsInformationRight(currentContact, small_edit_contacts_name, small_edit_contacts_email, small_edit_contacts_phone) {
   currentContact.contact_name = small_edit_contacts_name
@@ -67,29 +79,25 @@ async function changeAssignedContact(contact_name) {
   if (loggedInUser.name !== "Guest") {
     for (let i = 0; i < users.length; i++) {
       const currentUsers = users[i];
-    for (let k = 0; k < currentUsers.tasks.length; k++) {
-      const currentContact = currentUsers.tasks[k];
-      for (let l = 0; l < currentContact.assignedContacts.length; l++) {
-        if (currentContact.assignedContacts[l] == contact_name) {
-          currentContact.assignedContacts[l] = small_edit_contacts_name
-          await saveUsersArray()
-        }
-      }
-    } 
+      await assignNewContactName(currentUsers, contact_name)
   }
-} else {
-  for (let k = 0; k < loggedInUser.tasks.length; k++) {
-    const currentContact = loggedInUser.tasks[k];
-    for (let l = 0; l < currentContact.assignedContacts.length; l++) {
-      if (currentContact.assignedContacts[l] == contact_name) {
-        currentContact.assignedContacts[l] = small_edit_contacts_name
-        saveLoggedInUser()
-      }
+} else {  
+  await assignNewContactName(loggedInUser, contact_name)
   }
-}
-}
 }
 
+
+async function assignNewContactName(user, contact_name) {
+  for (let i = 0; i < user.tasks.length; i++) {
+    const currentContact = user.tasks[i];
+    for (let j = 0; j < currentContact.assignedContacts.length; j++) {
+      if (currentContact.assignedContacts[j] == contact_name) {
+        currentContact.assignedContacts[j] = small_edit_contacts_name
+        await saveDependingOnUserName()
+      }
+    }
+  } 
+}
 
 function addSelectContactOption(index) {
   let add_contact_input = document.getElementById("add-contact-input").value
@@ -99,20 +107,20 @@ function addSelectContactOption(index) {
     for (let i = 0; i < users.length; i++) {
       const currentUser = users[i];
       if(currentUser.email == loggedInUser.email) {
-          for (let j = 0; j < currentUser.contacts.length; j++) {
-            const currentContact = currentUser.contacts[j];
-            if (currentContact.contact_email == add_contact_input) {
-              custom_select_contact_container[index].innerHTML += `<label class="custom-select-option"> ${currentContact.contact_name} <input onclick="returnSelectedContacts(this)" value="${currentContact.contact_name}" class="selected-option" type="checkbox" autocomplete="off"></label>`
-            } 
-          }
+        addLabelContactOptionToSelectContactContainer(currentUser, custom_select_contact_container, add_contact_input, index)
       }
     }
   } else {
-    for (let i = 0; i < loggedInUser.contacts.length; i++) {
-      const currentContact = loggedInUser.contacts[i];   
-      if (currentContact.contact_email == add_contact_input)
+    addLabelContactOptionToSelectContactContainer(loggedInUser, custom_select_contact_container, add_contact_input, index)
+  }
+}
+
+function addLabelContactOptionToSelectContactContainer(user, custom_select_contact_container, add_contact_input, index) {
+  for (let j = 0; j < user.contacts.length; j++) {
+    const currentContact = user.contacts[j];
+    if (currentContact.contact_email == add_contact_input) {
       custom_select_contact_container[index].innerHTML += `<label class="custom-select-option"> ${currentContact.contact_name} <input onclick="returnSelectedContacts(this)" value="${currentContact.contact_name}" class="selected-option" type="checkbox" autocomplete="off"></label>`
-    }
+    } 
   }
 }
 
@@ -153,6 +161,12 @@ function returnSuitableCategoryColor(task_topics, category, index) {
         task_topics[index].classList.add("blue")
       }
       break;
+    default:
+      if (index === "") {
+        task_topics.classList.add("gray")
+      } else {
+        task_topics[index].classList.add("gray")
+      }
     } 
 }
 

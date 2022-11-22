@@ -80,7 +80,7 @@ function addNewContactOption(index) {
 }
 
 function setColorCategory(category_color, add_category_input) {
-  returnSuitableCategoryColor(category_color, add_category_input)
+  returnSuitableCategoryColor(category_color, add_category_input, category_color.length - 1)
 }
 
 function showAddSubtask() {

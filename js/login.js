@@ -46,9 +46,9 @@ document.querySelector('.guest-btn').addEventListener('click', () => {
     
 function sendEmail() {
     showPopup("forgotPassword-popup")
-    // document.querySelector(".white-overlay").style.backgroundColor = "white"
-    // document.querySelector(".white-overlay").style.opacity = 0.25
-    // document.querySelector(".popups").style.opacity = 1
+    document.querySelector(".popups").style.opacity = 1
+    document.querySelector(".white-overlay").style.backgroundColor = "white"
+    document.querySelector(".white-overlay").style.opacity = 0.25
     setTimeout(() => {
         location.href = "resetPassword.html"
     }, 2000)
@@ -56,9 +56,9 @@ function sendEmail() {
 
 function resetPassword() {
     showPopup("resetPassword-popup")
-    // document.querySelector(".white-overlay").style.backgroundColor = "white"
-    // document.querySelector(".white-overlay").style.opacity = 0.25
-    // document.querySelector(".popups").style.opacity = 1
+    document.querySelector(".popups").style.opacity = 1
+    document.querySelector(".white-overlay").style.backgroundColor = "white"
+    document.querySelector(".white-overlay").style.opacity = 0.25
     setTimeout(() => {
         location.href = "../login.html"
     }, 2000)
