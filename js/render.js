@@ -388,12 +388,16 @@ async function addContactToBook(btn) {
   }
 
     if (small_add_contacts_name !== "" && small_add_contacts_email !== "" && small_add_contacts_phone !== "") {
+      
       if (loggedInUser.name == "Guest") {
       pushAddedContactIntoUser(loggedInUser, contact)
       } else {
         for (let i = 0; i < users.length; i++) {
           const currentUser = users[i];
-          pushAddedContactIntoUser(currentUser, contact)
+          if (loggedInUser.email == currentUser.email) {
+            pushAddedContactIntoUser(currentUser, contact)
+          }
+          
         }
       }
     } 
@@ -433,28 +437,32 @@ function pushContactInfo(small_add_contacts_name, small_add_contacts_email, smal
   contact_phones.push(small_add_contacts_phone)
 }
 
-function pushAddedContactIntoUser(user, contact) {
+async function pushAddedContactIntoUser(user, contact) {
   if (user.name == "Guest") {
-    loggedInUser.contacts.push(contact)
+    user.contacts.push(contact)
     getUserColor()
-  }  
+  } else {
+    user.contacts.push(contact)
+    getUserColor()
+    await saveUsersArray()
+  }
 }
 
 
-function showAddedContactInContactBook(small_add_contacts_name,small_add_contacts_email,small_add_contacts_phone, btn) {
+async function showAddedContactInContactBook(small_add_contacts_name,small_add_contacts_email,small_add_contacts_phone, btn) {
   let small_add_contacts_name_general;
   if (btn == 'mobile') {
     small_add_contacts_name_general = document.getElementById("small-add-contacts-name-mobile").value
   } else {
     small_add_contacts_name_general = document.getElementById("small-add-contacts-name").value
   }
-  saveDependingOnUserName()
+  await saveDependingOnUserName()
   let first_letter = small_add_contacts_name_general[0].toUpperCase()
 
   document.querySelector(`#contacts-${first_letter}`).classList.remove("d-none")
   document.querySelector(`.contacts-${first_letter}-data`).innerHTML += templateUserContactAddContact(small_add_contacts_name,small_add_contacts_email,small_add_contacts_phone)
       
-  loadContactBackgroundColor()
+  await loadContactBackgroundColor()
   showPopup("task-popup")
   closeSmallContacts()
 }

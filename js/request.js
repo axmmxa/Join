@@ -48,13 +48,13 @@ async function init() {
     initSummary()
   } 
   if (document.getElementById("board-body")) {
-    initBoard()
+    await initBoard()
   } 
   if (document.getElementById("addTask-body")) {
     initAddTask()
   } 
   if (document.getElementById("contacts-body")) {
-    initContacts()
+    await initContacts()
   } 
   if (document.getElementById("legal-notice-body")) {
     selectedLink("kanban-link-4")
@@ -82,9 +82,9 @@ function initAddTask() {
   custom_select_contact_container.innerHTML += `<label class="custom-select-option"> ${loggedInUser.name} (You) <input onclick="returnSelectedContacts(this)" value="${loggedInUser.name}" class="selected-option" type="checkbox" autocomplete="off"></label>`
 }
 
-function initContacts() {
+async function initContacts() {
   renderContactBook()
-  loadContactBackgroundColor()
+  await loadContactBackgroundColor()
   selectedLink("kanban-link-3")
   selectedLink("kanban-link-8")  
 }

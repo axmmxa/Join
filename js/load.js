@@ -43,11 +43,11 @@ async function saveEditedContact(contact_email, contact_name, btn) {
  } 
 
 
-function changeContactAndRenderContactsInformationRight(currentContact, small_edit_contacts_name, small_edit_contacts_email, small_edit_contacts_phone) {
+async function changeContactAndRenderContactsInformationRight(currentContact, small_edit_contacts_name, small_edit_contacts_email, small_edit_contacts_phone) {
   currentContact.contact_name = small_edit_contacts_name
   currentContact.contact_email = small_edit_contacts_email
   currentContact.contact_phone = small_edit_contacts_phone
-  saveDependingOnUserName()
+  await saveDependingOnUserName()
   if (document.querySelector(".contacts-left") && document.querySelector(".contacts-right")) {
     document.querySelector(".contacts-left").innerHTML = ""
     document.querySelector(".contacts-right").innerHTML = 
@@ -57,13 +57,13 @@ function changeContactAndRenderContactsInformationRight(currentContact, small_ed
     </button>
     `
     renderContactBook()
-    loadContactBackgroundColor() 
+    await loadContactBackgroundColor() 
   }
   location.reload(true)
 }
 
 
-function changeAssignedContact(contact_name) {
+async function changeAssignedContact(contact_name) {
   if (loggedInUser.name !== "Guest") {
     for (let i = 0; i < users.length; i++) {
       const currentUsers = users[i];
@@ -72,7 +72,7 @@ function changeAssignedContact(contact_name) {
       for (let l = 0; l < currentContact.assignedContacts.length; l++) {
         if (currentContact.assignedContacts[l] == contact_name) {
           currentContact.assignedContacts[l] = small_edit_contacts_name
-          saveUsersArray()
+          await saveUsersArray()
         }
       }
     } 
@@ -172,7 +172,7 @@ function getUserColor() {
 }  
 
 
-function randomBackgroundColorForUser(user_color) {
+async function randomBackgroundColorForUser(user_color) {
   randomBackgroundColorForUserContacts(user_color)
 
   for (let i = 0; i < users.length; i++) {
@@ -180,7 +180,7 @@ function randomBackgroundColorForUser(user_color) {
     if(currentUser.email == loggedInUser.email && currentUser["user-background-color"] == ""){
       let random_color_2 = user_color[Math.floor(Math.random() * 7)]
       currentUser["user-background-color"] = random_color_2
-      saveUsersArray()
+      await saveUsersArray()
     }
   }     
 }
@@ -262,7 +262,12 @@ async function loadContactBackgroundColor() {
   if (loggedInUser.name !== "Guest") {
   await getUsersFromBackend()
   let user_icons = document.querySelectorAll(".user-icon")
-  setBackgroundColor(BackgroundColorForContactBook, user_icons, loggedInUser)
+  for (let i = 0; i < users.length; i++) {
+    const currentUser = users[i];
+    if (currentUser.email == loggedInUser.email) {
+      setBackgroundColor(BackgroundColorForContactBook, user_icons, currentUser)
+    }
+  }
 } else {
   let user_icons = document.querySelectorAll(".user-icon")
   setBackgroundColor(BackgroundColorForContactBook, user_icons, loggedInUser) 
