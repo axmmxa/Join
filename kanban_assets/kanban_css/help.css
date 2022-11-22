@@ -18,6 +18,19 @@
     color: #005DFF;
 }
 
+.main-field > h1 {
+    color: #005DFF;
+}
+.main-field > h2 {
+    color: #005DFF;
+}
+
+.help-number {
+    font-size: 29px;
+    color:#005DFF;
+    margin-right: 10px;
+}
+
 .kanban-main::-webkit-scrollbar { 
     width: 10px;
     height: 4px;  

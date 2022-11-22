@@ -22,6 +22,19 @@
     color: #005DFF;
 }
 
+.main-field {
+    overflow-y: auto;
+    width: 60vw;
+    margin: auto;
+    padding-bottom:  20px;
+}
+
+.main-field > h1 {
+    color: #005DFF;
+}
+.main-field > h2 {
+    color: #005DFF;
+}
 
 .kanban-main::-webkit-scrollbar { 
     width: 10px;
