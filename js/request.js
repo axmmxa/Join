@@ -1,4 +1,4 @@
-setURL('https://gruppe-319.developerakademie.net/smallest_backend_ever')
+setURL('https://alexander-much.developerakademie.net/smallest_backend_ever')
 
 let amount_task_urgent = 0;
 let amount_to_do = 0;
@@ -68,8 +68,8 @@ function initSummary() {
   selectedLink("kanban-link-5")
 }
 
-function initBoard() {
-  updateHTML()
+async function initBoard() {
+  await updateHTML()
   loadBoardContactBackgroundColor()
   selectedLink("kanban-link-1")
   selectedLink("kanban-link-6")
@@ -115,11 +115,11 @@ function initUserIcon() {
     }
 }
 
-function saveDependingOnUserName() {
+async function saveDependingOnUserName() {
   if (loggedInUser.name == "Guest") {
     saveLoggedInUser() 
   } else {
-    saveUsersArray()
+    await saveUsersArray()
   }
 }
 
@@ -217,15 +217,15 @@ if (loggedInUser.name !== "Guest") {
 function addContactOptionToCustomSelectOption(id_task) {
     let custom_select_contact_container = document.querySelectorAll(".custom-select-contact-container")
                 
-    if (loggedInUser.name !== "Guest" && i) {
+    if (loggedInUser.name !== "Guest") {
         for (let i = 0; i < users.length; i++) {
             const currentUser = users[i];
-            for (let j = 0; j < currentUser.contact.length; j++) {
-                const currentContact = currentUser.contact[j];
+            for (let j = 0; j < currentUser.contacts.length; j++) {
+                const currentContact = currentUser.contacts[j];
                 custom_select_contact_container[custom_select_contact_container.length - 1].innerHTML += `<label class="custom-select-option"> ${currentContact.contact_name}<input onclick="returnSelectedContacts(this)" value="${currentContact.contact_name}" class="selected-option contact-option" type="checkbox" autocomplete="off"></label>` 
             }
         }
-        
+        checkAssignedContactsInEditTask(id_task)
     } else {
         for (let j = 0; j < loggedInUser.contacts.length; j++) {
             const currentContact = loggedInUser.contacts[j];
@@ -237,6 +237,7 @@ function addContactOptionToCustomSelectOption(id_task) {
 
 function checkAssignedContactsInEditTask(id_task) {
     let assignedContactName;
+    let selected_contact_option = document.querySelectorAll(".contact-option")
     if (loggedInUser.name !== "Guest") {
         for (let i = 0; i < users.length; i++) {
             const currentUser = users[i];
@@ -293,15 +294,10 @@ async function deleteTask(id_task) {
                         index = id_array.indexOf(id_array[k])
                         currentUser.tasks.splice(index, 1)
                         await saveUsersArray()
-                        // console.log(users)
-                        // updateHTML()
-                        // closeBoardTaskInfo()
                     }
                 }
             }
         }
-        
-        
     } else {
         let id_array = []
         let index
@@ -316,9 +312,6 @@ async function deleteTask(id_task) {
                 index = id_array.indexOf(id_array[j])
                 loggedInUser.tasks.splice(index, 1)
                 saveLoggedInUser()
-
-                // updateHTML()
-                // closeBoardTaskInfo()
             }
         }
         

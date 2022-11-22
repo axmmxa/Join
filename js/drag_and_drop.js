@@ -119,7 +119,10 @@ function addUserIcons(element) {
 }
 
 function startDragging(id_task) {
-  currentDraggedElement = id_task;
+  let id_array = []
+  id_array.push(id_task)
+
+  currentDraggedElement = id_array.indexOf(id_task);
   console.log(currentDraggedElement);
 }
 
