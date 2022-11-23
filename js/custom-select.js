@@ -73,16 +73,17 @@ function addNewContactOption(index) {
 
   resetContactOptions(checkboxes, index);
 
-  if (document.getElementById("addTask-body")) {
-    let custom_select_category_container = document.querySelector(".custom-select-category-container");
+  if (document.getElementById("addTask-body") || document.getElementById("board-body")) {
+    let custom_select_category_container_add_task = document.querySelectorAll(".custom-select-options-container-add-task");
     let add_category_input = document.getElementById("add-category-input").value;
 
     if (index == 1) {
-      custom_select_category_container.innerHTML += `<label onclick="returnSelectedCategory(id)" id="${add_category_input}" class="custom-select-option-category">${add_category_input} <span class="category-color"></span></label>`;
+      console.log(custom_select_category_container_add_task)
+      custom_select_category_container_add_task[index].innerHTML += `<label onclick="returnSelectedCategory(id)" id="${add_category_input}" class="custom-select-option-category">${add_category_input} <span class="category-color"></span></label>`;
       let category_color = document.querySelectorAll(".category-color");
       setColorCategory(category_color, add_category_input);
     }
-    closeAddContact(index)
+    // closeSmallAddTask(index)
   }
 
 }

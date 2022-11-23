@@ -30,3 +30,23 @@ async function addUser(user) {
   }
 }
 
+    
+function sendEmail() {
+  showPopup("forgotPassword-popup")
+  document.querySelector(".popups").style.opacity = 1
+  document.querySelector(".white-overlay").style.backgroundColor = "white"
+  document.querySelector(".white-overlay").style.opacity = 0.25
+  setTimeout(() => {
+      location.href = "resetPassword.html"
+  }, 2000)
+}
+
+function resetPassword() {
+  showPopup("resetPassword-popup")
+  document.querySelector(".popups").style.opacity = 1
+  document.querySelector(".white-overlay").style.backgroundColor = "white"
+  document.querySelector(".white-overlay").style.opacity = 0.25
+  setTimeout(() => {
+      location.href = "../login.html"
+  }, 2000)
+}

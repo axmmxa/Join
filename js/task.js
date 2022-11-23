@@ -171,19 +171,19 @@ async function addTask(task,id) {
   }
   
   if(id == 'urgent-btn') {
-    changeStyleSelectedPriorityButton('red', 'kanban_img/priority_icons/urgent_white.png' , 'white', 'kanban_img/priority_icons/urgent-red.png', 'Urgent', id)
+    changeStyleSelectedPriorityButton('red', 'kanban_img/priority_icons/urgent_white.png' , 'white', 'kanban_img/priority_icons/urgent-red.png', 'Urgent', id, "urgent-btn-priority-img")
   } else if(id == "medium-btn") {
-    changeStyleSelectedPriorityButton('orange', 'kanban_img/priority_icons/medium_urgent_white.png', 'white', 'kanban_img/priority_icons/middle-urgent-orange.png', 'Medium', id)
+    changeStyleSelectedPriorityButton('orange', 'kanban_img/priority_icons/medium_urgent_white.png', 'white', 'kanban_img/priority_icons/middle-urgent-orange.png', 'Medium', id, "medium-btn-priority-img")
   } else if(id == 'non-urgent-btn') {
-    changeStyleSelectedPriorityButton('lightgreen', 'kanban_img/priority_icons/non_urgent_white.png', 'white', 'kanban_img/priority_icons/non-urgent-green.png', 'Low', id)
+    changeStyleSelectedPriorityButton('lightgreen', 'kanban_img/priority_icons/non_urgent_white.png', 'white', 'kanban_img/priority_icons/non-urgent-green.png', 'Low', id, "non-urgent-btn-priority-img")
   }
   
  }
 
 
-function changeStyleSelectedPriorityButton(backgroundColor, reset_img_path, color, img_path, priority, id) {
+function changeStyleSelectedPriorityButton(backgroundColor, reset_img_path, color, img_path, priority, id, id_img) {
   document.getElementById(id).style.backgroundColor = backgroundColor
-  document.getElementById('non-urgent-btn-priority-img').setAttribute('src', reset_img_path)
+  document.getElementById(id_img).setAttribute('src', reset_img_path)
   document.getElementById(id).style.color = color
   priority_img_path = img_path
   selected_priority = priority

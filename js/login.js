@@ -2,7 +2,7 @@ const URLParams = new URLSearchParams(window.location.search)
 const msg = URLParams.get("msg")
 let msgBox = document.getElementById("msgBox")
 
-if (msg && document.getElementById("login-body")) {
+if (msg) {
     msgBox.innerHTML = msg
     setTimeout(() => {
         msgBox.style.display = "none"
@@ -25,7 +25,13 @@ if (msg && document.getElementById("login-body")) {
         console.log("User gefunden") 
         saveLoggedInUser()
         window.location.href = './summary.html'
-    }   
+    } else {
+        msgBox.innerHTML = "Email or Password are incorrect. Please try again!"
+        msgBox.style.display = "block"
+        setTimeout(() => {
+            msgBox.style.display = "none"
+        },2500)
+    }
 }
 
 document.querySelector('.guest-btn').addEventListener('click', () => {
@@ -43,26 +49,6 @@ document.querySelector('.guest-btn').addEventListener('click', () => {
     window.location.href = './summary.html'
 })
  
-    
-function sendEmail() {
-    showPopup("forgotPassword-popup")
-    document.querySelector(".popups").style.opacity = 1
-    document.querySelector(".white-overlay").style.backgroundColor = "white"
-    document.querySelector(".white-overlay").style.opacity = 0.25
-    setTimeout(() => {
-        location.href = "resetPassword.html"
-    }, 2000)
-}
-
-function resetPassword() {
-    showPopup("resetPassword-popup")
-    document.querySelector(".popups").style.opacity = 1
-    document.querySelector(".white-overlay").style.backgroundColor = "white"
-    document.querySelector(".white-overlay").style.opacity = 0.25
-    setTimeout(() => {
-        location.href = "../login.html"
-    }, 2000)
-}
         
         
     

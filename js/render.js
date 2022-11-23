@@ -412,13 +412,13 @@ async function addContactToBook(btn) {
       if (small_add_contacts_name !== "" && small_add_contacts_email !== "" && small_add_contacts_phone !== "") {
         pushDependingOnUser(contact)
       } 
-      showAddedContactDependingOnUser() 
+      showAddedContactDependingOnUser(btn) 
   } else {
     styleCreateContactButton(btn)
   }
 } 
 
-function showAddedContactDependingOnUser() {
+function showAddedContactDependingOnUser(btn) {
   if (loggedInUser.name !== "Guest") {  
     showAddedContactInContactBook(small_add_contacts_name,small_add_contacts_email,small_add_contacts_phone, btn)
   } else {
@@ -497,7 +497,7 @@ async function showAddedContactInContactBook(small_add_contacts_name,small_add_c
   await loadContactBackgroundColor()
   showPopup("task-popup")
   
-  if (btn) {
+  if (btn == "mobile") {
     closeSmallContactsMobile()
   } else {
     closeSmallContacts()
