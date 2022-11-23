@@ -159,64 +159,61 @@ function templateParentSmallEditContacts(contact_name,contact_email,contact_phon
 
 
 function templateSmallEditTask(id_task, title, description, due_date) { 
-
     return   `
     <div id="edit-task-${id_task}" class="edit-task centered">  
         <div class="add-task-container-edit">
-             
-                <span onclick="closeSmallEditTask(${id_task})" class="close-x-absolute">X</span>  
+            <span onclick="closeSmallEditTask(${id_task})" class="close-x-absolute">X</span>  
             
-        
             <form onsubmit="saveEditedTask(${id_task}); return false" class="task-form">
-                        <input value="${title}" id="input-title" class="input-title" type="text" placeholder="Enter a title">
+                    <input value="${title}" id="input-title" class="input-title" type="text" placeholder="Enter a title">
+                    <div class="description-container">
+                        <span>Description</span>
+                        <textarea id="textarea" placeholder="Enter a description">${description}</textarea>
+                    </div>
+                    <div class="due-date-container">
+                        <label class="label-flex" for="due-date">Due date<input value="${due_date}" placeholder="dd/mm/yyyy" id="due-date" type="date"></label>
+                    </div>
+                    <div class="priority-btn-container">
+                        <a id="urgent-btn-${id_task}" class="urgent-btn priority" onclick="setPrioritySmallEditTask('Urgent', ${id_task})">Urgent <img id="urgent-btn-priority-img-${id_task}" class="priority-urgent-img" src="kanban_img/priority_icons/urgent-red.png"></a>
+                        <a id="medium-btn-${id_task}" class="medium-btn priority" onclick="setPrioritySmallEditTask('Medium', ${id_task})">Medium <img  id="medium-urgent-btn-priority-img-${id_task}" class="priority-urgent-img" src="kanban_img/priority_icons/middle-urgent-orange.png"></a>
+                        <a id="non-urgent-btn-${id_task}" class="non-urgent-btn priority" onclick="setPrioritySmallEditTask('Low', ${id_task})">Low <img id="non-urgent-btn-priority-img-${id_task}" class="priority-urgent-img" src="kanban_img/priority_icons/non-urgent-green.png"></a>
+                    </div>
+                    
 
-                        <div class="description-container">
-                            <span>Description</span>
-                            <textarea id="textarea" placeholder="Enter a description">${description}</textarea>
-                        </div>
-
-                        <div class="due-date-container">
-                            <label class="label-flex" for="due-date">Due date<input value="${due_date}" placeholder="dd/mm/yyyy" id="due-date" type="date"></label>
-                        </div>
-
-                        <div class="priority-btn-container">
-                            <a id="urgent-btn-${id_task}" class="urgent-btn priority" onclick="setPrioritySmallEditTask('Urgent', ${id_task})">Urgent <img id="urgent-btn-priority-img-${id_task}" class="priority-urgent-img" src="kanban_img/priority_icons/urgent-red.png"></a>
-                            <a id="medium-btn-${id_task}" class="medium-btn priority" onclick="setPrioritySmallEditTask('Medium', ${id_task})">Medium <img  id="medium-urgent-btn-priority-img-${id_task}" class="priority-urgent-img" src="kanban_img/priority_icons/middle-urgent-orange.png"></a>
-                            <a id="non-urgent-btn-${id_task}" class="non-urgent-btn priority" onclick="setPrioritySmallEditTask('Low', ${id_task})">Low <img id="non-urgent-btn-priority-img-${id_task}" class="priority-urgent-img" src="kanban_img/priority_icons/non-urgent-green.png"></a>
-                        </div>
-                        
-    
-                        <div class="contacts-container">
-                            <div class="add-option d-none">
-                                <input id="add-contact-input" class="add-option-input" type="text" placeholder="Contact email">
-                                <div class="add-option-btn-container">
-                                    <img onclick="closeAddContact(0)" class="close-x-blue-btn" src="kanban_img/close_icons/close_x_blue.png">
-                                    <img onclick="addNewContactOption(0)" class="blue-clear-btn" src="kanban_img/clear_icons/blue_clear.png">
-                                </div>
-                            </div>
-
-                            <div class="custom-select" id="contacts">
-                                <div onclick="showCustomSelectOptions(${id_task})" class="first-select-option-container">
-                                    <span id="first-select-contacts" class="first-select-option">Select contacts to assign</span>
-                                    <img class="arrow-down" src="kanban_img/arrow_icons/arrow_select.png" />
-                                </div>
-                                <div class="custom-select-options-container d-none">
-                                    <div class="custom-select-contact-container">
-
-                                    </div> 
-                                    <label onclick="showAddContact(0)" class="custom-select-option">Invite new contact <img src="kanban_img/invite_contact.png"></label>
-                                </div>
+                    <div class="contacts-container">
+                        <div class="add-option d-none">
+                            <input id="add-contact-input" class="add-option-input" type="text" placeholder="Contact email">
+                            <div class="add-option-btn-container">
+                                <img onclick="closeAddContact(0)" class="close-x-blue-btn" src="kanban_img/close_icons/close_x_blue.png">
+                                <img onclick="addNewContactOption(0)" class="blue-clear-btn" src="kanban_img/clear_icons/blue_clear.png">
                             </div>
                         </div>
-
-                        <div class="margin align-right">
-                            <button class="create-btn">Ok <img class="white-clear" src="kanban_img/clear_icons/white_clear.png"/></button>
+                        <div class="custom-select" id="contacts">
+                            ${templateCustomSelect(id_task)}
                         </div>
-
-                    </form>          
+                    </div>
+                    <div class="margin align-right">
+                        <button class="create-btn">Ok <img class="white-clear" src="kanban_img/clear_icons/white_clear.png"/></button>
+                    </div>
+            </form>          
         </div>
     </div>
     `
+}
+
+
+function templateCustomSelect(id_task) {
+   return `<div onclick="showCustomSelectOptionEditTask(${id_task})" class="first-select-option-container">
+                <span id="first-select-contacts" class="first-select-option">Select contacts to assign</span>
+                <img class="arrow-down" src="kanban_img/arrow_icons/arrow_select.png" />
+            </div>
+
+            <div class="custom-select-options-container d-none">
+            <div class="custom-select-contact-container">
+
+            </div> 
+            <label onclick="showAddContact(0)" class="custom-select-option">Invite new contact <img src="kanban_img/invite_contact.png"></label>
+            </div>`
 }
 
 function templateShowTaskInfo(userTaskId, id_task, j) {
@@ -283,7 +280,7 @@ function templateSmallAddTask() {
                             <span id="first-select-contacts" class="first-select-option">Select contacts to assign</span>
                             <img class="arrow-down" src="kanban_img/arrow_icons/arrow_select.png" />
                         </div>
-                        <div class="custom-select-options-container d-none" >
+                        <div class="custom-select-options-container-add-task d-none" >
                             <div class="custom-select-contact-container">
 
                             </div> 
@@ -311,7 +308,7 @@ function templateSmallAddTask() {
                                     <span id="first-select-task-category" class="first-select-option">Select task category</span>
                                     <img class="arrow-down" src="kanban_img/arrow_icons/arrow_select.png"/>
                                 </div>
-                                <div class="custom-select-options-container d-none">
+                                <div class="custom-select-options-container-add-task d-none">
                                     <label onclick="showAddContact(1)" class="custom-select-option">New Category</label>
                                     <div class="custom-select-category-container">
                                         <label onclick="returnSelectedCategory(id)" id="Sales" class="custom-select-option-category">Sales <span class="category-color pink"></span></label>

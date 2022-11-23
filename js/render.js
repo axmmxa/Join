@@ -166,7 +166,6 @@ function setPrioritySmallEditTask(id, id_task) {
    function changeStyleSelectedPriorityButtonEditTask(backgroundColor, reset_img_path, color, img_path, priority, id_task) {
     let id_style;
     let id_img;
-
     if(priority == `Urgent`) {
       id_style =  `urgent-btn-${id_task}`
       id_img = `urgent-btn-priority-img-${id_task}`
@@ -177,7 +176,6 @@ function setPrioritySmallEditTask(id, id_task) {
       id_style = `non-urgent-btn-${id_task}`
       id_img = `non-urgent-btn-priority-img-${id_task}`
     }
-
     document.getElementById(id_style).style.backgroundColor = backgroundColor
     document.getElementById(id_img).setAttribute('src', reset_img_path)
     document.getElementById(id_style).style.color = color
@@ -185,20 +183,46 @@ function setPrioritySmallEditTask(id, id_task) {
     selected_priority = priority
    }
 
-function renderSmallEditTask(id_task,title,description,due_date,priority) {
-    if (document.querySelector(`#edit-task-${id_task}`)) {
-        document.querySelector(`#edit-task-${id_task}`).classList.remove("d-none")
-        setPrioritySmallEditTask(priority, id_task)
-        setOpacity(0.5)
-    } else {
-        setOpacity(0.5)
-        document.querySelector("body").innerHTML += templateSmallEditTask(id_task,title,description,due_date) 
-        setPrioritySmallEditTask(priority, id_task)
-        let custom_select_contact_container = document.querySelectorAll(".custom-select-contact-container")
-        console.log(custom_select_contact_container)
-        custom_select_contact_container[custom_select_contact_container.length - 1].innerHTML += `<label class="custom-select-option"> ${loggedInUser.name} (You) <input onclick="returnSelectedContacts(this)" value="${loggedInUser.name}" class="selected-option contact-option" type="checkbox" autocomplete="off"></label>`
-        addContactOptionToCustomSelectOption(id_task)
-    }
+async function renderSmallEditTask(id_task,title,description,due_date,priority) {
+  id_task = await changeIdToCorrectIndex(id_task)
+  
+  if (document.querySelector(`#edit-task-${id_task}`)) {
+    document.querySelector(`#edit-task-${id_task}`).classList.remove("d-none")
+    setPrioritySmallEditTask(priority, id_task)
+    setOpacity(0.5)
+  } else {
+    setOpacity(0.5)
+    document.querySelector("body").innerHTML += templateSmallEditTask(id_task,title,description,due_date) 
+    setPrioritySmallEditTask(priority, id_task)
+    changeArgumentIdFromCustomSelectToCorrectIndex()
+    addContactOptionToCustomSelectOption(id_task)
+  }
+}
+
+async function changeIdToCorrectIndex(id_task) {
+    
+  for (let i = 0; i < users.length; i++) {
+    const currentUser = users[i]
+    if (loggedInUser.email == currentUser.email) {
+      id_task = await getIndexOfIdTask(currentUser, id_task)
+    }          
+  }
+  if (loggedInUser.name == "Guest") {
+    id_task = await getIndexOfIdTask(loggedInUser, id_task)
+  }
+  
+  return id_task
+}
+
+function changeArgumentIdFromCustomSelectToCorrectIndex() {
+  let custom_select_contact_container = document.querySelectorAll(".custom-select-contact-container")
+  console.log(custom_select_contact_container)
+  custom_select_contact_container[custom_select_contact_container.length - 1].innerHTML += `<label class="custom-select-option"> ${loggedInUser.name} (You) <input onclick="returnSelectedContacts(this)" value="${loggedInUser.name}" class="selected-option contact-option" type="checkbox" autocomplete="off"></label>`
+  
+  let first_select_option_container = document.querySelectorAll(".first-select-option-container")
+  
+  first_select_option_container[custom_select_contact_container.length - 1].setAttribute("onclick", `showCustomSelectOptionEditTask(${custom_select_contact_container.length - 1})`)
+
 }
 
 async function showTaskInfo(id_task) {
@@ -290,7 +314,7 @@ function renderBoardTaskInfo(id_task) {
   } else {
       showTaskInfo(id_task)
       setOpacity(0.5)
-      }
+  }
 }
     
 
@@ -376,47 +400,55 @@ function renderTemplateContactInformation(index, name, email) {
 
 async function addContactToBook(btn) {
   setCorrectInputValueFromAddContact(btn)
-  
   if (!checkContactEmailExist(small_add_contacts_email)) {
-  pushContactInfo(small_add_contacts_name, small_add_contacts_email, small_add_contacts_phone)
-
-  let contact = {
-    "contact_name": capitalizeFirstLetter(small_add_contacts_name),
-    "contact_email": small_add_contacts_email,
-    "contact_phone": small_add_contacts_phone,
-    "contact-background-color": ""
-  }
-
-    if (small_add_contacts_name !== "" && small_add_contacts_email !== "" && small_add_contacts_phone !== "") {
-      
-      if (loggedInUser.name == "Guest") {
-      pushAddedContactIntoUser(loggedInUser, contact)
-      } else {
-        for (let i = 0; i < users.length; i++) {
-          const currentUser = users[i];
-          if (loggedInUser.email == currentUser.email) {
-            pushAddedContactIntoUser(currentUser, contact)
-          }
-          
-        }
-      }
-    } 
-      if (loggedInUser.name !== "Guest") {  
-        showAddedContactInContactBook(small_add_contacts_name,small_add_contacts_email,small_add_contacts_phone, btn)
-      } else {
-        showAddedContactInContactBook(small_add_contacts_name,small_add_contacts_email,small_add_contacts_phone, btn)
-      }
-  } else {
-    if (btn == 'mobile') {
-      document.querySelector("#add-contact-create-btn-mobile").style.border = `1px solid rgb(255,0,0)`
-      document.querySelector(".add-contact-email-exist-mobile").classList.remove("d-none");
-    } else {
-      document.querySelector("#add-contact-create-btn").style.border = `1px solid rgb(255,0,0)`
-      document.querySelector(".add-contact-email-exist").classList.remove("d-none");
+    pushContactInfo(small_add_contacts_name, small_add_contacts_email, small_add_contacts_phone)
+    
+    let contact = {
+      "contact_name": capitalizeFirstLetter(small_add_contacts_name),
+      "contact_email": small_add_contacts_email,
+      "contact_phone": small_add_contacts_phone,
+      "contact-background-color": ""
     }
+      if (small_add_contacts_name !== "" && small_add_contacts_email !== "" && small_add_contacts_phone !== "") {
+        pushDependingOnUser(contact)
+      } 
+      showAddedContactDependingOnUser() 
+  } else {
+    styleCreateContactButton(btn)
   }
-  
 } 
+
+function showAddedContactDependingOnUser() {
+  if (loggedInUser.name !== "Guest") {  
+    showAddedContactInContactBook(small_add_contacts_name,small_add_contacts_email,small_add_contacts_phone, btn)
+  } else {
+    showAddedContactInContactBook(small_add_contacts_name,small_add_contacts_email,small_add_contacts_phone, btn)
+  }
+}
+
+function styleCreateContactButton(btn) {
+  if (btn == 'mobile') {
+    document.querySelector("#add-contact-create-btn-mobile").style.border = `1px solid rgb(255,0,0)`
+    document.querySelector(".add-contact-email-exist-mobile").classList.remove("d-none");
+  } else {
+    document.querySelector("#add-contact-create-btn").style.border = `1px solid rgb(255,0,0)`
+    document.querySelector(".add-contact-email-exist").classList.remove("d-none");
+  }
+}
+
+function pushDependingOnUser(contact) {
+  if (loggedInUser.name == "Guest") {
+    pushAddedContactIntoUser(loggedInUser, contact)
+    } else {
+      for (let i = 0; i < users.length; i++) {
+        const currentUser = users[i];
+        if (loggedInUser.email == currentUser.email) {
+          pushAddedContactIntoUser(currentUser, contact)
+        }
+        
+      }
+    }
+}
 
 
 function setCorrectInputValueFromAddContact(btn) {
@@ -464,6 +496,11 @@ async function showAddedContactInContactBook(small_add_contacts_name,small_add_c
       
   await loadContactBackgroundColor()
   showPopup("task-popup")
-  closeSmallContacts()
+  
+  if (btn) {
+    closeSmallContactsMobile()
+  } else {
+    closeSmallContacts()
+  }
 }
     

@@ -1,4 +1,4 @@
-setURL('https://alexander-much.developerakademie.net/smallest_backend_ever')
+setURL('https://gruppe-319.developerakademie.net/smallest_backend_ever')
 
 let amount_task_urgent = 0;
 let amount_to_do = 0;
@@ -267,33 +267,35 @@ function checkContactsNameInEditTask(user, assignedContactName, selected_contact
 }
 
 async function deleteTask(id_task) {
-    let id_array = []
-    let index
-    
     console.log(users)
     if (loggedInUser.name !== "Guest") {
         for (let i = 0; i < users.length; i++) {
             const currentUser = users[i];
-            await getIndexOfIdTask(currentUser, id_array, index) 
+            id_task = await getIndexOfIdTask(currentUser, id_task) 
+            currentUser.tasks.splice(id_task, 1)
+            await saveUsersArray()
         }
     } else {
-      await getIndexOfIdTask(loggedInUser, id_array, index) 
-            
+      id_task = await getIndexOfIdTask(loggedInUser, id_task) 
+      loggedInUser.tasks.splice(id_task, 1)
+      saveLoggedInUser()
     }
     location.reload(true)
 }
 
 
-async function getIndexOfIdTask(user,id_array, index) {
-  for (let j = 0; j < currentUser.tasks.length; j++) {
-    let id_tasks = currentUser.tasks[j].id_task
+async function getIndexOfIdTask(user, id_task) {
+  let id_array = [];
+  let index;
+
+  for (let j = 0; j < user.tasks.length; j++) {
+    let id_tasks = user.tasks[j].id_task
     id_array.push(id_tasks) 
 }  
-for (let k = 0; k < currentUser.tasks.length; k++) {
+for (let k = 0; k < user.tasks.length; k++) {
     if (id_task == id_array[k]) {
         index = id_array.indexOf(id_array[k])
-        currentUser.tasks.splice(index, 1)
-        await saveUsersArray()
+        return index
     }
 }
 }

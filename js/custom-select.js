@@ -1,15 +1,22 @@
 function showCustomSelectOptions(index) {
-  let selects = document.querySelectorAll(".custom-select-options-container");
-
+  let selects = document.querySelectorAll(".custom-select-options-container-add-task");
+  
   if (
     document.getElementById("addTask-body") ||
     document.getElementById("contacts-body") || document.getElementById("board-body")
   ) {
-    selects[index].classList.toggle("d-none");
-  } else {
-    selects[selects.length - 1].classList.toggle("d-none");
-  }
+    selects[index].classList.toggle("d-none"); 
+  } // else {
+  //   selects[selects.length - 1].classList.toggle("d-none");
+  // }
 }
+
+function showCustomSelectOptionEditTask(index) {
+  let edit_task_selects = document.querySelectorAll(".custom-select-options-container");
+  edit_task_selects[index].classList.toggle("d-none")
+}
+
+
 
 function showCustomSelectOptionsTaskInfo() {
   document
@@ -70,10 +77,11 @@ function addNewContactOption(index) {
     let custom_select_category_container = document.querySelector(".custom-select-category-container");
     let add_category_input = document.getElementById("add-category-input").value;
 
-    custom_select_category_container.innerHTML += `<label onclick="returnSelectedCategory(id)" id="${add_category_input}" class="custom-select-option-category">${add_category_input} <span class="category-color"></span></label>`;
-    let category_color = document.querySelectorAll(".category-color");
-
-    setColorCategory(category_color, add_category_input);
+    if (index == 1) {
+      custom_select_category_container.innerHTML += `<label onclick="returnSelectedCategory(id)" id="${add_category_input}" class="custom-select-option-category">${add_category_input} <span class="category-color"></span></label>`;
+      let category_color = document.querySelectorAll(".category-color");
+      setColorCategory(category_color, add_category_input);
+    }
     closeAddContact(index)
   }
 

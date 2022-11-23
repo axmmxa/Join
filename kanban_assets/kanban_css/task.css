@@ -317,7 +317,7 @@
   
   .task-form-left::-webkit-scrollbar-track {
     background: transparent;   /* color of the tracking area */ 
-    margin-bottom: 450px;    
+    margin-bottom: 375px;    
   }
 
   .task-form-left::-webkit-scrollbar-thumb {

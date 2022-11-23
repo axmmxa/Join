@@ -38,6 +38,7 @@ function returnSelectedSubtasks(el) {
 }
 
 async function saveEditedTask(id_task) {
+
     let title = document.getElementById('input-title').value
     let due_date = document.getElementById('due-date').value
     let description = document.getElementById('textarea').value
@@ -45,10 +46,10 @@ async function saveEditedTask(id_task) {
     if (checkIfCreatedTaskIsEmpty(title,due_date,description) && loggedInUser.name !== "Guest") {
       for (let i = 0; i < users.length; i++) {
         const currentUser = users[i];
-        changeTaskJSON(currentUser, id_task, title, due_date, description)
+        await changeTaskJSON(currentUser, id_task, title, due_date, description)
     }
     } else {
-        changeTaskJSON(loggedInUser, id_task, title, due_date, description)
+        await changeTaskJSON(loggedInUser, id_task, title, due_date, description)
     }
     
   location.reload(true)
@@ -56,9 +57,16 @@ async function saveEditedTask(id_task) {
 
 
 async function changeTaskJSON(user, id_task, title, due_date, description) {
+  let contact_options = document.querySelectorAll(".contact-option")
+  for (let j = 0; j < contact_options.length; j++) {
+    if (contact_options[j].checked == true) {
+      selected_options.push(contact_options[j].value)
+    }
+  }
+
   for (let j = 0; j < user.tasks.length; j++) {
     const currentTask = user.tasks[j];
-    if (id_task == currentTask.id_task) {
+    if (id_task == j) {
       console.log(currentTask)
       currentTask.title = title
       currentTask.assignedContacts = selected_options
@@ -103,12 +111,18 @@ async function saveTask()  {
   
   if (checkIfCreatedTaskIsEmpty(title,due_date,description)) {
     document.querySelector(".create-btn").style.border = '1px solid rgb(0, 255, 0)';
+    if (document.querySelector(".create-task-mobile-btn")) {
+      document.querySelector(".create-task-mobile-btn").style.border = '1px solid rgb(0, 255, 0)';
+    }
     addTask(task, id)
-    if (document.querySelector("addTask-body")) {
+    if (document.querySelector("addTask-body") || document.querySelector(".create-task-mobile-btn")) {
       showPopup("task-popup")  
     }
   }  else {
     document.querySelector(".create-btn").style.border = '1px solid rgb(255, 0, 0)';
+    if (document.querySelector(".create-task-mobile-btn")) {
+      document.querySelector(".create-task-mobile-btn").style.border = '1px solid rgb(0, 255, 0)';
+    }
   }
 }
 
@@ -254,10 +268,10 @@ function clearSecondPart() {
   for (let i = 0; i < tasks.length; i++) {
       let task = tasks[i].textContent.toLowerCase();
       console.log(task)
-      document.getElementById(`added-task-${i}`).style.display = "none";
+      document.querySelectorAll(`.added-task`)[i].style.display = "none";
 
       if (task.includes(input)) {
-          document.getElementById(`added-task-${i}`).style.display = "block"
+          document.querySelectorAll(`.added-task`)[i].style.display = "block"
       }
   }
 

@@ -1,10 +1,10 @@
 .edit-task {
     z-index: 2;
     width: 410px;
+    height: 450px;
     background-color: white;
     border: 2px solid rgba(0, 0, 0, 0.2);
     border-radius: 8px;
-    height: 450px;
     overflow-y: auto;
     box-sizing: border-box;
     padding: 10px 0;
@@ -17,4 +17,22 @@
 .assigned-headline-outside {
     margin-top: 10px;
 }
+
+.edit-task::-webkit-scrollbar {
+    width: 5px;  /* width of the entire scrollbar */
+  }
+  
+  .edit-task::-webkit-scrollbar-track {
+    background: transparent;   /* color of the tracking area */ 
+    margin-bottom: 400px;    
+  }
+  
+  /* .edit-task::-webkit-scrollbar-button {
+    height: 150px;
+  } */
+
+  .edit-task::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3);    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */ 
+  }
 

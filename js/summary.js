@@ -3,6 +3,7 @@ function updateSummary() {
         for (let i = 0; i < users.length; i++) {
             const currentUser = users[i];
             addTaskAmountCounter(currentUser)
+            renderTaskAmount()
             if(currentUser.email == loggedInUser.email) {
                 document.getElementById("task-amount-in-board").innerHTML = currentUser.tasks.length
             }    
