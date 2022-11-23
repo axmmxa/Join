@@ -105,9 +105,8 @@ function addUserIcons(element) {
     const contact = element.assignedContacts[i];
     if (i == 1 && window.innerWidth > 874) {
       assignedContacts.innerHTML += `<div>
-         <span class="user-icon blue">+${
-           element.assignedContacts.length - 1
-         }</span>  
+         <span class="user-icon blue">+${element.assignedContacts.length - 1
+        }</span>  
         </div>`;
       break;
     } else {

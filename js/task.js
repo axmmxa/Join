@@ -1,16 +1,16 @@
-let id = 0 
+let id = 0
 
 function returnSelectedContacts(el) {
   let first_select_contact = document.getElementById("first-select-contacts")
-    if (el.checked) {
-      selected_options.push(el.value)
-    } else {
-      selected_options.pop(el.value)
-    }
+  if (el.checked) {
+    selected_options.push(el.value)
+  } else {
+    selected_options.pop(el.value)
+  }
 
   if (selected_options.length == 0) {
-    first_select_contact.innerHTML = `Select contacts to assign` 
-  }   
+    first_select_contact.innerHTML = `Select contacts to assign`
+  }
   if (selected_options.length >= 1 || el.checked) {
     first_select_contact.innerHTML = `${selected_options.length} selected contact(s)`
   }
@@ -25,7 +25,7 @@ function returnSelectedCategory(id) {
   let category_color = document.querySelector(".category-color-selected")
 
   returnSuitableCategoryColor(category_color, id, "")
-      
+
 }
 
 function returnSelectedSubtasks(el) {
@@ -39,20 +39,22 @@ function returnSelectedSubtasks(el) {
 
 async function saveEditedTask(id_task) {
 
-    let title = document.getElementById('input-title').value
-    let due_date = document.getElementById('due-date').value
-    let description = document.getElementById('textarea').value
-    
-    if (checkIfCreatedTaskIsEmpty(title,due_date,description) && loggedInUser.name !== "Guest") {
-      for (let i = 0; i < users.length; i++) {
-        const currentUser = users[i];
-        await changeTaskJSON(currentUser, id_task, title, due_date, description)
+  let title = document.getElementById('input-title').value
+  let due_date = document.getElementById('due-date').value
+  let description = document.getElementById('textarea').value
+
+  if (checkIfCreatedTaskIsEmpty(title, due_date, description) && loggedInUser.name !== "Guest") {
+    for (let i = 0; i < users.length; i++) {
+      const currentUser = users[i];
+      await changeTaskJSON(currentUser, id_task, title, due_date, description)
     }
-    } else {
-        await changeTaskJSON(loggedInUser, id_task, title, due_date, description)
-    }
-    
-  location.reload(true)
+  } else {
+    await changeTaskJSON(loggedInUser, id_task, title, due_date, description)
+  }
+
+  closeSmallEditTask(id_task)
+  await initBoard()
+  // location.reload(true)
 }
 
 
@@ -79,46 +81,43 @@ async function changeTaskJSON(user, id_task, title, due_date, description) {
   }
 }
 
-async function saveTask()  {
-  await downloadFromServer();
-  let idTaskFromBackend = parseInt(JSON.parse(backend.getItem('id_task')));
-
+function setId(idTaskFromBackend) {
   if (idTaskFromBackend) {
     id = idTaskFromBackend
     console.log(id)
-  } 
+  }
 
   if (loggedInUser.name == "Guest") {
     id = JSON.parse(localStorage.getItem("task_id"))
   }
- 
-  let title = document.getElementById('input-title').value
-  let due_date = document.getElementById('due-date').value
-  let description = document.getElementById('textarea').value
+}
 
-  let task = {
-      'title': title,
-      'assignedContacts': selected_options,
-      'due-date': due_date,
-      'description': description,
-      'category': selected_category,
-      'priority': selected_priority,
-      'priority_img_path': priority_img_path,
-      'subtask': selected_subtasks,
-      'id_task': id,
-      'status':'todo',
+function returnTaskJSON(title, due_date, description) {
+  return {
+    'title': title,
+    'assignedContacts': selected_options,
+    'due-date': due_date,
+    'description': description,
+    'category': selected_category,
+    'priority': selected_priority,
+    'priority_img_path': priority_img_path,
+    'subtask': selected_subtasks,
+    'id_task': id,
+    'status': 'todo',
   }
-  
-  if (checkIfCreatedTaskIsEmpty(title,due_date,description)) {
+}
+
+function styleCorrectButtonAccordingToSuccesOrFailur(title, due_date, description, task, id) {
+  if (checkIfCreatedTaskIsEmpty(title, due_date, description)) {
     document.querySelector(".create-btn").style.border = '1px solid rgb(0, 255, 0)';
     if (document.querySelector(".create-task-mobile-btn")) {
       document.querySelector(".create-task-mobile-btn").style.border = '1px solid rgb(0, 255, 0)';
     }
     addTask(task, id)
     if (document.querySelector("addTask-body") || document.querySelector(".create-task-mobile-btn")) {
-      showPopup("task-popup")  
+      showPopup("task-popup")
     }
-  }  else {
+  } else {
     document.querySelector(".create-btn").style.border = '1px solid rgb(255, 0, 0)';
     if (document.querySelector(".create-task-mobile-btn")) {
       document.querySelector(".create-task-mobile-btn").style.border = '1px solid rgb(0, 255, 0)';
@@ -126,20 +125,38 @@ async function saveTask()  {
   }
 }
 
-function checkIfCreatedTaskIsEmpty(title,due_date,description) {
-    return title !== "" && due_date !== "" && description !== "" && selected_category !== "" 
-            && selected_priority !== "" && priority_img_path !== "" && id !== ""
-  }
+async function saveTask() {
+  await downloadFromServer();
+  let idTaskFromBackend = parseInt(JSON.parse(backend.getItem('id_task')));
 
-async function addTask(task,id) {
+  setId(idTaskFromBackend)
+
+  let title = document.getElementById('input-title').value
+  let due_date = document.getElementById('due-date').value
+  let description = document.getElementById('textarea').value
+
+  let task = returnTaskJSON(title, due_date, description)
+
+  styleCorrectButtonAccordingToSuccesOrFailur(title, due_date, description, task, id)
+
+  // await initBoard()
+  closeSmallAddTask()
+}
+
+function checkIfCreatedTaskIsEmpty(title, due_date, description) {
+  return title !== "" && due_date !== "" && description !== "" && selected_category !== ""
+    && selected_priority !== "" && priority_img_path !== "" && id !== ""
+}
+
+async function addTask(task, id) {
   if (loggedInUser.name !== "Guest") {
     for (let i = 0; i < users.length; i++) {
       const currentUser = users[i];
-      if(currentUser.email == loggedInUser.email){
+      if (currentUser.email == loggedInUser.email) {
         // task.task_id = id
         id++
         console.log(id)
-        await backend.setItem('id_task', JSON.stringify(id)); 
+        await backend.setItem('id_task', JSON.stringify(id));
         currentUser.tasks.push(task)
         await backend.setItem('users', JSON.stringify(users));
       }
@@ -152,33 +169,33 @@ async function addTask(task,id) {
     localStorage.setItem("loggedInUser", JSON.stringify(loggedInUser));
     console.log(loggedInUser)
   }
-} 
+}
 
- function setPriority(id) {
+function setPriority(id) {
   let priorities = document.querySelectorAll('.priority')
 
   for (let index = 0; index < priorities.length; index++) {
     const priority = priorities[index];
     priority.style.color = 'black'
     priority.style.backgroundColor = 'white'
-    if(document.getElementById('urgent-btn')) {
+    if (document.getElementById('urgent-btn')) {
       document.getElementById('urgent-btn-priority-img').setAttribute('src', 'kanban_img/priority_icons/urgent-red.png')
     } if (document.getElementById('medium-btn')) {
       document.getElementById('medium-btn-priority-img').setAttribute('src', 'kanban_img/priority_icons/middle-urgent-orange.png')
-    } if(document.getElementById('non-urgent-btn')){
+    } if (document.getElementById('non-urgent-btn')) {
       document.getElementById('non-urgent-btn-priority-img').setAttribute('src', 'kanban_img/priority_icons/non-urgent-green.png')
     }
   }
-  
-  if(id == 'urgent-btn') {
-    changeStyleSelectedPriorityButton('red', 'kanban_img/priority_icons/urgent_white.png' , 'white', 'kanban_img/priority_icons/urgent-red.png', 'Urgent', id, "urgent-btn-priority-img")
-  } else if(id == "medium-btn") {
+
+  if (id == 'urgent-btn') {
+    changeStyleSelectedPriorityButton('red', 'kanban_img/priority_icons/urgent_white.png', 'white', 'kanban_img/priority_icons/urgent-red.png', 'Urgent', id, "urgent-btn-priority-img")
+  } else if (id == "medium-btn") {
     changeStyleSelectedPriorityButton('orange', 'kanban_img/priority_icons/medium_urgent_white.png', 'white', 'kanban_img/priority_icons/middle-urgent-orange.png', 'Medium', id, "medium-btn-priority-img")
-  } else if(id == 'non-urgent-btn') {
+  } else if (id == 'non-urgent-btn') {
     changeStyleSelectedPriorityButton('lightgreen', 'kanban_img/priority_icons/non_urgent_white.png', 'white', 'kanban_img/priority_icons/non-urgent-green.png', 'Low', id, "non-urgent-btn-priority-img")
   }
-  
- }
+
+}
 
 
 function changeStyleSelectedPriorityButton(backgroundColor, reset_img_path, color, img_path, priority, id, id_img) {
@@ -190,9 +207,9 @@ function changeStyleSelectedPriorityButton(backgroundColor, reset_img_path, colo
 }
 
 function clearForm() {
-  clearFirstPart() 
+  clearFirstPart()
   clearSecondPart()
-  clearThirdPart() 
+  clearThirdPart()
   clearFourthPart()
 }
 
@@ -207,12 +224,12 @@ function clearFirstPart() {
     if (checkbox.checked) {
       checkbox.checked = false
       selected_options.pop(selected_options[j])
-    } 
+    }
   }
 }
 
 function clearSecondPart() {
-  if (selected_options.length ==  0) {
+  if (selected_options.length == 0) {
     document.querySelector("#first-select-contacts").innerHTML = "Select contacts to assign"
   }
   selected_category = ""
@@ -222,28 +239,28 @@ function clearSecondPart() {
 
 }
 
- function clearThirdPart() {
+function clearThirdPart() {
   let priorities = document.querySelectorAll('.priority')
 
   for (let index = 0; index < priorities.length; index++) {
     const priority = priorities[index];
     priority.style.color = 'black'
     priority.style.backgroundColor = 'white'
-    if(document.getElementById('urgent-btn')) {
+    if (document.getElementById('urgent-btn')) {
       document.getElementById('urgent-btn-priority-img').setAttribute('src', 'kanban_img/priority_icons/urgent-red.png')
     } if (document.getElementById('medium-btn')) {
       document.getElementById('medium-btn-priority-img').setAttribute('src', 'kanban_img/priority_icons/middle-urgent-orange.png')
-    } if(document.getElementById('non-urgent-btn')){
+    } if (document.getElementById('non-urgent-btn')) {
       document.getElementById('non-urgent-btn-priority-img').setAttribute('src', 'kanban_img/priority_icons/non-urgent-green.png')
     }
   }
   priority_img_path = ""
   selected_priority = ""
- }
+}
 
- function clearFourthPart() {
+function clearFourthPart() {
   document.getElementById("textarea").value = ""
-  document.querySelector(".category-container").innerHTML = 
+  document.querySelector(".category-container").innerHTML =
     `<div class="category-container">
     <img class="plus-select-subtask" src="kanban_img/plus_icons/plus_blue.png">
     <label class="category-label" for="subtask-category">Subtask<input onclick="showAddSubtask()" id="subtask-category" placeholder="Add new subtask" type="text"></label>
@@ -257,22 +274,22 @@ function clearSecondPart() {
     </div>   
       
   </div>`
- }
+}
 
 
- function searchTask() {
+function searchTask() {
   let input = document.getElementById("search-task").value;
   input = input.toLowerCase();
 
   let tasks = document.querySelectorAll(".task-topic")
   for (let i = 0; i < tasks.length; i++) {
-      let task = tasks[i].textContent.toLowerCase();
-      console.log(task)
-      document.querySelectorAll(`.added-task`)[i].style.display = "none";
+    let task = tasks[i].textContent.toLowerCase();
+    console.log(task)
+    document.querySelectorAll(`.added-task`)[i].style.display = "none";
 
-      if (task.includes(input)) {
-          document.querySelectorAll(`.added-task`)[i].style.display = "block"
-      }
+    if (task.includes(input)) {
+      document.querySelectorAll(`.added-task`)[i].style.display = "block"
+    }
   }
 
 }

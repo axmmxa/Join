@@ -21,6 +21,12 @@
     <link rel="shortcut icon" href="kanban_img/login_icons/join_blue.png" type="image/x-icon">
 
     <style>
+        @media (max-width: 874px) {
+        .priority-btn-container a {
+            padding: 5px 5px !important;
+        }
+    }
+
         @media (max-width: 684px) {
         .kanban-navbar {
             display: none !important;
@@ -32,15 +38,12 @@
             padding: 8px 10px;
         }
     }    
-        @media (max-width: 874px) {
-        .priority-btn-container a {
-            padding: 5px 5px;
-        }
-    }
+        
+    
 
     </style>
 
-<script src="js/request.js" defer></script>
+    <script src="js/request.js" defer></script>
     <script src="js/template.js" defer></script>
     <script src="js/mini_backend.js"></script>
     <script src="js/load.js" defer></script>
@@ -126,7 +129,7 @@
                         </div>
 
                         <div class="due-date-container">
-                            <label class="label-flex" for="due-date">Due date<input placeholder="dd/mm/yyyy" id="due-date" type="date" required></label>
+                            <label class="label-flex menu-color" for="due-date">Due date<input placeholder="dd/mm/yyyy" id="due-date" type="date" required></label>
                         </div>
 
                         <div class="task-category-container">
@@ -160,7 +163,7 @@
                             <a id="non-urgent-btn" class="non-urgent-btn priority" onclick="setPriority(id)">Low <img id="non-urgent-btn-priority-img" class="priority-urgent-img" src="kanban_img/priority_icons/non-urgent-green.png"></a>
                         </div>
                         <div class="description-container">
-                            <span>Description</span>
+                            <span class="menu-color">Description</span>
                             <textarea id="textarea" placeholder="Enter a description"></textarea>
                         </div>
 
@@ -168,7 +171,7 @@
 
                             <img class="plus-select-subtask" src="kanban_img/plus_icons/plus_blue.png">
         
-                            <label class="category-label" for="subtask-category">Subtask<input onclick="showAddSubtask()" id="subtask-category" placeholder="Add new subtask" type="text"></label>
+                            <label class="category-label menu-color" for="subtask-category">Subtask<input onclick="showAddSubtask()" id="subtask-category" placeholder="Add new subtask" type="text"></label>
                             
                             <div class="add-option-subtask d-none">
                                 <input id="add-subtask-input" class="add-option-input" type="text" placeholder="Add new subtask">

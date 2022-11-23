@@ -31,7 +31,7 @@
 .first-select-option-container {
     position: relative;
     cursor: pointer;
-    width: 95%;
+    /* width: 95%; */
     border: none;
     border-bottom: 1px solid gray;
     padding-bottom: 10px;

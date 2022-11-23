@@ -34,28 +34,28 @@ let small_edit_contacts_email;
 let small_edit_contacts_phone;
 
 async function init() {
-    await getUsersFromBackend()
+  await getUsersFromBackend()
 
-    loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"))
-    
-    if (loggedInUser.name == "Guest") {
-      initGuestIcon()
-   } else {
-      initUserIcon()
-    }
+  loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"))
+
+  if (loggedInUser.name == "Guest") {
+    initGuestIcon()
+  } else {
+    initUserIcon()
+  }
 
   if (document.getElementById("summary-body")) {
     initSummary()
-  } 
+  }
   if (document.getElementById("board-body")) {
     await initBoard()
-  } 
+  }
   if (document.getElementById("addTask-body")) {
     initAddTask()
-  } 
+  }
   if (document.getElementById("contacts-body")) {
     await initContacts()
-  } 
+  }
   if (document.getElementById("legal-notice-body")) {
     selectedLink("kanban-link-4")
   }
@@ -86,15 +86,15 @@ async function initContacts() {
   renderContactBook()
   await loadContactBackgroundColor()
   selectedLink("kanban-link-3")
-  selectedLink("kanban-link-8")  
+  selectedLink("kanban-link-8")
 }
 
 function initUserIcon() {
   for (let i = 0; i < users.length; i++) {
     const currentUser = users[i];
 
-    if(currentUser.email == loggedInUser.email){
-        document.querySelector(".user-logout-icon-container").innerHTML = 
+    if (currentUser.email == loggedInUser.email) {
+      document.querySelector(".user-logout-icon-container").innerHTML =
         `<div onclick="toggleLogoutBox()" class="user-logout-icon">${getUserIcon(currentUser.name)}</div>
           <div class="logout d-none">
           <span onclick="logout()" class="light-blue-text">Log out</span>
@@ -106,26 +106,26 @@ function initUserIcon() {
           <a onclick="logout()" class="light-blue-text">Log out</a>
         </div>
         `
-        getUserColor()
-        document.querySelector(".user-logout-icon").classList.add(currentUser["user-background-color"])
-        for (let j = 0; j < currentUser.tasks.length; j++) {
-          todos.push(currentUser.tasks[j])
-        }
+      getUserColor()
+      document.querySelector(".user-logout-icon").classList.add(currentUser["user-background-color"])
+      for (let j = 0; j < currentUser.tasks.length; j++) {
+        todos.push(currentUser.tasks[j])
       }
     }
+  }
 }
 
 async function saveDependingOnUserName() {
   if (loggedInUser.name == "Guest") {
-    saveLoggedInUser() 
+    saveLoggedInUser()
   } else {
     await saveUsersArray()
   }
 }
 
 function initGuestIcon() {
-  document.querySelector(".user-logout-icon-container").innerHTML = 
-  `<div onclick="toggleLogoutBox()" class="user-logout-icon">${getUserIcon(loggedInUser.name)}</div>
+  document.querySelector(".user-logout-icon-container").innerHTML =
+    `<div onclick="toggleLogoutBox()" class="user-logout-icon">${getUserIcon(loggedInUser.name)}</div>
     <div class="logout d-none">
     <span onclick="logout()" class="light-blue-text">Log out</span>
    </div>
@@ -160,92 +160,94 @@ async function deleteIdTask() {
   await backend.deleteItem('id_task');
 }
 
- function greetUser() {
+function greetUser() {
   let user_name = document.getElementById("user-name")
   user_name.innerHTML = loggedInUser.name
- }
+}
 
 function loadLoggedInUser() {
   let loggedInUserAsText = localStorage.getItem("loggedInUser");
 
   if (loggedInUserAsText) {
-      loggedInUser = JSON.parse(loggedInUserAsText)
+    loggedInUser = JSON.parse(loggedInUserAsText)
   }
-  if(document.getElementById("user-name")) {
+  if (document.getElementById("user-name")) {
     greetUser()
   }
 }
 
 function checkIfEditContactInputsNotEmpty() {
-    return small_edit_contacts_name !== "" && small_add_contacts_email !== "" && small_add_contacts_phone !== ""
+  return small_edit_contacts_name !== "" && small_add_contacts_email !== "" && small_add_contacts_phone !== ""
 }
 
 function checkUserEmailExist(input_email) {
-    for (let i = 0; i < users.length; i++) {
-        const usersEmail = users[i].email;
-        if (usersEmail == input_email) {
-          return true;
-        }
-      }
-      return false;
-}
-
-function checkContactEmailExist(input_email) {
-if (loggedInUser.name !== "Guest") {
-    for (let i = 0; i < users.length; i++) {
-        const currentUser = users[i]
-        compareInputEmailAndEmailsFromDatabase(currentUser, input_email)
+  for (let i = 0; i < users.length; i++) {
+    const usersEmail = users[i].email;
+    if (usersEmail == input_email) {
+      return true;
     }
-    return false;
-} else {
-  compareInputEmailAndEmailsFromDatabase(loggedInUser, input_email)
   }
   return false;
 }
 
-function compareInputEmailAndEmailsFromDatabase(user, input_email) {
-    for (let i = 0; i < user.contacts.length; i++) {
-      const currentContactEmail = user.contacts[i].contact_email;
-      if (currentContactEmail == input_email) {
-          return true;
-        } 
-    };
+function checkContactEmailExist(input_email, index) {
+  let foundEmail;
+  if (loggedInUser.name !== "Guest") {
+    for (let i = 0; i < users.length; i++) {
+      const currentUser = users[i]
+      foundEmail = compareInputEmailAndEmailsFromDatabase(currentUser, input_email, index)
+    }
+
+  } else {
+    foundEmail = compareInputEmailAndEmailsFromDatabase(loggedInUser, input_email, index)
+  }
+  return foundEmail
+}
+
+function compareInputEmailAndEmailsFromDatabase(user, input_email, index) {
+  for (let i = 0; i < user.contacts.length; i++) {
+    const currentContactEmail = user.contacts[i].contact_email;
+    if (currentContactEmail == input_email && index !== i) {
+      return false;
+    }
+  };
+  return true
 }
 
 
 function addContactOptionToCustomSelectOption(id_task) {
-    let custom_select_contact_container = document.querySelectorAll(".custom-select-contact-container")
-                
-    if (loggedInUser.name !== "Guest") {
-        for (let i = 0; i < users.length; i++) {
-            const currentUser = users[i];
-            renderLabelContactOption(currentUser, custom_select_contact_container)
-        }
-        checkAssignedContactsInEditTask(id_task)
-    } else {
-        renderLabelContactOption(loggedInUser, custom_select_contact_container)
-        checkAssignedContactsInEditTask(id_task)
+  let custom_select_contact_container = document.querySelectorAll(".custom-select-contact-container")
+
+  if (loggedInUser.name !== "Guest") {
+    for (let i = 0; i < users.length; i++) {
+      const currentUser = users[i];
+      renderLabelContactOption(currentUser, custom_select_contact_container)
     }
+    checkAssignedContactsInEditTask(id_task)
+  } else {
+    renderLabelContactOption(loggedInUser, custom_select_contact_container)
+    checkAssignedContactsInEditTask(id_task)
+  }
 }
 
 function renderLabelContactOption(user, custom_select_contact_container) {
   for (let j = 0; j < user.contacts.length; j++) {
     const currentContact = user.contacts[j];
-    custom_select_contact_container[custom_select_contact_container.length - 1].innerHTML += `<label class="custom-select-option"> ${currentContact.contact_name}<input onclick="returnSelectedContacts(this)" value="${currentContact.contact_name}" class="selected-option contact-option" type="checkbox" autocomplete="off"></label>` 
-}
+    custom_select_contact_container[custom_select_contact_container.length - 1].innerHTML += `<label class="custom-select-option"> ${currentContact.contact_name}<input onclick="returnSelectedContacts(this)" value="${currentContact.contact_name}" class="selected-option contact-option" type="checkbox" autocomplete="off"></label>`
+  }
 }
 
 function checkAssignedContactsInEditTask(id_task) {
-    let assignedContactName;
-    let selected_contact_option = document.querySelectorAll(".contact-option")
-    if (loggedInUser.name !== "Guest") {
-        for (let i = 0; i < users.length; i++) {
-            const currentUser = users[i];
-            checkContactsNameInEditTask(currentUser, assignedContactName, selected_contact_option, id_task)
-        } 
-    } else {
-        checkContactsNameInEditTask(loggedInUser, assignedContactName, selected_contact_option, id_task)
+  let assignedContactName;
+  let selected_contact_option = document.querySelectorAll(".contact-option")
+  if (loggedInUser.name !== "Guest") {
+    for (let i = 0; i < users.length; i++) {
+      const currentUser = users[i];
+      checkContactsNameInEditTask(currentUser, assignedContactName, selected_contact_option, id_task)
     }
+  } else {
+    checkContactsNameInEditTask(loggedInUser, assignedContactName, selected_contact_option, id_task)
+  }
 }
 
 
@@ -253,34 +255,36 @@ function checkContactsNameInEditTask(user, assignedContactName, selected_contact
   for (let j = 0; j < user.tasks.length; j++) {
     const currentTask = user.tasks[j];
     if (j == id_task) {
-        for (let j = 0; j < currentTask.assignedContacts.length; j++) {
-            assignedContactName = currentTask.assignedContacts[j]
-            for (let k = 0; k < selected_contact_option.length ; k++) {
-                const currentContact = selected_contact_option[k].value;
-                if (currentContact == assignedContactName) {
-                    selected_contact_option[k].checked = true 
-                } 
-            }
-        } 
-    } 
-}
+      for (let j = 0; j < currentTask.assignedContacts.length; j++) {
+        assignedContactName = currentTask.assignedContacts[j]
+        for (let k = 0; k < selected_contact_option.length; k++) {
+          const currentContact = selected_contact_option[k].value;
+          if (currentContact == assignedContactName) {
+            selected_contact_option[k].checked = true
+          }
+        }
+      }
+    }
+  }
 }
 
 async function deleteTask(id_task) {
-    console.log(users)
-    if (loggedInUser.name !== "Guest") {
-        for (let i = 0; i < users.length; i++) {
-            const currentUser = users[i];
-            id_task = await getIndexOfIdTask(currentUser, id_task) 
-            currentUser.tasks.splice(id_task, 1)
-            await saveUsersArray()
-        }
-    } else {
-      id_task = await getIndexOfIdTask(loggedInUser, id_task) 
-      loggedInUser.tasks.splice(id_task, 1)
-      saveLoggedInUser()
+  console.log(users)
+  if (loggedInUser.name !== "Guest") {
+    for (let i = 0; i < users.length; i++) {
+      const currentUser = users[i];
+      id_task = await getIndexOfIdTask(currentUser, id_task)
+      currentUser.tasks.splice(id_task, 1)
+      await saveUsersArray()
     }
-    location.reload(true)
+  } else {
+    id_task = await getIndexOfIdTask(loggedInUser, id_task)
+    loggedInUser.tasks.splice(id_task, 1)
+    saveLoggedInUser()
+  }
+  closeBoardTaskInfo()
+  await initBoard()
+  // location.reload(true)
 }
 
 
@@ -290,12 +294,12 @@ async function getIndexOfIdTask(user, id_task) {
 
   for (let j = 0; j < user.tasks.length; j++) {
     let id_tasks = user.tasks[j].id_task
-    id_array.push(id_tasks) 
-}  
-for (let k = 0; k < user.tasks.length; k++) {
+    id_array.push(id_tasks)
+  }
+  for (let k = 0; k < user.tasks.length; k++) {
     if (id_task == id_array[k]) {
-        index = id_array.indexOf(id_array[k])
-        return index
+      index = id_array.indexOf(id_array[k])
+      return index
     }
-}
+  }
 }

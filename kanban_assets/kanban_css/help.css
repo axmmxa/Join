@@ -1,6 +1,7 @@
 .help-container {
-    width: 90%;
-    margin: 20px auto;
+    box-sizing: border-box;
+    width: 80%;
+    margin: auto;
 }
 
 .help-arrow-container {

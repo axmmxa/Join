@@ -6,12 +6,12 @@ if (msg) {
     msgBox.innerHTML = msg
     setTimeout(() => {
         msgBox.style.display = "none"
-    },2500)
+    }, 2500)
 } else {
     msgBox.style.display = "none"
 }
 
- async function login() {
+async function login() {
     await downloadFromServer();
     users = JSON.parse(backend.getItem('users')) || [];
 
@@ -20,9 +20,9 @@ if (msg) {
 
     console.log(users)
     loggedInUser = users.find(u => u.email == email && u.password == password)
-       
+
     if (loggedInUser) {
-        console.log("User gefunden") 
+        console.log("User gefunden")
         saveLoggedInUser()
         window.location.href = './summary.html'
     } else {
@@ -30,7 +30,7 @@ if (msg) {
         msgBox.style.display = "block"
         setTimeout(() => {
             msgBox.style.display = "none"
-        },2500)
+        }, 2500)
     }
 }
 
@@ -48,7 +48,7 @@ document.querySelector('.guest-btn').addEventListener('click', () => {
     localStorage.setItem("task_id", JSON.stringify(0))
     window.location.href = './summary.html'
 })
- 
-        
-        
-    
+
+
+
+

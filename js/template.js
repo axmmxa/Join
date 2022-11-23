@@ -1,5 +1,5 @@
 function templateSmallContacts() {
-    return  `
+    return `
     <div id="small-contacts-container">
         <div id="small-contacts-container-close-btn-container" class="light-blue">
             <span onclick="closeSmallContacts()" class="arrow white-text">X</span>
@@ -34,7 +34,7 @@ function templateSmallContacts() {
 
 
 function templateSmallContactsMobile() {
-    return  `<div id="small-contacts-container-mobile" class="centered">
+    return `<div id="small-contacts-container-mobile" class="centered">
         <span onclick="closeSmallContactsMobile()" class="arrow white-text close-x-absolute">X</span>
       <div class="upper-part-small-contacts-mobile light-blue">
           <h1 class="white-text">Add Contact</h1>
@@ -62,8 +62,8 @@ function templateSmallContactsMobile() {
 }
 
 
-function templateSmallEditContacts(contact_name,contact_email,contact_phone,i) {
-    return  `
+function templateSmallEditContacts(contact_name, contact_email, contact_phone, i) {
+    return `
     <div id="small-contacts-container-${i}" class="edit-contact-container"> 
     <div id="small-contacts-container-close-btn-container" class="blue">
         <span onclick="closeSmallEditContacts(${i})" class="arrow white-text">X</span>
@@ -76,7 +76,7 @@ function templateSmallEditContacts(contact_name,contact_email,contact_phone,i) {
     <div class="lower-part-small-contacts">
     <div id="${contact_name}" class="user-icon-edit-contact user-icon-big fs-22">${getUserIcon(contact_name)}</div>
 
-        <form onsubmit="saveEditedContact('${contact_email}','${contact_name}', 'not-mobile'); return false" class="small-contacts-add-data">
+        <form onsubmit="saveEditedContact('${contact_email}','${contact_name}', ${i},'not-mobile'); return false" class="small-contacts-add-data">
             <div class="login-data">
                 <input value="${contact_name}" id="small-edit-contacts-name" type="text" placeholder="Name" required>
                 <input value="${contact_email}" id="small-edit-contacts-email" type="text" placeholder="E-mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
@@ -85,7 +85,7 @@ function templateSmallEditContacts(contact_name,contact_email,contact_phone,i) {
             </div>
 
             <div class="small-contacts-btn-container">
-                <button class="create-btn">Save</button>
+                <button id="edit-contact-create-btn" class="create-btn">Save</button>
             </div>
         </form>
     </div>
@@ -93,8 +93,8 @@ function templateSmallEditContacts(contact_name,contact_email,contact_phone,i) {
     `
 }
 
-function templateSmallEditContactsMobile(contact_name,contact_email,contact_phone,i) {
-    return  `
+function templateSmallEditContactsMobile(contact_name, contact_email, contact_phone, i) {
+    return `
     <div id="small-contacts-container-mobile-${i}" class="edit-contact-container-mobile centered"> 
     
     <span onclick="closeSmallEditContactsMobile(${i})" class="arrow white-text close-x-absolute">X</span>
@@ -127,7 +127,7 @@ function templateSmallEditContactsMobile(contact_name,contact_email,contact_phon
 }
 
 
-function templateParentSmallEditContacts(contact_name,contact_email,contact_phone) {
+function templateParentSmallEditContacts(contact_name, contact_email, contact_phone) {
     return `
     <div id="edit-small-contacts-container">
         <div id="small-contacts-container-close-btn-container" class="blue">
@@ -158,8 +158,8 @@ function templateParentSmallEditContacts(contact_name,contact_email,contact_phon
 }
 
 
-function templateSmallEditTask(id_task, title, description, due_date) { 
-    return   `
+function templateSmallEditTask(id_task, title, description, due_date) {
+    return `
     <div id="edit-task-${id_task}" class="edit-task centered">  
         <div class="add-task-container-edit">
             <span onclick="closeSmallEditTask(${id_task})" class="close-x-absolute">X</span>  
@@ -203,7 +203,7 @@ function templateSmallEditTask(id_task, title, description, due_date) {
 
 
 function templateCustomSelect(id_task) {
-   return `<div onclick="showCustomSelectOptionEditTask(${id_task})" class="first-select-option-container">
+    return `<div onclick="showCustomSelectOptionEditTask(${id_task})" class="first-select-option-container">
                 <span id="first-select-contacts" class="first-select-option">Select contacts to assign</span>
                 <img class="arrow-down" src="kanban_img/arrow_icons/arrow_select.png" />
             </div>
@@ -217,7 +217,7 @@ function templateCustomSelect(id_task) {
 }
 
 function templateShowTaskInfo(userTaskId, id_task, j) {
-    return  `
+    return `
     <div id="small-board-task-info-${id_task}" class="small-board-task-info centered">
                 <div class="close-btn-container-task-info">
                     <span onclick="closeBoardTaskInfo()" class="close-x-right-side">X</span>
@@ -253,7 +253,7 @@ function templateShowTaskInfo(userTaskId, id_task, j) {
 }
 
 function templateSmallAddTask() {
-    return  `
+    return `
     <div id="small-add-task">
         <span onclick="closeSmallAddTask()" class="close-x-absolute">X</span>
         
@@ -351,8 +351,8 @@ function templateSmallAddTask() {
         `
 }
 
-function templateContactInformation(email,name,i) {
-    return  `
+function templateContactInformation(email, name, i) {
+    return `
     <div class="contact-information-upper-part">
         <div class="user-icon user-icon-big fs-22">${getUserIcon(contact_names[i])}</div>
         <div class="contact-information-name-container">
@@ -382,8 +382,8 @@ function templateContactInformation(email,name,i) {
 }
 
 
-function templateContactInformationMobile(email,name,i) {
-    return  `
+function templateContactInformationMobile(email, name, i) {
+    return `
     <div class="contact-information-mobile">
         <p class="light-blue-text">Kanban Project Management Tool</p>
         <div class="legal-notice-arrow-container">
@@ -448,7 +448,7 @@ function templateContactUserInContactBook(contact) {
     `
 }
 
-function templateUserContactAddContact(small_add_contacts_name,small_add_contacts_email,small_add_contacts_phone) {
+function templateUserContactAddContact(small_add_contacts_name, small_add_contacts_email, small_add_contacts_phone) {
     return `
     <div onclick="renderContactInformation('${small_add_contacts_email}', '${small_add_contacts_name}')" class="contact-info">
       <div class="user-icon-container">
@@ -461,7 +461,7 @@ function templateUserContactAddContact(small_add_contacts_name,small_add_contact
       </div>
     </div>
     `
-  }
+}
 
 
 function showPopup(id) {
@@ -481,18 +481,18 @@ function selectedLink(id) {
 
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
-  }
-  
-  function getUserIcon(contact) {
+}
+
+function getUserIcon(contact) {
     let names = contact.split(" ");
     let firstLetterFirstName = names[0][0].toUpperCase();
     let firstLetterlastName;
     if (names.length > 1) {
-      let firstLetterlastName = names[1][0].toUpperCase()
-      return `${firstLetterFirstName + firstLetterlastName}`
+        let firstLetterlastName = names[1][0].toUpperCase()
+        return `${firstLetterFirstName + firstLetterlastName}`
     } else {
-      return `${firstLetterFirstName}`
+        return `${firstLetterFirstName}`
     }
-  }
+}
 
 

@@ -1,14 +1,12 @@
 function showCustomSelectOptions(index) {
   let selects = document.querySelectorAll(".custom-select-options-container-add-task");
-  
+
   if (
     document.getElementById("addTask-body") ||
     document.getElementById("contacts-body") || document.getElementById("board-body")
   ) {
-    selects[index].classList.toggle("d-none"); 
-  } // else {
-  //   selects[selects.length - 1].classList.toggle("d-none");
-  // }
+    selects[index].classList.toggle("d-none");
+  } 
 }
 
 function showCustomSelectOptionEditTask(index) {
@@ -17,12 +15,12 @@ function showCustomSelectOptionEditTask(index) {
 }
 
 
-
 function showCustomSelectOptionsTaskInfo() {
   document
     .querySelector(".custom-select-options-task-info-container")
     .classList.toggle("d-none");
 }
+
 
 function showAddContact(index) {
   let custom_select = document.querySelectorAll(".custom-select");
@@ -35,6 +33,7 @@ function showAddContact(index) {
   arrow_down[index].classList.add("d-none");
   add_option[index].classList.remove("d-none");
 }
+
 
 function closeAddContact(index) {
   let custom_select = document.querySelectorAll(".custom-select");
@@ -50,6 +49,7 @@ function closeAddContact(index) {
   }
 }
 
+
 function resetContactOptions(checkboxes, index) {
   for (let j = 0; j < checkboxes.length; j++) {
     const checkbox = checkboxes[j];
@@ -57,16 +57,15 @@ function resetContactOptions(checkboxes, index) {
       selected_options.pop(selected_options[j]);
     }
   }
-
   if (selected_options.length == 0) {
     let first_select_contact = document.getElementById("first-select-contacts");
     first_select_contact.innerHTML = `Select contacts to assign`;
   }
-
   if (index == 0) {
     addSelectContactOption(index);
   }
 }
+
 
 function addNewContactOption(index) {
   let checkboxes = document.querySelectorAll('input[type="checkbox"]');
@@ -83,14 +82,17 @@ function addNewContactOption(index) {
       let category_color = document.querySelectorAll(".category-color");
       setColorCategory(category_color, add_category_input);
     }
-    // closeSmallAddTask(index)
+    closeAddContact(index)
+
   }
 
 }
 
+
 function setColorCategory(category_color, add_category_input) {
   returnSuitableCategoryColor(category_color, add_category_input, category_color.length - 1)
 }
+
 
 function showAddSubtask() {
   let subtask_category_container = document.querySelector("#subtask-category");
@@ -102,6 +104,7 @@ function showAddSubtask() {
   add_option_subtask.classList.remove("d-none");
 }
 
+
 function closeAddSubtask() {
   let subtask_category_container = document.querySelector("#subtask-category");
   let add_option_subtask = document.querySelector(".add-option-subtask");
@@ -111,6 +114,7 @@ function closeAddSubtask() {
   plus_select.classList.remove("d-none");
   add_option_subtask.classList.add("d-none");
 }
+
 
 function addNewSubtask() {
   let category_container = document.querySelector(".category-container");

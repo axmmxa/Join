@@ -6,8 +6,8 @@ document.querySelector(".task-urgent").addEventListener("mouseover", () => {
     document.querySelector(".date").style.color = "#4589FF"
     document.querySelector(".deadline").style.color = "#4589FF"
     document.querySelector(".white-border").style.backgroundColor = "#4589FF"
-    
-    
+
+
 })
 
 document.querySelector(".task-urgent").addEventListener("mouseout", () => {

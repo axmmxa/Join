@@ -2,6 +2,12 @@
     display: none;
 }
 
+.position-arrow {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+}
+
 .d-flex-center {
     display: flex;
     align-items: center;
@@ -26,6 +32,11 @@
     width: 20px;
     height: auto;
 }
+
+.menu-color {
+    color: #42526E;
+}
+
 
 .fs-12 {
     font-size: 12px;
@@ -326,7 +337,7 @@
 
 .user-icon-edit-contact {
     color: white;
-    padding: 25px;
+    padding: 20px 25px;
     border-radius: 50%;
     margin-bottom: 20px;
 }
@@ -401,9 +412,9 @@
 }
 
 .user-icon-big-mobile {
-    padding: 20px;
+    padding: 25px 30px;
     border: 2px solid white;
-    margin-top: -140px;
+    margin-top: -130px;
 }
 
 .upper-part-small-contacts-mobile {
