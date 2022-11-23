@@ -143,7 +143,7 @@ body {
     align-items: center;
     justify-content: space-evenly;
     height: 150px;
-    width: 72%;
+    width: 73%;
     border-radius: 18px;
 }
 
@@ -320,6 +320,7 @@ body {
     }
     .task-urgent {
         height: 135px;
+        width: 63%;
     }
     .upper-task-container {
         margin-bottom: 10px;

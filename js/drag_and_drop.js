@@ -118,11 +118,17 @@ function addUserIcons(element) {
   }
 }
 
-function startDragging(id_task) {
-  let id_array = []
-  id_array.push(id_task)
-
-  currentDraggedElement = id_array.indexOf(id_task);
+async function startDragging(id_task) {
+  if (loggedInUser.name !== "Guest") {
+    for (let i = 0; i < users.length; i++) {
+      const currentUser = users[i];
+      if (currentUser.email == loggedInUser.email) {
+        currentDraggedElement = await getIndexOfIdTask(currentUser, id_task)
+      }
+    }
+  } else {
+    currentDraggedElement = await getIndexOfIdTask(loggedInUser, id_task)
+  }
   console.log(currentDraggedElement);
 }
 
