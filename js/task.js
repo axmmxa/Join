@@ -106,7 +106,7 @@ function returnTaskJSON(title, due_date, description) {
   }
 }
 
-function styleCorrectButtonAccordingToSuccesOrFailur(title, due_date, description, task, id) {
+function styleCorrectButtonAccordingToSuccesOrFailure(title, due_date, description, task, id) {
   if (checkIfCreatedTaskIsEmpty(title, due_date, description)) {
     document.querySelector(".create-btn").style.border = '1px solid rgb(0, 255, 0)';
     if (document.querySelector(".create-task-mobile-btn")) {
@@ -136,7 +136,7 @@ async function saveTask() {
 
   let task = returnTaskJSON(title, due_date, description)
 
-  styleCorrectButtonAccordingToSuccesOrFailur(title, due_date, description, task, id)
+  styleCorrectButtonAccordingToSuccesOrFailure(title, due_date, description, task, id)
 
   if (document.querySelector("#board-body")) {
     await initBoard()
@@ -147,8 +147,6 @@ async function saveTask() {
       window.location.href = "board.html"  
     }, 1000);
   }
-  
-  
 }
 
 function checkIfCreatedTaskIsEmpty(title, due_date, description) {
@@ -289,14 +287,19 @@ function searchTask() {
   let input = document.getElementById("search-task").value;
   input = input.toLowerCase();
 
+  let task_headlines = document.querySelectorAll(".task-headline") 
   let tasks = document.querySelectorAll(".task-topic")
   for (let i = 0; i < tasks.length; i++) {
     let task = tasks[i].textContent.toLowerCase();
+    let task_headline = task_headlines[i].textContent.toLowerCase()
+
     console.log(task)
     document.querySelectorAll(`.added-task`)[i].style.display = "none";
+    document.querySelectorAll(`.task-headline`)[i].style.display = "none";
 
-    if (task.includes(input)) {
+    if (task.includes(input) || task_headline.includes(input)) {
       document.querySelectorAll(`.added-task`)[i].style.display = "block"
+      document.querySelectorAll(`.task-headline`)[i].style.display = "block";
     }
   }
 

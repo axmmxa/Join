@@ -15,22 +15,21 @@ function templateSmallContacts() {
 
             <form onsubmit="addContactToBook('not-mobile'); return false"  class="small-contacts-add-data">
                 <div class="login-data">
-                    <input id="small-add-contacts-name" type="text" placeholder="Name" pattern="^[\\p{L} .'-]+$"" required>
+                    <input id="small-add-contacts-name" type="text" placeholder="Name" pattern="^[a-zA-Z ]*$" required>
                     <input id="small-add-contacts-email" type="text" placeholder="E-mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
                     <div class="add-contact-email-exist red-text d-none fs-12">Email already exists!</div>
-                    <input id="small-add-contacts-phone" type="text" placeholder="Phone" pattern="[0-9 ]+" required>
+                    <input id="small-add-contacts-phone" type="text" placeholder="Phone" pattern="^[0-9 ]*$" required>
                 </div>
 
                 <div class="small-contacts-btn-container">
-                    <button onclick="cancelContactsInput('not-mobile')" class="delete-btn">Cancel <span class="close-x">X</span></button>
-                    <button id="add-contact-create-btn" onclick="addContactToBook('not-mobile')" class="create-btn add-create-btn">Create Contact <img class="white-clear" src="kanban_img/clear_icons/white_clear.png"></button>
+                    <button type="button" onclick="cancelContactsInput('not-mobile')" class="delete-btn">Cancel <span class="close-x">X</span></button>
+                    <button type="button" id="add-contact-create-btn" onclick="addContactToBook('not-mobile')" class="create-btn add-create-btn">Create Contact <img class="white-clear" src="kanban_img/clear_icons/white_clear.png"></button>
                 </div>
             </form>
         </div>
     </div>
     `
 }
-
 
 
 function templateSmallContactsMobile() {
@@ -46,14 +45,14 @@ function templateSmallContactsMobile() {
 
           <form onclick="addContactToBook('mobile'); return false" class="small-contacts-add-data">
               <div class="login-data">
-                  <input id="small-add-contacts-name-mobile" type="text" placeholder="Name" pattern="^[\\p{L} .'-]+$" required>
+                  <input id="small-add-contacts-name-mobile" type="text" placeholder="Name" pattern="^[a-zA-Z ]*$" required>
                   <input id="small-add-contacts-email-mobile" type="text" placeholder="E-mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
                   <div class="add-contact-email-exist-mobile red-text d-none fs-12">Email already exists!</div>
-                  <input id="small-add-contacts-phone-mobile" type="text" placeholder="Phone" pattern="[0-9 ]+" required>
+                  <input id="small-add-contacts-phone-mobile" type="text" placeholder="Phone" pattern="^[0-9 ]*$" required>
               </div>
 
               <div class="small-contacts-btn-container">
-                  <button id="add-contact-create-btn-mobile" class="create-btn add-create-btn-mobile">Create Contact <img class="white-clear" src="kanban_img/clear_icons/white_clear.png"></button>
+                  <button type="button" id="add-contact-create-btn-mobile" class="create-btn add-create-btn-mobile">Create Contact <img class="white-clear" src="kanban_img/clear_icons/white_clear.png"></button>
               </div>
           </form>
       </div>
@@ -78,14 +77,14 @@ function templateSmallEditContacts(contact_name, contact_email, contact_phone, i
 
         <form onsubmit="saveEditedContact('${contact_email}','${contact_name}', ${i},'not-mobile'); return false" class="small-contacts-add-data">
             <div class="login-data">
-                <input value="${contact_name}" id="small-edit-contacts-name" type="text" placeholder="Name" pattern="^[\\p{L} .'-]+$" required>
+                <input value="${contact_name}" id="small-edit-contacts-name" type="text" placeholder="Name" pattern="^[a-zA-Z ]*$" required>
                 <input value="${contact_email}" id="small-edit-contacts-email" type="text" placeholder="E-mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
                 <div class="edit-contact-email-exist red-text d-none fs-12">Email already exists!</div>
-                <input value="${contact_phone}" id="small-edit-contacts-phone" type="text" placeholder="Phone" pattern="[0-9 ]+" required>
+                <input value="${contact_phone}" id="small-edit-contacts-phone" type="text" placeholder="Phone" pattern="^[0-9 ]*$" required>
             </div>
 
             <div class="small-contacts-btn-container">
-                <button id="edit-contact-create-btn" class="create-btn">Save</button>
+                <button type="button" id="edit-contact-create-btn" class="create-btn">Save</button>
             </div>
         </form>
     </div>
@@ -109,14 +108,14 @@ function templateSmallEditContactsMobile(contact_name, contact_email, contact_ph
 
         <form onsubmit="saveEditedContact('${contact_email}','${contact_name}', 'mobile'); return false" class="small-contacts-add-data">
             <div class="login-data margin">
-                <input value="${contact_name}" id="small-edit-contacts-name-mobile" type="text" placeholder="Name" pattern="^[\\p{L} .'-]+$" required>
+                <input value="${contact_name}" id="small-edit-contacts-name-mobile" type="text" placeholder="Name" pattern="^[a-zA-Z ]*$" required>
                 <input value="${contact_email}" id="small-edit-contacts-email-mobile" type="text" placeholder="E-mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
                 <div class="edit-contact-email-exist-mobile red-text d-none fs-12">Email already exists!</div>
-                <input value="${contact_phone}" id="small-edit-contacts-phone-mobile" type="text" placeholder="Phone" pattern="[0-9 ]+" required>
+                <input value="${contact_phone}" id="small-edit-contacts-phone-mobile" type="text" placeholder="Phone" pattern="^[0-9 ]*$" required>
             </div>
 
             <div class="small-contacts-btn-container">
-                <button id="edit-contact-create-btn-mobile" class="create-btn">Save</button>
+                <button type="button" id="edit-contact-create-btn-mobile" class="create-btn">Save</button>
             </div>
         </form>
     </div>
@@ -143,13 +142,13 @@ function templateParentSmallEditContacts(contact_name, contact_email, contact_ph
 
             <form onsubmit="saveEditedContact('${contact_email}','${contact_name}', 'not-mobile'); return false" class="small-contacts-add-data">
                 <div class="login-data">
-                    <input value="${contact_name}"  id="small-edit-contacts-name" type="text" placeholder="Name" required>
-                    <input value="${contact_email}" id="small-edit-contacts-email" type="text" placeholder="E-mail" required>
-                    <input value="${contact_phone}" id="small-edit-contacts-phone" type="text" placeholder="Phone" required>
+                    <input value="${contact_name}"  id="small-edit-contacts-name" type="text" placeholder="Name" pattern="^[a-zA-Z ]*$" required>
+                    <input value="${contact_email}" id="small-edit-contacts-email" type="text" placeholder="E-mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+                    <input value="${contact_phone}" id="small-edit-contacts-phone" type="text" placeholder="Phone" pattern="^[0-9 ]*$" required>
                 </div>
 
                 <div class="small-contacts-btn-container">
-                    <button id="edit-contact-create-btn" class="create-btn edit-contact-email-exist-mobile">Save</button>
+                    <button type="button" id="edit-contact-create-btn" class="create-btn edit-contact-email-exist-mobile">Save</button>
                 </div>
             </form>
         </div>
@@ -264,11 +263,11 @@ function templateSmallAddTask() {
         <div>
         <div>
             <form class="task-form">
-                <input id="input-title" class="input-title" type="text" placeholder="Enter a title" required>
+                <input id="input-title" class="input-title" type="text" placeholder="Enter a title" >
 
                 <div class="contacts-container contacts-add-task">
                     <div class="add-option d-none">
-                        <input id="add-contact-input" class="add-option-input" type="text" placeholder="Contact email" required>
+                        <input id="add-contact-input" class="add-option-input" type="text" placeholder="Contact email" >
                         <div class="add-option-btn-container">
                             <img onclick="closeAddContact(0)" class="close-x-blue-btn" src="kanban_img/close_icons/close_x_blue.png">
                             <img onclick="addNewContactOption(0)" class="blue-clear-btn" src="kanban_img/clear_icons/blue_clear.png">
@@ -291,12 +290,12 @@ function templateSmallAddTask() {
                 </div>
 
                 <div class="due-date-container">
-                    <label class="label-flex" for="due-date">Due date<input placeholder="dd/mm/yyyy" id="due-date" type="date" required></label>
+                    <label class="label-flex" for="due-date">Due date<input placeholder="dd/mm/yyyy" id="due-date" type="date" ></label>
                 </div>
 
                 <div class="task-category-container">
                             <div class="add-option d-none">
-                                <input id="add-category-input" class="add-option-input" type="text" placeholder="New category name" required>
+                                <input id="add-category-input" class="add-option-input" type="text" placeholder="New category name" >
                                 <div class="add-option-btn-container">
                                     <img onclick="closeAddContact(1)" class="close-x-blue-btn" src="kanban_img/close_icons/close_x_blue.png">
                                     <img onclick="addNewContactOption(1)" class="blue-clear-btn" src="kanban_img/clear_icons/blue_clear.png">

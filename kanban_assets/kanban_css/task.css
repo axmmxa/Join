@@ -249,15 +249,18 @@
 }
 
 .add-option {
+    border-bottom: 1px solid gray;
     position: relative;
     margin-top: 20px;
 }
 
 #add-contact-input {
+    border: none;
     padding-bottom: 10px;
 }
 
 #add-category-input {
+    border: none;
     padding-bottom: 10px;
 }
 
