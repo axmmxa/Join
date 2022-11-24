@@ -403,6 +403,14 @@ function returnContactJSON(small_add_contacts_name, small_add_contacts_email, sm
   }
 }
 
+function cancelContactsInput(btn) {
+  if (btn === "not-mobile") {
+    document.querySelector("#small-add-contacts-name").value = ""
+    document.querySelector("#small-add-contacts-email").value = ""
+    document.querySelector("#small-add-contacts-phone").value = ""
+  } 
+}
+
 
 async function addContactToBook(btn) {
   setCorrectInputValueFromAddContact(btn)
@@ -414,6 +422,7 @@ async function addContactToBook(btn) {
       pushDependingOnUser(contact)
     }
     showAddedContactDependingOnUser(btn)
+    cancelContactsInput(btn)
   } else {
     styleCreateContactButton(btn)
   }

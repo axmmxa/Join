@@ -17,6 +17,7 @@
 }
 
 body {
+    box-sizing: border-box;
     height: 100vh;
     margin: 0;
     font-family: "Open Sans";
@@ -123,7 +124,6 @@ body {
     width: 95%;
     display: flex;
     justify-content: space-between;
-    margin-top: 10px;
 }
 
 .login-btn {
@@ -148,7 +148,7 @@ body {
     color: rgba(0, 0, 0, 0.3);
     border: 2px solid rgba(0, 0, 0, 0.3);
     border-radius: 8px;
-    padding: 10px 25px 10px 25px;
+    padding: 10px 25px;
     text-decoration: none;
 }
 
@@ -159,7 +159,7 @@ body {
 }
 
 .not-a-user-mobile {
-    margin-top: 40px;
+    margin-top: 20px;
     display: none;
 }
 
@@ -172,6 +172,13 @@ body {
 }
 
 @media(max-width:540px) {
+    .navbar {
+        height: 15vh;
+    }
+    .overlay-container {
+        margin-top: 10px;
+        height: 80vh;
+    }
     .login {
         height: 500px;
         width: 90%;
@@ -184,7 +191,6 @@ body {
         width: 95%;
         display: flex;
         justify-content: space-between;
-        margin-top: 10px;
     }
     .forgot-password {
         margin-top: 20px;
@@ -198,13 +204,14 @@ body {
         flex-direction: column;
     }
     .login-btn {
-        margin-bottom: 20px;
+        margin-bottom: 10px;
         width: 100px;
         display: flex;
         justify-content: center;
     }
     .guest-btn {
         width: 100px;
+        padding: 10px 10px;
     }
     .not-a-user {
         display: none;

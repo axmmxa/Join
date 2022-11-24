@@ -38,7 +38,6 @@ function returnSelectedSubtasks(el) {
 }
 
 async function saveEditedTask(id_task) {
-
   let title = document.getElementById('input-title').value
   let due_date = document.getElementById('due-date').value
   let description = document.getElementById('textarea').value
@@ -114,7 +113,7 @@ function styleCorrectButtonAccordingToSuccesOrFailur(title, due_date, descriptio
       document.querySelector(".create-task-mobile-btn").style.border = '1px solid rgb(0, 255, 0)';
     }
     addTask(task, id)
-    if (document.querySelector("addTask-body") || document.querySelector(".create-task-mobile-btn")) {
+    if (document.querySelector("#addTask-body") || document.querySelector("#board-body")) {
       showPopup("task-popup")
     }
   } else {
@@ -139,8 +138,17 @@ async function saveTask() {
 
   styleCorrectButtonAccordingToSuccesOrFailur(title, due_date, description, task, id)
 
-  // await initBoard()
-  closeSmallAddTask()
+  if (document.querySelector("#board-body")) {
+    await initBoard()
+    closeSmallAddTask()
+  } else {
+    clearForm()
+    setTimeout(() => {
+      window.location.href = "board.html"  
+    }, 1000);
+  }
+  
+  
 }
 
 function checkIfCreatedTaskIsEmpty(title, due_date, description) {

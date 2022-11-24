@@ -21,20 +21,21 @@
     margin: auto;
 }
 
-.task-form input {
+.task-form input  {
     border: none;
     border-bottom: 1px solid gray;
     padding-left: 20px;
 }
 
 .contacts-container {
+    
     position: relative;
 }
 
 .task-category-container {
+    
     position: relative;
 }
-
 
 .date-img {
     position: absolute;
@@ -49,7 +50,7 @@
 }
 
 #due-date {
-    /* width: 95%; */
+   
     margin-top: 10px;
     padding-bottom: 10px;
 }
@@ -59,8 +60,9 @@
 }
 
 .input-title {
+   
     margin-top: 5px;
-    padding-bottom: 5px ;
+    padding-bottom: 5px;
     height: 35px;
     font-size: 32px;
 }
@@ -88,7 +90,6 @@
 }
 
 .priority-btn-container {
-    width: 100%;
     display: flex;
     justify-content: space-evenly;
     margin-top: 15px;
@@ -127,12 +128,10 @@
 }
 
 .description-container {
+    
     margin-top: 15px;
 }
 
-.description-container>span {
-    /* font-weight: bold; */
-}
 
 #subtask-category {
     margin-top: 10px;
@@ -173,7 +172,7 @@
 }
 
 .create-task-container {
-    width: 70%;
+    width: 95%;
     height: 95%;
     margin: auto;
     display: flex;
@@ -255,12 +254,10 @@
 }
 
 #add-contact-input {
-    width: 93.32%;;
     padding-bottom: 10px;
 }
 
 #add-category-input {
-    width: 93.32%;
     padding-bottom: 10px;
 }
 
@@ -310,87 +307,60 @@
 }
 
 .task-form-left::-webkit-scrollbar {
-    width: 5px;  
-    height: 4px;  
-  }
-  
-  .task-form-left::-webkit-scrollbar-track {
-    background: transparent;   /* color of the tracking area */ 
-    margin-bottom: 375px;    
-  }
-
-  .task-form-left::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.3);    /* color of the scroll thumb */
-    border-radius: 20px;       /* roundness of the scroll thumb */ 
-  }
-
-@media (max-width: 874px) {
-    .task-form {
-        width: 250px;
-    }
-    #contacts {
-        width: 250px;
-    }
-    #task-category {
-        width: 250px;
-    }
-    #description-container {
-        width: 250px;
-    }
-    #subtask-category {
-        width: 250px
-    }
-    .create-task-container {
-        width: 100%;
-    }
-    .priority-btn-container {
-        width: 250px;
-    }
+    width: 5px;
+    height: 4px;
 }
 
-@media (max-width: 600px) {
-    .kanban-navbar-mobile {
-        height: 10vh;
-    }
+.task-form-left::-webkit-scrollbar-track {
+    background: transparent;
+    /* color of the tracking area */
+    margin-bottom: 375px;
+}
+
+.task-form-left::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3);
+    /* color of the scroll thumb */
+    border-radius: 20px;
+    /* roundness of the scroll thumb */
 }
 
 @media (max-width: 684px) {
     .task-form-right {
         display: none;
     }
+
     .task-form-left {
         width: 100%;
     }
+
     .task-form {
         width: 100%;
     }
-    .input-title {
-        /* width: 95%; */
-    }
+
     #contacts {
         width: 100%;
     }
-    #due-date {
-        /* width: 95%; */
-    }
+
     #task-category {
         width: 100%;
     }
+
     #description-container {
         width: 100%;
     }
-    #subtask-category {
-        /* width: 95% */
-    }
+
     .create-task-container {
         width: 100%;
     }
+
     .priority-btn-container {
         width: 100%;
     }
+
     .priority-btn-container button {
         padding: 10px 15px;
     }
+
     .mobile-create-task-navbar {
         display: flex;
     }
@@ -400,7 +370,5 @@
     .priority-btn-container button {
         padding: 5px 10px;
     }
-    #subtask-category {
-        width: 91%
-    }
+
 }

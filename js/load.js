@@ -346,9 +346,11 @@ function showSavedContactInContactBook(user) {
 
     let first_letter_contact = contact.contact_name[0].toUpperCase()
 
-    document.querySelector(`#contacts-${first_letter_contact}`).classList.remove("d-none")
-    document.querySelector(`.contacts-${first_letter_contact}-data`).innerHTML += templateContactUserInContactBook(contact)
-
+    if (document.querySelector(`#contacts-${first_letter_contact}`)) {
+      document.querySelector(`#contacts-${first_letter_contact}`).classList.remove("d-none")
+      document.querySelector(`.contacts-${first_letter_contact}-data`).innerHTML += templateContactUserInContactBook(contact)
+    }
+    
   }
 }
 
