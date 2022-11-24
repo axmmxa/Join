@@ -92,6 +92,7 @@ function setId(idTaskFromBackend) {
 }
 
 function returnTaskJSON(title, due_date, description) {
+  console.log(selected_options)
   return {
     'title': title,
     'assignedContacts': selected_options,
@@ -112,6 +113,7 @@ function styleCorrectButtonAccordingToSuccesOrFailure(title, due_date, descripti
     if (document.querySelector(".create-task-mobile-btn")) {
       document.querySelector(".create-task-mobile-btn").style.border = '1px solid rgb(0, 255, 0)';
     }
+    console.log(task)
     addTask(task, id)
     if (document.querySelector("#addTask-body") || document.querySelector("#board-body")) {
       showPopup("task-popup")
@@ -135,7 +137,7 @@ async function saveTask() {
   let description = document.getElementById('textarea').value
 
   let task = returnTaskJSON(title, due_date, description)
-
+  
   styleCorrectButtonAccordingToSuccesOrFailure(title, due_date, description, task, id)
 
   if (document.querySelector("#board-body")) {
@@ -143,9 +145,9 @@ async function saveTask() {
     closeSmallAddTask()
   } else {
     clearForm()
-    setTimeout(() => {
-      window.location.href = "board.html"  
-    }, 1000);
+    // setTimeout(() => {
+    //   window.location.href = "board.html"  
+    // }, 1000);
   }
 }
 
@@ -163,6 +165,7 @@ async function addTask(task, id) {
         id++
         console.log(id)
         await backend.setItem('id_task', JSON.stringify(id));
+        console
         currentUser.tasks.push(task)
         await backend.setItem('users', JSON.stringify(users));
       }
@@ -223,13 +226,15 @@ function clearFirstPart() {
   document.getElementById("input-title").value = ""
   document.getElementById("due-date").value = ""
 
+  selected_options = []
+
   let checkboxes = document.querySelectorAll('input[type="checkbox"]');
 
   for (let j = 0; j < checkboxes.length; j++) {
     const checkbox = checkboxes[j];
     if (checkbox.checked) {
       checkbox.checked = false
-      selected_options.pop(selected_options[j])
+      // selected_options.pop(selected_options[j])
     }
   }
 }

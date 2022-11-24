@@ -22,8 +22,8 @@ function templateSmallContacts() {
                 </div>
 
                 <div class="small-contacts-btn-container">
-                    <button type="button" onclick="cancelContactsInput('not-mobile')" class="delete-btn">Cancel <span class="close-x">X</span></button>
-                    <button type="button" id="add-contact-create-btn" onclick="addContactToBook('not-mobile')" class="create-btn add-create-btn">Create Contact <img class="white-clear" src="kanban_img/clear_icons/white_clear.png"></button>
+                    <button onclick="cancelContactsInput('not-mobile')" class="delete-btn">Cancel <span class="close-x">X</span></button>
+                    <button id="add-contact-create-btn" class="create-btn add-create-btn">Create Contact <img class="white-clear" src="kanban_img/clear_icons/white_clear.png"></button>
                 </div>
             </form>
         </div>
@@ -43,7 +43,7 @@ function templateSmallContactsMobile() {
       <div class="lower-part-small-contacts-mobile">
           <img class="anonymous-profile-picture anonymous-profile-picture-mobile" src="kanban_img/user_icons/anonym_profile_picture.png">
 
-          <form onclick="addContactToBook('mobile'); return false" class="small-contacts-add-data">
+          <form onsubmit="addContactToBook('mobile'); return false" class="small-contacts-add-data">
               <div class="login-data">
                   <input id="small-add-contacts-name-mobile" type="text" placeholder="Name" pattern="^[a-zA-Z ]*$" required>
                   <input id="small-add-contacts-email-mobile" type="text" placeholder="E-mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
@@ -52,7 +52,7 @@ function templateSmallContactsMobile() {
               </div>
 
               <div class="small-contacts-btn-container">
-                  <button type="button" id="add-contact-create-btn-mobile" class="create-btn add-create-btn-mobile">Create Contact <img class="white-clear" src="kanban_img/clear_icons/white_clear.png"></button>
+                  <button id="add-contact-create-btn-mobile" class="create-btn add-create-btn-mobile">Create Contact <img class="white-clear" src="kanban_img/clear_icons/white_clear.png"></button>
               </div>
           </form>
       </div>
@@ -84,7 +84,7 @@ function templateSmallEditContacts(contact_name, contact_email, contact_phone, i
             </div>
 
             <div class="small-contacts-btn-container">
-                <button type="button" id="edit-contact-create-btn" class="create-btn">Save</button>
+                <button id="edit-contact-create-btn" class="create-btn">Save</button>
             </div>
         </form>
     </div>
@@ -115,7 +115,7 @@ function templateSmallEditContactsMobile(contact_name, contact_email, contact_ph
             </div>
 
             <div class="small-contacts-btn-container">
-                <button type="button" id="edit-contact-create-btn-mobile" class="create-btn">Save</button>
+                <button id="edit-contact-create-btn-mobile" class="create-btn">Save</button>
             </div>
         </form>
     </div>
@@ -148,7 +148,7 @@ function templateParentSmallEditContacts(contact_name, contact_email, contact_ph
                 </div>
 
                 <div class="small-contacts-btn-container">
-                    <button type="button" id="edit-contact-create-btn" class="create-btn edit-contact-email-exist-mobile">Save</button>
+                    <button id="edit-contact-create-btn" class="create-btn edit-contact-email-exist-mobile">Save</button>
                 </div>
             </form>
         </div>
