@@ -1,3 +1,11 @@
+/**
+ * save the edited contact for render new contact
+ * 
+ * @param {string} contact_email - 
+ * @param {string} contact_name 
+ * @param {integer} i 
+ * @param {string} btn 
+ */
 async function saveEditedContact(contact_email, contact_name, i, btn) {
   extractInputValueFromCorrectInputs(btn)
 
