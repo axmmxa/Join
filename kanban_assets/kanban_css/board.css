@@ -3,6 +3,7 @@
 }
 
 .board-container {
+    height: 80%;
     width: 90%;
     margin: 0 auto;
 }
@@ -149,6 +150,26 @@
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+}
+
+.board-task-container {
+    height: 80%;
+}
+
+#todo {
+    height: 80%;
+}
+
+#in-progress {
+    height: 80%;
+}
+
+#await-feedback {
+    height: 80%;
+}
+
+#done {
+    height: 80%;
 }
 
 #small-add-task::-webkit-scrollbar {
