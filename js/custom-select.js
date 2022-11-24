@@ -1,19 +1,36 @@
+/**
+ * Show options in add task
+ *
+ * @param {integer} index - array number for the selected option
+ *
+ */
+
 function showCustomSelectOptions(index) {
-  let selects = document.querySelectorAll(".custom-select-options-container-add-task");
+  let selects = document.querySelectorAll(
+    ".custom-select-options-container-add-task"
+  );
 
   if (
     document.getElementById("addTask-body") ||
-    document.getElementById("contacts-body") || document.getElementById("board-body")
+    document.getElementById("contacts-body") ||
+    document.getElementById("board-body")
   ) {
     selects[index].classList.toggle("d-none");
-  } 
+  }
 }
+
+/**
+ * show options in edit task
+ *
+ * @param {integer} index - array number for the selected option
+ */
 
 function showCustomSelectOptionEditTask(index) {
-  let edit_task_selects = document.querySelectorAll(".custom-select-options-container");
-  edit_task_selects[index].classList.toggle("d-none")
+  let edit_task_selects = document.querySelectorAll(
+    ".custom-select-options-container"
+  );
+  edit_task_selects[index].classList.toggle("d-none");
 }
-
 
 function showCustomSelectOptionsTaskInfo() {
   document
@@ -21,6 +38,11 @@ function showCustomSelectOptionsTaskInfo() {
     .classList.toggle("d-none");
 }
 
+/**
+ * removes the first option container
+ *
+ * @param {integer} index - array number of option container
+ */
 
 function showAddContact(index) {
   let custom_select = document.querySelectorAll(".custom-select");
@@ -34,6 +56,11 @@ function showAddContact(index) {
   add_option[index].classList.remove("d-none");
 }
 
+/**
+ * show the first option container again
+ *
+ * @param {integer} index - array number of option container
+ */
 
 function closeAddContact(index) {
   let custom_select = document.querySelectorAll(".custom-select");
@@ -49,6 +76,12 @@ function closeAddContact(index) {
   }
 }
 
+/**
+ * reset selected contact options
+ *
+ * @param {array} checkboxes - all contact options
+ * @param {integer} index - array number of option container
+ */
 
 function resetContactOptions(checkboxes, index) {
   for (let j = 0; j < checkboxes.length; j++) {
@@ -66,33 +99,53 @@ function resetContactOptions(checkboxes, index) {
   }
 }
 
+/**
+ * add a new contact option
+ *
+ * @param {integer} index - array number of option container
+ */
 
 function addNewContactOption(index) {
   let checkboxes = document.querySelectorAll('input[type="checkbox"]');
 
   resetContactOptions(checkboxes, index);
 
-  if (document.getElementById("addTask-body") || document.getElementById("board-body")) {
-    let custom_select_category_container_add_task = document.querySelectorAll(".custom-select-options-container-add-task");
-    let add_category_input = document.getElementById("add-category-input").value;
+  if (
+    document.getElementById("addTask-body") ||
+    document.getElementById("board-body")
+  ) {
+    let custom_select_category_container_add_task = document.querySelectorAll(
+      ".custom-select-options-container-add-task"
+    );
+    let add_category_input =
+      document.getElementById("add-category-input").value;
 
     if (index == 1) {
-      console.log(custom_select_category_container_add_task)
-      custom_select_category_container_add_task[index].innerHTML += `<label onclick="returnSelectedCategory(id)" id="${add_category_input}" class="custom-select-option-category">${add_category_input} <span class="category-color"></span></label>`;
+      console.log(custom_select_category_container_add_task);
+      custom_select_category_container_add_task[
+        index
+      ].innerHTML += `<label onclick="returnSelectedCategory(id)" id="${add_category_input}" class="custom-select-option-category">${add_category_input} <span class="category-color"></span></label>`;
       let category_color = document.querySelectorAll(".category-color");
       setColorCategory(category_color, add_category_input);
     }
-    closeAddContact(index)
-
+    closeAddContact(index);
   }
-
 }
 
+/**
+ * set the color for each category
+ *
+ * @param {array} category_color - array with all random colors
+ * @param {string} add_category_input - category name
+ */
 
 function setColorCategory(category_color, add_category_input) {
-  returnSuitableCategoryColor(category_color, add_category_input, category_color.length - 1)
+  returnSuitableCategoryColor(
+    category_color,
+    add_category_input,
+    category_color.length - 1
+  );
 }
-
 
 function showAddSubtask() {
   let subtask_category_container = document.querySelector("#subtask-category");
@@ -104,7 +157,6 @@ function showAddSubtask() {
   add_option_subtask.classList.remove("d-none");
 }
 
-
 function closeAddSubtask() {
   let subtask_category_container = document.querySelector("#subtask-category");
   let add_option_subtask = document.querySelector(".add-option-subtask");
@@ -114,7 +166,6 @@ function closeAddSubtask() {
   plus_select.classList.remove("d-none");
   add_option_subtask.classList.add("d-none");
 }
-
 
 function addNewSubtask() {
   let category_container = document.querySelector(".category-container");
