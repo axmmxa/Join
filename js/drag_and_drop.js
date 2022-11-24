@@ -26,6 +26,12 @@ async function updateHTML() {
   loadAndStoreCorrectColor(user_task_array);
 }
 
+/**
+ * load correct color for users icon
+ *
+ * @param {array} user_task_array - array of all users information
+ */
+
 function loadAndStoreCorrectColor(user_task_array) {
   let correctCategory;
   let correctId;
@@ -40,6 +46,13 @@ function loadAndStoreCorrectColor(user_task_array) {
   localStorage.setItem("loggedInUser", JSON.stringify(loggedInUser));
   loadBoardContactBackgroundColor();
 }
+
+/**
+ * generate task for the kanban board
+ *
+ * @param {array} user_task_array - array of all users information
+ * @param {string} status - task category
+ */
 
 async function generateTask(user_task_array, status) {
   let task = user_task_array.filter((t) => t["status"] == status);
@@ -85,6 +98,13 @@ function generateTodoHTML(element) {
       `;
 }
 
+/**
+ * get the titles for the task container
+ *
+ * @param {string} status - task category
+ * @returns
+ */
+
 function getStatusTitle(status) {
   if (status == "todo") {
     return "To do";
@@ -97,6 +117,12 @@ function getStatusTitle(status) {
   }
 }
 
+/**
+ * add user icons
+ *
+ * @param {object} element -task json object
+ */
+
 function addUserIcons(element) {
   let assignedContacts = document.querySelector(
     `#assigned-contact-${element.id_task}`
@@ -105,8 +131,9 @@ function addUserIcons(element) {
     const contact = element.assignedContacts[i];
     if (i == 1 && window.innerWidth > 874) {
       assignedContacts.innerHTML += `<div>
-         <span class="user-icon blue">+${element.assignedContacts.length - 1
-        }</span>  
+         <span class="user-icon blue">+${
+           element.assignedContacts.length - 1
+         }</span>  
         </div>`;
       break;
     } else {
@@ -117,16 +144,22 @@ function addUserIcons(element) {
   }
 }
 
+/**
+ * drag function from w3schools
+ *
+ * @param {integer} id_task - number for dragged task
+ */
+
 async function startDragging(id_task) {
   if (loggedInUser.name !== "Guest") {
     for (let i = 0; i < users.length; i++) {
       const currentUser = users[i];
       if (currentUser.email == loggedInUser.email) {
-        currentDraggedElement = await getIndexOfIdTask(currentUser, id_task)
+        currentDraggedElement = await getIndexOfIdTask(currentUser, id_task);
       }
     }
   } else {
-    currentDraggedElement = await getIndexOfIdTask(loggedInUser, id_task)
+    currentDraggedElement = await getIndexOfIdTask(loggedInUser, id_task);
   }
   console.log(currentDraggedElement);
 }
@@ -134,6 +167,12 @@ async function startDragging(id_task) {
 function allowDrop(ev) {
   ev.preventDefault();
 }
+
+/**
+ * drag and drop function from w3schools to move the task at the board
+ *
+ * @param {string} status - task category
+ */
 
 async function moveTo(status) {
   let user_task_array = getUserTasks();
