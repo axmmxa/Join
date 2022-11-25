@@ -110,9 +110,7 @@ function returnTaskJSON(title, due_date, description) {
 function styleCorrectButtonAccordingToSuccesOrFailure(title, due_date, description, task, id) {
   if (checkIfCreatedTaskIsEmpty(title, due_date, description)) {
     document.querySelector(".create-btn").style.border = '1px solid rgb(0, 255, 0)';
-    if (document.querySelector(".create-task-mobile-btn")) {
-      document.querySelector(".create-task-mobile-btn").style.border = '1px solid rgb(0, 255, 0)';
-    }
+   
     console.log(task)
     addTask(task, id)
     if (document.querySelector("#addTask-body") || document.querySelector("#board-body")) {
@@ -120,9 +118,7 @@ function styleCorrectButtonAccordingToSuccesOrFailure(title, due_date, descripti
     }
   } else {
     document.querySelector(".create-btn").style.border = '1px solid rgb(255, 0, 0)';
-    if (document.querySelector(".create-task-mobile-btn")) {
-      document.querySelector(".create-task-mobile-btn").style.border = '1px solid rgb(0, 255, 0)';
-    }
+    
   }
 }
 
@@ -143,12 +139,68 @@ async function saveTask() {
   if (document.querySelector("#board-body")) {
     await initBoard()
     closeSmallAddTask()
+    document.querySelector(".create-btn").disabled = true
+    document.querySelector(".create-btn").style.border = "1px solid rgba(0, 0, 0, 0.2)"
+    document.querySelector(".create-btn").style.backgroundColor = "#95bcff"
+    document.querySelector(".create-btn").style.boxShadow = "none"
   } else {
     clearForm()
+    document.querySelector(".create-btn").disabled = true
+    document.querySelector(".create-btn").style.border = "1px solid rgba(0, 0, 0, 0.2)"
+    document.querySelector(".create-btn").style.backgroundColor = "#95bcff"
+    document.querySelector(".create-btn").style.boxShadow = "none"
     // setTimeout(() => {
     //   window.location.href = "board.html"  
     // }, 1000);
   }
+}
+
+function enableButton(id) {
+  if (window.innerWidth <= 600) {
+    id = "create-btn-mobile"
+  }
+
+  let title = document.querySelector("#input-title").value
+  let due_date = document.querySelector("#due-date").value
+  let description = document.querySelector("#textarea").value
+
+  if (checkIfCreatedTaskIsEmpty(title, due_date, description)) {
+    document.querySelector(`.${id}`).style.backgroundColor = "#4589FF"
+    document.querySelector(`.${id}`).disabled = false 
+
+    document.querySelector(`.${id}`).addEventListener("mouseover", () => {
+      document.querySelector(`.${id}`).style.backgroundColor = "blue"
+      document.querySelector(`.${id}`).style.boxShadow = "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px"
+    })
+    
+    document.querySelector(`.${id}`).addEventListener("mouseout", () => {
+      document.querySelector(`.${id}`).style.backgroundColor = "#4589FF"
+      document.querySelector(`.${id}`).style.boxShadow = "none"
+    })
+
+  }
+}
+
+function enableAddContactButton(btn, id) {
+    if (checkIfContactsInputIsNotEmpty(btn)) {
+      document.querySelector(`.${id}`).style.backgroundColor = "#4589FF"
+      document.querySelector(`.${id}`).disabled = false 
+  
+      document.querySelector(`.${id}`).addEventListener("mouseover", () => {
+        document.querySelector(`.${id}`).style.backgroundColor = "blue"
+        document.querySelector(`.${id}`).style.boxShadow = "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px"
+      })
+      
+      document.querySelector(`.${id}`).addEventListener("mouseout", () => {
+        document.querySelector(`.${id}`).style.backgroundColor = "#4589FF"
+        document.querySelector(`.${id}`).style.boxShadow = "none"
+      })
+    }
+}
+
+function checkIfContactsInputIsNotEmpty(btn) {
+  setCorrectInputValueFromAddContact(btn) 
+  return small_add_contacts_name !== "" && small_add_contacts_email !== "" && small_add_contacts_phone  !== ""
 }
 
 function checkIfCreatedTaskIsEmpty(title, due_date, description) {

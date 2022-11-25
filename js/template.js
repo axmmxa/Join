@@ -13,7 +13,7 @@ function templateSmallContacts() {
         <div class="lower-part-small-contacts">
             <img class="anonymous-profile-picture" src="kanban_img/user_icons/anonym_profile_picture.png">
 
-            <form onsubmit="addContactToBook('not-mobile'); return false"  class="small-contacts-add-data">
+            <form onchange="enableAddContactButton('not-mobile','add-create-btn')" onsubmit="addContactToBook('not-mobile'); return false"  class="small-contacts-add-data">
                 <div class="login-data">
                     <input id="small-add-contacts-name" type="text" placeholder="Name" pattern="^[a-zA-Z ]*$" required>
                     <input id="small-add-contacts-email" type="text" placeholder="E-mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
@@ -43,7 +43,7 @@ function templateSmallContactsMobile() {
       <div class="lower-part-small-contacts-mobile">
           <img class="anonymous-profile-picture anonymous-profile-picture-mobile" src="kanban_img/user_icons/anonym_profile_picture.png">
 
-          <form onsubmit="addContactToBook('mobile'); return false" class="small-contacts-add-data">
+          <form onchange="enableAddContactButton('mobile','add-create-btn-mobile')" onsubmit="addContactToBook('mobile'); return false" class="small-contacts-add-data">
               <div class="login-data">
                   <input id="small-add-contacts-name-mobile" type="text" placeholder="Name" pattern="^[a-zA-Z ]*$" required>
                   <input id="small-add-contacts-email-mobile" type="text" placeholder="E-mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
@@ -75,7 +75,7 @@ function templateSmallEditContacts(contact_name, contact_email, contact_phone, i
     <div class="lower-part-small-contacts">
     <div id="${contact_name}" class="user-icon-edit-contact user-icon-big fs-22">${getUserIcon(contact_name)}</div>
 
-        <form onsubmit="saveEditedContact('${contact_email}','${contact_name}', ${i},'not-mobile'); return false" class="small-contacts-add-data">
+        <form onchange="enableButton()" onsubmit="saveEditedContact('${contact_email}','${contact_name}', ${i},'not-mobile'); return false" class="small-contacts-add-data">
             <div class="login-data">
                 <input value="${contact_name}" id="small-edit-contacts-name" type="text" placeholder="Name" pattern="^[a-zA-Z ]*$" required>
                 <input value="${contact_email}" id="small-edit-contacts-email" type="text" placeholder="E-mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
@@ -262,7 +262,7 @@ function templateSmallAddTask() {
 
         <div>
         <div>
-            <form class="task-form">
+            <form onkeyup="enableButton()" class="task-form">
                 <input id="input-title" class="input-title" type="text" placeholder="Enter a title" >
 
                 <div class="contacts-container contacts-add-task">

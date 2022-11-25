@@ -88,7 +88,7 @@
 
     <nav class="mobile-create-task-navbar">
         <img class="mobile-logo-blue" src="kanban_img/login_icons/join_blue.png">
-        <button onclick="saveTask()" class="create-task-mobile-btn">Create <img class="white-clear" src="kanban_img/clear_icons/white_clear.png"></button>
+        <button onclick="saveTask()" class="create-btn create-btn-mobile">Create <img class="white-clear" src="kanban_img/clear_icons/white_clear.png"></button>
     </nav>
 
 
@@ -112,7 +112,7 @@
         <div class="main-field">
             <div class="add-task-container">
                 <div class="task-form-left">
-                    <form class="task-form">
+                    <form onkeyup="enableButton('create-btn')" class="task-form">
                         <input id="input-title" class="input-title" type="text" placeholder="Enter a title" required>
 
                         <div class="contacts-container">
@@ -199,7 +199,7 @@
                 <div class="task-form-right">
                     <div class="create-task-container">
                         <button onclick="clearForm()" style="margin-right: 10px;" class="delete-btn">Clear <span class="close-x">X</span></button>
-                        <button onclick="saveTask()" class="create-btn">Create Task <img class="white-clear" src="kanban_img/clear_icons/white_clear.png"></button>
+                        <button onclick="saveTask()" class="create-btn disabled-blue" disabled >Create Task <img class="white-clear" src="kanban_img/clear_icons/white_clear.png" ></button>
                     </div>
                 </div>
             </div>

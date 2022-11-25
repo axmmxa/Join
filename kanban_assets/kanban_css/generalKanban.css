@@ -127,7 +127,7 @@ body{
 }
 
 .disabled-blue {
-    background-color: rgb(50, 110, 235);
+    background-color: rgb(70, 10, 255);
 }
 
 .light-blue {
@@ -197,18 +197,19 @@ body{
 
 .create-btn {
     cursor: pointer;
-    background-color: #4589FF;
+    background-color: #95bcff;
     color: white;
     padding: 10px 15px;
     border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 8px;
     margin-left: 10px;
+    margin-right: 10px;
 }
 
-.create-btn:hover {
+/* .create-btn:hover {
     background-color: blue;
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
-}
+} */
 
 .close-x {
     cursor: pointer;
