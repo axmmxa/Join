@@ -59,6 +59,7 @@ async function saveEditedTask(id_task) {
 
 async function changeTaskJSON(user, id_task, title, due_date, description) {
   let contact_options = document.querySelectorAll(".contact-option")
+  selected_options = []
   for (let j = 0; j < contact_options.length; j++) {
     if (contact_options[j].checked == true) {
       selected_options.push(contact_options[j].value)
@@ -156,8 +157,10 @@ async function saveTask() {
 }
 
 function enableButton(id) {
-  if (window.innerWidth <= 600) {
-    id = "create-btn-mobile"
+  if (window.innerWidth <= 684 && document.getElementById("small-add-task").classList.contains("d-none")) {
+    id = ".create-btn-mobile"
+  } else if (!document.getElementById("small-add-task").classList.contains("d-none")) {
+    id = "#create-btn-small-add-task"
   }
 
   let title = document.querySelector("#input-title").value
@@ -165,17 +168,17 @@ function enableButton(id) {
   let description = document.querySelector("#textarea").value
 
   if (checkIfCreatedTaskIsEmpty(title, due_date, description)) {
-    document.querySelector(`.${id}`).style.backgroundColor = "#4589FF"
-    document.querySelector(`.${id}`).disabled = false 
+    document.querySelector(`${id}`).style.backgroundColor = "#4589FF"
+    document.querySelector(`${id}`).disabled = false 
 
-    document.querySelector(`.${id}`).addEventListener("mouseover", () => {
-      document.querySelector(`.${id}`).style.backgroundColor = "blue"
-      document.querySelector(`.${id}`).style.boxShadow = "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px"
+    document.querySelector(`${id}`).addEventListener("mouseover", () => {
+      document.querySelector(`${id}`).style.backgroundColor = "blue"
+      document.querySelector(`${id}`).style.boxShadow = "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px"
     })
     
-    document.querySelector(`.${id}`).addEventListener("mouseout", () => {
-      document.querySelector(`.${id}`).style.backgroundColor = "#4589FF"
-      document.querySelector(`.${id}`).style.boxShadow = "none"
+    document.querySelector(`${id}`).addEventListener("mouseout", () => {
+      document.querySelector(`${id}`).style.backgroundColor = "#4589FF"
+      document.querySelector(`${id}`).style.boxShadow = "none"
     })
 
   }

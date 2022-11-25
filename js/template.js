@@ -13,7 +13,7 @@ function templateSmallContacts() {
         <div class="lower-part-small-contacts">
             <img class="anonymous-profile-picture" src="kanban_img/user_icons/anonym_profile_picture.png">
 
-            <form onchange="enableAddContactButton('not-mobile','add-create-btn')" onsubmit="addContactToBook('not-mobile'); return false"  class="small-contacts-add-data">
+            <form onchange="enableAddContactButton('not-mobile','.add-create-btn')" onsubmit="addContactToBook('not-mobile'); return false"  class="small-contacts-add-data">
                 <div class="login-data">
                     <input id="small-add-contacts-name" type="text" placeholder="Name" pattern="^[a-zA-Z ]*$" required>
                     <input id="small-add-contacts-email" type="text" placeholder="E-mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
@@ -43,7 +43,7 @@ function templateSmallContactsMobile() {
       <div class="lower-part-small-contacts-mobile">
           <img class="anonymous-profile-picture anonymous-profile-picture-mobile" src="kanban_img/user_icons/anonym_profile_picture.png">
 
-          <form onchange="enableAddContactButton('mobile','add-create-btn-mobile')" onsubmit="addContactToBook('mobile'); return false" class="small-contacts-add-data">
+          <form onchange="enableAddContactButton('mobile','.add-create-btn-mobile')" onsubmit="addContactToBook('mobile'); return false" class="small-contacts-add-data">
               <div class="login-data">
                   <input id="small-add-contacts-name-mobile" type="text" placeholder="Name" pattern="^[a-zA-Z ]*$" required>
                   <input id="small-add-contacts-email-mobile" type="text" placeholder="E-mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
@@ -257,12 +257,12 @@ function templateSmallAddTask() {
         <span onclick="closeSmallAddTask()" class="close-x-absolute">X</span>
         
         <div class="small-add-task-container">
-             <h2>Add Task</h2> <button onclick="saveTask()" class="create-btn">Create Task <img class="white-clear" src="kanban_img/clear_icons/white_clear.png"></button>
+             <h2>Add Task</h2> <button onclick="saveTask()" id="create-btn-small-add-task" class="create-btn">Create Task <img class="white-clear" src="kanban_img/clear_icons/white_clear.png"></button>
         </div>
 
         <div>
         <div>
-            <form onkeyup="enableButton()" class="task-form">
+            <form onkeyup="enableButton('.create-btn')" class="task-form">
                 <input id="input-title" class="input-title" type="text" placeholder="Enter a title" >
 
                 <div class="contacts-container contacts-add-task">
