@@ -27,6 +27,7 @@
     overflow-y: auto;
     margin: auto;
     padding-bottom:  20px;
+    overflow-x: hidden;
 }
 
 .main-field > h1 {
