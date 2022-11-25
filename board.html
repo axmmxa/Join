@@ -28,9 +28,10 @@
         }
         .main-field {
             overflow-y: auto;
+            overflow-x: hidden;
             width: auto;
         }
-
+        
         .board-container {
             width: auto;
             margin: 0 auto;
@@ -52,6 +53,19 @@
             }
             .priority-btn-container a {
                 padding: 5px 5px;
+            }
+        }
+
+        @media (max-width: 1124px) {
+            .board-container {
+                width: auto;
+                height: auto;
+            }
+            .input-container {
+                margin-left: 10px;
+            }
+            .board-headline-mobile {
+                margin-left: 10px;
             }
         }
 

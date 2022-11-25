@@ -3,7 +3,7 @@
 }
 
 .board-container {
-    height: 80%;
+    height: 100%;
     width: 90%;
     margin: 0 auto;
 }
@@ -153,23 +153,23 @@
 }
 
 .board-task-container {
-    height: 80%;
+    height: 100%;
 }
 
 #todo {
-    height: 80%;
+    height: 100%;
 }
 
 #in-progress {
-    height: 80%;
+    height: 100%;
 }
 
 #await-feedback {
-    height: 80%;
+    height: 100%;
 }
 
 #done {
-    height: 80%;
+    height: 100%;
 }
 
 #small-add-task::-webkit-scrollbar {

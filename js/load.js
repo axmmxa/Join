@@ -130,9 +130,22 @@ function addLabelContactOptionToSelectContactContainer(user, custom_select_conta
   for (let j = 0; j < user.contacts.length; j++) {
     const currentContact = user.contacts[j];
     if (currentContact.contact_email == add_contact_input) {
-      custom_select_contact_container[index].innerHTML += `<label class="custom-select-option"> ${currentContact.contact_name} <input onclick="returnSelectedContacts(this)" value="${currentContact.contact_name}" class="selected-option" type="checkbox" autocomplete="off"></label>`
+      custom_select_contact_container[index].innerHTML += `<label class="custom-select-option light-green"> ${currentContact.contact_name} <input onclick="returnSelectedContacts(this)" value="${currentContact.contact_name}" class="selected-option" type="checkbox" autocomplete="off"></label>`
+      let custom_select_option = document.querySelectorAll(".custom-select-option")
+      removeGreenMarking(custom_select_option)
     }
   }
+}
+
+function removeGreenMarking(option_array) {
+  setTimeout(() => {
+    for (let i = 0; i < option_array.length; i++) {
+      const category_option = option_array[i];
+      if (category_option.classList.contains("light-green")) {
+      category_option.classList.remove("light-green")
+    }
+  }
+  },1500)
 }
 
 function returnSuitableCategoryColor(task_topics, category, index) {

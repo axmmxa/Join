@@ -389,9 +389,9 @@ body {
     .summary-count-black {
         font-size: 24px;
     }
-    .blue-text {
+    /* .blue-text {
         font-size: 12px;
-    }
+    } */
     .inner-task-card-upper {
         height: 65%;
         display: flex;
@@ -465,9 +465,9 @@ body {
         width: 200px;
         margin-top: 5px;
     }
-    .blue-text {
+    /* .blue-text {
         font-size: 10px;
-    }
+    } */
     .kanban-btns {
         height: 15vh;
     }

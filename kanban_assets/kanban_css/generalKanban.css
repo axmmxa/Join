@@ -82,6 +82,10 @@
     background-color: #AF1616;
 }
 
+.light-green {
+    background-color: lightgreen;
+}
+
 .green {
     background-color: #02CF2F;
 }
@@ -116,6 +120,10 @@
 
 .yellow {
     background-color: #FFC701;
+}
+
+.disabled-blue {
+    background-color: rgb(50, 110, 235);
 }
 
 .light-blue {

@@ -100,7 +100,7 @@ function resetContactOptions(checkboxes, index) {
 }
 
 /**
- * add a new contact option
+ * add a new contact or category option
  *
  * @param {integer} index - array number of option container
  */
@@ -124,7 +124,11 @@ function addNewContactOption(index) {
       console.log(custom_select_category_container_add_task);
       custom_select_category_container_add_task[
         index
-      ].innerHTML += `<label onclick="returnSelectedCategory(id)" id="${add_category_input}" class="custom-select-option-category">${add_category_input} <span class="category-color"></span></label>`;
+      ].innerHTML += `<label onclick="returnSelectedCategory(id)" id="${add_category_input}" class="custom-select-option-category light-green">${add_category_input} <span class="category-color"></span></label>`;
+      
+      let custom_select_option_category = document.querySelectorAll(".custom-select-option-category")
+      removeGreenMarking(custom_select_option_category)
+
       let category_color = document.querySelectorAll(".category-color");
       setColorCategory(category_color, add_category_input);
     }
