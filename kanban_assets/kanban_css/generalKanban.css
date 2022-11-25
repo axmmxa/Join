@@ -349,10 +349,15 @@ body{
 }
 
 .user-icon-edit-contact {
+    width: 70px;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     color: white;
-    padding: 20px 25px;
     border-radius: 100%;
     margin-bottom: 20px;
+    font-size: 30px;
 }
 
 .user-tasks {
