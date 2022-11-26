@@ -38,17 +38,20 @@ function returnSelectedSubtasks(el) {
 }
 
 async function saveEditedTask(id_task) {
-  let title = document.getElementById('input-title').value
-  let due_date = document.getElementById('due-date').value
-  let description = document.getElementById('textarea').value
+ 
+  id_task = await setIdTaskDependingOnUserName(id_task)
 
-  if (checkIfCreatedTaskIsEmpty(title, due_date, description) && loggedInUser.name !== "Guest") {
+  let edit_title = document.querySelector(`.input-title-${id_task}`).value
+  let edit_due_date = document.querySelector(`.due-date-${id_task}`).value
+  let edit_description = document.querySelector(`.textarea-${id_task}`).value
+ 
+  if (checkIfEditedTaskIsNotEmpty(edit_title, edit_due_date, edit_description, id_task) && loggedInUser.name !== "Guest") {
     for (let i = 0; i < users.length; i++) {
       const currentUser = users[i];
-      await changeTaskJSON(currentUser, id_task, title, due_date, description)
+      await changeTaskJSON(currentUser, id_task, edit_title, edit_due_date, edit_description)
     }
-  } else {
-    await changeTaskJSON(loggedInUser, id_task, title, due_date, description)
+  } else if (checkIfEditedTaskIsNotEmpty(edit_title, edit_due_date, edit_description, id_task)) {
+    await changeTaskJSON(loggedInUser, id_task, edit_title, edit_due_date, edit_description)
   }
 
   closeSmallEditTask(id_task)
@@ -57,11 +60,11 @@ async function saveEditedTask(id_task) {
 }
 
 
-async function changeTaskJSON(user, id_task, title, due_date, description) {
+async function changeTaskJSON(user, id_task, edit_title, edit_due_date, edit_description) {
   let contact_options = document.querySelectorAll(".contact-option")
   selected_options = []
   for (let j = 0; j < contact_options.length; j++) {
-    if (contact_options[j].checked == true) {
+    if (contact_options[j].checked == true && selected_options[selected_options.length - 1] !== contact_options[j].value) {
       selected_options.push(contact_options[j].value)
     }
   }
@@ -70,10 +73,10 @@ async function changeTaskJSON(user, id_task, title, due_date, description) {
     const currentTask = user.tasks[j];
     if (id_task == j) {
       console.log(currentTask)
-      currentTask.title = title
+      currentTask.title = edit_title
       currentTask.assignedContacts = selected_options
-      currentTask["due-date"] = due_date
-      currentTask.description = description
+      currentTask["due-date"] = edit_due_date
+      currentTask.description = edit_description
       currentTask.priority = selected_priority
       currentTask.priority_img_path = priority_img_path
       await saveDependingOnUserName()
@@ -150,19 +153,47 @@ async function saveTask() {
     document.querySelector(".create-btn").style.border = "1px solid rgba(0, 0, 0, 0.2)"
     document.querySelector(".create-btn").style.backgroundColor = "#95bcff"
     document.querySelector(".create-btn").style.boxShadow = "none"
+    if (document.querySelector("#contacts-body")) {
+      showPopup("task-popup")
+      closeSmallAddTask()
+    }
     // setTimeout(() => {
     //   window.location.href = "board.html"  
     // }, 1000);
   }
 }
 
-function enableButton(id) {
-  if (window.innerWidth <= 684 && document.getElementById("small-add-task").classList.contains("d-none")) {
-    id = ".create-btn-mobile"
-  } else if (!document.getElementById("small-add-task").classList.contains("d-none")) {
-    id = "#create-btn-small-add-task"
-  }
+function enableEditTaskButton(id, id_task) {
+  
+  let edit_title = document.querySelector(`.input-title-${id_task}`).value
+  let edit_due_date = document.querySelector(`.due-date-${id_task}`).value
+  let edit_description = document.querySelector(`.textarea-${id_task}`).value
 
+  if (checkIfEditedTaskIsNotEmpty(edit_title, edit_due_date, edit_description)) {
+    document.querySelector(`${id}`).style.backgroundColor = "#4589FF"
+    document.querySelector(`${id}`).disabled = false 
+
+    document.querySelector(`${id}`).addEventListener("mouseover", () => {
+      document.querySelector(`${id}`).style.backgroundColor = "blue"
+      document.querySelector(`${id}`).style.boxShadow = "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px"
+    })
+    
+    document.querySelector(`${id}`).addEventListener("mouseout", () => {
+      document.querySelector(`${id}`).style.backgroundColor = "#4589FF"
+      document.querySelector(`${id}`).style.boxShadow = "none"
+    })
+  } else {
+    document.querySelector(`${id}`).disabled = true
+    document.querySelector(`${id}`).style.backgroundColor = "#95bcff"
+  }
+}
+
+
+function enableButton(id) {
+  if (window.innerWidth < 684) {
+    id = ".create-btn-mobile"
+  }
+  
   let title = document.querySelector("#input-title").value
   let due_date = document.querySelector("#due-date").value
   let description = document.querySelector("#textarea").value
@@ -186,17 +217,17 @@ function enableButton(id) {
 
 function enableAddContactButton(btn, id) {
     if (checkIfContactsInputIsNotEmpty(btn)) {
-      document.querySelector(`.${id}`).style.backgroundColor = "#4589FF"
-      document.querySelector(`.${id}`).disabled = false 
+      document.querySelector(`${id}`).style.backgroundColor = "#4589FF"
+      document.querySelector(`${id}`).disabled = false 
   
-      document.querySelector(`.${id}`).addEventListener("mouseover", () => {
-        document.querySelector(`.${id}`).style.backgroundColor = "blue"
-        document.querySelector(`.${id}`).style.boxShadow = "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px"
+      document.querySelector(`${id}`).addEventListener("mouseover", () => {
+        document.querySelector(`${id}`).style.backgroundColor = "blue"
+        document.querySelector(`${id}`).style.boxShadow = "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px"
       })
       
-      document.querySelector(`.${id}`).addEventListener("mouseout", () => {
-        document.querySelector(`.${id}`).style.backgroundColor = "#4589FF"
-        document.querySelector(`.${id}`).style.boxShadow = "none"
+      document.querySelector(`${id}`).addEventListener("mouseout", () => {
+        document.querySelector(`${id}`).style.backgroundColor = "#4589FF"
+        document.querySelector(`${id}`).style.boxShadow = "none"
       })
     }
 }
@@ -209,6 +240,11 @@ function checkIfContactsInputIsNotEmpty(btn) {
 function checkIfCreatedTaskIsEmpty(title, due_date, description) {
   return title !== "" && due_date !== "" && description !== "" && selected_category !== ""
     && selected_priority !== "" && priority_img_path !== "" && id !== ""
+}
+
+function checkIfEditedTaskIsNotEmpty(edit_title, edit_due_date, edit_description) {
+  return  edit_title !== "" && edit_due_date !== "" && edit_description !== "" 
+  && selected_priority !== "" && priority_img_path !== ""
 }
 
 async function addTask(task, id) {

@@ -13,7 +13,7 @@ function templateSmallContacts() {
         <div class="lower-part-small-contacts">
             <img class="anonymous-profile-picture" src="kanban_img/user_icons/anonym_profile_picture.png">
 
-            <form onchange="enableAddContactButton('not-mobile','.add-create-btn')" onsubmit="addContactToBook('not-mobile'); return false"  class="small-contacts-add-data">
+            <form onkeyup="enableAddContactButton('not-mobile','.add-create-btn')" onsubmit="addContactToBook('not-mobile'); return false"  class="small-contacts-add-data">
                 <div class="login-data">
                     <input id="small-add-contacts-name" type="text" placeholder="Name" pattern="^[a-zA-Z ]*$" required>
                     <input id="small-add-contacts-email" type="text" placeholder="E-mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
@@ -43,7 +43,7 @@ function templateSmallContactsMobile() {
       <div class="lower-part-small-contacts-mobile">
           <img class="anonymous-profile-picture anonymous-profile-picture-mobile" src="kanban_img/user_icons/anonym_profile_picture.png">
 
-          <form onchange="enableAddContactButton('mobile','.add-create-btn-mobile')" onsubmit="addContactToBook('mobile'); return false" class="small-contacts-add-data">
+          <form onkeyup="enableAddContactButton('mobile','.add-create-btn-mobile')" onsubmit="addContactToBook('mobile'); return false" class="small-contacts-add-data">
               <div class="login-data">
                   <input id="small-add-contacts-name-mobile" type="text" placeholder="Name" pattern="^[a-zA-Z ]*$" required>
                   <input id="small-add-contacts-email-mobile" type="text" placeholder="E-mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
@@ -75,7 +75,7 @@ function templateSmallEditContacts(contact_name, contact_email, contact_phone, i
     <div class="lower-part-small-contacts">
     <div id="${contact_name}" class="user-icon-edit-contact user-icon-big fs-22">${getUserIcon(contact_name)}</div>
 
-        <form onchange="enableButton()" onsubmit="saveEditedContact('${contact_email}','${contact_name}', ${i},'not-mobile'); return false" class="small-contacts-add-data">
+        <form onkeyupe="enableButton()" onsubmit="saveEditedContact('${contact_email}','${contact_name}', ${i},'not-mobile'); return false" class="small-contacts-add-data">
             <div class="login-data">
                 <input value="${contact_name}" id="small-edit-contacts-name" type="text" placeholder="Name" pattern="^[a-zA-Z ]*$" required>
                 <input value="${contact_email}" id="small-edit-contacts-email" type="text" placeholder="E-mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
@@ -163,24 +163,23 @@ function templateSmallEditTask(id_task, title, description, due_date) {
         <div class="add-task-container-edit">
             <span onclick="closeSmallEditTask(${id_task})" class="close-x-absolute">X</span>  
             
-            <form onsubmit="saveEditedTask(${id_task}); return false" class="task-form">
-                    <input value="${title}" id="input-title" class="input-title" type="text" placeholder="Enter a title">
+            <form onkeyup="enableEditTaskButton('.edit-task-create-btn-${id_task}', ${id_task})" onsubmit="saveEditedTask(${id_task}); return false" class="task-form">
+                    <input value="${title}" id="input-title" class="input-title input-title-${id_task}" type="text" placeholder="Enter a title">
                     <div class="description-container">
                         <span>Description</span>
-                        <textarea id="textarea" placeholder="Enter a description">${description}</textarea>
+                        <textarea id="textarea" class="textarea-${id_task}" placeholder="Enter a description">${description}</textarea>
                     </div>
                     <div class="due-date-container">
-                        <label class="label-flex" for="due-date">Due date<input value="${due_date}" placeholder="dd/mm/yyyy" id="due-date" type="date"></label>
+                        <label class="label-flex" for="due-date">Due date<input value="${due_date}" placeholder="dd/mm/yyyy" class="due-date-${id_task}" id="due-date" type="date"></label>
                     </div>
                     <div class="priority-btn-container">
                         <a id="urgent-btn-${id_task}" class="urgent-btn priority" onclick="setPrioritySmallEditTask('Urgent', ${id_task})">Urgent <img id="urgent-btn-priority-img-${id_task}" class="priority-urgent-img" src="kanban_img/priority_icons/urgent-red.png"></a>
                         <a id="medium-btn-${id_task}" class="medium-btn priority" onclick="setPrioritySmallEditTask('Medium', ${id_task})">Medium <img  id="medium-urgent-btn-priority-img-${id_task}" class="priority-urgent-img" src="kanban_img/priority_icons/middle-urgent-orange.png"></a>
                         <a id="non-urgent-btn-${id_task}" class="non-urgent-btn priority" onclick="setPrioritySmallEditTask('Low', ${id_task})">Low <img id="non-urgent-btn-priority-img-${id_task}" class="priority-urgent-img" src="kanban_img/priority_icons/non-urgent-green.png"></a>
                     </div>
-                    
-
+                
                     <div class="contacts-container">
-                        <div class="add-option d-none">
+                        <div class="add-option-edit-task d-none">
                             <input id="add-contact-input" class="add-option-input" type="text" placeholder="Contact email">
                             <div class="add-option-btn-container">
                                 <img onclick="closeAddContact(0)" class="close-x-blue-btn" src="kanban_img/close_icons/close_x_blue.png">
@@ -192,7 +191,7 @@ function templateSmallEditTask(id_task, title, description, due_date) {
                         </div>
                     </div>
                     <div class="margin align-right">
-                        <button class="create-btn">Ok <img class="white-clear" src="kanban_img/clear_icons/white_clear.png"/></button>
+                        <button class="create-btn edit-task-create-btn-${id_task}" disabled>Ok <img class="white-clear" src="kanban_img/clear_icons/white_clear.png"/></button>
                     </div>
             </form>          
         </div>
@@ -211,7 +210,7 @@ function templateCustomSelect(id_task) {
             <div class="custom-select-contact-container">
 
             </div> 
-            <label onclick="showAddContact(0)" class="custom-select-option">Invite new contact <img src="kanban_img/invite_contact.png"></label>
+            <label onclick="showAddTask(0, '.add-option-edit-task')" class="custom-select-option">Invite new contact <img src="kanban_img/invite_contact.png"></label>
             </div>`
 }
 
@@ -257,12 +256,12 @@ function templateSmallAddTask() {
         <span onclick="closeSmallAddTask()" class="close-x-absolute">X</span>
         
         <div class="small-add-task-container">
-             <h2>Add Task</h2> <button onclick="saveTask()" id="create-btn-small-add-task" class="create-btn">Create Task <img class="white-clear" src="kanban_img/clear_icons/white_clear.png"></button>
+             <h2>Add Task</h2> <button onclick="saveTask()" id="create-btn-small-add-task" class="create-btn" disabled>Create Task <img class="white-clear" src="kanban_img/clear_icons/white_clear.png"></button>
         </div>
 
         <div>
         <div>
-            <form onkeyup="enableButton('.create-btn')" class="task-form">
+            <form onkeyup="enableButton('#create-btn-small-add-task')" class="task-form">
                 <input id="input-title" class="input-title" type="text" placeholder="Enter a title" >
 
                 <div class="contacts-container contacts-add-task">
@@ -283,7 +282,7 @@ function templateSmallAddTask() {
                             <div class="custom-select-contact-container">
 
                             </div> 
-                            <label onclick="showAddContact(0)" class="custom-select-option">Invite new contact <img src="kanban_img/invite_contact.png"></label>
+                            <label onclick="showAddTask(0, '.add-option')" class="custom-select-option">Invite new contact <img src="kanban_img/invite_contact.png"></label>
                         </div>
                     </div>
                     
@@ -308,7 +307,7 @@ function templateSmallAddTask() {
                                     <img class="arrow-down" src="kanban_img/arrow_icons/arrow_select.png"/>
                                 </div>
                                 <div class="custom-select-options-container-add-task d-none">
-                                    <label onclick="showAddContact(1)" class="custom-select-option">New Category</label>
+                                    <label onclick="showAddTask(1, '.add-option')" class="custom-select-option">New Category</label>
                                     <div class="custom-select-category-container">
                                         <label onclick="returnSelectedCategory(id)" id="Sales" class="custom-select-option-category">Sales <span class="category-color pink"></span></label>
                                         <label onclick="returnSelectedCategory(id)" id="Backoffice" class="custom-select-option-category">Backoffice <span class="category-color turquoise"></span></label>       

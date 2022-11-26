@@ -507,7 +507,7 @@ async function showAddedContactInContactBook(small_add_contacts_name, small_add_
   document.querySelector(`.contacts-${first_letter}-data`).innerHTML += templateUserContactAddContact(small_add_contacts_name, small_add_contacts_email, small_add_contacts_phone)
 
   await loadContactBackgroundColor()
-  showPopup("task-popup")
+  showPopup("contact-popup")
 
   if (btn == "mobile") {
     closeSmallContactsMobile()

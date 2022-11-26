@@ -1,4 +1,4 @@
-setURL("https://alexander-much.developerakademie.net/smallest_backend_ever");
+setURL("https://emir-salihovic.developerakademie.net/smallest_backend_ever");
 
 let amount_task_urgent = 0;
 let amount_to_do = 0;
@@ -341,4 +341,19 @@ async function getIndexOfIdTask(user, id_task) {
       return index;
     }
   }
+}
+
+
+async function setIdTaskDependingOnUserName(id_task) {
+  if (loggedInUser.name == "Guest") {
+    id_task = await getIndexOfIdTask(loggedInUser, id_task)
+  } else {
+    for (let i = 0; i < users.length; i++) {
+      const currentUser = users[i];
+      if (currentUser.email == loggedInUser.email) {
+        id_task = await getIndexOfIdTask(currentUser, id_task)
+      }
+    }
+  }
+  return id_task
 }

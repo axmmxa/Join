@@ -25,18 +25,17 @@ function showCustomSelectOptions(index) {
  * @param {integer} index - array number for the selected option
  */
 
-function showCustomSelectOptionEditTask(index) {
-  let edit_task_selects = document.querySelectorAll(
+function showCustomSelectOptionEditTask(id_task) {
+  document.querySelectorAll(
     ".custom-select-options-container"
-  );
-  edit_task_selects[index].classList.toggle("d-none");
+  )[id_task].classList.toggle("d-none");
 }
 
-function showCustomSelectOptionsTaskInfo() {
-  document
-    .querySelector(".custom-select-options-task-info-container")
-    .classList.toggle("d-none");
-}
+// function showCustomSelectOptionsTaskInfo(id_task) {
+//   document
+//     .querySelectorAll(".custom-select-options-task-info-container")[id_task]
+//     .classList.toggle("d-none");
+// }
 
 /**
  * removes the first option container
@@ -46,7 +45,20 @@ function showCustomSelectOptionsTaskInfo() {
 
 function showAddContact(index) {
   let custom_select = document.querySelectorAll(".custom-select");
-  let add_option = document.querySelectorAll(".add-option");
+  let add_option = document.querySelectorAll(".add-option")
+  let arrow_down = document.querySelectorAll(".arrow-down");
+
+  console.log(add_option);
+
+  custom_select[index].classList.add("d-none");
+  arrow_down[index].classList.add("d-none");
+  add_option[index].classList.remove("d-none");
+}
+
+
+function showAddTask(index, id) {
+  let custom_select = document.querySelectorAll(".custom-select");
+  let add_option = document.querySelectorAll(id);
   let arrow_down = document.querySelectorAll(".arrow-down");
 
   console.log(add_option);
