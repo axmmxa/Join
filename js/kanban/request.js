@@ -131,14 +131,10 @@ async function saveDependingOnUserName() {
 }
 
 function initGuestIcon() {
-  document.querySelector(
-    ".user-logout-icon-container"
-  ).innerHTML = `<div onclick="toggleLogoutBox()" class="user-logout-icon">${getUserIcon(
-    loggedInUser.name
-  )}</div>
+  document.querySelector(".user-logout-icon-container").innerHTML = `<div onclick="toggleLogoutBox()" class="user-logout-icon">${getUserIcon(loggedInUser.name)}</div>
     <div class="logout d-none">
     <span onclick="logout()" class="light-blue-text">Log out</span>
-   </div>
+    </div>
 
    <div class="logout-mobile d-none">
     <a href="kanban_assets/help.html" class="light-blue-text">Help</a>
@@ -146,9 +142,7 @@ function initGuestIcon() {
     <a onclick="logout()" class="light-blue-text">Log out</a>
    </div>
   `;
-  document
-    .querySelector(".user-logout-icon")
-    .classList.add(loggedInUser["user-background-color"]);
+  document.querySelector(".user-logout-icon").classList.add(loggedInUser["user-background-color"]);
 }
 
 async function getUsersFromBackend() {

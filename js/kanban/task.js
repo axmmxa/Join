@@ -38,7 +38,6 @@ function returnSelectedSubtasks(el) {
 }
 
 async function saveEditedTask(id_task) {
- 
   id_task = await setIdTaskDependingOnUserName(id_task)
 
   let edit_title = document.querySelector(`.input-title-${id_task}`).value
@@ -164,7 +163,6 @@ async function saveTask() {
 }
 
 function enableEditTaskButton(id, id_task) {
-  
   let edit_title = document.querySelector(`.input-title-${id_task}`).value
   let edit_due_date = document.querySelector(`.due-date-${id_task}`).value
   let edit_description = document.querySelector(`.textarea-${id_task}`).value
@@ -377,7 +375,6 @@ function clearFourthPart() {
       
   </div>`
 }
-
 
 function searchTask() {
   let input = document.getElementById("search-task").value;

@@ -55,15 +55,14 @@
 
     </style>
 
-    <script src="js/request.js" defer></script>
+    <script src="js/kanban/functionalities.js" defer></script>
+    <script src="js/kanban/request.js" defer></script>
     <script src="js/template.js" defer></script>
     <script src="js/mini_backend.js"></script>
-    <script src="js/load.js" defer></script>
-    <script src="js/task.js" defer></script>
-    <script src="js/custom-select.js" defer></script>
-    <script src="js/logout.js" defer></script>
-
-
+    <script src="js/kanban/load.js" defer></script>
+    <script src="js/kanban/task.js" defer></script>
+    <script src="js/kanban/custom-select.js" defer></script>
+    <script src="js/login/logout.js" defer></script>
 </head>
 
 
@@ -82,7 +81,6 @@
         </div>
     </nav>
 
-    
 
     <nav class="mobile-create-task-navbar">
         <img class="mobile-logo-blue" src="kanban_img/login_icons/join_blue.png">
@@ -129,11 +127,11 @@
                                 </div>
                                 <div class="custom-select-options-container-add-task d-none" >
                                     <div class="custom-select-contact-container">
-                                        <!-- <label class="custom-select-option">You <input onclick="returnSelectedContacts(this)" value="You" class="selected-option" type="checkbox" autocomplete="off"></label>
-                                        <label class="custom-select-option"> Maximilian Vogel <input onclick="returnSelectedContacts(this)" value="Maximilian Vogel" class="selected-option" type="checkbox" autocomplete="off"></label> -->      
+
                                     </div> 
                                     <label onclick="showAddContact(0)" class="custom-select-option">Invite new contact <img src="kanban_img/invite_contact.png"></label>
                                 </div>
+                                <p class="contact-not-found d-none">Contact not found</p>
                             </div>
                             
                         </div>
@@ -178,7 +176,6 @@
                         </div>
 
                         <div class="category-container">
-
                             <img class="plus-select-subtask" src="kanban_img/plus_icons/plus_blue.png">
         
                             <label class="category-label menu-color" for="subtask-category">Subtask<input onclick="showAddSubtask()" id="subtask-category" placeholder="Add new subtask" type="text"></label>

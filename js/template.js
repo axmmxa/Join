@@ -45,10 +45,10 @@ function templateSmallContactsMobile() {
 
           <form onkeyup="enableAddContactButton('mobile','.add-create-btn-mobile')" onsubmit="addContactToBook('mobile'); return false" class="small-contacts-add-data">
               <div class="login-data">
-                  <input id="small-add-contacts-name-mobile" type="text" placeholder="Name" pattern="^[a-zA-Z ]*$" required>
-                  <input id="small-add-contacts-email-mobile" type="text" placeholder="E-mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+                  <input id="small-add-contacts-name-mobile" type="text" placeholder="Name" pattern="^[a-zA-Z ].+$" required>
+                  <input id="small-add-contacts-email-mobile" type="text" placeholder="E-mail" pattern="^[a-z0-9._%+-].+@[a-z0-9.-]+\.[a-z]{2,4}.+$" required>
                   <div class="add-contact-email-exist-mobile red-text d-none fs-12">Email already exists!</div>
-                  <input id="small-add-contacts-phone-mobile" type="text" placeholder="Phone" pattern="^[0-9 ]*$" required>
+                  <input id="small-add-contacts-phone-mobile" type="text" placeholder="Phone" pattern="^[0-9 ].+$" required>
               </div>
 
               <div class="small-contacts-btn-container">
@@ -75,7 +75,7 @@ function templateSmallEditContacts(contact_name, contact_email, contact_phone, i
     <div class="lower-part-small-contacts">
     <div id="${contact_name}" class="user-icon-edit-contact user-icon-big fs-22">${getUserIcon(contact_name)}</div>
 
-        <form onkeyupe="enableButton()" onsubmit="saveEditedContact('${contact_email}','${contact_name}', ${i},'not-mobile'); return false" class="small-contacts-add-data">
+        <form onsubmit="saveEditedContact('${contact_email}','${contact_name}', ${i} ,'not-mobile'); return false" class="small-contacts-add-data">
             <div class="login-data">
                 <input value="${contact_name}" id="small-edit-contacts-name" type="text" placeholder="Name" pattern="^[a-zA-Z ]*$" required>
                 <input value="${contact_email}" id="small-edit-contacts-email" type="text" placeholder="E-mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
@@ -106,7 +106,7 @@ function templateSmallEditContactsMobile(contact_name, contact_email, contact_ph
     <div class="lower-part-small-contacts-mobile">
     <div id="${contact_name}" class="user-icon-edit-contact user-icon-big-mobile fs-22">${getUserIcon(contact_name)}</div>
 
-        <form onsubmit="saveEditedContact('${contact_email}','${contact_name}', 'mobile'); return false" class="small-contacts-add-data">
+        <form onsubmit="saveEditedContact('${contact_email}','${contact_name}', ${i} ,'mobile'); return false" class="small-contacts-add-data">
             <div class="login-data margin">
                 <input value="${contact_name}" id="small-edit-contacts-name-mobile" type="text" placeholder="Name" pattern="^[a-zA-Z ]*$" required>
                 <input value="${contact_email}" id="small-edit-contacts-email-mobile" type="text" placeholder="E-mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
@@ -140,7 +140,7 @@ function templateParentSmallEditContacts(contact_name, contact_email, contact_ph
         <div class="lower-part-small-contacts">
         <div id="${contact_name}" class="user-icon-edit-contact user-icon-big fs-22">${getUserIcon(contact_name)}</div>
 
-            <form onsubmit="saveEditedContact('${contact_email}','${contact_name}', 'not-mobile'); return false" class="small-contacts-add-data">
+            <form onsubmit="saveEditedContact('${contact_email}','${contact_name}', ${i} ,'not-mobile'); return false" class="small-contacts-add-data">
                 <div class="login-data">
                     <input value="${contact_name}"  id="small-edit-contacts-name" type="text" placeholder="Name" pattern="^[a-zA-Z ]*$" required>
                     <input value="${contact_email}" id="small-edit-contacts-email" type="text" placeholder="E-mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
@@ -460,37 +460,4 @@ function templateUserContactAddContact(small_add_contacts_name, small_add_contac
     </div>
     `
 }
-
-
-function showPopup(id) {
-    document.getElementById(id).style.display = "flex"
-
-    setTimeout(() => {
-        document.getElementById(id).style.display = "none"
-    }, 2000)
-}
-
-
-function selectedLink(id) {
-    document.getElementById(id).classList.add("hover-blue")
-    document.getElementById(id).style.border = "1px solid transparent"
-    document.getElementById(id).style.borderRadius = "8px"
-}
-
-function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-}
-
-function getUserIcon(contact) {
-    let names = contact.split(" ");
-    let firstLetterFirstName = names[0][0].toUpperCase();
-    let firstLetterlastName;
-    if (names.length > 1) {
-        let firstLetterlastName = names[1][0].toUpperCase()
-        return `${firstLetterFirstName + firstLetterlastName}`
-    } else {
-        return `${firstLetterFirstName}`
-    }
-}
-
 

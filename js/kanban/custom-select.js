@@ -122,21 +122,13 @@ function addNewContactOption(index) {
 
   resetContactOptions(checkboxes, index);
 
-  if (
-    document.getElementById("addTask-body") ||
-    document.getElementById("board-body")
-  ) {
-    let custom_select_category_container_add_task = document.querySelectorAll(
-      ".custom-select-options-container-add-task"
-    );
-    let add_category_input =
-      document.getElementById("add-category-input").value;
+  if (document.getElementById("addTask-body") || document.getElementById("board-body")) {
+    let custom_select_category_container_add_task = document.querySelectorAll(".custom-select-options-container-add-task");
+    let add_category_input = document.getElementById("add-category-input").value;
 
     if (index == 1) {
       console.log(custom_select_category_container_add_task);
-      custom_select_category_container_add_task[
-        index
-      ].innerHTML += `<label onclick="returnSelectedCategory(id)" id="${add_category_input}" class="custom-select-option-category light-green">${add_category_input} <span class="category-color"></span></label>`;
+      custom_select_category_container_add_task[index].innerHTML += `<label onclick="returnSelectedCategory(id)" id="${add_category_input}" class="custom-select-option-category light-green">${add_category_input} <span class="category-color"></span></label>`;
       
       let custom_select_option_category = document.querySelectorAll(".custom-select-option-category")
       removeGreenMarking(custom_select_option_category)
@@ -156,11 +148,7 @@ function addNewContactOption(index) {
  */
 
 function setColorCategory(category_color, add_category_input) {
-  returnSuitableCategoryColor(
-    category_color,
-    add_category_input,
-    category_color.length - 1
-  );
+  returnSuitableCategoryColor(category_color, add_category_input, category_color.length - 1);
 }
 
 function showAddSubtask() {

@@ -249,6 +249,10 @@ body{
     margin-left: 5px;
 }
 
+.add-contact-email-exist-mobile {
+    margin-left: 10px;
+}
+
 .anonymous-profile-picture {
     height: 100px;
     width: auto;
@@ -353,8 +357,7 @@ body{
     align-items: center;
     margin-right: 5px;
     width: 45px;
-    height: 38px;
-    letter-spacing: 2px;
+    height: 45px;
     color: white;
     border-radius: 50%;
 }
@@ -441,7 +444,7 @@ body{
 }
 
 .user-icon-big-mobile {
-    padding: 25px 30px;
+    padding: 15px 15px;
     border: 2px solid white;
     margin-top: -130px;
 }

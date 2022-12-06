@@ -145,6 +145,15 @@
     border: 2px solid rgba(0, 0, 0, 0.2);
 }
 
+#edit-contact-create-btn {
+    background-color: #4589FF !important;
+}
+
+
+#edit-contact-create-btn-mobile {
+    background-color: #4589FF !important;
+}
+
 #small-add-task::-webkit-scrollbar {
     width: 5px;  /* width of the entire scrollbar */
   }
@@ -161,8 +170,8 @@
   #small-add-task::-webkit-scrollbar-thumb {
     background-color: rgba(0, 0, 0, 0.3);    /* color of the scroll thumb */
     border-radius: 20px;       /* roundness of the scroll thumb */
-    
   }
+
 
 @media (max-width: 1024px) {
     .contacts-left {

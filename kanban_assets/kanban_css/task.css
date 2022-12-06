@@ -60,7 +60,6 @@
 }
 
 .input-title {
-   
     margin-top: 5px;
     padding-bottom: 5px;
     height: 35px;
@@ -87,6 +86,13 @@
 
 #due-date::placeholder {
     color: rgba(0, 0, 0, 0.2);
+}
+
+.contact-not-found {
+    padding: 10px 20px;
+    margin: 0;
+    margin-bottom: -10px;
+    color: red;
 }
 
 .priority-btn-container {
@@ -128,10 +134,8 @@
 }
 
 .description-container {
-    
     margin-top: 15px;
 }
-
 
 #subtask-category {
     margin-top: 10px;
@@ -256,11 +260,13 @@
 }
 
 #add-contact-input {
+    width: 75%;
     border: none;
     padding-bottom: 10px;
 }
 
 #add-category-input {
+    width: 75%;
     border: none;
     padding-bottom: 10px;
 }

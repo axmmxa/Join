@@ -15,8 +15,14 @@ async function saveEditedContact(contact_email, contact_name, i, btn) {
   } else {
     styleButtonWithRedBorder(btn);
   }
-  closeSmallEditContacts(i);
+  if (btn == "mobile") {
+    closeSmallEditContactsMobile(i)
+  } else {
+    closeSmallEditContacts(i);
+  }
+  
 }
+
 
 function renderUserOrGuestContactInformation(contact_email, contact_name) {
   if (loggedInUser.name !== "Guest") {
@@ -29,6 +35,7 @@ function renderUserOrGuestContactInformation(contact_email, contact_name) {
     loopThroughUserAndRenderContactInformation(loggedInUser, contact_email);
   }
 }
+
 
 function extractInputValueFromCorrectInputs(btn) {
   if (btn == "mobile") {
@@ -54,6 +61,7 @@ function extractInputValueFromCorrectInputs(btn) {
   }
 }
 
+
 function loopThroughUserAndRenderContactInformation(user, contact_email, i) {
   for (let j = 0; j < user.contacts.length; j++) {
     const currentContact = user.contacts[j];
@@ -68,6 +76,7 @@ function loopThroughUserAndRenderContactInformation(user, contact_email, i) {
     }
   }
 }
+
 
 function styleButtonWithRedBorder(btn) {
   if (btn == "mobile") {
@@ -86,6 +95,7 @@ function styleButtonWithRedBorder(btn) {
       .classList.remove("d-none");
   }
 }
+
 
 async function changeContactAndRenderContactsInformationRight(
   currentContact,
@@ -138,52 +148,44 @@ async function assignNewContactName(user, contact_name) {
   }
 }
 
+
 function addSelectContactOption(index) {
   let add_contact_input = document.getElementById("add-contact-input").value;
-  let custom_select_contact_container = document.querySelectorAll(
-    ".custom-select-contact-container"
-  );
+  let custom_select_contact_container = document.querySelectorAll(".custom-select-contact-container");
 
   if (loggedInUser.name !== "Guest") {
     for (let i = 0; i < users.length; i++) {
       const currentUser = users[i];
       if (currentUser.email == loggedInUser.email) {
-        addLabelContactOptionToSelectContactContainer(
-          currentUser,
-          custom_select_contact_container,
-          add_contact_input,
-          index
-        );
+        addLabelContactOptionToSelectContactContainer(currentUser,custom_select_contact_container,add_contact_input,index);
       }
     }
   } else {
-    addLabelContactOptionToSelectContactContainer(
-      loggedInUser,
-      custom_select_contact_container,
-      add_contact_input,
-      index
-    );
+    addLabelContactOptionToSelectContactContainer(loggedInUser, custom_select_contact_container,add_contact_input,index);
   }
 }
 
-function addLabelContactOptionToSelectContactContainer(
-  user,
-  custom_select_contact_container,
-  add_contact_input,
-  index
-) {
+function addLabelContactOptionToSelectContactContainer(user, custom_select_contact_container, add_contact_input, index) {
+  let emails = []
   for (let j = 0; j < user.contacts.length; j++) {
     const currentContact = user.contacts[j];
+    emails.push(currentContact.contact_email)
     if (currentContact.contact_email == add_contact_input) {
-      custom_select_contact_container[
-        index
-      ].innerHTML += `<label class="custom-select-option light-green"> ${currentContact.contact_name} <input onclick="returnSelectedContacts(this)" value="${currentContact.contact_name}" class="selected-option" type="checkbox" autocomplete="off"></label>`;
-      let custom_select_option = document.querySelectorAll(
-        ".custom-select-option"
-      );
+      custom_select_contact_container[index].innerHTML += `<label class="custom-select-option light-green"> ${currentContact.contact_name} <input onclick="returnSelectedContacts(this)" value="${currentContact.contact_name}" class="selected-option" type="checkbox" autocomplete="off"></label>`;
+      let custom_select_option = document.querySelectorAll(".custom-select-option");
       removeGreenMarking(custom_select_option);
     }
+    if (!emails.includes(add_contact_input)) {
+      console.log(user.contacts)
+      document.querySelector(".contact-not-found").innerHTML = `'${add_contact_input}' not found in contact book`
+      document.querySelector(".contact-not-found").classList.remove("d-none")
+  
+      setTimeout(() => {
+        document.querySelector(".contact-not-found").classList.add("d-none")
+      }, 2000)
+    }
   }
+  
 }
 
 function removeGreenMarking(option_array) {
@@ -282,6 +284,7 @@ async function randomBackgroundColorForUser(user_color) {
     }
   }
 }
+
 
 function randomBackgroundColorForUserContacts(user_color) {
   for (let i = 0; i < users.length; i++) {
@@ -423,8 +426,11 @@ function renderContactBook() {
   let firstLetterContainer;
   for (let i = 0; i < alphabet.length; i++) {
     firstLetterContainer = alphabet[i];
-    document.querySelector(".contacts-left").innerHTML +=
-      templateContactsLeft(firstLetterContainer);
+    if (document.querySelector(".contacts-left")) {
+      document.querySelector(".contacts-left").innerHTML += templateContactsLeft(firstLetterContainer);
+    } else {
+      location.href = "./contacts.html"
+    }
   }
   renderSavedContacts();
 }
