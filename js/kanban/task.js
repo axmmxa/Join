@@ -71,7 +71,7 @@ async function changeTaskJSON(user, id_task, edit_title, edit_due_date, edit_des
   for (let j = 0; j < user.tasks.length; j++) {
     const currentTask = user.tasks[j];
     if (id_task == j) {
-      console.log(currentTask)
+      // console.log(currentTask)
       currentTask.title = edit_title
       currentTask.assignedContacts = selected_options
       currentTask["due-date"] = edit_due_date
@@ -86,7 +86,7 @@ async function changeTaskJSON(user, id_task, edit_title, edit_due_date, edit_des
 function setId(idTaskFromBackend) {
   if (idTaskFromBackend) {
     id = idTaskFromBackend
-    console.log(id)
+    // console.log(id)
   }
 
   if (loggedInUser.name == "Guest") {
@@ -95,7 +95,7 @@ function setId(idTaskFromBackend) {
 }
 
 function returnTaskJSON(title, due_date, description) {
-  console.log(selected_options)
+  // console.log(selected_options)
   return {
     'title': title,
     'assignedContacts': selected_options,
@@ -114,7 +114,7 @@ function styleCorrectButtonAccordingToSuccesOrFailure(title, due_date, descripti
   if (checkIfCreatedTaskIsEmpty(title, due_date, description)) {
     document.querySelector(".create-btn").style.border = '1px solid rgb(0, 255, 0)';
    
-    console.log(task)
+    // console.log(task)
     addTask(task, id)
     if (document.querySelector("#addTask-body") || document.querySelector("#board-body")) {
       showPopup("task-popup")
@@ -252,7 +252,7 @@ async function addTask(task, id) {
       if (currentUser.email == loggedInUser.email) {
         // task.task_id = id
         id++
-        console.log(id)
+        // console.log(id)
         await backend.setItem('id_task', JSON.stringify(id));
         console
         currentUser.tasks.push(task)
@@ -261,11 +261,11 @@ async function addTask(task, id) {
     }
   } else {
     id++
-    console.log(id)
+    // console.log(id)
     localStorage.setItem("task_id", JSON.stringify(id));
     loggedInUser.tasks.push(task)
     localStorage.setItem("loggedInUser", JSON.stringify(loggedInUser));
-    console.log(loggedInUser)
+    // console.log(loggedInUser)
   }
 }
 
@@ -386,7 +386,7 @@ function searchTask() {
     let task = tasks[i].textContent.toLowerCase();
     let task_headline = task_headlines[i].textContent.toLowerCase()
 
-    console.log(task)
+    // console.log(task)
     document.querySelectorAll(`.added-task`)[i].style.display = "none";
     document.querySelectorAll(`.task-headline`)[i].style.display = "none";
 

@@ -303,7 +303,7 @@ function checkContactsNameInEditTask(
 }
 
 async function deleteTask(id_task) {
-  console.log(users);
+  // console.log(users);
   if (loggedInUser.name !== "Guest") {
     for (let i = 0; i < users.length; i++) {
       const currentUser = users[i];

@@ -176,7 +176,7 @@ function addLabelContactOptionToSelectContactContainer(user, custom_select_conta
       removeGreenMarking(custom_select_option);
     }
     if (!emails.includes(add_contact_input)) {
-      console.log(user.contacts)
+      // console.log(user.contacts)
       document.querySelector(".contact-not-found").innerHTML = `'${add_contact_input}' not found in contact book`
       document.querySelector(".contact-not-found").classList.remove("d-none")
   

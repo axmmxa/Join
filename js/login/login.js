@@ -18,11 +18,11 @@ async function login() {
     let email = document.getElementById("e-mail").value
     let password = document.getElementById("password").value
 
-    console.log(users)
+    // console.log(users)
     loggedInUser = users.find(u => u.email == email && u.password == password)
 
     if (loggedInUser) {
-        console.log("User gefunden")
+        // console.log("User gefunden")
         saveLoggedInUser()
         window.location.href = './summary.html'
     } else {
@@ -35,7 +35,7 @@ async function login() {
 }
 
 document.querySelector('.guest-btn').addEventListener('click', () => {
-    console.log("Guest login")
+    // console.log("Guest login")
     loggedInUser = {
         "contacts": [],
         "tasks": [],

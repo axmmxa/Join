@@ -48,7 +48,7 @@ function showAddContact(index) {
   let add_option = document.querySelectorAll(".add-option")
   let arrow_down = document.querySelectorAll(".arrow-down");
 
-  console.log(add_option);
+  // console.log(add_option);
 
   custom_select[index].classList.add("d-none");
   arrow_down[index].classList.add("d-none");
@@ -61,7 +61,7 @@ function showAddTask(index, id) {
   let add_option = document.querySelectorAll(id);
   let arrow_down = document.querySelectorAll(".arrow-down");
 
-  console.log(add_option);
+  // console.log(add_option);
 
   custom_select[index].classList.add("d-none");
   arrow_down[index].classList.add("d-none");
@@ -127,7 +127,7 @@ function addNewContactOption(index) {
     let add_category_input = document.getElementById("add-category-input").value;
 
     if (index == 1) {
-      console.log(custom_select_category_container_add_task);
+      // console.log(custom_select_category_container_add_task);
       custom_select_category_container_add_task[index].innerHTML += `<label onclick="returnSelectedCategory(id)" id="${add_category_input}" class="custom-select-option-category light-green">${add_category_input} <span class="category-color"></span></label>`;
       
       let custom_select_option_category = document.querySelectorAll(".custom-select-option-category")

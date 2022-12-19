@@ -11,7 +11,7 @@ function getUserTasks() {
 }
 
 async function updateHTML() {
-  console.log("updateHTML function");
+  // console.log("updateHTML function");
   let user_task_array = getUserTasks();
 
   if (loggedInUser.name == "Guest") {
@@ -161,7 +161,7 @@ async function startDragging(id_task) {
   } else {
     currentDraggedElement = await getIndexOfIdTask(loggedInUser, id_task);
   }
-  console.log(currentDraggedElement);
+  // console.log(currentDraggedElement);
 }
 
 function allowDrop(ev) {

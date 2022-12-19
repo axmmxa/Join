@@ -146,7 +146,7 @@ async function changeIdToCorrectIndex(id_task) {
 
 function changeArgumentIdFromCustomSelectToCorrectIndex() {
   let custom_select_contact_container = document.querySelectorAll(".custom-select-contact-container")
-  console.log(custom_select_contact_container)
+  // console.log(custom_select_contact_container)
   custom_select_contact_container[custom_select_contact_container.length - 1].innerHTML += `<label class="custom-select-option"> ${loggedInUser.name} (You) <input onclick="returnSelectedContacts(this)" value="${loggedInUser.name}" class="selected-option contact-option" type="checkbox" autocomplete="off"></label>`
 
   let first_select_option_container = document.querySelectorAll(".first-select-option-container")
@@ -169,7 +169,7 @@ function renderGuestInfoTask(id_task) {
     let userTaskId = loggedInUser.tasks[j]
     if (userTaskId.id_task == id_task) {
       document.querySelector("body").innerHTML += templateShowTaskInfo(userTaskId, id_task, j)
-      console.log(userTaskId.category)
+      // console.log(userTaskId.category)
       getCategoryColorTaskInfo(userTaskId.category)
       assignedPersonal(userTaskId, j)
       let user_icons = document.querySelectorAll(".user-icon-task-info")
@@ -181,7 +181,7 @@ function renderGuestInfoTask(id_task) {
 
 async function renderUsersTaskInfo(id_task) {
   for (let i = 0; i < users.length; i++) {
-    console.log(users)
+    // console.log(users)
     const currentUser = users[i];
     if (currentUser.email == loggedInUser.email) {
       renderBoardTask(currentUser, id_task)
@@ -205,7 +205,7 @@ function renderBoardTask(currentUser, id_task) {
     if (userTaskId.id_task == id_task) {
       document.querySelector("body").innerHTML += templateShowTaskInfo(userTaskId, id_task, j)
 
-      console.log(userTaskId.category)
+      // console.log(userTaskId.category)
       getCategoryColorTaskInfo(userTaskId.category)
       assignedPersonal(userTaskId, j)
     }
@@ -275,7 +275,7 @@ function loadUserIconContactInformation(user, name, email) {
     if (user.contacts[j].contact_name == name) {
       for (let j = 0; j < user.contacts.length; j++) {
         const currentContact = user.contacts[j];
-        console.log("current contact", currentContact)
+        // console.log("current contact", currentContact)
         correctColor = currentContact["contact-background-color"]
         if (currentContact.contact_email == email && window.innerWidth > 874) {
           user_icons[user.contacts.length].classList.add(correctColor)
