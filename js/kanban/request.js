@@ -190,9 +190,11 @@ function checkIfEditContactInputsNotEmpty() {
   );
 }
 
-function checkUserEmailExist(input_email) {
+async function checkUserEmailExist(input_email) {
+  await getUsersFromBackend()
   for (let i = 0; i < users.length; i++) {
     const usersEmail = users[i].email;
+    console.log(usersEmail)
     if (usersEmail == input_email) {
       return true;
     }
